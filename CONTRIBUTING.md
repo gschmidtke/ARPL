@@ -9,14 +9,15 @@ Thank you. Every protocol, even a failed attempt, makes the next agent better.
 - Professional rules from your discipline that an agent needs to know (a domain overlay).
 - Failure patterns you keep seeing.
 
-## How to submit
+## How to submit: one inbox
 
-**Option A, pull request (preferred):**
-1. Fork the repository.
-2. Copy [templates/submission.template.json](templates/submission.template.json) to `inbox/<your-github-name>/<short-title>.json` and fill in what you know. Markdown, plain-text logs or a zipped protocol in the same folder are fine too.
-3. Open a pull request. Don't edit `library/`, `catalogs/` or `ledger/`: the curator does that.
+There is exactly one way in: **the `inbox/` folder**. Everything else in the repository is read-only for contributors and is maintained by the curator.
 
-**Option B, issue:** open an issue with the "Contribution" label and paste or attach your protocol.
+1. Open [Upload to inbox](https://github.com/gschmidtke/ARPL/upload/main/inbox) (you need a free GitHub account).
+2. Name the path `inbox/<your-github-name>/` and drop your files: a JSON from [the template](templates/submission.template.json), Markdown, a plain-text log or a zip. Any format is fine.
+3. Click "Propose changes". GitHub forks the repository and opens the pull request for you.
+
+Git users can fork and open a pull request the normal way, as long as it only touches `inbox/`. Pull requests that change anything outside `inbox/` fail the automatic "Inbox only" check and are closed. Issues are for questions only, not for submissions.
 
 ## Rules
 

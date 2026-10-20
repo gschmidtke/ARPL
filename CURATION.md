@@ -5,9 +5,13 @@
 
 The curator keeps the library consistent so it stays useful as it grows. The owner reads the protocols and decides on anything that changes the structure or the rules.
 
+## One inbox
+
+Contributions enter only through pull requests that add files to `inbox/`. The "Inbox only" check rejects pull requests that touch anything else. If a contribution arrives another way (an issue, an email), the curator replies with the upload link instead of filing it from there. The library, catalogs, ledger, vocabularies and schemas are written only by the curator and the owner.
+
 ## Review process for each submission
 
-1. **Record intake.** Add a ledger entry: who, when, what files, source (PR or issue). Status `received`.
+1. **Record intake.** Add a ledger entry: who, when, what files, source pull request. Status `received`.
 2. **Safety check.** Look for client data, personal data, secrets (keys, tokens, passwords), model files and licensed content. Anything found is removed or the submission is held, and the contributor is asked.
 3. **Script check.** Contributed code is read, never run, until reviewed. Destructive or network calls are flagged.
 4. **Understand.** Identify the intent, the iterations and the final rule. Ask the contributor if something essential is missing.
@@ -17,7 +21,7 @@ The curator keeps the library consistent so it stays useful as it grows. The own
    - new technique → create a new pack.
 6. **Structure.** Write manifest, intent, iterations and final rule; assign facets from the controlled vocabularies only. New vocabulary values are proposed to the owner, not added silently.
 7. **Validate.** Run `python tools/validate.py`, then `python tools/build_catalogs.py`.
-8. **Close.** Update the ledger entry (decision, resulting pack ids), credit the contributor in CONTRIBUTORS.md, reply in the PR or issue with thanks and links, and move the raw submission to `ledger/archive/<entry-id>/`.
+8. **Close.** Update the ledger entry (decision, resulting pack ids), credit the contributor in CONTRIBUTORS.md, reply in the pull request with thanks and links, and move the raw submission to `ledger/archive/<entry-id>/`.
 
 ## Status rules
 

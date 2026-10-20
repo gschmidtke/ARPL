@@ -1,0 +1,26 @@
+name: Inbox only
+# Contributions may only add or change files under inbox/.
+# Everything else in the repository is maintained by the curator.
+on: pull_request
+permissions:
+  contents: read
+jobs:
+  inbox-only:
+    if: github.event.pull_request.user.login != 'gschmidtke'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - name: Check that only inbox/ is touched
+        run: |
+          git diff --name-only HEAD^1 HEAD > changed.txt
+          echo "Changed files:"; cat changed.txt
+          if grep -v '^inbox/' changed.txt; then
+            echo "::error::Contributions can only add files to inbox/. Please move your files to inbox/<your-github-name>/ (see CONTRIBUTING.md)."
+            exit 1
+          fi
+          if grep -Ei '\.(rvt|rfa|rte|rft|exe|dll)$' changed.txt; then
+            echo "::error::Model files and binaries are not accepted. Please share a protocol, JSON or Markdown instead."
+            exit 1
+          fi

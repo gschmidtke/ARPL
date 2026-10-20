@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Upload a contribution to the inbox
+    url: https://github.com/gschmidtke/ARPL/upload/main/inbox
+    about: The only way to contribute. Upload your protocol, JSON or Markdown into inbox/<your-github-name>/. GitHub creates the pull request for you.

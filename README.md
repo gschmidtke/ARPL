@@ -41,7 +41,7 @@ A pack lives in exactly one folder; the catalogs list it under every facet it ca
 
 ## Contribute
 
-Send your protocols, prompts, failure stories and rules. You don't need to fit our structure: put what you have in `inbox/` (see [CONTRIBUTING.md](CONTRIBUTING.md)) and the curator reads, verifies, structures and files it. Every contribution is recorded in the [ledger](ledger/intake-ledger.json) and credited in [CONTRIBUTORS.md](CONTRIBUTORS.md).
+Everyone can read, download and fork ARPL. Contributions go through **one inbox**: [upload your protocol to `inbox/`](https://github.com/gschmidtke/ARPL/upload/main/inbox) (see [CONTRIBUTING.md](CONTRIBUTING.md)). You don't need to fit our structure; the curator reads, verifies, restructures and files it. Nothing outside the inbox is edited by contributors. Every contribution is recorded in the [ledger](ledger/intake-ledger.json) and credited in [CONTRIBUTORS.md](CONTRIBUTORS.md).
 
 ## Curation
 
