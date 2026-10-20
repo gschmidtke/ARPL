@@ -57,7 +57,7 @@ A pack lives in exactly one folder; the catalogs list it under every facet it ca
 
 **Status:** `candidate` (recorded once) → `reproduced` (worked again in another model or by another person) → `verified` → `deprecated`. The definitions in [vocabularies.json](vocabularies/vocabularies.json) are authoritative. Each pack also has a `revision`, raised whenever its rule changes, so results can cite exactly which version was used.
 
-Want to help? See [help wanted](catalogs/help-wanted.md): packs waiting for reproduction and disciplines not covered yet. Scope, limits and the deprecation policy: [docs/scope.md](docs/scope.md).
+Want to help? See [help wanted](catalogs/help-wanted.md): packs waiting for reproduction and disciplines not covered yet. Scope, limits and the deprecation policy: [docs/scope.md](docs/scope.md). How ARPL relates to other projects: [docs/related-work.md](docs/related-work.md).
 
 ## Contribute
 

@@ -28,6 +28,8 @@ A pack is deprecated when a Revit version changes the API behaviour it depends o
 
 ## Roadmap
 
+See also [related-work.md](related-work.md) for existing projects and partnership options.
+
 1. Stress tests with radically different tasks (AV vs. electrical equipment, hospital MEP spaces, linked-model QA).
 2. Independent reproductions; first `reproduced` and `verified` packs.
 3. Executable validations: reference checks that return structured pass/fail plus evidence.
