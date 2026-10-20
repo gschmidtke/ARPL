@@ -1,0 +1,5 @@
+{
+  "result": "Layout drawn in elevation preview",
+  "problem": "A joint 28 mm from the window edge would leave an unusable strip",
+  "found_by": "2D elevation preview"
+}

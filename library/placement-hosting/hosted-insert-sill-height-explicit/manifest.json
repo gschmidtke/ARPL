@@ -1,0 +1,40 @@
+{
+  "id": "ARPL-PLH-0001",
+  "title": "Windows placed at sill 0",
+  "level": 1,
+  "work_class": "W4",
+  "workflows": [
+    "placement-hosting"
+  ],
+  "disciplines": [
+    "architecture"
+  ],
+  "roles": [
+    "designer",
+    "bim-specialist"
+  ],
+  "project_types": [
+    "generic"
+  ],
+  "phases": [
+    "generic"
+  ],
+  "revit_versions_tested": [
+    "2024"
+  ],
+  "environment": {
+    "revit_version": "2024.3",
+    "tool": "RevitBridge 0.3.0 with run_csharp",
+    "compiler": "CodeDOM (C# 5)",
+    "agent": "Claude (Anthropic)"
+  },
+  "failure_patterns": [
+    "FP05"
+  ],
+  "status": "candidate",
+  "contributors": [
+    "Gottfried Schmidtke with Claude"
+  ],
+  "recorded": "2026-10-16",
+  "legacy_id": "W4-001"
+}

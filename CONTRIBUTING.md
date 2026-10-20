@@ -1,26 +1,29 @@
 # Contributing to ARPL
 
-Thank you for adding to the pool. You don't need to build an agent — one problem, honestly recorded, is a contribution.
+Thank you. Every protocol, even a failed attempt, makes the next agent better.
 
-## What to contribute
-- A **learning chain**: the intent, each instruction version as executed, what Revit produced, the problem, and the lesson or rule at the end.
-- A **failure pattern** you've seen more than once.
-- A **reproduction** of an existing chain in another Revit version or with another tool — this is how entries move from `candidate` to `reproduced`.
+## What we want
 
-## How
-1. Copy [`templates/learning-chain.template.json`](templates/learning-chain.template.json).
-2. Pick the work class (`W1`–`W8`) — see the README. If a chain spans several classes, use the class of the step where the lesson was learned and list the others in `related_classes`.
-3. Fill in the chain. Keep the failed iterations.
-4. Tag failure patterns from [`patterns/failure-patterns.json`](patterns/failure-patterns.json) (propose a new one if none fits).
-5. Add the chain to the `learning_chains` array of the matching file in [`categories/`](categories/) and open a pull request.
+- A production task you ran with an AI agent in Revit (any tool: MCP bridge, pyRevit, Dynamo, custom add-in).
+- What you asked, what came out, what was wrong, how you noticed, and what finally worked.
+- Professional rules from your discipline that an agent needs to know (a domain overlay).
+- Failure patterns you keep seeing.
 
-Validate against [`schema/learning-chain.schema.json`](schema/learning-chain.schema.json) if you can.
+## How to submit
+
+**Option A, pull request (preferred):**
+1. Fork the repository.
+2. Copy [templates/submission.template.json](templates/submission.template.json) to `inbox/<your-github-name>/<short-title>.json` and fill in what you know. Markdown, plain-text logs or a zipped protocol in the same folder are fine too.
+3. Open a pull request. Don't edit `library/`, `catalogs/` or `ledger/`: the curator does that.
+
+**Option B, issue:** open an issue with the "Contribution" label and paste or attach your protocol.
 
 ## Rules
-- **Record what actually ran** — JSON, prompts, scripts or conversation decisions. Short excerpts are fine; link full scripts if they're long.
-- **State the environment**: Revit version, bridge or tool, compiler or runtime, model fixture.
-- **No client or proprietary data**: no project names, client information, model files (`.rvt`, `.rfa`) or licensed content.
-- **Status**: new entries start as `candidate`. Maintainers raise the status when an entry has been reproduced; frequency alone never raises it.
 
-## Licence of contributions
-By contributing you agree that documents and learning chains are published under CC BY 4.0 and code under MIT.
+- Only share what you have the right to share. No client names, addresses, project numbers, model files (`.rvt`, `.rfa`), passwords, API keys or licensed content (standards text, manufacturer data behind a login).
+- By submitting, you agree to publish under CC BY 4.0 (content) and MIT (code).
+- Scripts are welcome as excerpts. They are never executed by the curator without review.
+
+## What happens next
+
+The curator reviews the submission (see [CURATION.md](CURATION.md)), then either files it as a new pack, merges it into an existing pack (as a new iteration or a "reproduced" confirmation), or asks you questions in the PR. Every outcome is written in the [ledger](ledger/intake-ledger.json), and you are credited in [CONTRIBUTORS.md](CONTRIBUTORS.md) with the pack ids your work went into.

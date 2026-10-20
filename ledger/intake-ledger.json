@@ -1,0 +1,49 @@
+{
+  "description": "Every contribution to ARPL: who sent what, when, and what became of it. Maintained by the curator; used to credit contributors.",
+  "entries": [
+    {
+      "entry_id": "IN-0001",
+      "received": "2026-10-20",
+      "contributor": {
+        "name": "Gottfried Schmidtke",
+        "github": "gschmidtke",
+        "with": "Claude (Anthropic)"
+      },
+      "source": "founding contribution",
+      "submitted": "Learning chains from Revit production sessions 2026-10 (coffee brewer families, power connector, adaptive components, ADU-01 wall panels, documentation, schedules), failure patterns FP01-FP12, ARPL v0.43 layout preview rule",
+      "status": "filed",
+      "decision": "Founding library: 25 canonical packs, 1 project workflow, 1 domain overlay, 12 failure patterns",
+      "resulting_ids": [
+        "ARPL-ASM-0001",
+        "ARPL-ASM-0002",
+        "ARPL-ASM-0003",
+        "ARPL-ASM-0004",
+        "ARPL-ASM-0005",
+        "ARPL-CHG-0001",
+        "ARPL-CON-0001",
+        "ARPL-DOC-0001",
+        "ARPL-DOC-0002",
+        "ARPL-FAM-0001",
+        "ARPL-FAM-0002",
+        "ARPL-FAM-0003",
+        "ARPL-FAM-0004",
+        "ARPL-FAM-0005",
+        "ARPL-GEO-0001",
+        "ARPL-GEO-0002",
+        "ARPL-GEO-0003",
+        "ARPL-MCX-0001",
+        "ARPL-PLH-0001",
+        "ARPL-PLH-0002",
+        "ARPL-QA-0001",
+        "ARPL-SCH-0001",
+        "ARPL-SCH-0002",
+        "ARPL-VIEW-0001",
+        "ARPL-VIEW-0002",
+        "ARPL-PW-0001",
+        "domains/electrical/power-connector"
+      ],
+      "reviewed_by": "Claude (curator)",
+      "closed": "2026-10-20"
+    }
+  ]
+}

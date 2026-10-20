@@ -1,0 +1,7 @@
+{
+  "lesson": "A screenshot carries no orientation unless you read it from the view.",
+  "rule": "Read the camera before interpreting any 3D markup.",
+  "validation": [
+    "Orientation read back"
+  ]
+}

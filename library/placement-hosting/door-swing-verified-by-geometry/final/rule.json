@@ -1,0 +1,7 @@
+{
+  "lesson": "FacingOrientation doesn't reliably predict the swing.",
+  "rule": "Verify door swing geometrically and re-check after every door swap or move.",
+  "validation": [
+    "Room.IsPointInRoom on the swing-arc midpoint"
+  ]
+}

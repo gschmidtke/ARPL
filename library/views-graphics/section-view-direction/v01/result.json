@@ -1,0 +1,5 @@
+{
+  "result": "Section reversed",
+  "problem": "The section looks along +BasisZ of the box (ViewDirection = -BasisZ)",
+  "found_by": "sheet review"
+}

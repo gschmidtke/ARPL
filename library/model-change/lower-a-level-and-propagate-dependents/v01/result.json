@@ -1,0 +1,5 @@
+{
+  "result": "Walls, roof and rooms followed",
+  "problem": "Profile gable walls and a custom Ridge level didn't; one window head ended above the new wall line",
+  "found_by": "section and elevation review"
+}

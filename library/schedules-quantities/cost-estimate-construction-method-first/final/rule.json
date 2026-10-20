@@ -1,0 +1,7 @@
+{
+  "lesson": "Type names describe a material, not a construction method.",
+  "rule": "Ask the construction method before any cost or structural work.",
+  "validation": [
+    "Quantities from HOST_VOLUME_COMPUTED and HOST_AREA_COMPUTED"
+  ]
+}

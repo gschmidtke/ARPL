@@ -1,0 +1,41 @@
+{
+  "id": "ARPL-FAM-0004",
+  "title": "Annotation family from a newer Revit version",
+  "level": 2,
+  "work_class": "W1",
+  "workflows": [
+    "family-authoring",
+    "model-administration"
+  ],
+  "disciplines": [
+    "bim-vdc"
+  ],
+  "roles": [
+    "bim-manager",
+    "bim-specialist"
+  ],
+  "project_types": [
+    "generic"
+  ],
+  "phases": [
+    "generic"
+  ],
+  "revit_versions_tested": [
+    "2024"
+  ],
+  "environment": {
+    "revit_version": "2024.3",
+    "tool": "RevitBridge 0.4.0 (local Revit API bridge, MCP) with run_csharp",
+    "compiler": "Roslyn 4.8 (C# 12)",
+    "agent": "Claude (Anthropic)"
+  },
+  "failure_patterns": [
+    "FP05"
+  ],
+  "status": "candidate",
+  "contributors": [
+    "Gottfried Schmidtke with Claude"
+  ],
+  "recorded": "2026-10-17",
+  "legacy_id": "W1-005"
+}

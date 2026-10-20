@@ -1,0 +1,8 @@
+{
+  "lesson": "Material constraints must be part of the layout rule, not a check afterwards; and a fix needs the same preview as the original rule.",
+  "rule": "Minimum remnant width is a parameter of the layout rule and is evaluated on both sides of every opening edge.",
+  "validation": [
+    "Measured joint positions in the preview",
+    "Piece-by-piece check of the 3D build"
+  ]
+}

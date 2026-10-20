@@ -1,0 +1,4 @@
+{
+  "version": "v02",
+  "instruction": "ElectricalSystemType.PowerBalanced; associate after CanElementParameterBeAssociated"
+}

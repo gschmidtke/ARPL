@@ -1,0 +1,8 @@
+{
+  "lesson": "Constraint-driven elements follow a level; sketch-driven ones don't.",
+  "rule": "Before changing a fundamental, list every dependent by type of constraint and plan the fix for each.",
+  "validation": [
+    "Sections and elevations exported and reviewed",
+    "Window heads against the new wall top"
+  ]
+}

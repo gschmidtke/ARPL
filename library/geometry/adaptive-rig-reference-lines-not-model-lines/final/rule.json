@@ -1,0 +1,7 @@
+{
+  "lesson": "Forms take ownership of model lines used as profiles.",
+  "rule": "Use reference lines for every profile in adaptive rigs, and verify hosting by behaviour (move test), not by element ids.",
+  "validation": [
+    "Move test of each driver point"
+  ]
+}

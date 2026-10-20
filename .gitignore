@@ -1,0 +1,11 @@
+# Revit and model files are never committed
+*.rvt
+*.rfa
+*.rte
+*.rft
+*.[0-9][0-9][0-9][0-9].rvt
+*.[0-9][0-9][0-9][0-9].rfa
+*_backup/
+journal.*.txt
+
+__pycache__/

@@ -1,0 +1,7 @@
+{
+  "lesson": "API placement doesn't apply UI defaults.",
+  "rule": "Set every placement-relevant instance parameter explicitly.",
+  "validation": [
+    "Sill heights read back"
+  ]
+}

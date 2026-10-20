@@ -1,0 +1,7 @@
+{
+  "lesson": "Conflicts between the architecture and the framing rule surface in the layout computation; they are design decisions, not things to fix silently.",
+  "rule": "Report every opening whose rough opening plus header doesn't fit under the plates as a decision for the user; never move a header into the top plates.",
+  "validation": [
+    "Rough opening and header heights dimensioned on the shop drawing"
+  ]
+}

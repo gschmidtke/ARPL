@@ -1,0 +1,7 @@
+{
+  "lesson": "View direction conventions must be checked, not assumed.",
+  "rule": "After creating any view, compare its ViewDirection with the intended direction.",
+  "validation": [
+    "ViewDirection read back"
+  ]
+}

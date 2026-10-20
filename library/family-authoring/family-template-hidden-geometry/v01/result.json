@@ -1,0 +1,5 @@
+{
+  "result": "Bounding box 900 mm larger than modelled",
+  "problem": "The template carries default geometry",
+  "found_by": "bounding box measurement"
+}

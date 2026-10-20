@@ -1,0 +1,5 @@
+{
+  "result": "Faucet modelled on +X",
+  "problem": "The top view on the sheet was mirrored; the faucet belongs on -X (viewer's left when the family faces -Y)",
+  "found_by": "user review"
+}

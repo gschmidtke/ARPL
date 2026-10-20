@@ -1,0 +1,65 @@
+{
+  "description": "Cross-cutting failure patterns. Learning chains reference them by id in 'failure_patterns'.",
+  "patterns": [
+    {
+      "id": "FP01",
+      "name": "Geometry correct, semantics wrong",
+      "meaning": "The shape is right but the category, role or family kind is wrong for downstream use."
+    },
+    {
+      "id": "FP02",
+      "name": "Wrong coordinate frame or orientation",
+      "meaning": "Mirrored views, wrong view direction, assumed camera, transforms defaulting to world axes."
+    },
+    {
+      "id": "FP03",
+      "name": "Existing content should have been reused",
+      "meaning": "A governed family, parameter or standard existed and was recreated."
+    },
+    {
+      "id": "FP04",
+      "name": "Missing fabrication or material constraint",
+      "meaning": "The layout is geometrically valid but cannot be built from stock material."
+    },
+    {
+      "id": "FP05",
+      "name": "API succeeded, model result wrong",
+      "meaning": "The call returned without error but Revit changed something else (auto-joins, ignored defaults, silent overrides)."
+    },
+    {
+      "id": "FP06",
+      "name": "Correct model, unusable schedule or data",
+      "meaning": "Values exist but can't be scheduled, totalled or extracted."
+    },
+    {
+      "id": "FP07",
+      "name": "Correct element, wrong authority",
+      "meaning": "A value or decision was taken by the agent that belongs to the user, a standard or a discipline."
+    },
+    {
+      "id": "FP08",
+      "name": "Correct geometry, documentation fails",
+      "meaning": "Views, crops, dimensions or sheets don't show the model correctly."
+    },
+    {
+      "id": "FP09",
+      "name": "Source misread",
+      "meaning": "A dimension, view or note in the source document was missed or misinterpreted."
+    },
+    {
+      "id": "FP10",
+      "name": "Dependency not propagated",
+      "meaning": "A change in one element left dependents (profile walls, levels, hosted inserts, sheets) unchanged."
+    },
+    {
+      "id": "FP11",
+      "name": "Runtime blocked by a dialog",
+      "meaning": "A modal Revit dialog or warning blocked the automation; nothing visible in the API result."
+    },
+    {
+      "id": "FP12",
+      "name": "Fix incomplete",
+      "meaning": "The correction addressed one case of the problem; the same problem reappeared in a neighbouring case."
+    }
+  ]
+}

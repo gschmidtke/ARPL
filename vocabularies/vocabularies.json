@@ -1,0 +1,103 @@
+{
+  "version": "1.0",
+  "date": "2026-10-20",
+  "note": "Controlled vocabularies for manifest facets. New values are added by the curator on request; 'generic' means applicable regardless of the facet.",
+  "workflows": {
+    "model-context": "Inspect model, levels, categories, units, existing content",
+    "geometry": "Create or modify geometry, profiles, curves, solids, openings",
+    "family-authoring": "Families, types, nested content, reference planes",
+    "parameters-data": "Shared, project and family parameters; schemas; classification",
+    "connectors-systems": "Electrical, pipe, duct, AV, data and logical connections",
+    "spatial-planning": "Rooms, spaces, areas, zones, adjacency",
+    "placement-hosting": "Host selection, face and work-plane placement, orientation",
+    "assemblies-fabrication": "Framing, panels, parts, assemblies, fabrication logic",
+    "views-graphics": "Plans, sections, elevations, filters, visibility, crops",
+    "documentation": "Dimensions, tags, notes, sheets, details, print sets",
+    "schedules-quantities": "Schedules, BOM, take-offs, cost",
+    "links-coordinates": "Revit and CAD links, shared coordinates, cloud links",
+    "coordination": "Interference, openings, clearances between disciplines",
+    "validation-qaqc": "Checks of geometry, semantics, parameters, systems, deliverables",
+    "interoperability": "IFC, DWG, SAT, JSON, external databases",
+    "model-administration": "Worksets, naming, standards, warnings, cleanup",
+    "model-change": "Propagating a changed fundamental through dependents"
+  },
+  "work_classes": {
+    "W1": "Component family authoring (driven by a source and an LOD)",
+    "W2": "Adaptive / form-driven geometry (driven by a rig)",
+    "W3": "Layout-driven assembly production (driven by a rule applied many times)",
+    "W4": "Building model authoring (driven by a program and system families)",
+    "W5": "Model change and propagation (driven by one changed fundamental)",
+    "W6": "Documentation production (driven by views and sheets)",
+    "W7": "Information and data (driven by parameters, standards, quantities)",
+    "W8": "Analysis and review (driven by questions about an existing model)"
+  },
+  "levels": {
+    "1": "Primitive (one API operation)",
+    "2": "Pattern (reusable production pattern)",
+    "3": "Discipline workflow (pattern + domain overlay)",
+    "4": "Project workflow (composition of packs for a project type)"
+  },
+  "disciplines": [
+    "generic",
+    "architecture",
+    "interiors",
+    "structural",
+    "mechanical",
+    "electrical",
+    "plumbing",
+    "fire-protection",
+    "civil-site",
+    "audio-av",
+    "lighting",
+    "ict-data",
+    "security",
+    "themed-entertainment",
+    "food-service",
+    "bim-vdc",
+    "construction",
+    "facilities"
+  ],
+  "roles": [
+    "generic",
+    "designer",
+    "project-architect",
+    "technical-architect",
+    "design-engineer",
+    "modeler",
+    "bim-specialist",
+    "bim-manager",
+    "coordinator",
+    "fabricator",
+    "estimator",
+    "facility-manager"
+  ],
+  "project_types": [
+    "generic",
+    "residential",
+    "healthcare",
+    "data-centers",
+    "airports",
+    "theme-parks",
+    "education",
+    "hospitality",
+    "commercial",
+    "industrial",
+    "infrastructure"
+  ],
+  "phases": [
+    "generic",
+    "concept",
+    "schematic-design",
+    "design-development",
+    "construction-documents",
+    "fabrication",
+    "construction",
+    "operations"
+  ],
+  "statuses": {
+    "candidate": "Recorded once; not yet reproduced",
+    "reproduced": "Reproduced by another contributor or environment",
+    "verified": "Reproduced and reviewed by the curator against its validation",
+    "deprecated": "Superseded; kept for history"
+  }
+}

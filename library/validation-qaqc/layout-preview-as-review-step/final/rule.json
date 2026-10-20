@@ -1,0 +1,7 @@
+{
+  "lesson": "A preview is a review tool, not decoration.",
+  "rule": "Every layout-driven build (W3) gets a 2D preview from the same rule and a user confirmation.",
+  "validation": [
+    "User confirmation"
+  ]
+}

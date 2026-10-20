@@ -1,0 +1,4 @@
+{
+  "version": "v01",
+  "instruction": "ConnectorElement.CreateElectricalConnector(doc, ElectricalSystemType.PowerCircuit, ref)"
+}

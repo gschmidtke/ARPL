@@ -1,0 +1,8 @@
+{
+  "lesson": "Revit framing joins change members after placement, including their position.",
+  "rule": "Disallow joins on all framing members immediately at creation and verify positions after regeneration.",
+  "validation": [
+    "Interference check between all assemblies",
+    "Stud end heights read back"
+  ]
+}

@@ -1,0 +1,102 @@
+{
+  "id": "ARPL-PW-0001",
+  "title": "ADU exterior wall fabrication package (LOD 400 + BOM)",
+  "level": 4,
+  "context": {
+    "discipline": "architecture",
+    "role": "bim-specialist",
+    "project_type": "residential",
+    "subtype": "accessory dwelling unit",
+    "phase": "fabrication",
+    "platform": "revit",
+    "revit_version": "2024"
+  },
+  "intent": "Turn the exterior walls of a one-storey wood-frame ADU into prefabricated wall panels: 2x6 framing, 3/4in plywood, bevel siding, XPS cavity fill; one assembly per wall; shop drawings; BOM and cost.",
+  "sequence": [
+    {
+      "step": 1,
+      "work_class": "W1",
+      "do": "Build and flex-test component families (lumber, sheet panel, insulation block, siding board)",
+      "packs": [
+        "ARPL-FAM-0005",
+        "ARPL-FAM-0003"
+      ]
+    },
+    {
+      "step": 2,
+      "work_class": "W3",
+      "do": "Write the layout rule (studs 16in o.c., 3-stud corners, double top plate lapped, openings with king/jack/header/sill/cripples, sheets on stud centres, siding courses, foam per cavity)",
+      "packs": [
+        "ARPL-ASM-0001",
+        "ARPL-ASM-0002"
+      ]
+    },
+    {
+      "step": 3,
+      "work_class": "W8",
+      "do": "2D preview from the rule: studs in plan, sheet and board joints in elevations; user confirms or corrects the rule",
+      "packs": [
+        "ARPL-QA-0001"
+      ]
+    },
+    {
+      "step": 4,
+      "work_class": "W5",
+      "do": "Resolve design conflicts found by the preview as user decisions (door lowered to fit a header) and re-preview",
+      "packs": [
+        "ARPL-ASM-0002"
+      ]
+    },
+    {
+      "step": 5,
+      "work_class": "W3",
+      "do": "Replay the rule in 3D per wall; disallow joins on all framing; verify every piece; group into assemblies",
+      "packs": [
+        "ARPL-ASM-0003",
+        "ARPL-ASM-0004",
+        "ARPL-ASM-0005"
+      ]
+    },
+    {
+      "step": 6,
+      "work_class": "W6",
+      "do": "Assembly shop drawings: framing and sheathing elevations, plan section, 3D, part list; trade dimension style; PDF review",
+      "packs": [
+        "ARPL-DOC-0001",
+        "ARPL-DOC-0002",
+        "ARPL-VIEW-0001"
+      ]
+    },
+    {
+      "step": 7,
+      "work_class": "W7",
+      "do": "Quantities and cost from the model; governed BOM parameters",
+      "packs": [
+        "ARPL-SCH-0001",
+        "ARPL-SCH-0002"
+      ]
+    }
+  ],
+  "decisions_for_the_user": [
+    "Member sizes and spacing",
+    "Insulation material",
+    "Sheet size (4x8 + blocking or 4x9 cut)",
+    "Minimum remnant width",
+    "Conflicts at openings (door height vs. wall height)",
+    "Siding grade for pricing"
+  ],
+  "discipline_authority": [
+    "Header sizing over wide openings: structural engineer"
+  ],
+  "results_recorded": {
+    "pieces": 509,
+    "assemblies": 4,
+    "sheets": 3,
+    "clashes_after_fix": 0
+  },
+  "status": "candidate",
+  "contributors": [
+    "Gottfried Schmidtke with Claude"
+  ],
+  "recorded": "2026-10-19"
+}

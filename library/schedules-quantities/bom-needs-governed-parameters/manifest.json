@@ -1,0 +1,42 @@
+{
+  "id": "ARPL-SCH-0002",
+  "title": "Cost per type can't carry a BOM",
+  "level": 2,
+  "work_class": "W7",
+  "workflows": [
+    "schedules-quantities",
+    "parameters-data"
+  ],
+  "disciplines": [
+    "construction",
+    "bim-vdc"
+  ],
+  "roles": [
+    "estimator",
+    "bim-manager"
+  ],
+  "project_types": [
+    "generic"
+  ],
+  "phases": [
+    "fabrication"
+  ],
+  "revit_versions_tested": [
+    "2024"
+  ],
+  "environment": {
+    "revit_version": "2024.3",
+    "tool": "RevitBridge 0.4.0 (local Revit API bridge, MCP) with run_csharp",
+    "compiler": "Roslyn 4.8 (C# 12)",
+    "agent": "Claude (Anthropic)"
+  },
+  "failure_patterns": [
+    "FP06"
+  ],
+  "status": "candidate",
+  "contributors": [
+    "Gottfried Schmidtke with Claude"
+  ],
+  "recorded": "2026-10-19",
+  "legacy_id": "W7-002"
+}

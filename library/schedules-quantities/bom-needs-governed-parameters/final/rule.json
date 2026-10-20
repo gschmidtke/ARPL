@@ -1,0 +1,7 @@
+{
+  "lesson": "A BOM needs governed fields decided before the families are built.",
+  "rule": "Define BOM fields as shared parameters in the information contract (A5) before authoring families.",
+  "validation": [
+    "Schedule read back"
+  ]
+}

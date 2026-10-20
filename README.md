@@ -1,75 +1,52 @@
-# ARPL — AI Revit Production Logic
+# ARPL: AI Revit Production Logic
 
-**An open learning pool of tested production instructions for AI agents working in Revit — including the failed versions, the lessons and the rules that came out of them.**
+An open, curated learning pool of **instruction packs** that teach AI agents to produce professional Revit models, documentation and data, together with the reasoning behind every instruction.
 
-Connecting an AI to the Revit API is increasingly solved: there are bridges, MCP servers and add-ins. The harder question comes next:
+> Teach it professional practice downward until the required API action becomes obvious.
 
-> *What exactly should we tell the AI to do — and how do we know the result is correct?*
+Each pack records a real production task: the intent, every iteration that was tried (what was asked, what came out, what was wrong and how it was found), and the final rule that works, with a way to prove it. Failures are kept on purpose: they are what makes the next agent faster.
 
-ARPL collects the answers as they are actually found: the instruction that was executed, what Revit produced, what was wrong with it, the next version, and the reusable rule at the end. A successful instruction tells you what worked. A failed one tells you **why the rule exists**.
+## Find what you need
 
----
-
-## What is in this repository
-
-| Folder | Content |
+| You are... | Start here |
 |---|---|
-| [`categories/`](categories/) | One JSON file per **work class** (see below). Each holds the class definition, its decisive questions, the reference method, known failures, the verification profile, and the **learning chains** recorded so far. |
-| [`patterns/`](patterns/) | Cross-cutting **failure patterns** ("geometry correct — semantics wrong", "API succeeded — model wrong", …) used as tags in the learning chains. |
-| [`schema/`](schema/) | JSON Schema for a learning chain, so contributions stay comparable. |
-| [`templates/`](templates/) | An empty learning chain to copy when you contribute. |
-| [`docs/`](docs/) | Background: the work-class model and how ARPL uses it. |
+| A Revit user or developer looking for a technique | [catalogs/by-workflow.md](catalogs/by-workflow.md) |
+| An engineer or designer in a discipline | [catalogs/by-discipline.md](catalogs/by-discipline.md) |
+| Working on a building type | [catalogs/by-project-type.md](catalogs/by-project-type.md) and [project-workflows/](project-workflows/) |
+| Debugging an agent that went wrong | [catalogs/by-failure-pattern.md](catalogs/by-failure-pattern.md) |
+| Checking what runs in your Revit version | [catalogs/by-revit-version.md](catalogs/by-revit-version.md) |
 
-## Work classes
+Other entry points: [by work class](catalogs/by-work-class.md), [by phase](catalogs/by-phase.md), [by role](catalogs/by-role.md), [by level](catalogs/by-level.md).
 
-Production work in Revit falls into distinct kinds. They differ less in size than in **what drives the result** — and each has its own decisive questions, methods, failure modes and proof of "done".
-
-| ID | Work class | Driven by | Example |
-|---|---|---|---|
-| W1 | Component family authoring | A source document and an LOD | Coffee brewer at LOD 200 and LOD 350 |
-| W2 | Adaptive / form-driven geometry | A rig of points and hosts | Adaptive façade lofted through stacked points |
-| W3 | Layout-driven assembly production | A rule applied many times | LOD 400 wall panels: studs, plywood, siding, foam |
-| W4 | Building model authoring | A program and system families | Small house: walls, roofs, rooms, doors, windows |
-| W5 | Model change and propagation | One changed fundamental | Lowering a level and everything that depends on it |
-| W6 | Documentation production | Views and sheets that must be right | Sections, dimensions, shop drawings, PDF sets |
-| W7 | Information and data | Parameters, standards, quantities | Schedules, BOM, cost estimates |
-| W8 | Analysis and review | Questions about an existing model | Code check, circulation, model audit |
-
-A real job usually combines several classes — the class of each **step** decides its method.
-
-## A learning chain, in short
+## How it is organized
 
 ```
-INTENT → instruction v1 → Revit result → problem found → instruction v2 → … → lesson → reusable rule
+library/<workflow>/<pack>/     one canonical pack per technique (single source of truth)
+  manifest.json                id, level, work class, facets, Revit versions tested, status, contributors
+  intent.md                    what the professional wanted
+  v01/ v02/ ...                each iteration: instruction.json + result.json
+  final/rule.json              the lesson, the rule, the validation
+domains/<discipline>/          discipline overlays (rules a pattern needs in that discipline)
+project-workflows/             Level 4: packs composed into a full project deliverable
+patterns/failure-patterns.json recurring ways agents fail (FP01...)
+vocabularies/                  the controlled lists every facet must use
+catalogs/                      generated indexes; never edited by hand
+inbox/                         where contributions arrive
+ledger/                        record of every contribution and decision
 ```
 
-Example (W3, wall panelization, recorded 2026-10-19):
+A pack lives in exactly one folder; the catalogs list it under every facet it carries. **Levels:** 1 primitive, 2 pattern, 3 discipline workflow, 4 project workflow. **Work classes** (W1–W8) describe what drives the result and decide what preview and proof a task needs; see [docs/model.md](docs/model.md).
 
-| Version | Instruction | Result |
-|---|---|---|
-| v1 | Plywood sheets 4×9, joints on stud centres | A joint 28 mm from the window edge → unusable sliver |
-| v2 | Move joints that fall within 150 mm *outside* an opening edge | Sliver remained — the joint was *inside* the opening edge |
-| v3 | Move any joint within 150 mm of either side of an opening edge back one stud bay | Valid layout; same rule fed model, shop drawings and BOM |
+**Status:** `candidate` (recorded once) → `reproduced` (worked again in another model or by another person) → `verified` (reviewed, with a validation that passes) → `deprecated`.
 
-**Lesson:** material constraints must be part of the layout rule, not checked afterwards — and a fix needs the same preview as the original rule.
+## Contribute
 
-## Principles behind the pool
+Send your protocols, prompts, failure stories and rules. You don't need to fit our structure: put what you have in `inbox/` (see [CONTRIBUTING.md](CONTRIBUTING.md)) and the curator reads, verifies, structures and files it. Every contribution is recorded in the [ledger](ledger/intake-ledger.json) and credited in [CONTRIBUTORS.md](CONTRIBUTORS.md).
 
-- **Record what was executed**, not a polished prompt. Instructions may be JSON, prompts, C#/Python/Dynamo scripts or decisions taken in conversation — record them as they ran.
-- **Keep the failures.** Every iteration has a result and a problem.
-- **State the environment** (Revit version, tool or bridge, model fixture) so others can reproduce it.
-- **Popularity is not authority.** Entries carry a status — `candidate`, `reproduced`, `verified` — and only reproduced evidence raises it.
-- **No client data.** Strip project names, client information and licensed content (Autodesk or manufacturer families) before contributing.
+## Curation
 
-## Contributing
+The repository is owned by Gottfried Schmidtke and curated by Claude (Anthropic) under his supervision. How contributions are reviewed: [CURATION.md](CURATION.md).
 
-Small contributions are welcome — one problem, one chain. See [CONTRIBUTING.md](CONTRIBUTING.md).
+## License
 
-## Licence
-
-- Code and scripts: [MIT](LICENSE)
-- Documents, lessons and learning chains (Markdown and JSON content): [CC BY 4.0](LICENSE-DOCS.md)
-
-## Origin
-
-ARPL is developed by Gottfried Schmidtke (Tiverit LLC) as a governance layer for AI agents producing Revit content. The first learning chains come from experiments with an AI agent working in Revit 2024 through a local Revit API bridge.
+Text and JSON content: [CC BY 4.0](LICENSE-DOCS.md). Code (tools, scripts): MIT, see [LICENSE](LICENSE). Revit is a trademark of Autodesk, Inc.; this project is not affiliated with Autodesk.

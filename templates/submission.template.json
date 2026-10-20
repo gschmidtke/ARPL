@@ -1,0 +1,32 @@
+{
+  "_how_to": "Copy this file to inbox/<your-github-name>/<short-title>.json, fill in what you know, and open a pull request. Fields you don't know can stay empty: the curator assigns ids, facets and status.",
+  "title": "",
+  "contributor": {
+    "name": "",
+    "github": "",
+    "credit_as": "How you want to be thanked in CONTRIBUTORS.md"
+  },
+  "license_confirmation": "I wrote this or have the right to share it, and I agree to publish it under CC BY 4.0 (text/JSON) and MIT (code).",
+  "context": {
+    "revit_version": "",
+    "tool_or_bridge": "e.g. RevitBridge, pyRevit, Dynamo, MCP server",
+    "discipline": "",
+    "project_type": "",
+    "phase": ""
+  },
+  "intent": "What you wanted to achieve, in professional terms",
+  "iterations": [
+    {
+      "instruction": "What you asked for or ran (prompt, JSON, script excerpt)",
+      "result": "What happened",
+      "problem": "What was wrong, if anything",
+      "found_by": "How you noticed (looking at the view, a check, a warning)"
+    }
+  ],
+  "final_rule": {
+    "lesson": "",
+    "rule": "The instruction that works",
+    "validation": "How you prove it worked"
+  },
+  "notes": "Anything else. Do not include client names, addresses, model files, passwords or licensed content."
+}

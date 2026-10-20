@@ -1,0 +1,42 @@
+{
+  "id": "ARPL-CHG-0001",
+  "title": "Lowering a level: what doesn't follow",
+  "level": 2,
+  "work_class": "W5",
+  "workflows": [
+    "model-change",
+    "documentation"
+  ],
+  "disciplines": [
+    "architecture"
+  ],
+  "roles": [
+    "project-architect",
+    "bim-specialist"
+  ],
+  "project_types": [
+    "generic"
+  ],
+  "phases": [
+    "design-development",
+    "construction-documents"
+  ],
+  "revit_versions_tested": [
+    "2024"
+  ],
+  "environment": {
+    "revit_version": "2024.3",
+    "tool": "RevitBridge 0.4.0 (local Revit API bridge, MCP) with run_csharp",
+    "compiler": "Roslyn 4.8 (C# 12)",
+    "agent": "Claude (Anthropic)"
+  },
+  "failure_patterns": [
+    "FP10"
+  ],
+  "status": "candidate",
+  "contributors": [
+    "Gottfried Schmidtke with Claude"
+  ],
+  "recorded": "2026-10-16",
+  "legacy_id": "W5-001"
+}

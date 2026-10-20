@@ -1,0 +1,4 @@
+{
+  "version": "v01",
+  "instruction": "ViewSection.CreateSection with a box whose BasisZ was assumed to be the view direction towards the viewer"
+}

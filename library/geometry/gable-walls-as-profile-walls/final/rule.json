@@ -1,0 +1,7 @@
+{
+  "lesson": "Profile walls replace attachment in the 2024 API, but they no longer follow levels (see W5-001).",
+  "rule": "Use profile walls for gables and register them as dependents of the roof and the levels.",
+  "validation": [
+    "Section view check"
+  ]
+}

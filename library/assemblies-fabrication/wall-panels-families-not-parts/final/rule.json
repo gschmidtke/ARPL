@@ -1,0 +1,7 @@
+{
+  "lesson": "The 'native' Revit route isn't always the production route; established tools are precedents.",
+  "rule": "For fabrication panels use component families plus assemblies, not Parts. Check how established tools solve a task before choosing a method.",
+  "validation": [
+    "Method review against two commercial tools"
+  ]
+}

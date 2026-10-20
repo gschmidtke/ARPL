@@ -1,0 +1,7 @@
+{
+  "lesson": "Project units are set for the architecture, not for fabrication drawings.",
+  "rule": "Shop drawings get their own dimension style matching the trade's units.",
+  "validation": [
+    "PDF review"
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "lesson": "Parametric component families can be generated reliably when every face is locked to a labelled reference plane.",
+  "rule": "Generate component families from templates by script, with locks on all faces, then flex-test before placing any instance.",
+  "validation": [
+    "Flex test of each type with measured bounding boxes"
+  ]
+}

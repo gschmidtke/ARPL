@@ -1,0 +1,41 @@
+{
+  "id": "ARPL-FAM-0002",
+  "title": "Faucet on the wrong side: mirrored source view",
+  "level": 2,
+  "work_class": "W1",
+  "workflows": [
+    "family-authoring"
+  ],
+  "disciplines": [
+    "generic"
+  ],
+  "roles": [
+    "modeler",
+    "bim-specialist"
+  ],
+  "project_types": [
+    "generic"
+  ],
+  "phases": [
+    "generic"
+  ],
+  "revit_versions_tested": [
+    "2024"
+  ],
+  "environment": {
+    "revit_version": "2024.3",
+    "tool": "RevitBridge 0.3.0 with run_csharp",
+    "compiler": "CodeDOM (C# 5)",
+    "agent": "Claude (Anthropic)"
+  },
+  "failure_patterns": [
+    "FP02",
+    "FP09"
+  ],
+  "status": "candidate",
+  "contributors": [
+    "Gottfried Schmidtke with Claude"
+  ],
+  "recorded": "2026-10-16",
+  "legacy_id": "W1-002"
+}

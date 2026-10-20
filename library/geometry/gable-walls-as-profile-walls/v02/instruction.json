@@ -1,0 +1,4 @@
+{
+  "version": "v02",
+  "instruction": "Rebuild the gable walls as profile walls (Wall.Create with an IList<Curve>) following the roof underside"
+}

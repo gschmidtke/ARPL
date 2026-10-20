@@ -1,0 +1,8 @@
+{
+  "lesson": "The PowerCircuit connector type carries no load data.",
+  "rule": "Use PowerBalanced for equipment power connectors and probe associability before associating.",
+  "validation": [
+    "Connector parameters read back",
+    "Flex test of the associated parameters"
+  ]
+}

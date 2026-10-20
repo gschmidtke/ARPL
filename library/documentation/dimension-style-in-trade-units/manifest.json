@@ -1,0 +1,42 @@
+{
+  "id": "ARPL-DOC-0002",
+  "title": "Project units round framing dimensions",
+  "level": 1,
+  "work_class": "W6",
+  "workflows": [
+    "documentation",
+    "views-graphics"
+  ],
+  "disciplines": [
+    "generic",
+    "construction"
+  ],
+  "roles": [
+    "bim-specialist"
+  ],
+  "project_types": [
+    "generic"
+  ],
+  "phases": [
+    "construction-documents",
+    "fabrication"
+  ],
+  "revit_versions_tested": [
+    "2024"
+  ],
+  "environment": {
+    "revit_version": "2024.3",
+    "tool": "RevitBridge 0.4.0 (local Revit API bridge, MCP) with run_csharp",
+    "compiler": "Roslyn 4.8 (C# 12)",
+    "agent": "Claude (Anthropic)"
+  },
+  "failure_patterns": [
+    "FP08"
+  ],
+  "status": "candidate",
+  "contributors": [
+    "Gottfried Schmidtke with Claude"
+  ],
+  "recorded": "2026-10-19",
+  "legacy_id": "W6-004"
+}

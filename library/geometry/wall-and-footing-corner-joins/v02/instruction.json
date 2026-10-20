@@ -1,0 +1,4 @@
+{
+  "version": "v02",
+  "instruction": "East-west walls full outer length, north-south between them; DisallowWallJoinAtEnd; footing type end extension 125 mm"
+}

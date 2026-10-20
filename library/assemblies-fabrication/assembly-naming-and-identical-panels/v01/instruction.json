@@ -1,0 +1,4 @@
+{
+  "version": "v01",
+  "instruction": "AssemblyInstance.Create, then set AssemblyTypeName in the same transaction"
+}

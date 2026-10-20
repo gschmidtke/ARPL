@@ -1,0 +1,5 @@
+{
+  "result": "125 mm notches at every corner",
+  "problem": "API-created walls did not join at the corners",
+  "found_by": "plan review"
+}

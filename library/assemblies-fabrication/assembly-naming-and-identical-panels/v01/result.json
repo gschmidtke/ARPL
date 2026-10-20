@@ -1,0 +1,5 @@
+{
+  "result": "Exception 'No valid type for the assembly instance'; assembly kept a default name",
+  "problem": "The assembly type exists only after the creating transaction commits",
+  "found_by": "exception"
+}

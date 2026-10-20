@@ -1,0 +1,4 @@
+{
+  "version": "v02",
+  "instruction": "BasisZ = direction to look; Min.Z = 0, Max.Z = depth; check ViewDirection after creating"
+}

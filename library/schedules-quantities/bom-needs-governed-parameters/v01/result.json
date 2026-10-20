@@ -1,0 +1,5 @@
+{
+  "result": "Cost column filled",
+  "problem": "One value per type: for cut pieces it can only be a unit price (per stud, per sheet, per LF), so the column can't be totalled; family parameters (Width, Height, Length) can't be scheduled",
+  "found_by": "schedule review"
+}

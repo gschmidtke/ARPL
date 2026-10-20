@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ARPL iteration (instruction.json + result.json)",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string",
+      "pattern": "^v[0-9]{2}$"
+    },
+    "instruction": {
+      "description": "What was executed: JSON, prompt excerpt, script excerpt or decision",
+      "type": [
+        "string",
+        "object"
+      ]
+    },
+    "artifact": {
+      "type": "string"
+    },
+    "result": {
+      "type": "string"
+    },
+    "problem": {
+      "type": "string"
+    },
+    "found_by": {
+      "type": "string"
+    }
+  }
+}

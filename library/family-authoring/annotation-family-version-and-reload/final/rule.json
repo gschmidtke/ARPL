@@ -1,0 +1,7 @@
+{
+  "lesson": "File version, file name and reload behaviour all decide whether a family update succeeds.",
+  "rule": "Check BasicFileInfo before loading; keep the file name equal to the family name; capture element ids (not objects) before a reload. Labels in annotation families can't be created or retyped by the API, only moved.",
+  "validation": [
+    "Family name and id read back after reload"
+  ]
+}

@@ -1,0 +1,5 @@
+{
+  "result": "10 of 11 chains, then 11 of 11",
+  "problem": "North sheet: 'exterior' elevation showed the inside; the assembly transform had reverted to world X",
+  "found_by": "PDF review"
+}

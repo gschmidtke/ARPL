@@ -1,0 +1,4 @@
+{
+  "version": "v03",
+  "instruction": "Pick exterior and interior elevations by ViewDirection · exterior normal, not by the assembly transform"
+}

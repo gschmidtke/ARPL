@@ -1,0 +1,5 @@
+{
+  "result": "2D plan preview flagged the conflict",
+  "problem": "Rough opening top 2505 mm is above the underside of the top plates (2424 mm); no header fits",
+  "found_by": "layout rule check shown in the 2D preview"
+}

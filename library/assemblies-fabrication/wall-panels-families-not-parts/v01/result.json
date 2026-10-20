@@ -1,0 +1,5 @@
+{
+  "result": "0 parts, then a modal dialog 'Can't make Parts out of these Elements' blocked the bridge",
+  "problem": "Vertically compound wall type with integral sweeps; no error reachable through the API",
+  "found_by": "bridge timeout, screenshot"
+}

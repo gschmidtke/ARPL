@@ -1,0 +1,5 @@
+{
+  "result": "509 pieces placed and verified by position",
+  "problem": "Interference check found studs overlapping corner studs: Revit had joined the studs to the plates, extended them to the plate centrelines and pulled two end studs 89 mm onto a neighbouring plate end",
+  "found_by": "clash check between assemblies"
+}

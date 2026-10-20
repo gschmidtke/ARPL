@@ -1,0 +1,5 @@
+{
+  "result": "No error; crop unchanged",
+  "problem": "The template's scope box (VIEWER_VOLUME_OF_INTEREST_CROP) overrode the crop",
+  "found_by": "image export review"
+}

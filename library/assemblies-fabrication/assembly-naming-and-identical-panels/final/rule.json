@@ -1,0 +1,7 @@
+{
+  "lesson": "Revit detects identical assemblies and gives them one type.",
+  "rule": "Name assemblies after commit; document identical assemblies once with a quantity ('build 2').",
+  "validation": [
+    "Assembly type names and member counts read back"
+  ]
+}

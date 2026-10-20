@@ -1,0 +1,7 @@
+{
+  "lesson": "Overall dimensions on a spec sheet can include parts that the main views don't label separately.",
+  "rule": "Before modelling, reconcile every overall dimension on the source against the sum of the parts in each view.",
+  "validation": [
+    "Bounding box height against the sheet's overall height"
+  ]
+}

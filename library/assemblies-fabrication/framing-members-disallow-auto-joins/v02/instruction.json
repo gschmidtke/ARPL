@@ -1,0 +1,4 @@
+{
+  "version": "v02",
+  "instruction": "StructuralFramingUtils.DisallowJoinAtEnd on every framing member including braces, then LocationCurve.Curve reset to the layout line"
+}

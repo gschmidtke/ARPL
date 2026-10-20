@@ -1,0 +1,5 @@
+{
+  "result": "Load refused",
+  "problem": "The family was saved in Revit 2025 (BasicFileInfo.Format)",
+  "found_by": "BasicFileInfo.Extract"
+}

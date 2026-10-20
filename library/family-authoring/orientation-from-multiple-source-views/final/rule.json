@@ -1,0 +1,7 @@
+{
+  "lesson": "Drawing views in manufacturer sheets can be mirrored.",
+  "rule": "Establish orientation from features visible in at least two views, never from one view's layout.",
+  "validation": [
+    "Visual comparison of the family 3D view with two source views"
+  ]
+}

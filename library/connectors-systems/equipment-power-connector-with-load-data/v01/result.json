@@ -1,0 +1,5 @@
+{
+  "result": "Connector created",
+  "problem": "No Voltage, Apparent Load, Poles or Power Factor parameters on the connector",
+  "found_by": "parameter probe"
+}

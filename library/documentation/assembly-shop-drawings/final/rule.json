@@ -1,0 +1,7 @@
+{
+  "lesson": "Per-element transactions contain failures; implicit state (assembly transforms) can't be trusted.",
+  "rule": "Isolate risky annotation in its own transaction and verify every sheet visually.",
+  "validation": [
+    "PDF export rendered and reviewed per sheet"
+  ]
+}

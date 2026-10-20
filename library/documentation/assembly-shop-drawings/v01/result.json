@@ -1,0 +1,5 @@
+{
+  "result": "Blocking dialog 'dimension references are or have become invalid'; whole sheet rolled back",
+  "problem": "Stud centre-plane references are invalid for this family and view",
+  "found_by": "dialog"
+}

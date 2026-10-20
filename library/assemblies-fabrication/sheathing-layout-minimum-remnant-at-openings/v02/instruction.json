@@ -1,0 +1,4 @@
+{
+  "version": "v02",
+  "instruction": "If a joint falls within 150 mm outside an opening edge, move it back one stud bay (sheet one bay shorter, following joints shift)"
+}

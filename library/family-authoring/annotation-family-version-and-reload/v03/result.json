@@ -1,0 +1,5 @@
+{
+  "result": "Family replaced",
+  "problem": "Objects captured before the reload were invalidated (new Family element)",
+  "found_by": "InvalidObjectException"
+}

@@ -1,0 +1,4 @@
+{
+  "version": "v02",
+  "instruction": "One transaction per dimension in a TransactionGroup, rollback on error; stud chain from stud faces"
+}

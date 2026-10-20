@@ -1,0 +1,35 @@
+{
+  "domain": "electrical",
+  "applies_to_pattern": "equipment connector",
+  "title": "Power connector for equipment families",
+  "connector": {
+    "api": "ConnectorElement.CreateElectricalConnector",
+    "system_type": "PowerBalanced",
+    "avoid": "PowerCircuit (no load parameters)"
+  },
+  "required_parameters": [
+    {
+      "name": "Voltage",
+      "spec": "SpecTypeId.ElectricalPotential"
+    },
+    {
+      "name": "Apparent Load",
+      "spec": "SpecTypeId.ApparentPower"
+    },
+    {
+      "name": "Number of Poles",
+      "spec": "autodesk.spec.aec:numberOfPoles-2.0.0 (no SpecTypeId member in Revit 2024)"
+    },
+    {
+      "name": "Power Factor"
+    }
+  ],
+  "rules": [
+    "Probe FamilyManager.CanElementParameterBeAssociated before associating",
+    "Place connectors on planar faces obtained with ComputeReferences = true"
+  ],
+  "used_by": [
+    "ARPL-CON-0001"
+  ],
+  "status": "candidate"
+}

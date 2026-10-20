@@ -1,0 +1,4 @@
+{
+  "version": "v01",
+  "instruction": "NewFamilyInstance(line, 2x6, level, StructuralType.Brace); joins disallowed on beams (plates) only"
+}

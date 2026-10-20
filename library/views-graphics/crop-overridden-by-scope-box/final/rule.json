@@ -1,0 +1,8 @@
+{
+  "lesson": "Some settings override others without any error.",
+  "rule": "Read back every crop after setting it.",
+  "validation": [
+    "Crop read-back",
+    "Image or PDF review"
+  ]
+}

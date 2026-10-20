@@ -1,0 +1,4 @@
+{
+  "version": "v02",
+  "instruction": "Unit and source written into Type Comments as a stopgap; BOM shared parameters proposed (component, cut length, width, height, stock size, unit price, extended cost)"
+}

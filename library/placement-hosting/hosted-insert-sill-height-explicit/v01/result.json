@@ -1,0 +1,5 @@
+{
+  "result": "Windows at sill height 0",
+  "problem": "Hosted placement ignores the family's default sill",
+  "found_by": "visual check"
+}

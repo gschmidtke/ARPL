@@ -1,0 +1,4 @@
+{
+  "version": "v02",
+  "instruction": "Set the scope box parameter to InvalidElementId first, then set and read back the crop"
+}

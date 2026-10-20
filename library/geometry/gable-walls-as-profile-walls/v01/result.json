@@ -1,0 +1,4 @@
+{
+  "result": "Wall.AddAttachment doesn't exist in Revit 2024",
+  "found_by": "compile/API check"
+}

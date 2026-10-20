@@ -1,0 +1,7 @@
+{
+  "lesson": "Wall joins assumed by the UI don't happen through the API.",
+  "rule": "Model corner conditions explicitly; never rely on automatic joins.",
+  "validation": [
+    "Plan and 3D check of footing corners"
+  ]
+}

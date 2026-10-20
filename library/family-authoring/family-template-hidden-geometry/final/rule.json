@@ -1,0 +1,7 @@
+{
+  "lesson": "Some family templates carry hidden default geometry.",
+  "rule": "Build from the Generic Model template and set the category; check the bounding box after building.",
+  "validation": [
+    "Bounding box against the modelled size"
+  ]
+}

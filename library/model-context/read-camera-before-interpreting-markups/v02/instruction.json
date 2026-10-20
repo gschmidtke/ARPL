@@ -1,0 +1,4 @@
+{
+  "version": "v02",
+  "instruction": "Read View3D.GetOrientation() and determine which walls face the viewer"
+}

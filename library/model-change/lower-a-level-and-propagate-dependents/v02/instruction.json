@@ -1,0 +1,4 @@
+{
+  "version": "v02",
+  "instruction": "Edit the gable sketches with SketchEditScope + CurveElement.SetGeometryCurve, commit with a failures preprocessor; also set WALL_USER_HEIGHT_PARAM (the bounding box follows it); move the Ridge level"
+}

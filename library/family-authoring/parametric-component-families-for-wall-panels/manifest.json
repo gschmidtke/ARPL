@@ -1,0 +1,43 @@
+{
+  "id": "ARPL-FAM-0005",
+  "title": "Component families for a wall panel",
+  "level": 2,
+  "work_class": "W1",
+  "workflows": [
+    "family-authoring",
+    "assemblies-fabrication"
+  ],
+  "disciplines": [
+    "architecture",
+    "structural",
+    "construction"
+  ],
+  "roles": [
+    "bim-specialist",
+    "fabricator"
+  ],
+  "project_types": [
+    "residential"
+  ],
+  "phases": [
+    "fabrication"
+  ],
+  "revit_versions_tested": [
+    "2024"
+  ],
+  "environment": {
+    "revit_version": "2024.3",
+    "tool": "RevitBridge 0.4.0 (local Revit API bridge, MCP) with run_csharp",
+    "compiler": "Roslyn 4.8 (C# 12)",
+    "agent": "Claude (Anthropic)"
+  },
+  "failure_patterns": [
+    "FP05"
+  ],
+  "status": "candidate",
+  "contributors": [
+    "Gottfried Schmidtke with Claude"
+  ],
+  "recorded": "2026-10-19",
+  "legacy_id": "W1-006"
+}
