@@ -6,6 +6,14 @@ An open, curated learning pool of **instruction packs** that teach AI agents to 
 
 Each pack records a real production task: the intent, every iteration that was tried (what was asked, what came out, what was wrong and how it was found), and the final rule that works, with a way to prove it. Failures are kept on purpose: they are what makes the next agent faster.
 
+## Use it from your AI
+
+If your AI works in Revit through a bridge or MCP server, tell it:
+
+> Before this Revit task, check the ARPL knowledge pool for an established workflow: read https://raw.githubusercontent.com/gschmidtke/ARPL/main/AGENTS.md and follow it.
+
+The agent searches [index.json](index.json), applies the matching rules, tells you which packs it used, and afterwards says when it found something better or missing, so you can upload it and nobody has to learn it twice.
+
 ## Find what you need
 
 | You are... | Start here |

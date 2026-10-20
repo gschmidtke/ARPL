@@ -1,6 +1,16 @@
 {
   "id": "ARPL-FAM-0004",
   "title": "Annotation family from a newer Revit version",
+  "use_when": [
+    "loading or editing annotation families (tags, labels)",
+    "loading a family saved in another Revit version"
+  ],
+  "not_for": [],
+  "api_terms": [
+    "BasicFileInfo",
+    "Document.LoadFamily",
+    "TextElement"
+  ],
   "level": 2,
   "work_class": "W1",
   "workflows": [

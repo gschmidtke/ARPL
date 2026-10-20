@@ -1,6 +1,15 @@
 {
   "id": "ARPL-FAM-0003",
   "title": "Template with hidden geometry",
+  "use_when": [
+    "choosing a family template for a new family",
+    "family geometry is invisible or too large after building"
+  ],
+  "not_for": [],
+  "api_terms": [
+    "Application.NewFamilyDocument",
+    "FamilyCategory"
+  ],
   "level": 1,
   "work_class": "W1",
   "workflows": [

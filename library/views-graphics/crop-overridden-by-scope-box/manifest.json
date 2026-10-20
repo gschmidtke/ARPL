@@ -1,6 +1,15 @@
 {
   "id": "ARPL-VIEW-0001",
   "title": "Crops silently ignored",
+  "use_when": [
+    "setting crop boxes or scope boxes on views",
+    "exported views show more than intended"
+  ],
+  "not_for": [],
+  "api_terms": [
+    "View.CropBox",
+    "ViewCropRegionShapeManager"
+  ],
   "level": 1,
   "work_class": "W6",
   "workflows": [

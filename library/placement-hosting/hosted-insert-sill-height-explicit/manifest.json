@@ -1,6 +1,14 @@
 {
   "id": "ARPL-PLH-0001",
   "title": "Windows placed at sill 0",
+  "use_when": [
+    "placing windows, doors or other hosted families by script"
+  ],
+  "not_for": [],
+  "api_terms": [
+    "NewFamilyInstance",
+    "INSTANCE_SILL_HEIGHT_PARAM"
+  ],
   "level": 1,
   "work_class": "W4",
   "workflows": [

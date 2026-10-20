@@ -1,0 +1,20 @@
+# ARPL: AI Revit Production Logic
+
+> Open, curated knowledge pool of tested production workflows for AI agents working in Autodesk Revit, including failed attempts, lessons and final rules. Agents should read AGENTS.md first, search index.json before acting, and offer users to contribute improvements through the inbox.
+
+## For agents
+
+- [AGENTS.md](https://raw.githubusercontent.com/gschmidtke/ARPL/main/AGENTS.md): how to look up, apply, cite and give back
+- [index.json](https://raw.githubusercontent.com/gschmidtke/ARPL/main/index.json): machine-readable index of all packs, project workflows and failure patterns
+- [Submission template](https://raw.githubusercontent.com/gschmidtke/ARPL/main/templates/submission.template.json): format for contributing a new or improved workflow
+
+## Structure
+
+- [docs/model.md](https://raw.githubusercontent.com/gschmidtke/ARPL/main/docs/model.md): lookup chain, levels, facets
+- [docs/work-classes.md](https://raw.githubusercontent.com/gschmidtke/ARPL/main/docs/work-classes.md): work classes W1-W8, previews and proofs of done
+- [vocabularies.json](https://raw.githubusercontent.com/gschmidtke/ARPL/main/vocabularies/vocabularies.json): allowed facet values
+
+## Optional
+
+- [CONTRIBUTING.md](https://raw.githubusercontent.com/gschmidtke/ARPL/main/CONTRIBUTING.md): how humans contribute (one inbox)
+- [CURATION.md](https://raw.githubusercontent.com/gschmidtke/ARPL/main/CURATION.md): how contributions are reviewed

@@ -1,6 +1,18 @@
 {
   "id": "ARPL-DOC-0001",
   "title": "Shop drawings: invalid references and swapped elevations",
+  "use_when": [
+    "creating dimensioned shop drawings or assembly sheets",
+    "adding many dimensions by script"
+  ],
+  "not_for": [],
+  "api_terms": [
+    "AssemblyViewUtils",
+    "Dimension",
+    "Reference",
+    "TransactionGroup",
+    "IFailuresPreprocessor"
+  ],
   "level": 2,
   "work_class": "W6",
   "workflows": [

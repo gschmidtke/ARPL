@@ -1,6 +1,16 @@
 {
   "id": "ARPL-PLH-0002",
   "title": "Door swing reported correct without a test",
+  "use_when": [
+    "placing, swapping or flipping doors",
+    "reporting door swing or hand"
+  ],
+  "not_for": [],
+  "api_terms": [
+    "FamilyInstance.FacingOrientation",
+    "FamilyInstance.HandOrientation",
+    "flipFacing"
+  ],
   "level": 2,
   "work_class": "W4",
   "workflows": [

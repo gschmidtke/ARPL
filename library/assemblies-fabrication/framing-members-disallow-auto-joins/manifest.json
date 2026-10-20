@@ -1,6 +1,18 @@
 {
   "id": "ARPL-ASM-0004",
   "title": "Vertical studs pulled by auto-joins",
+  "use_when": [
+    "placing vertical studs, posts or braces as structural framing",
+    "framing members end up longer or shifted after placement"
+  ],
+  "not_for": [
+    "structural columns (not framing)"
+  ],
+  "api_terms": [
+    "StructuralFramingUtils.DisallowJoinAtEnd",
+    "StructuralType.Brace",
+    "LocationCurve"
+  ],
   "level": 1,
   "work_class": "W3",
   "workflows": [

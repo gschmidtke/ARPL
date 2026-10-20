@@ -1,6 +1,16 @@
 {
   "id": "ARPL-ASM-0005",
   "title": "Assembly naming and identical panels",
+  "use_when": [
+    "creating and naming Revit assemblies",
+    "several identical panels or modules need drawings"
+  ],
+  "not_for": [],
+  "api_terms": [
+    "AssemblyInstance.Create",
+    "AssemblyType",
+    "AssemblyInstance.SetTransform"
+  ],
   "level": 1,
   "work_class": "W3",
   "workflows": [

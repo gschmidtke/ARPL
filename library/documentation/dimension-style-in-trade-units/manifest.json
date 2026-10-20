@@ -1,6 +1,15 @@
 {
   "id": "ARPL-DOC-0002",
   "title": "Project units round framing dimensions",
+  "use_when": [
+    "dimensioning fabrication or shop drawings for a trade",
+    "dimensions round to project units and hide small values"
+  ],
+  "not_for": [],
+  "api_terms": [
+    "DimensionType",
+    "FormatOptions"
+  ],
   "level": 1,
   "work_class": "W6",
   "workflows": [

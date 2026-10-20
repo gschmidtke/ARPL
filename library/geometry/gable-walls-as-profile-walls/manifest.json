@@ -1,6 +1,16 @@
 {
   "id": "ARPL-GEO-0002",
   "title": "Gable walls without wall attachment",
+  "use_when": [
+    "walls under gable or sloped roofs",
+    "walls that should follow a roof slope"
+  ],
+  "not_for": [],
+  "api_terms": [
+    "Wall",
+    "SketchPlane",
+    "Wall.Create (profile)"
+  ],
   "level": 2,
   "work_class": "W4",
   "workflows": [

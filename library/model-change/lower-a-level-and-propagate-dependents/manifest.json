@@ -1,6 +1,15 @@
 {
   "id": "ARPL-CHG-0001",
   "title": "Lowering a level: what doesn't follow",
+  "use_when": [
+    "changing a level elevation or another fundamental datum",
+    "a change must propagate to walls, roofs, openings and layouts"
+  ],
+  "not_for": [],
+  "api_terms": [
+    "Level",
+    "Element.GetDependentElements"
+  ],
   "level": 2,
   "work_class": "W5",
   "workflows": [

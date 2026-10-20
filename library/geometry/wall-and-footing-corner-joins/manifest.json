@@ -1,6 +1,15 @@
 {
   "id": "ARPL-GEO-0003",
   "title": "Footing corner notches",
+  "use_when": [
+    "modelling foundations or footings at wall corners",
+    "relying on automatic joins at corners"
+  ],
+  "not_for": [],
+  "api_terms": [
+    "WallFoundation",
+    "JoinGeometryUtils"
+  ],
   "level": 2,
   "work_class": "W4",
   "workflows": [

@@ -1,6 +1,17 @@
 {
   "id": "ARPL-FAM-0005",
   "title": "Component families for a wall panel",
+  "use_when": [
+    "building parametric component families for lumber, sheets, insulation or cladding",
+    "families that must flex reliably before mass placement"
+  ],
+  "not_for": [],
+  "api_terms": [
+    "ReferencePlane",
+    "FamilyItemFactory.NewAlignment",
+    "FamilyManager",
+    "Extrusion"
+  ],
   "level": 2,
   "work_class": "W1",
   "workflows": [

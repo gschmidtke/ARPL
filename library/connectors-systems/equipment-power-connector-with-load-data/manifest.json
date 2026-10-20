@@ -1,6 +1,18 @@
 {
   "id": "ARPL-CON-0001",
   "title": "Power connector without load parameters",
+  "use_when": [
+    "adding electrical power connectors to equipment families",
+    "connecting a family to an electrical circuit"
+  ],
+  "not_for": [
+    "piping or duct connectors"
+  ],
+  "api_terms": [
+    "ConnectorElement.CreateElectricalConnector",
+    "ElectricalSystemType.PowerBalanced",
+    "FamilyManager.AssociateElementParameterToFamilyParameter"
+  ],
   "level": 3,
   "work_class": "W1",
   "workflows": [

@@ -1,6 +1,15 @@
 {
   "id": "ARPL-SCH-0001",
   "title": "Cost estimate priced the wrong construction",
+  "use_when": [
+    "estimating material or construction costs from a model",
+    "pricing wall, floor or roof types"
+  ],
+  "not_for": [],
+  "api_terms": [
+    "ViewSchedule",
+    "ALL_MODEL_COST"
+  ],
   "level": 2,
   "work_class": "W7",
   "workflows": [

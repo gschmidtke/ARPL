@@ -1,6 +1,14 @@
 {
   "id": "ARPL-FAM-0002",
   "title": "Faucet on the wrong side: mirrored source view",
+  "use_when": [
+    "modelling from orthographic views of a source drawing",
+    "deciding left/right or front/back orientation of a product"
+  ],
+  "not_for": [],
+  "api_terms": [
+    "Extrusion"
+  ],
   "level": 2,
   "work_class": "W1",
   "workflows": [

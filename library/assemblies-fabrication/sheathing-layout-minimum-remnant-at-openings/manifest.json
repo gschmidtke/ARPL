@@ -1,6 +1,18 @@
 {
   "id": "ARPL-ASM-0001",
   "title": "Plywood slivers at openings",
+  "use_when": [
+    "laying out sheathing, sheet goods or cladding boards across a wall with openings",
+    "deciding where panel joints fall relative to windows and doors"
+  ],
+  "not_for": [
+    "curtain walls",
+    "single full-height sheets without openings"
+  ],
+  "api_terms": [
+    "AssemblyInstance",
+    "FamilyInstance"
+  ],
   "level": 2,
   "work_class": "W3",
   "workflows": [

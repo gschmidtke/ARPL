@@ -1,6 +1,17 @@
 {
   "id": "ARPL-QA-0001",
   "title": "Layout preview as a review step",
+  "use_when": [
+    "any layout-driven build: studs, panels, cladding, tiles, ceiling grids",
+    "before committing many repeated elements in 3D"
+  ],
+  "not_for": [
+    "single elements"
+  ],
+  "api_terms": [
+    "DetailCurve",
+    "FilledRegion"
+  ],
   "level": 2,
   "work_class": "W8",
   "workflows": [

@@ -1,6 +1,15 @@
 {
   "id": "ARPL-MCX-0001",
   "title": "Markup read without checking the camera",
+  "use_when": [
+    "interpreting markups or redlines on a 3D view or screenshot",
+    "reviewing feedback given on a 3D image"
+  ],
+  "not_for": [],
+  "api_terms": [
+    "View3D.GetOrientation",
+    "ViewOrientation3D"
+  ],
   "level": 1,
   "work_class": "W8",
   "workflows": [

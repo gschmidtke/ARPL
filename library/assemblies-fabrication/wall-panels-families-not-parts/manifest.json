@@ -1,6 +1,17 @@
 {
   "id": "ARPL-ASM-0003",
   "title": "Revit Parts for wall layers: a dead end",
+  "use_when": [
+    "splitting wall layers into separate fabrication pieces",
+    "considering Revit Parts (PartUtils.CreateParts) for panels or BOM"
+  ],
+  "not_for": [
+    "Parts for simple area takeoffs or visual layer display"
+  ],
+  "api_terms": [
+    "PartUtils",
+    "AssemblyInstance"
+  ],
   "level": 2,
   "work_class": "W3",
   "workflows": [

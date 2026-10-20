@@ -1,6 +1,17 @@
 {
   "id": "ARPL-ASM-0002",
   "title": "Door too tall for a header",
+  "use_when": [
+    "framing a wall with openings where headers must fit under top plates",
+    "a door or window rough opening is close to the plate height"
+  ],
+  "not_for": [
+    "openings in non-framed walls (masonry, concrete)"
+  ],
+  "api_terms": [
+    "FamilyInstance",
+    "StructuralType.Beam"
+  ],
   "level": 2,
   "work_class": "W3",
   "workflows": [

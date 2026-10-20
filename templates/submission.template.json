@@ -15,6 +15,16 @@
     "phase": ""
   },
   "intent": "What you wanted to achieve, in professional terms",
+  "use_when": [
+    "When should another agent use this? One short sentence per situation"
+  ],
+  "not_for": [
+    "Similar-looking situations where this does not apply"
+  ],
+  "api_terms": [
+    "Revit API classes or methods involved"
+  ],
+  "improves": "If this improves an existing pack, its id (e.g. ARPL-ASM-0004). Otherwise empty.",
   "iterations": [
     {
       "instruction": "What you asked for or ran (prompt, JSON, script excerpt)",

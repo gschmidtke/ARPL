@@ -1,6 +1,19 @@
 {
   "id": "ARPL-GEO-0001",
   "title": "Forms absorb model lines and break hosting",
+  "use_when": [
+    "building adaptive components or forms from profiles",
+    "hosted elements lose their host after form edits"
+  ],
+  "not_for": [
+    "non-adaptive loadable families"
+  ],
+  "api_terms": [
+    "AdaptiveComponentFamilyUtils",
+    "ReferencePoint",
+    "CurveByPoints",
+    "FormUtils"
+  ],
   "level": 2,
   "work_class": "W2",
   "workflows": [

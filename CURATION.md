@@ -19,8 +19,8 @@ Contributions enter only through pull requests that add files to `inbox/`. The "
    - same technique and same result → add the contributor to the pack and raise status to `reproduced`;
    - same technique with a new failure or fix → add an iteration to the existing pack;
    - new technique → create a new pack.
-6. **Structure.** Write manifest, intent, iterations and final rule; assign facets from the controlled vocabularies only. New vocabulary values are proposed to the owner, not added silently.
-7. **Validate.** Run `python tools/validate.py`, then `python tools/build_catalogs.py`.
+6. **Structure.** Write manifest (including `use_when`, `not_for`, `api_terms`, so agents can find the pack), intent, iterations and final rule; assign facets from the controlled vocabularies only. New vocabulary values are proposed to the owner, not added silently.
+7. **Validate.** Run `python tools/validate.py`, then `python tools/build_catalogs.py` (regenerates the catalogs and `index.json`).
 8. **Close.** Update the ledger entry (decision, resulting pack ids), credit the contributor in CONTRIBUTORS.md, reply in the pull request with thanks and links, and move the raw submission to `ledger/archive/<entry-id>/`.
 
 ## Status rules

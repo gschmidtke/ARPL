@@ -6,6 +6,7 @@
   "required": [
     "id",
     "title",
+    "use_when",
     "level",
     "work_class",
     "workflows",
@@ -114,6 +115,28 @@
     },
     "legacy_id": {
       "type": "string"
+    },
+    "use_when": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      },
+      "description": "Trigger sentences: the situations in which an agent should apply this pack"
+    },
+    "not_for": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Situations that look similar but where this pack does not apply"
+    },
+    "api_terms": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Revit API classes, methods or parameters involved, for lookup from code"
     }
   }
 }

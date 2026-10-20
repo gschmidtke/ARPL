@@ -1,6 +1,15 @@
 {
   "id": "ARPL-FAM-0001",
   "title": "Coffee brewer from a spec sheet: overall height short",
+  "use_when": [
+    "building an equipment family from a manufacturer spec sheet or drawing",
+    "overall dimensions don't match after modelling"
+  ],
+  "not_for": [],
+  "api_terms": [
+    "Family",
+    "Extrusion"
+  ],
   "level": 2,
   "work_class": "W1",
   "workflows": [

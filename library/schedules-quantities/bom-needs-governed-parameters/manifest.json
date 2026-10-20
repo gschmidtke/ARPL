@@ -1,6 +1,16 @@
 {
   "id": "ARPL-SCH-0002",
   "title": "Cost per type can't carry a BOM",
+  "use_when": [
+    "preparing a bill of materials (BOM) or cut list from families",
+    "adding cost or quantity fields to schedules"
+  ],
+  "not_for": [],
+  "api_terms": [
+    "SharedParameterElement",
+    "ViewSchedule",
+    "ALL_MODEL_COST"
+  ],
   "level": 2,
   "work_class": "W7",
   "workflows": [
