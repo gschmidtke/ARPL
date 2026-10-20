@@ -1,5 +1,6 @@
 {
   "id": "ARPL-FAM-0004",
+  "revision": 1,
   "title": "Annotation family from a newer Revit version",
   "use_when": [
     "loading or editing annotation families (tags, labels)",
@@ -47,5 +48,12 @@
     "Gottfried Schmidtke with Claude"
   ],
   "recorded": "2026-10-17",
-  "legacy_id": "W1-005"
+  "legacy_id": "W1-005",
+  "changelog": [
+    {
+      "revision": 1,
+      "date": "2026-10-17",
+      "change": "First recorded"
+    }
+  ]
 }

@@ -1,5 +1,6 @@
 {
   "id": "ARPL-GEO-0003",
+  "revision": 1,
   "title": "Footing corner notches",
   "use_when": [
     "modelling foundations or footings at wall corners",
@@ -47,5 +48,12 @@
     "Gottfried Schmidtke with Claude"
   ],
   "recorded": "2026-10-16",
-  "legacy_id": "W4-004"
+  "legacy_id": "W4-004",
+  "changelog": [
+    {
+      "revision": 1,
+      "date": "2026-10-16",
+      "change": "First recorded"
+    }
+  ]
 }

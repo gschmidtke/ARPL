@@ -1,7 +1,7 @@
 # Curation
 
 **Owner:** Gottfried Schmidtke (repository owner, final authority).
-**Curator:** Claude (Anthropic), working in sessions under the owner's supervision.
+**Curator:** an AI-assisted curator working under the owner's supervision. The current implementation uses Claude (Anthropic) in scheduled sessions. ARPL is model-independent: the curator role is defined by this document, not by a particular AI.
 
 The curator keeps the library consistent so it stays useful as it grows. The owner reads the protocols and decides on anything that changes the structure or the rules.
 
@@ -20,16 +20,19 @@ Contributions enter only through pull requests that add files to `inbox/`. The "
    - same technique with a new failure or fix → add an iteration to the existing pack;
    - new technique → create a new pack.
 6. **Structure.** Write manifest (including `use_when`, `not_for`, `api_terms`, so agents can find the pack), intent, iterations and final rule; assign facets from the controlled vocabularies only. New vocabulary values are proposed to the owner, not added silently.
-7. **Validate.** Run `python tools/validate.py`, then `python tools/build_catalogs.py` (regenerates the catalogs and `index.json`).
-8. **Close.** Update the ledger entry (decision, resulting pack ids), credit the contributor in CONTRIBUTORS.md, reply in the pull request with thanks and links, and move the raw submission to `ledger/archive/<entry-id>/`.
+7. **Revise.** Any change to an existing pack's rule, validation or iterations raises its `revision` by 1 and adds a `changelog` entry naming the contributor.
+8. **Validate.** Run `python tools/validate.py`, then `python tools/build_catalogs.py` (regenerates the catalogs and `index.json`).
+9. **Close.** Update the ledger entry (decision, resulting pack ids), credit the contributor in CONTRIBUTORS.md, reply in the pull request with thanks and links, and move the raw submission to `ledger/archive/<entry-id>/`.
 
 ## Status rules
+
+The status definitions in `vocabularies/vocabularies.json` are authoritative; this table repeats them.
 
 | Status | Meaning | Who sets it |
 |---|---|---|
 | candidate | Recorded once, as submitted | Curator |
 | reproduced | Worked again in another model, by another person or in another Revit version | Curator, with evidence |
-| verified | Reviewed by the owner or a named discipline reviewer; validation passes | Owner |
+| verified | Reproduced, its validation passes, and reviewed by the owner or by a discipline reviewer the owner has named | Owner |
 | deprecated | Superseded or no longer valid (API change); kept for history | Curator, recorded in the ledger |
 
 ## Protocols for the owner

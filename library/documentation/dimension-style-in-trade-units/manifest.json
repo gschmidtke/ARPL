@@ -1,5 +1,6 @@
 {
   "id": "ARPL-DOC-0002",
+  "revision": 1,
   "title": "Project units round framing dimensions",
   "use_when": [
     "dimensioning fabrication or shop drawings for a trade",
@@ -47,5 +48,12 @@
     "Gottfried Schmidtke with Claude"
   ],
   "recorded": "2026-10-19",
-  "legacy_id": "W6-004"
+  "legacy_id": "W6-004",
+  "changelog": [
+    {
+      "revision": 1,
+      "date": "2026-10-19",
+      "change": "First recorded"
+    }
+  ]
 }

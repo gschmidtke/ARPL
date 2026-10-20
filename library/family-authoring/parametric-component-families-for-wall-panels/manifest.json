@@ -1,5 +1,6 @@
 {
   "id": "ARPL-FAM-0005",
+  "revision": 1,
   "title": "Component families for a wall panel",
   "use_when": [
     "building parametric component families for lumber, sheets, insulation or cladding",
@@ -50,5 +51,12 @@
     "Gottfried Schmidtke with Claude"
   ],
   "recorded": "2026-10-19",
-  "legacy_id": "W1-006"
+  "legacy_id": "W1-006",
+  "changelog": [
+    {
+      "revision": 1,
+      "date": "2026-10-19",
+      "change": "First recorded"
+    }
+  ]
 }

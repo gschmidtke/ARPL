@@ -1,5 +1,6 @@
 {
   "id": "ARPL-ASM-0004",
+  "revision": 1,
   "title": "Vertical studs pulled by auto-joins",
   "use_when": [
     "placing vertical studs, posts or braces as structural framing",
@@ -51,5 +52,12 @@
     "Gottfried Schmidtke with Claude"
   ],
   "recorded": "2026-10-19",
-  "legacy_id": "W3-004"
+  "legacy_id": "W3-004",
+  "changelog": [
+    {
+      "revision": 1,
+      "date": "2026-10-19",
+      "change": "First recorded"
+    }
+  ]
 }

@@ -1,5 +1,6 @@
 {
   "id": "ARPL-SCH-0002",
+  "revision": 1,
   "title": "Cost per type can't carry a BOM",
   "use_when": [
     "preparing a bill of materials (BOM) or cut list from families",
@@ -48,5 +49,12 @@
     "Gottfried Schmidtke with Claude"
   ],
   "recorded": "2026-10-19",
-  "legacy_id": "W7-002"
+  "legacy_id": "W7-002",
+  "changelog": [
+    {
+      "revision": 1,
+      "date": "2026-10-19",
+      "change": "First recorded"
+    }
+  ]
 }

@@ -1,6 +1,6 @@
 # ARPL: AI Revit Production Logic
 
-An open, curated learning pool of **instruction packs** that teach AI agents to produce professional Revit models, documentation and data, together with the reasoning behind every instruction.
+An open, curated learning pool of **instruction packs** that teach AI agents to produce professional Revit models, documentation and data, together with the production rationale and evidence behind every instruction: why a method was chosen, what failed, how the failure was found and how the correction was verified.
 
 > Teach it professional practice downward until the required API action becomes obvious.
 
@@ -45,7 +45,7 @@ ledger/                        record of every contribution and decision
 
 A pack lives in exactly one folder; the catalogs list it under every facet it carries. **Levels:** 1 primitive, 2 pattern, 3 discipline workflow, 4 project workflow. **Work classes** (W1–W8) describe what drives the result and decide what preview and proof a task needs; see [docs/model.md](docs/model.md).
 
-**Status:** `candidate` (recorded once) → `reproduced` (worked again in another model or by another person) → `verified` (reviewed, with a validation that passes) → `deprecated`.
+**Status:** `candidate` (recorded once) → `reproduced` (worked again in another model or by another person) → `verified` → `deprecated`. The definitions in [vocabularies.json](vocabularies/vocabularies.json) are authoritative. Each pack also has a `revision`, raised whenever its rule changes, so results can cite exactly which version was used.
 
 ## Contribute
 
@@ -53,7 +53,7 @@ Everyone can read, download and fork ARPL. Contributions go through **one inbox*
 
 ## Curation
 
-The repository is owned by Gottfried Schmidtke and curated by Claude (Anthropic) under his supervision. How contributions are reviewed: [CURATION.md](CURATION.md).
+The repository is owned by Gottfried Schmidtke. It is maintained by an AI-assisted curator under his supervision (currently Claude by Anthropic); ARPL itself is model-independent and works with any AI. How contributions are reviewed: [CURATION.md](CURATION.md).
 
 ## License
 

@@ -1,5 +1,6 @@
 {
   "id": "ARPL-DOC-0001",
+  "revision": 1,
   "title": "Shop drawings: invalid references and swapped elevations",
   "use_when": [
     "creating dimensioned shop drawings or assembly sheets",
@@ -54,5 +55,12 @@
     "Gottfried Schmidtke with Claude"
   ],
   "recorded": "2026-10-19",
-  "legacy_id": "W6-003"
+  "legacy_id": "W6-003",
+  "changelog": [
+    {
+      "revision": 1,
+      "date": "2026-10-19",
+      "change": "First recorded"
+    }
+  ]
 }

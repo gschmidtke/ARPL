@@ -1,5 +1,6 @@
 {
   "id": "ARPL-MCX-0001",
+  "revision": 1,
   "title": "Markup read without checking the camera",
   "use_when": [
     "interpreting markups or redlines on a 3D view or screenshot",
@@ -45,5 +46,12 @@
     "Gottfried Schmidtke with Claude"
   ],
   "recorded": "2026-10-16",
-  "legacy_id": "W8-001"
+  "legacy_id": "W8-001",
+  "changelog": [
+    {
+      "revision": 1,
+      "date": "2026-10-16",
+      "change": "First recorded"
+    }
+  ]
 }

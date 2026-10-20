@@ -1,5 +1,6 @@
 {
   "id": "ARPL-ASM-0003",
+  "revision": 1,
   "title": "Revit Parts for wall layers: a dead end",
   "use_when": [
     "splitting wall layers into separate fabrication pieces",
@@ -51,5 +52,12 @@
     "Gottfried Schmidtke with Claude"
   ],
   "recorded": "2026-10-19",
-  "legacy_id": "W3-003"
+  "legacy_id": "W3-003",
+  "changelog": [
+    {
+      "revision": 1,
+      "date": "2026-10-19",
+      "change": "First recorded"
+    }
+  ]
 }

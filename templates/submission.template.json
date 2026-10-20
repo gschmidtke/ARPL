@@ -25,6 +25,14 @@
     "Revit API classes or methods involved"
   ],
   "improves": "If this improves an existing pack, its id (e.g. ARPL-ASM-0004). Otherwise empty.",
+  "packs_used": [
+    {
+      "arpl_pack": "e.g. ARPL-ASM-0004",
+      "pack_revision": 1,
+      "revit_version": "",
+      "result": "passed | failed | improved"
+    }
+  ],
   "iterations": [
     {
       "instruction": "What you asked for or ran (prompt, JSON, script excerpt)",

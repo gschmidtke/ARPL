@@ -1,5 +1,6 @@
 {
   "id": "ARPL-ASM-0002",
+  "revision": 1,
   "title": "Door too tall for a header",
   "use_when": [
     "framing a wall with openings where headers must fit under top plates",
@@ -51,5 +52,12 @@
     "Gottfried Schmidtke with Claude"
   ],
   "recorded": "2026-10-19",
-  "legacy_id": "W3-002"
+  "legacy_id": "W3-002",
+  "changelog": [
+    {
+      "revision": 1,
+      "date": "2026-10-19",
+      "change": "First recorded"
+    }
+  ]
 }

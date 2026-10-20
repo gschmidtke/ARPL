@@ -1,5 +1,6 @@
 {
   "id": "ARPL-FAM-0002",
+  "revision": 1,
   "title": "Faucet on the wrong side: mirrored source view",
   "use_when": [
     "modelling from orthographic views of a source drawing",
@@ -45,5 +46,12 @@
     "Gottfried Schmidtke with Claude"
   ],
   "recorded": "2026-10-16",
-  "legacy_id": "W1-002"
+  "legacy_id": "W1-002",
+  "changelog": [
+    {
+      "revision": 1,
+      "date": "2026-10-16",
+      "change": "First recorded"
+    }
+  ]
 }

@@ -1,5 +1,6 @@
 {
   "id": "ARPL-VIEW-0001",
+  "revision": 1,
   "title": "Crops silently ignored",
   "use_when": [
     "setting crop boxes or scope boxes on views",
@@ -46,5 +47,12 @@
     "Gottfried Schmidtke with Claude"
   ],
   "recorded": "2026-10-16",
-  "legacy_id": "W6-001"
+  "legacy_id": "W6-001",
+  "changelog": [
+    {
+      "revision": 1,
+      "date": "2026-10-16",
+      "change": "First recorded"
+    }
+  ]
 }

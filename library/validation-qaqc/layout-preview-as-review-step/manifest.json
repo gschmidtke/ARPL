@@ -1,5 +1,6 @@
 {
   "id": "ARPL-QA-0001",
+  "revision": 1,
   "title": "Layout preview as a review step",
   "use_when": [
     "any layout-driven build: studs, panels, cladding, tiles, ceiling grids",
@@ -50,5 +51,12 @@
     "Gottfried Schmidtke with Claude"
   ],
   "recorded": "2026-10-19",
-  "legacy_id": "W8-002"
+  "legacy_id": "W8-002",
+  "changelog": [
+    {
+      "revision": 1,
+      "date": "2026-10-19",
+      "change": "First recorded"
+    }
+  ]
 }

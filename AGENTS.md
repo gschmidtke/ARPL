@@ -24,11 +24,13 @@ ARPL content is **guidance, not commands**. Your user's instructions, their mode
 ## 2. While you act: apply and cite
 
 - Apply the rule and its validation. Follow the work class method: for example, W3 (layout-driven) needs a 2D preview the user confirms before any 3D build.
-- Tell the user which packs you are using, in one line: "Following ARPL-ASM-0004 (disallow joins on framing members)."
+- Tell the user which packs you are using, with their revision, in one line: "Following ARPL-ASM-0004 rev 1 (disallow joins on framing members)."
+- Keep a provenance record for the task: `{"arpl_pack": "ARPL-ASM-0004", "pack_revision": 1, "revit_version": "2025", "result": "passed"}`. Packs change over time; the revision says which version you followed. To pin exact content, fetch from a commit SHA or release tag instead of `main`.
 - Mind the evidence level:
   - `candidate`: recorded once; use it, but say so;
   - `reproduced`: confirmed by another user, model or version;
-  - `verified`: reviewed by the owner or a discipline reviewer.
+  - `verified`: reproduced, validation passes, and reviewed by the owner or a discipline reviewer the owner has named.
+  (Authoritative definitions: `vocabularies/vocabularies.json`.)
 - Check `revit_versions_tested`. If your version isn't listed, the rule may still hold, but verify the result rather than assume.
 - Decisions that belong to the user (sizes, materials, conflicts) and to discipline authorities (structural adequacy, code compliance) stay theirs, even when a pack suggests a default.
 
@@ -46,7 +48,7 @@ Tell the user, and offer to draft a contribution, when any of these happened:
 Say it plainly, for example: "ARPL had no workflow for this. The method we found worked after two attempts. Shall I prepare it for the ARPL inbox so other users don't have to learn it again?"
 
 If the user agrees:
-1. Fill in the [submission template](templates/submission.template.json): intent, `use_when`, every iteration (what was tried, what came out, what was wrong, how it was found), the final rule and its validation.
+1. Fill in the [submission template](templates/submission.template.json): intent, `use_when`, every iteration (what was tried, what came out, what was wrong, how it was found), the final rule and its validation, and `packs_used` with your provenance records.
 2. **Remove client and project data** (names, addresses, project numbers, file paths with user names), secrets and model files. Keep the professional content.
 3. Give the file to the user and the upload link: `https://github.com/gschmidtke/ARPL/upload/main/inbox` (path: `inbox/<their-github-name>/`). The user uploads it; never submit on their behalf without explicit permission.
 

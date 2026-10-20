@@ -1,5 +1,6 @@
 {
   "id": "ARPL-ASM-0005",
+  "revision": 1,
   "title": "Assembly naming and identical panels",
   "use_when": [
     "creating and naming Revit assemblies",
@@ -49,5 +50,12 @@
     "Gottfried Schmidtke with Claude"
   ],
   "recorded": "2026-10-19",
-  "legacy_id": "W3-005"
+  "legacy_id": "W3-005",
+  "changelog": [
+    {
+      "revision": 1,
+      "date": "2026-10-19",
+      "change": "First recorded"
+    }
+  ]
 }

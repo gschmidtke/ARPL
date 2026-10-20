@@ -1,5 +1,6 @@
 {
   "id": "ARPL-FAM-0003",
+  "revision": 1,
   "title": "Template with hidden geometry",
   "use_when": [
     "choosing a family template for a new family",
@@ -44,5 +45,12 @@
     "Gottfried Schmidtke with Claude"
   ],
   "recorded": "2026-10-16",
-  "legacy_id": "W1-004"
+  "legacy_id": "W1-004",
+  "changelog": [
+    {
+      "revision": 1,
+      "date": "2026-10-16",
+      "change": "First recorded"
+    }
+  ]
 }

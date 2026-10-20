@@ -5,6 +5,7 @@
   "type": "object",
   "required": [
     "id",
+    "revision",
     "title",
     "use_when",
     "level",
@@ -137,6 +138,39 @@
         "type": "string"
       },
       "description": "Revit API classes, methods or parameters involved, for lookup from code"
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Raised by the curator whenever the rule, validation or iterations change. Agents record pack id + revision as provenance."
+    },
+    "changelog": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "revision",
+          "date",
+          "change"
+        ],
+        "properties": {
+          "revision": {
+            "type": "integer"
+          },
+          "date": {
+            "type": "string"
+          },
+          "change": {
+            "type": "string"
+          },
+          "contributors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
     }
   }
 }

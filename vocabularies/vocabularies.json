@@ -1,7 +1,7 @@
 {
-  "version": "1.0",
+  "version": "1.1",
   "date": "2026-10-20",
-  "note": "Controlled vocabularies for manifest facets. New values are added by the curator on request; 'generic' means applicable regardless of the facet.",
+  "note": "Controlled vocabularies for manifest facets. New values are proposed by the curator and approved by the owner; 'generic' means applicable regardless of the facet. The status definitions here are authoritative; other documents refer to them.",
   "workflows": {
     "model-context": "Inspect model, levels, categories, units, existing content",
     "geometry": "Create or modify geometry, profiles, curves, solids, openings",
@@ -97,7 +97,7 @@
   "statuses": {
     "candidate": "Recorded once; not yet reproduced",
     "reproduced": "Reproduced by another contributor or environment",
-    "verified": "Reproduced and reviewed by the curator against its validation",
+    "verified": "Reproduced, its validation passes, and reviewed by the owner or by a discipline reviewer the owner has named",
     "deprecated": "Superseded; kept for history"
   }
 }
