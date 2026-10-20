@@ -33,7 +33,7 @@ The status definitions in `vocabularies/vocabularies.json` are authoritative; th
 | candidate | Recorded once, as submitted | Curator |
 | reproduced | Worked again in another model, by another person or in another Revit version | Curator, with evidence |
 | verified | Reproduced, its validation passes, and reviewed by the owner or by a discipline reviewer the owner has named | Owner |
-| deprecated | Superseded or no longer valid (API change); kept for history | Curator, recorded in the ledger |
+| deprecated | Superseded or no longer valid (API change); kept for history, with `superseded_by` | Curator, recorded in the ledger (policy: [docs/scope.md](docs/scope.md)) |
 
 ## Protocols for the owner
 

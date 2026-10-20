@@ -171,6 +171,11 @@
           }
         }
       }
+    },
+    "superseded_by": {
+      "type": "string",
+      "pattern": "^ARPL-[A-Z]{2,4}-[0-9]{4}$",
+      "description": "Set when status is deprecated: the pack that replaces this one"
     }
   }
 }

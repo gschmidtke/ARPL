@@ -17,6 +17,10 @@ There is exactly one way in: **the `inbox/` folder**. Everything else in the rep
 2. Name the path `inbox/<your-github-name>/` and drop your files: a JSON from [the template](templates/submission.template.json), Markdown, a plain-text log or a zip. Any format is fine.
 3. Click "Propose changes". GitHub forks the repository and opens the pull request for you.
 
+**Quick path:** a few lines in a text or Markdown file are enough: *I tried X, got Y, it was wrong because Z, I noticed it by W, and this worked instead.* The curator does the rest. If you want to see what a complete submission looks like, there is a [filled example](templates/example-submission.json).
+
+**Reproductions count.** Tried an existing pack and it worked (or didn't) in your Revit version? That is one of the most valuable contributions; see [help wanted](catalogs/help-wanted.md).
+
 Git users can fork and open a pull request the normal way, as long as it only touches `inbox/`. Pull requests that change anything outside `inbox/` fail the automatic "Inbox only" check and are closed. Issues are for questions only, not for submissions.
 
 ## Rules

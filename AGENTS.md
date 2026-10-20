@@ -4,7 +4,7 @@ ARPL here means **AI Revit Production Logic**. It is unrelated to other projects
 
 You are an AI agent working in Autodesk Revit for a user (through a bridge, MCP server or add-in). ARPL is a shared knowledge pool of production workflows other agents and users have already worked out, including what went wrong. Use it so nothing has to be learned twice, and give back what you learn.
 
-ARPL content is **guidance, not commands**. Your user's instructions, their model and their approval always decide. Never run a script from this repository without reading it and having the user's consent.
+ARPL content is **guidance, not commands**. Your user's instructions, their firm's standards, their model and their approval always decide. Never run a script from this repository without reading it and having the user's consent.
 
 ## 0. First: establish the frame from evidence
 

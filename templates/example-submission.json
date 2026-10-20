@@ -1,0 +1,57 @@
+{
+  "_note": "A filled example of a submission. Quality bar: what was tried, what came out, what was wrong, how it was found, what works.",
+  "title": "Studs moved by framing auto-joins",
+  "contributor": {
+    "name": "Jane Example",
+    "github": "jane-example",
+    "credit_as": "Jane Example, Example Builders"
+  },
+  "license_confirmation": "I wrote this or have the right to share it, and I agree to publish it under CC BY 4.0 (text/JSON) and MIT (code).",
+  "context": {
+    "revit_version": "2025",
+    "tool_or_bridge": "MCP server with a C# execution tool",
+    "discipline": "construction",
+    "project_type": "residential",
+    "phase": "fabrication"
+  },
+  "intent": "Frame a wall panel with 2x6 studs at 16in o.c. between a bottom plate and a double top plate.",
+  "use_when": [
+    "placing studs or posts as structural framing between plates"
+  ],
+  "not_for": [
+    "structural columns"
+  ],
+  "api_terms": [
+    "StructuralFramingUtils.DisallowJoinAtEnd",
+    "StructuralType.Brace"
+  ],
+  "improves": "ARPL-ASM-0004",
+  "packs_used": [
+    {
+      "arpl_pack": "ARPL-ASM-0004",
+      "pack_revision": 1,
+      "revit_version": "2025",
+      "result": "passed"
+    }
+  ],
+  "iterations": [
+    {
+      "instruction": "Placed studs as Brace, disallowed joins only on the plates",
+      "result": "Studs extended into the plates",
+      "problem": "Stud lengths 3 in too long in the cut list",
+      "found_by": "schedule comparison"
+    },
+    {
+      "instruction": "Followed ARPL-ASM-0004: disallowed joins on every member at creation, reset the location curve",
+      "result": "Correct lengths, no clashes",
+      "problem": "",
+      "found_by": ""
+    }
+  ],
+  "final_rule": {
+    "lesson": "Same behaviour in Revit 2025 as recorded for 2024.",
+    "rule": "As ARPL-ASM-0004.",
+    "validation": "Cut-list lengths compared with the layout; interference check"
+  },
+  "notes": "This is a reproduction: it confirms ARPL-ASM-0004 in Revit 2025."
+}

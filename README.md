@@ -8,11 +8,19 @@ An open, curated learning pool of **instruction packs** that teach AI agents to 
 
 Each pack records a real production task: the intent, every iteration that was tried (what was asked, what came out, what was wrong and how it was found), and the final rule that works, with a way to prove it. Failures are kept on purpose: they are what makes the next agent faster.
 
+## What a pack looks like
+
+An AI framed wall panels in Revit. Every stud was placed exactly where the layout said, and the check passed. Then a clash check found two end studs had moved 89 mm: Revit's automatic framing joins had changed them *after* placement. The API call "succeeded"; the model was wrong.
+
+[ARPL-ASM-0004](library/assemblies-fabrication/framing-members-disallow-auto-joins/) records both attempts, how the problem was found, and the rule that fixed it: disallow joins on every framing member at creation, then verify positions after regeneration. The next AI that frames a wall reads that first and doesn't repeat it.
+
 ## Use it from your AI
 
 If your AI works in Revit through a bridge or MCP server, tell it:
 
 > Before this Revit task, check the ARPL knowledge pool for an established workflow: read https://raw.githubusercontent.com/gschmidtke/ARPL/main/AGENTS.md and follow it.
+
+More options (system prompt, a lookup tool for bridges and MCP servers): [docs/agent-setup.md](docs/agent-setup.md).
 
 The agent searches [index.json](index.json), applies the matching rules, tells you which packs it used, and afterwards says when it found something better or missing, so you can upload it and nobody has to learn it twice.
 
@@ -49,9 +57,20 @@ A pack lives in exactly one folder; the catalogs list it under every facet it ca
 
 **Status:** `candidate` (recorded once) → `reproduced` (worked again in another model or by another person) → `verified` → `deprecated`. The definitions in [vocabularies.json](vocabularies/vocabularies.json) are authoritative. Each pack also has a `revision`, raised whenever its rule changes, so results can cite exactly which version was used.
 
+Want to help? See [help wanted](catalogs/help-wanted.md): packs waiting for reproduction and disciplines not covered yet. Scope, limits and the deprecation policy: [docs/scope.md](docs/scope.md).
+
 ## Contribute
 
 Everyone can read, download and fork ARPL. Contributions go through **one inbox**: [upload your protocol to `inbox/`](https://github.com/gschmidtke/ARPL/upload/main/inbox) (see [CONTRIBUTING.md](CONTRIBUTING.md)). You don't need to fit our structure; the curator reads, verifies, restructures and files it. Nothing outside the inbox is edited by contributors. Every contribution is recorded in the [ledger](ledger/intake-ledger.json) and credited in [CONTRIBUTORS.md](CONTRIBUTORS.md).
+
+## Run it locally
+
+```
+pip install jsonschema
+python tools/validate.py          # check every pack against schema and vocabularies
+python tools/build_catalogs.py    # regenerate catalogs, pack READMEs and index.json
+python tools/arpl_search.py "place studs in a wall panel" --index index.json
+```
 
 ## Curation
 
