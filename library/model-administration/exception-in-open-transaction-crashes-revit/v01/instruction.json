@@ -1,0 +1,4 @@
+{
+  "version": "v01",
+  "instruction": "new Transaction(...) ; tr.Start(); ... doc.Create.NewFootPrintRoof(...) (threw ArgumentNullException) ; no using/try, so tr stayed open when the exception left the snippet; bridge then aborted its TransactionGroup"
+}

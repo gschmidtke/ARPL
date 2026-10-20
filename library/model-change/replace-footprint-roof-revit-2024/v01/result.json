@@ -1,0 +1,5 @@
+{
+  "result": "ArgumentException: Sketch does not support editing",
+  "problem": "Footprint roof sketches are not editable through SketchEditScope in Revit 2024",
+  "found_by": "exception on dry run"
+}

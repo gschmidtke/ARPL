@@ -1,0 +1,5 @@
+{
+  "result": "New roof exactly on target: bb -4476.3,-1666,2456.8 to 8534.1,2988.1,3106.3",
+  "problem": "Walls still attached to the old roof; attachment must be done in the UI (Attach Top/Base), then the old roof deleted",
+  "found_by": "bounding box read back"
+}

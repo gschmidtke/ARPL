@@ -8,6 +8,7 @@ Entry for engineers and designers. 'generic' packs apply to every discipline.
 
 | Pack | Level | Work class | Status |
 |---|---|---|---|
+| [ARPL-ADM-0001](../library/model-administration/exception-in-open-transaction-crashes-revit/) An exception inside an open Transaction crashed Revit | 1 | W5 | candidate |
 | [ARPL-DOC-0002](../library/documentation/dimension-style-in-trade-units/) Project units round framing dimensions | 1 | W6 | candidate |
 | [ARPL-FAM-0001](../library/family-authoring/equipment-from-spec-sheet-overall-dimensions/) Coffee brewer from a spec sheet: overall height short | 2 | W1 | candidate |
 | [ARPL-FAM-0002](../library/family-authoring/orientation-from-multiple-source-views/) Faucet on the wrong side: mirrored source view | 2 | W1 | candidate |
@@ -27,6 +28,7 @@ Entry for engineers and designers. 'generic' packs apply to every discipline.
 | [ARPL-ASM-0004](../library/assemblies-fabrication/framing-members-disallow-auto-joins/) Vertical studs pulled by auto-joins | 1 | W3 | candidate |
 | [ARPL-ASM-0005](../library/assemblies-fabrication/assembly-naming-and-identical-panels/) Assembly naming and identical panels | 1 | W3 | candidate |
 | [ARPL-CHG-0001](../library/model-change/lower-a-level-and-propagate-dependents/) Lowering a level: what doesn't follow | 2 | W5 | candidate |
+| [ARPL-CHG-0002](../library/model-change/replace-footprint-roof-revit-2024/) Changing a footprint roof's outline by API in Revit 2024 | 2 | W5 | candidate |
 | [ARPL-DOC-0001](../library/documentation/assembly-shop-drawings/) Shop drawings: invalid references and swapped elevations | 2 | W6 | candidate |
 | [ARPL-FAM-0005](../library/family-authoring/parametric-component-families-for-wall-panels/) Component families for a wall panel | 2 | W1 | candidate |
 | [ARPL-GEO-0001](../library/geometry/adaptive-rig-reference-lines-not-model-lines/) Forms absorb model lines and break hosting | 2 | W2 | candidate |
@@ -101,6 +103,7 @@ Entry for engineers and designers. 'generic' packs apply to every discipline.
 | [ARPL-ASM-0003](../library/assemblies-fabrication/wall-panels-families-not-parts/) Revit Parts for wall layers: a dead end | 2 | W3 | candidate |
 | [ARPL-ASM-0004](../library/assemblies-fabrication/framing-members-disallow-auto-joins/) Vertical studs pulled by auto-joins | 1 | W3 | candidate |
 | [ARPL-ASM-0005](../library/assemblies-fabrication/assembly-naming-and-identical-panels/) Assembly naming and identical panels | 1 | W3 | candidate |
+| [ARPL-CHG-0002](../library/model-change/replace-footprint-roof-revit-2024/) Changing a footprint roof's outline by API in Revit 2024 | 2 | W5 | candidate |
 | [ARPL-DOC-0001](../library/documentation/assembly-shop-drawings/) Shop drawings: invalid references and swapped elevations | 2 | W6 | candidate |
 | [ARPL-DOC-0002](../library/documentation/dimension-style-in-trade-units/) Project units round framing dimensions | 1 | W6 | candidate |
 | [ARPL-FAM-0005](../library/family-authoring/parametric-component-families-for-wall-panels/) Component families for a wall panel | 2 | W1 | candidate |

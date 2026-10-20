@@ -1,0 +1,9 @@
+{
+  "lesson": "Revit 2024's API cannot edit a footprint roof's sketch or attach walls to a roof. Changing the outline means a new roof, and the wall attachment is a user step.",
+  "rule": "Create the new roof beside the old one (instantiate the out ModelCurveArray first), set slope and base offset, verify by bounding box, hide the old roof, pre-select the walls and ask the user to Attach Top/Base; delete the old roof only after the walls are attached to the new one.",
+  "validation": [
+    "Roof bounding box equals target edges and heights",
+    "Every wall reports WALL_TOP_IS_ATTACHED = 1 and a top that follows the new roof",
+    "Old roof deleted only after attachment"
+  ]
+}

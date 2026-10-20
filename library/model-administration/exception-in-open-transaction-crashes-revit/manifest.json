@@ -1,0 +1,65 @@
+{
+  "id": "ARPL-ADM-0001",
+  "revision": 1,
+  "title": "An exception inside an open Transaction crashed Revit",
+  "use_when": [
+    "any scripted change that starts its own Transaction, especially inside a TransactionGroup",
+    "a bridge or add-in runs agent-written C# against a live model"
+  ],
+  "not_for": [
+    "read-only scripts that open no transaction"
+  ],
+  "api_terms": [
+    "Transaction",
+    "TransactionGroup",
+    "IDisposable",
+    "Transaction.RollBack"
+  ],
+  "level": 1,
+  "work_class": "W5",
+  "workflows": [
+    "model-administration",
+    "model-change"
+  ],
+  "disciplines": [
+    "generic"
+  ],
+  "roles": [
+    "bim-specialist",
+    "bim-manager"
+  ],
+  "project_types": [
+    "generic"
+  ],
+  "phases": [
+    "design-development",
+    "construction-documents",
+    "fabrication"
+  ],
+  "revit_versions_tested": [
+    "2024"
+  ],
+  "environment": {
+    "revit_version": "2024.3",
+    "tool": "RevitBridge 0.4.0 (local Revit API bridge, MCP) with run_csharp",
+    "compiler": "Roslyn 4.8 (C# 12)",
+    "agent": "Claude (Anthropic)",
+    "model": "ADU-01 (workshared cloud model; recovery copy)"
+  },
+  "failure_patterns": [
+    "FP14",
+    "FP11"
+  ],
+  "status": "candidate",
+  "contributors": [
+    "Gottfried Schmidtke with Claude"
+  ],
+  "recorded": "2026-10-20",
+  "changelog": [
+    {
+      "revision": 1,
+      "date": "2026-10-20",
+      "change": "First recorded from the ADU-01 roof replacement crash"
+    }
+  ]
+}

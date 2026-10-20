@@ -1,0 +1,5 @@
+{
+  "result": "Wall.AddAttachment does not exist in the 2024 API (compile error); the next version without it threw ArgumentNullException in NewFootPrintRoof and crashed Revit (see ARPL-ADM-0001)",
+  "problem": "The out ModelCurveArray must be instantiated before the call; the unclosed transaction turned the exception into a crash",
+  "found_by": "compile error; Revit journal after the crash"
+}

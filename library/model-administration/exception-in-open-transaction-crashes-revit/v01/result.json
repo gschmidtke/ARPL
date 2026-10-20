@@ -1,0 +1,5 @@
+{
+  "result": "Revit fatal error: 'Revit has experienced a fatal error and cannot continue'",
+  "problem": "Journal: 'Missing transaction marker before abort transaction group', 'Undo phases not properly nested', 'A Transaction object or the document itself got destroyed while executing a call', then 'Pure Virtual Function Call!!! Go to crash protection'. The open sub-transaction was destroyed under the aborting group.",
+  "found_by": "Revit journal (journal.0074.txt) read after restart"
+}

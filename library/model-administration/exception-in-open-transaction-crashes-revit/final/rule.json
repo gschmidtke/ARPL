@@ -1,0 +1,9 @@
+{
+  "lesson": "In Revit 2024 an exception that leaves a scripted Transaction open while an enclosing TransactionGroup is aborted can crash Revit, not just fail the script. The first visible error (ArgumentNullException) was harmless; the crash came from the unclosed transaction.",
+  "rule": "Wrap every own Transaction (and SubTransaction) in using(...) so it is rolled back during exception unwinding, before any enclosing group is aborted. Wrap the script body in try/catch and return the failing step. Dry-run every new API call first. Bridges should run 'group' mode snippets so that unwinding happens before the group is rolled back.",
+  "validation": [
+    "Dry run of the guarded script returns the error and step instead of crashing",
+    "Journal shows no 'Undo phases not properly nested' warnings"
+  ],
+  "bridge_candidate": "RevitBridge 0.4.1: document the using-pattern in the tool description; consider refusing to abort a TransactionGroup while doc.IsModifiable is true and reporting it instead"
+}

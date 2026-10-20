@@ -1,0 +1,5 @@
+{
+  "result": "The exception rolled back cleanly; the script reported step 'create' and the real cause (see ARPL-CHG-0002). No crash.",
+  "problem": "",
+  "found_by": "dry run"
+}

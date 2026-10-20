@@ -1,0 +1,4 @@
+{
+  "version": "v02",
+  "instruction": "FootPrintRoof.set_Offset(edge, delta) per edge to push the outline"
+}

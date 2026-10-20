@@ -1,0 +1,4 @@
+{
+  "version": "v02",
+  "instruction": "Same script with every Transaction in a using block and the body in try/catch returning the failing step"
+}

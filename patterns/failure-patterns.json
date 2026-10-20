@@ -71,6 +71,15 @@
         "Gottfried Schmidtke",
         "Zara (ChatGPT) analysis"
       ]
+    },
+    {
+      "id": "FP14",
+      "name": "Exception leaves a transaction open",
+      "meaning": "A scripted error escapes while the script's own Transaction is still open. Inside an enclosing TransactionGroup this can crash Revit (fatal error) instead of failing the script. Defence: using-blocks for every Transaction, try/catch around the body, dry runs.",
+      "found_by": "Revit journal after a fatal error",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ]
     }
   ]
 }

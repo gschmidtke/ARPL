@@ -1,0 +1,5 @@
+{
+  "result": "No change to the outline; only the elevation shifted by 3 mm",
+  "problem": "The per-edge offset is not a horizontal move of the footprint for sketched roofs",
+  "found_by": "bounding box read back in dry run"
+}

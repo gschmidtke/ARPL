@@ -1,0 +1,4 @@
+{
+  "version": "v04",
+  "instruction": "var mca = new ModelCurveArray(); NewFootPrintRoof(...) in a guarded using-transaction; slope on the north edge (SlopeAngle = tan 5 deg); base offset corrected by measuring the bounding box (-43.2 mm); old roof kept, hidden in the 3D view; walls pre-selected for the user"
+}
