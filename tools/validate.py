@@ -1,6 +1,6 @@
 """Validate every pack manifest against the schema and the controlled vocabularies.
 Usage: python tools/validate.py   (needs: pip install jsonschema)"""
-import json, glob, sys, os
+import json, glob, sys, os, re
 try:
     import jsonschema
 except ImportError:
@@ -25,6 +25,16 @@ for path in sorted(glob.glob(os.path.join(root, "library/*/*/manifest.json"))):
     for v in sorted(glob.glob(os.path.join(os.path.dirname(path), "v*"))):
         for f in ("instruction.json", "result.json"):
             if not os.path.exists(os.path.join(v, f)): errors.append(f"{os.path.relpath(v, root)}: missing {f}")
+# Hidden characters can carry instructions humans can't see (context poisoning)
+HIDDEN = re.compile("[\U000E0000-\U000E007F\u200B-\u200F\u202A-\u202E\u2060-\u2064\uFEFF]")
+for folder in ["library", "domains", "patterns", "project-workflows", "vocabularies", "inbox", "templates"]:
+    for path in glob.glob(os.path.join(root, folder, "**", "*"), recursive=True):
+        if os.path.isfile(path) and path.endswith((".json", ".md", ".txt", ".cs", ".py")):
+            text = open(path, encoding="utf-8", errors="replace").read()
+            if HIDDEN.search(text): errors.append(f"{os.path.relpath(path, root)}: contains hidden Unicode characters")
+for f in ["AGENTS.md", "llms.txt", "index.json", "README.md"]:
+    path = os.path.join(root, f)
+    if os.path.exists(path) and HIDDEN.search(open(path, encoding="utf-8").read()): errors.append(f"{f}: contains hidden Unicode characters")
 print(f"{len(ids)} packs checked, {len(errors)} problems")
 for e in errors: print(" -", e)
 sys.exit(1 if errors else 0)

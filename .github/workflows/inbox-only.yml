@@ -24,3 +24,7 @@ jobs:
             echo "::error::Model files and binaries are not accepted. Please share a protocol, JSON or Markdown instead."
             exit 1
           fi
+      - name: Check for hidden characters and schema problems
+        run: |
+          pip install --quiet jsonschema
+          python tools/validate.py
