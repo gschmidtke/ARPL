@@ -1,6 +1,6 @@
 # ARPL: AI Revit Production Logic
 
-> Open, curated knowledge pool of tested production workflows for AI agents working in Autodesk Revit, including failed attempts, lessons and final rules. Agents should read AGENTS.md first, search index.json before acting, and offer users to contribute improvements through the inbox.
+> Open, curated knowledge pool of tested production workflows for AI agents working in Autodesk Revit, including failed attempts, lessons and final rules. Not related to Advanced Redpill Loader or Adversarial Reciprocal Points Learning, which share the acronym. Agents should read AGENTS.md first, inspect evidence before choosing a task's frame, search index.json before acting, and offer users to contribute improvements through the inbox.
 
 ## For agents
 

@@ -43,7 +43,8 @@
   },
   "failure_patterns": [
     "FP07",
-    "FP09"
+    "FP09",
+    "FP13"
   ],
   "status": "candidate",
   "contributors": [

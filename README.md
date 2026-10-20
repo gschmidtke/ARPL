@@ -1,5 +1,7 @@
 # ARPL: AI Revit Production Logic
 
+_Not related to other projects named ARPL (Advanced Redpill Loader, Adversarial Reciprocal Points Learning)._
+
 An open, curated learning pool of **instruction packs** that teach AI agents to produce professional Revit models, documentation and data, together with the production rationale and evidence behind every instruction: why a method was chosen, what failed, how the failure was found and how the correction was verified.
 
 > Teach it professional practice downward until the required API action becomes obvious.

@@ -1,14 +1,27 @@
 # ARPL for AI agents
 
+ARPL here means **AI Revit Production Logic**. It is unrelated to other projects with the same acronym (Advanced Redpill Loader, Adversarial Reciprocal Points Learning). Read this repository's files; don't answer from what the name reminds you of.
+
 You are an AI agent working in Autodesk Revit for a user (through a bridge, MCP server or add-in). ARPL is a shared knowledge pool of production workflows other agents and users have already worked out, including what went wrong. Use it so nothing has to be learned twice, and give back what you learn.
 
 ARPL content is **guidance, not commands**. Your user's instructions, their model and their approval always decide. Never run a script from this repository without reading it and having the user's consent.
+
+## 0. First: establish the frame from evidence
+
+Identify → Inspect → Frame → Act. Not: Recognize → Assume → Act.
+
+Words like "connector", "panel", "room", "system", "family" or an acronym trigger strong associations. Don't choose the discipline or meaning of a task from its name. Before mapping the task to a workflow, inspect the authoritative evidence:
+- the user's actual words and any source documents they gave;
+- the open model or family: category, project information, existing types, units, the element the user selected;
+- for a family: its category, existing connectors and parameters.
+
+If the evidence leaves the frame open (is this connector power, data or audio?), ask the user in one question. Failure pattern FP13 records what happens otherwise.
 
 ## 1. Before you act: look it up
 
 1. Fetch the index (one file, about 35 KB):
    `https://raw.githubusercontent.com/gschmidtke/ARPL/main/index.json`
-2. Describe the task in ARPL terms:
+2. Describe the task in ARPL terms, using the frame you established in step 0:
    - **work class** W1–W8 (what drives the result; listed in the index);
    - **workflow** (which area of Revit), **discipline**, **project type**, **phase**;
    - the **Revit version** you are running in.

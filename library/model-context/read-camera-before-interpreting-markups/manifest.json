@@ -39,7 +39,8 @@
     "agent": "Claude (Anthropic)"
   },
   "failure_patterns": [
-    "FP02"
+    "FP02",
+    "FP13"
   ],
   "status": "candidate",
   "contributors": [

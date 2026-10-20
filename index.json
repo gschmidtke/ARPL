@@ -906,7 +906,8 @@
         "2024"
       ],
       "failure_patterns": [
-        "FP02"
+        "FP02",
+        "FP13"
       ],
       "status": "candidate",
       "rule": "Read the camera before interpreting any 3D markup.",
@@ -1078,7 +1079,8 @@
       ],
       "failure_patterns": [
         "FP07",
-        "FP09"
+        "FP09",
+        "FP13"
       ],
       "status": "candidate",
       "rule": "Ask the construction method before any cost or structural work.",
@@ -1278,6 +1280,17 @@
       "id": "FP12",
       "name": "Fix incomplete",
       "meaning": "The correction addressed one case of the problem; the same problem reappeared in a neighbouring case."
+    },
+    {
+      "id": "FP13",
+      "name": "Frame chosen from a name",
+      "meaning": "The agent picks the domain, discipline or meaning of a task from a familiar word (a name, an acronym, 'connector', 'panel', 'room', 'system') before inspecting the actual evidence, then executes valid operations in the wrong world. Rule: Identify -> Inspect -> Frame -> Act, not Recognize -> Assume -> Act.",
+      "example": "Given the link github.com/gschmidtke/ARPL, an AI described 'ARPL (Advanced Redpill Loader)', an unrelated NAS bootloader, without opening the repository, and even attributed that project to the wrong owner. Revit equivalent: 'create the equipment connector' read as electrical when the family is audio equipment.",
+      "found_by": "user noticed the answer did not match the source",
+      "contributors": [
+        "Gottfried Schmidtke",
+        "Zara (ChatGPT) analysis"
+      ]
     }
   ]
 }

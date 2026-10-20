@@ -93,3 +93,10 @@ Learn from what went wrong: each pack is listed under the failure patterns it re
 |---|---|---|---|
 | [ARPL-ASM-0001](../library/assemblies-fabrication/sheathing-layout-minimum-remnant-at-openings/) Plywood slivers at openings | 2 | W3 | candidate |
 
+## FP13: Frame chosen from a name
+
+| Pack | Level | Work class | Status |
+|---|---|---|---|
+| [ARPL-MCX-0001](../library/model-context/read-camera-before-interpreting-markups/) Markup read without checking the camera | 1 | W8 | candidate |
+| [ARPL-SCH-0001](../library/schedules-quantities/cost-estimate-construction-method-first/) Cost estimate priced the wrong construction | 2 | W7 | candidate |
+
