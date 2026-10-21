@@ -1,6 +1,6 @@
 {
   "id": "ARPL-ASM-0006",
-  "revision": 4,
+  "revision": 5,
   "title": "Sloped roof assembly from component families",
   "use_when": [
     "framing and finishing a sloped (shed, mono-pitch) roof as an assembly of lumber, sheet and board families",
@@ -12,14 +12,17 @@
     "curved roofs"
   ],
   "api_terms": [
-    "FamilyPlacementType.WorkPlaneBased",
-    "FAMILY_WORK_PLANE_BASED",
-    "FAMILY_ALWAYS_VERTICAL",
+    "AssemblyInstance.Create",
+    "DirectShape",
     "Document.NewReferencePlane",
-    "NewFamilyInstance(Reference, XYZ, XYZ, FamilySymbol)",
-    "StructuralFramingUtils.DisallowJoinAtEnd",
     "ElementIntersectsElementFilter",
-    "AssemblyInstance.Create"
+    "FAMILY_ALWAYS_VERTICAL",
+    "FAMILY_WORK_PLANE_BASED",
+    "FamilyPlacementType.WorkPlaneBased",
+    "GeometryCreationUtilities.CreateExtrusionGeometry",
+    "NewFamilyInstance(Reference, XYZ, XYZ, FamilySymbol)",
+    "SolidOptions",
+    "StructuralFramingUtils.DisallowJoinAtEnd"
   ],
   "level": 2,
   "work_class": "W3",
@@ -94,6 +97,14 @@
       "change": "Owner correction: members that carry the deck (outlookers, blocking under the deck) are rotated to the slope, top face parallel to the rafters; replaces 'sit level at the uphill edge'",
       "contributors": [
         "Gottfried Schmidtke"
+      ]
+    },
+    {
+      "revision": 5,
+      "date": "2026-10-20",
+      "change": "Wedge under the roof (pony wall, raked infill) gets the full exterior wall build-up inside the roof assembly; sloped-edge pieces as DirectShapes",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
       ]
     }
   ]

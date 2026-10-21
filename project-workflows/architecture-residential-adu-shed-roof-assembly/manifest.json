@@ -1,6 +1,6 @@
 {
   "id": "ARPL-PW-0002",
-  "revision": 1,
+  "revision": 2,
   "title": "ADU shed roof assembly (LOD 400 + BOM): framing, deck, standing seam, trim, insulation",
   "level": 4,
   "context": {
@@ -99,7 +99,8 @@
   "rules_from_the_owner": [
     "Insulation only inside the exterior wall lines; overhangs (eaves and rakes) are not insulated",
     "Exposed rafter and fly-rafter cuts are covered by fascia and barge boards",
-    "Choose the cheapest build that meets the requirements, and flag what the engineer must confirm"
+    "Choose the cheapest build that meets the requirements, and flag what the engineer must confirm",
+    "The wedge under the roof is treated like the rest of the exterior wall (insulation, sheathing, siding, gypsum)"
   ],
   "decisions_for_the_user": [
     "Structure system",
@@ -116,7 +117,7 @@
     "Energy code: R-value of the roof insulation"
   ],
   "results_recorded": {
-    "pieces": 243,
+    "pieces": 360,
     "assemblies": 1,
     "sheets": 1,
     "material_cost_usd_incl_tax": 7097,

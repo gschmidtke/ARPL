@@ -1,0 +1,5 @@
+{
+  "result": "Added 117 pieces to the roof assembly: XPS 2in+2in+1-1/2in between cripples, 3/4in plywood, siding courses continuing the wall pattern (plus one strip closing the 74 mm gap under the rafters on all walls), 1/2in gypsum inside; all cut to the rafter line. No clashes.",
+  "problem": "The wedge had framing but none of the exterior wall layers (no insulation, sheathing, siding or gypsum): wall panels and the Revit wall type both stopped at the plate.",
+  "found_by": "owner looking at the section under the roof"
+}

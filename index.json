@@ -112,7 +112,7 @@
     },
     {
       "id": "ARPL-PW-0002",
-      "revision": 1,
+      "revision": 2,
       "title": "ADU shed roof assembly (LOD 400 + BOM): framing, deck, standing seam, trim, insulation",
       "level": 4,
       "context": {
@@ -425,7 +425,7 @@
     },
     {
       "id": "ARPL-ASM-0006",
-      "revision": 4,
+      "revision": 5,
       "title": "Sloped roof assembly from component families",
       "environment": {
         "revit_version": "2024.3",
@@ -444,14 +444,17 @@
         "curved roofs"
       ],
       "api_terms": [
-        "FamilyPlacementType.WorkPlaneBased",
-        "FAMILY_WORK_PLANE_BASED",
-        "FAMILY_ALWAYS_VERTICAL",
+        "AssemblyInstance.Create",
+        "DirectShape",
         "Document.NewReferencePlane",
-        "NewFamilyInstance(Reference, XYZ, XYZ, FamilySymbol)",
-        "StructuralFramingUtils.DisallowJoinAtEnd",
         "ElementIntersectsElementFilter",
-        "AssemblyInstance.Create"
+        "FAMILY_ALWAYS_VERTICAL",
+        "FAMILY_WORK_PLANE_BASED",
+        "FamilyPlacementType.WorkPlaneBased",
+        "GeometryCreationUtilities.CreateExtrusionGeometry",
+        "NewFamilyInstance(Reference, XYZ, XYZ, FamilySymbol)",
+        "SolidOptions",
+        "StructuralFramingUtils.DisallowJoinAtEnd"
       ],
       "level": 2,
       "work_class": "W3",
@@ -483,7 +486,7 @@
         "FP06"
       ],
       "status": "candidate",
-      "rule": "1) Check family placement type before reuse; make work-plane-based copies under new names. 2) Flex-test the plane orientation (cut vector sign) with one instance and read back the transform. 3) Compute every sloped member from one layout rule; offset square-cut ends by depth x sin(slope); members that carry the deck (outlookers, flat blocking) are rotated to the slope (cross-section rotation = slope angle; check the sign by the top-face normal), with their top on the rafter-top plane. 4) Dry-run the whole build with an all-pairs clash check and commit only when every remaining contact is on an allow-list of intended conditions. 5) Verify that trim covers every exposed cut by comparing end-face extents with trim extents. 6) Before documenting, check every modelled piece against its stock size (no piece longer than the sheet or board it is cut from). 7) After Duplicate(), reset Cost, Type Comments and other data parameters of every new type; duplicated types inherit them silently. 8) Insulation (batts, foam) runs only inside the exterior wall lines, bearing to bearing; eaves and rake overhangs are not insulated.",
+      "rule": "1) Check family placement type before reuse; make work-plane-based copies under new names. 2) Flex-test the plane orientation (cut vector sign) with one instance and read back the transform. 3) Compute every sloped member from one layout rule; offset square-cut ends by depth x sin(slope); members that carry the deck (outlookers, flat blocking) are rotated to the slope (cross-section rotation = slope angle; check the sign by the top-face normal), with their top on the rafter-top plane. 4) Dry-run the whole build with an all-pairs clash check and commit only when every remaining contact is on an allow-list of intended conditions. 5) Verify that trim covers every exposed cut by comparing end-face extents with trim extents. 6) Before documenting, check every modelled piece against its stock size (no piece longer than the sheet or board it is cut from). 7) After Duplicate(), reset Cost, Type Comments and other data parameters of every new type; duplicated types inherit them silently. 8) Insulation (batts, foam) runs only inside the exterior wall lines, bearing to bearing; eaves and rake overhangs are not insulated. 9) The wedge between flat wall plates and a sloped roof is part of the roof assembly (its shape comes from the roof, it is built with the roof, its gypsum goes up with the ceiling) and gets the complete exterior wall build-up, cut to the rafter line. Box families cannot make sloped edges: use DirectShape extrusions with material and Comments/Mark for the BOM.",
       "validation": [
         "Flex test transform equals expected axes",
         "Clash check: only allow-listed contacts",
@@ -492,7 +495,8 @@
         "No piece longer than its stock length",
         "Every type in the assembly has its own Cost and unit in Type Comments",
         "Insulation bounding box inside the outer face of the wall framing (ADU-01: batts y -1134.1..2456.2 within -1172.7..2494.8; x -3944.9..8002.7 within -3983..8040.8)",
-        "Top-face normal of every deck-bearing member equals the roof normal"
+        "Top-face normal of every deck-bearing member equals the roof normal",
+        "Every exterior face below the roof is closed: framing, insulation, sheathing, siding and gypsum reach the rafter line on all walls"
       ],
       "path": "library/assemblies-fabrication/sloped-roof-assembly-component-families"
     },
