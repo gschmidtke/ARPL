@@ -1,6 +1,6 @@
 {
   "id": "ARPL-ASM-0006",
-  "revision": 2,
+  "revision": 3,
   "title": "Sloped roof assembly from component families",
   "use_when": [
     "framing and finishing a sloped (shed, mono-pitch) roof as an assembly of lumber, sheet and board families",
@@ -78,6 +78,14 @@
       "change": "Added v06: BOM check found a deck stagger error and inherited type data; shop drawing W104 and cost estimate",
       "contributors": [
         "Gottfried Schmidtke with Claude"
+      ]
+    },
+    {
+      "revision": 3,
+      "date": "2026-10-20",
+      "change": "Owner rule: insulation only inside the exterior wall lines, never over overhangs; verified on the model",
+      "contributors": [
+        "Gottfried Schmidtke"
       ]
     }
   ]

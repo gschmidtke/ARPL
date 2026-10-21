@@ -1,0 +1,137 @@
+{
+  "id": "ARPL-PW-0002",
+  "revision": 1,
+  "title": "ADU shed roof assembly (LOD 400 + BOM): framing, deck, standing seam, trim, insulation",
+  "level": 4,
+  "context": {
+    "discipline": "architecture",
+    "role": "bim-specialist",
+    "project_type": "residential",
+    "subtype": "accessory dwelling unit",
+    "phase": "fabrication",
+    "platform": "revit",
+    "revit_version": "2024"
+  },
+  "intent": "Replace a placeholder shed roof with a real build-up and turn it into one roof assembly: 2x8 rafters @ 24in, pony wall on the high side, raked end infill, frieze blocks, outlookers and fly rafters, 3/4in plywood deck, standing seam roofing, 1x10 fascia and barge boards covering every exposed rafter cut, batts and drywall inside the wall lines, shop drawing and BOM with cost.",
+  "sequence": [
+    {
+      "step": 1,
+      "work_class": "W8",
+      "do": "Read the roof as modelled before planning: type, slope, footprint, overhangs, height gap between flat wall plates and the sloped roof underside, neighbouring elements (e.g. a trellis under the eave)",
+      "packs": [
+        "ARPL-MCX-0001"
+      ]
+    },
+    {
+      "step": 2,
+      "work_class": "W4",
+      "do": "Ask the decisions that belong to the user: structure (rafters + pony wall vs trusses), member size (engineer flag), roofing for the slope (5 deg excludes asphalt shingles), overhangs, trim, soffit, insulation, assembly grouping",
+      "packs": [
+        "ARPL-SCH-0001",
+        "ARPL-ASM-0002"
+      ]
+    },
+    {
+      "step": 3,
+      "work_class": "W8",
+      "do": "2D preview from the layout rule: framing plan, sheathing plan, section; check every view direction; look at the exported images",
+      "packs": [
+        "ARPL-QA-0001",
+        "ARPL-VIEW-0002",
+        "ARPL-VIEW-0001"
+      ]
+    },
+    {
+      "step": 4,
+      "work_class": "W5",
+      "do": "Replace the placeholder roof: new footprint roof with the real layers (Revit 2024 cannot edit roof sketches or attach walls by API), user re-attaches the walls, then delete the old roof; guard every transaction",
+      "packs": [
+        "ARPL-CHG-0002",
+        "ARPL-ADM-0001"
+      ]
+    },
+    {
+      "step": 5,
+      "work_class": "W1",
+      "do": "Component families: lumber types 2x8 / 2x4 flat; work-plane-based copies of sheet and insulation families; flex-test the plane orientation",
+      "packs": [
+        "ARPL-FAM-0005",
+        "ARPL-ASM-0006"
+      ]
+    },
+    {
+      "step": 6,
+      "work_class": "W3",
+      "do": "Build from one layout rule in a dry run with an all-pairs clash check; offset square-cut ends by depth x sin(slope); commit only with allow-listed contacts; trim must cover every exposed cut; insulation only inside the exterior wall lines",
+      "packs": [
+        "ARPL-ASM-0006",
+        "ARPL-ASM-0004",
+        "ARPL-ASM-0003"
+      ]
+    },
+    {
+      "step": 7,
+      "work_class": "W3",
+      "do": "Create the assembly after Regenerate; name it after commit",
+      "packs": [
+        "ARPL-ASM-0005"
+      ]
+    },
+    {
+      "step": 8,
+      "work_class": "W7",
+      "do": "BOM from the model: check every piece against its stock size; reset Cost and Type Comments on duplicated types; price with source and date; stock conversion, waste, tax, range",
+      "packs": [
+        "ARPL-SCH-0002",
+        "ARPL-ASM-0006"
+      ]
+    },
+    {
+      "step": 9,
+      "work_class": "W6",
+      "do": "Shop drawing: framing plan with deck hidden, deck layout, section along the slope, 3D, parts list, dimensions one per transaction, BOM note; export and look at the sheet",
+      "packs": [
+        "ARPL-DOC-0001",
+        "ARPL-DOC-0002"
+      ]
+    }
+  ],
+  "rules_from_the_owner": [
+    "Insulation only inside the exterior wall lines; overhangs (eaves and rakes) are not insulated",
+    "Exposed rafter and fly-rafter cuts are covered by fascia and barge boards",
+    "Choose the cheapest build that meets the requirements, and flag what the engineer must confirm"
+  ],
+  "decisions_for_the_user": [
+    "Structure system",
+    "Rafter size (engineer)",
+    "Roofing material vs slope",
+    "Overhang depth",
+    "Fascia/barge size and drip edge",
+    "Open or closed soffit",
+    "Insulation type and ceiling",
+    "Assembly grouping"
+  ],
+  "discipline_authority": [
+    "Structural engineer: rafter size, hurricane ties, pony wall bracing, header under the pony wall, trellis connection",
+    "Energy code: R-value of the roof insulation"
+  ],
+  "results_recorded": {
+    "pieces": 243,
+    "assemblies": 1,
+    "sheets": 1,
+    "material_cost_usd_incl_tax": 7097,
+    "cost_range_usd": [
+      6540,
+      7650
+    ],
+    "intended_contacts": [
+      "outlookers through end rafter notches",
+      "batts compressed under outlookers in the two end bays"
+    ]
+  },
+  "status": "candidate",
+  "contributors": [
+    "Gottfried Schmidtke with Claude"
+  ],
+  "recorded": "2026-10-20"
+}

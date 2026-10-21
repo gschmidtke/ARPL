@@ -1,12 +1,13 @@
 {
   "lesson": "Sloped assemblies need work-plane-based component families and an explicit orientation rule; on a slope every square-cut end moves by depth x sin(slope), which is where nearly all clashes came from.",
-  "rule": "1) Check family placement type before reuse; make work-plane-based copies under new names. 2) Flex-test the plane orientation (cut vector sign) with one instance and read back the transform. 3) Compute every sloped member from one layout rule; offset square-cut ends by depth x sin(slope); horizontal members under a slope sit at their uphill edge. 4) Dry-run the whole build with an all-pairs clash check and commit only when every remaining contact is on an allow-list of intended conditions. 5) Verify that trim covers every exposed cut by comparing end-face extents with trim extents. 6) Before documenting, check every modelled piece against its stock size (no piece longer than the sheet or board it is cut from). 7) After Duplicate(), reset Cost, Type Comments and other data parameters of every new type; duplicated types inherit them silently.",
+  "rule": "1) Check family placement type before reuse; make work-plane-based copies under new names. 2) Flex-test the plane orientation (cut vector sign) with one instance and read back the transform. 3) Compute every sloped member from one layout rule; offset square-cut ends by depth x sin(slope); horizontal members under a slope sit at their uphill edge. 4) Dry-run the whole build with an all-pairs clash check and commit only when every remaining contact is on an allow-list of intended conditions. 5) Verify that trim covers every exposed cut by comparing end-face extents with trim extents. 6) Before documenting, check every modelled piece against its stock size (no piece longer than the sheet or board it is cut from). 7) After Duplicate(), reset Cost, Type Comments and other data parameters of every new type; duplicated types inherit them silently. 8) Insulation (batts, foam) runs only inside the exterior wall lines, bearing to bearing; eaves and rake overhangs are not insulated.",
   "validation": [
     "Flex test transform equals expected axes",
     "Clash check: only allow-listed contacts",
     "End faces of all rafters, fly rafters and outlookers inside fascia/barge extents",
     "Assembly member count equals pieces built",
     "No piece longer than its stock length",
-    "Every type in the assembly has its own Cost and unit in Type Comments"
+    "Every type in the assembly has its own Cost and unit in Type Comments",
+    "Insulation bounding box inside the outer face of the wall framing (ADU-01: batts y -1134.1..2456.2 within -1172.7..2494.8; x -3944.9..8002.7 within -3983..8040.8)"
   ]
 }
