@@ -80,6 +80,15 @@
       "contributors": [
         "Gottfried Schmidtke with Claude"
       ]
+    },
+    {
+      "id": "FP15",
+      "name": "Shared assembly type edited through one instance",
+      "meaning": "Adding or removing members of an AssemblyInstance whose AssemblyType is used by other instances makes Revit ask (modal dialog, not a failure message) whether to update the type. The failures preprocessor cannot answer it, the API call blocks until a person does, and the change may be copied to every instance (members duplicated over the other instances). Defence: before editing members, count instances of the type; if more than one, create a new assembly from the new members instead and delete the old instance with its members.",
+      "found_by": "Bridge timeout; owner at the Revit dialog",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ]
     }
   ]
 }

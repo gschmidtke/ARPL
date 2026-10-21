@@ -1,6 +1,6 @@
 {
   "id": "ARPL-ASM-0006",
-  "revision": 5,
+  "revision": 6,
   "title": "Sloped roof assembly from component families",
   "use_when": [
     "framing and finishing a sloped (shed, mono-pitch) roof as an assembly of lumber, sheet and board families",
@@ -60,9 +60,10 @@
   },
   "failure_patterns": [
     "FP02",
-    "FP05",
     "FP04",
-    "FP06"
+    "FP05",
+    "FP06",
+    "FP15"
   ],
   "status": "candidate",
   "contributors": [
@@ -103,6 +104,14 @@
       "revision": 5,
       "date": "2026-10-20",
       "change": "Wedge under the roof (pony wall, raked infill) gets the full exterior wall build-up inside the roof assembly; sloped-edge pieces as DirectShapes",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ]
+    },
+    {
+      "revision": 6,
+      "date": "2026-10-20",
+      "change": "Owner correction: walls are built to fit the roof (taller high wall, raked end walls); the wedge leaves the roof assembly. New rule 10: never edit members of an assembly whose type is shared (FP15)",
       "contributors": [
         "Gottfried Schmidtke with Claude"
       ]

@@ -12,7 +12,7 @@
     "platform": "revit",
     "revit_version": "2024"
   },
-  "intent": "Replace a placeholder shed roof with a real build-up and turn it into one roof assembly: 2x8 rafters @ 24in, pony wall on the high side, raked end infill, frieze blocks, outlookers and fly rafters, 3/4in plywood deck, standing seam roofing, 1x10 fascia and barge boards covering every exposed rafter cut, batts and drywall inside the wall lines, shop drawing and BOM with cost.",
+  "intent": "Replace a placeholder shed roof with a real build-up and turn it into one roof assembly: 2x8 rafters @ 24in, walls rebuilt to fit the roof (taller high wall, raked end walls), frieze blocks, outlookers and fly rafters, 3/4in plywood deck, standing seam roofing, 1x10 fascia and barge boards covering every exposed rafter cut, batts and drywall inside the wall lines, shop drawing and BOM with cost.",
   "sequence": [
     {
       "step": 1,
@@ -25,7 +25,7 @@
     {
       "step": 2,
       "work_class": "W4",
-      "do": "Ask the decisions that belong to the user: structure (rafters + pony wall vs trusses), member size (engineer flag), roofing for the slope (5 deg excludes asphalt shingles), overhangs, trim, soffit, insulation, assembly grouping",
+      "do": "Ask the decisions that belong to the user: structure (rafters on walls built to fit the roof vs trusses), member size (engineer flag), roofing for the slope (5 deg excludes asphalt shingles), overhangs, trim, soffit, insulation, assembly grouping",
       "packs": [
         "ARPL-SCH-0001",
         "ARPL-ASM-0002"
@@ -100,7 +100,7 @@
     "Insulation only inside the exterior wall lines; overhangs (eaves and rakes) are not insulated",
     "Exposed rafter and fly-rafter cuts are covered by fascia and barge boards",
     "Choose the cheapest build that meets the requirements, and flag what the engineer must confirm",
-    "The wedge under the roof is treated like the rest of the exterior wall (insulation, sheathing, siding, gypsum)"
+    "A wall is a wall: walls are built to fit the roof (taller high wall, raked end walls) with the full wall build-up; no wedge in the roof assembly"
   ],
   "decisions_for_the_user": [
     "Structure system",
@@ -113,7 +113,7 @@
     "Assembly grouping"
   ],
   "discipline_authority": [
-    "Structural engineer: rafter size, hurricane ties, pony wall bracing, header under the pony wall, trellis connection",
+    "Structural engineer: rafter size, hurricane ties, bracing of the taller high wall and raked end walls, door header in the taller wall, trellis connection",
     "Energy code: R-value of the roof insulation"
   ],
   "results_recorded": {

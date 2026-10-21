@@ -124,7 +124,7 @@
         "platform": "revit",
         "revit_version": "2024"
       },
-      "intent": "Replace a placeholder shed roof with a real build-up and turn it into one roof assembly: 2x8 rafters @ 24in, pony wall on the high side, raked end infill, frieze blocks, outlookers and fly rafters, 3/4in plywood deck, standing seam roofing, 1x10 fascia and barge boards covering every exposed rafter cut, batts and drywall inside the wall lines, shop drawing and BOM with cost.",
+      "intent": "Replace a placeholder shed roof with a real build-up and turn it into one roof assembly: 2x8 rafters @ 24in, walls rebuilt to fit the roof (taller high wall, raked end walls), frieze blocks, outlookers and fly rafters, 3/4in plywood deck, standing seam roofing, 1x10 fascia and barge boards covering every exposed rafter cut, batts and drywall inside the wall lines, shop drawing and BOM with cost.",
       "steps": [
         {
           "step": 1,
@@ -137,7 +137,7 @@
         {
           "step": 2,
           "work_class": "W4",
-          "do": "Ask the decisions that belong to the user: structure (rafters + pony wall vs trusses), member size (engineer flag), roofing for the slope (5 deg excludes asphalt shingles), overhangs, trim, soffit, insulation, assembly grouping",
+          "do": "Ask the decisions that belong to the user: structure (rafters on walls built to fit the roof vs trusses), member size (engineer flag), roofing for the slope (5 deg excludes asphalt shingles), overhangs, trim, soffit, insulation, assembly grouping",
           "packs": [
             "ARPL-SCH-0001",
             "ARPL-ASM-0002"
@@ -425,7 +425,7 @@
     },
     {
       "id": "ARPL-ASM-0006",
-      "revision": 5,
+      "revision": 6,
       "title": "Sloped roof assembly from component families",
       "environment": {
         "revit_version": "2024.3",
@@ -481,12 +481,13 @@
       ],
       "failure_patterns": [
         "FP02",
-        "FP05",
         "FP04",
-        "FP06"
+        "FP05",
+        "FP06",
+        "FP15"
       ],
       "status": "candidate",
-      "rule": "1) Check family placement type before reuse; make work-plane-based copies under new names. 2) Flex-test the plane orientation (cut vector sign) with one instance and read back the transform. 3) Compute every sloped member from one layout rule; offset square-cut ends by depth x sin(slope); members that carry the deck (outlookers, flat blocking) are rotated to the slope (cross-section rotation = slope angle; check the sign by the top-face normal), with their top on the rafter-top plane. 4) Dry-run the whole build with an all-pairs clash check and commit only when every remaining contact is on an allow-list of intended conditions. 5) Verify that trim covers every exposed cut by comparing end-face extents with trim extents. 6) Before documenting, check every modelled piece against its stock size (no piece longer than the sheet or board it is cut from). 7) After Duplicate(), reset Cost, Type Comments and other data parameters of every new type; duplicated types inherit them silently. 8) Insulation (batts, foam) runs only inside the exterior wall lines, bearing to bearing; eaves and rake overhangs are not insulated. 9) The wedge between flat wall plates and a sloped roof is part of the roof assembly (its shape comes from the roof, it is built with the roof, its gypsum goes up with the ceiling) and gets the complete exterior wall build-up, cut to the rafter line. Box families cannot make sloped edges: use DirectShape extrusions with material and Comments/Mark for the BOM.",
+      "rule": "1) Check family placement type before reuse; make work-plane-based copies under new names. 2) Flex-test the plane orientation (cut vector sign) with one instance and read back the transform. 3) Compute every sloped member from one layout rule; offset square-cut ends by depth x sin(slope); members that carry the deck (outlookers, flat blocking) are rotated to the slope (cross-section rotation = slope angle; check the sign by the top-face normal), with their top on the rafter-top plane. 4) Dry-run the whole build with an all-pairs clash check and commit only when every remaining contact is on an allow-list of intended conditions. 5) Verify that trim covers every exposed cut by comparing end-face extents with trim extents. 6) Before documenting, check every modelled piece against its stock size (no piece longer than the sheet or board it is cut from). 7) After Duplicate(), reset Cost, Type Comments and other data parameters of every new type; duplicated types inherit them silently. 8) Insulation (batts, foam) runs only inside the exterior wall lines, bearing to bearing; eaves and rake overhangs are not insulated. 9) Walls are built to fit the roof, as a prefab plant would: no wedge or pony wall. The high wall is framed taller (cap at the rafter bearing), the end walls are raked (sloped double top plate, studs cut to it), and sheathing, insulation and siding are cut to the rafter line inside the wall panels. The roof assembly holds only roof components. 10) Before changing the members of an assembly instance, check whether its type is shared by other instances; if so, build a new assembly (AssemblyInstance.Create) instead, because Revit asks a modal question no script can answer and then copies the change to every instance (FP15). Box families cannot make sloped edges: use DirectShape extrusions with material and Comments/Mark for the BOM.",
       "validation": [
         "Flex test transform equals expected axes",
         "Clash check: only allow-listed contacts",
@@ -1746,6 +1747,15 @@
       "name": "Exception leaves a transaction open",
       "meaning": "A scripted error escapes while the script's own Transaction is still open. Inside an enclosing TransactionGroup this can crash Revit (fatal error) instead of failing the script. Defence: using-blocks for every Transaction, try/catch around the body, dry runs.",
       "found_by": "Revit journal after a fatal error",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ]
+    },
+    {
+      "id": "FP15",
+      "name": "Shared assembly type edited through one instance",
+      "meaning": "Adding or removing members of an AssemblyInstance whose AssemblyType is used by other instances makes Revit ask (modal dialog, not a failure message) whether to update the type. The failures preprocessor cannot answer it, the API call blocks until a person does, and the change may be copied to every instance (members duplicated over the other instances). Defence: before editing members, count instances of the type; if more than one, create a new assembly from the new members instead and delete the old instance with its members.",
+      "found_by": "Bridge timeout; owner at the Revit dialog",
       "contributors": [
         "Gottfried Schmidtke with Claude"
       ]

@@ -1,0 +1,5 @@
+{
+  "result": "Roof assembly reduced to roof components (208). South panel rebuilt at 2808.6 (cap on the rafter bearing, 246 pieces); East and West raked panels (69 each, sloped plates, plywood/XPS/siding cut to the rafter line as DirectShapes). All clash-free after pulling the raked plate ends back 3.5 mm (38.1 x sin 5).",
+  "problem": "East and West shared one assembly type. Swapping the members of one instance opened a Revit dialog (not a failure, so the failure preprocessor could not answer it); the bridge call hung until the owner answered, and Revit then copied the East members over the West instance.",
+  "found_by": "owner (design logic); bridge timeout and owner at the Revit dialog (FP15)"
+}

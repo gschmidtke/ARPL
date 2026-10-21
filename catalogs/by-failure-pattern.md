@@ -114,3 +114,9 @@ Learn from what went wrong: each pack is listed under the failure patterns it re
 | [ARPL-ADM-0001](../library/model-administration/exception-in-open-transaction-crashes-revit/) An exception inside an open Transaction crashed Revit | 1 | W5 | candidate |
 | [ARPL-CHG-0002](../library/model-change/replace-footprint-roof-revit-2024/) Changing a footprint roof's outline by API in Revit 2024 | 2 | W5 | candidate |
 
+## FP15: Shared assembly type edited through one instance
+
+| Pack | Level | Work class | Status |
+|---|---|---|---|
+| [ARPL-ASM-0006](../library/assemblies-fabrication/sloped-roof-assembly-component-families/) Sloped roof assembly from component families | 2 | W3 | candidate |
+
