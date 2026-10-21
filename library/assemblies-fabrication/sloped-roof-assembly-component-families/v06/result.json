@@ -1,0 +1,5 @@
+{
+  "result": "Fixed: deck rows 2 and 4 rebuilt with joints at rafters 1-5-9-13-17 (pieces 1103 / 2440 / 2109 mm); types repriced with unit and source in Type Comments. Sheet W104 (framing plan, deck layout, section, 3D, parts list, dimensions, BOM note). Roof material estimate approx. USD 7,100 incl. 6.5% tax (range 6,540-7,650).",
+  "problem": "1) The odd-row stagger started at rafter 5, giving deck pieces of 3543 mm, longer than a 2440 mm sheet; the clash check could not see it. 2) Types created by Duplicate() inherited Cost and Type Comments of the source type (batts, drywall, roofing and trim all said 'USD per 4x9 sheet plywood').",
+  "found_by": "BOM step: comparing modelled piece lengths with stock sizes; reading Cost/Type Comments of every type in the assembly"
+}

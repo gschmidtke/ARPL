@@ -1,0 +1,4 @@
+{
+  "version": "v06",
+  "instruction": "Quantities for the BOM read from the assembly members (cut lengths, Width x Height); prices set on the new types"
+}

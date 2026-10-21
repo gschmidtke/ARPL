@@ -1,6 +1,6 @@
 {
   "id": "ARPL-ASM-0006",
-  "revision": 1,
+  "revision": 2,
   "title": "Sloped roof assembly from component families",
   "use_when": [
     "framing and finishing a sloped (shed, mono-pitch) roof as an assembly of lumber, sheet and board families",
@@ -58,7 +58,8 @@
   "failure_patterns": [
     "FP02",
     "FP05",
-    "FP04"
+    "FP04",
+    "FP06"
   ],
   "status": "candidate",
   "contributors": [
@@ -70,6 +71,14 @@
       "revision": 1,
       "date": "2026-10-20",
       "change": "First recorded (ADU-01 shed roof, 241 pieces)"
+    },
+    {
+      "revision": 2,
+      "date": "2026-10-20",
+      "change": "Added v06: BOM check found a deck stagger error and inherited type data; shop drawing W104 and cost estimate",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ]
     }
   ]
 }

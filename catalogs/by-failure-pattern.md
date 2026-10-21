@@ -51,6 +51,7 @@ Learn from what went wrong: each pack is listed under the failure patterns it re
 
 | Pack | Level | Work class | Status |
 |---|---|---|---|
+| [ARPL-ASM-0006](../library/assemblies-fabrication/sloped-roof-assembly-component-families/) Sloped roof assembly from component families | 2 | W3 | candidate |
 | [ARPL-SCH-0002](../library/schedules-quantities/bom-needs-governed-parameters/) Cost per type can't carry a BOM | 2 | W7 | candidate |
 
 ## FP07: Correct element, wrong authority
