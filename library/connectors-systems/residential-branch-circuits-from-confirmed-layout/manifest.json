@@ -1,6 +1,6 @@
 {
   "id": "ARPL-CON-0002",
-  "revision": 1,
+  "revision": 2,
   "title": "Residential branch circuits from a confirmed layout",
   "use_when": [
     "electrical for a small dwelling unit or ADU: panel, receptacles, lighting, smoke alarms, circuits",
@@ -68,6 +68,14 @@
       "revision": 1,
       "date": "2026-10-21",
       "change": "First recorded (ADU-01: 43 devices, 10 circuits, panel schedule on E101)",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ]
+    },
+    {
+      "revision": 2,
+      "date": "2026-10-21",
+      "change": "Owner: LED wafer downlights, tags; framing coordination and rough-in in assemblies (v07, rules 7-8)",
       "contributors": [
         "Gottfried Schmidtke with Claude"
       ]

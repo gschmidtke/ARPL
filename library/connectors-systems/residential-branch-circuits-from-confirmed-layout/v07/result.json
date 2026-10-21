@@ -1,0 +1,5 @@
+{
+  "result": "LED wafer family (6 in, 12 VA) swapped in by ChangeTypeId, circuits kept; 44 rough-in pieces (boxes, ceiling cut-outs, driver and octagon boxes, fan housing, line-set sleeve, conduit nipple) added to the five assemblies; 86 intended notches, no framing hit; 43 devices tagged",
+  "problem": "Layout positions ignored the framing: 9 of 14 ceiling devices sat on or next to a rafter, 3 wall boxes on a stud, and the round 4 in boxes behind exterior lights needed more clearance than single-gang boxes. A panel swapped to another family lost its wall host.",
+  "found_by": "distance check of every device against stud and rafter axes; clash check of the rough-in pieces"
+}
