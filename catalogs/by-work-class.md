@@ -32,6 +32,7 @@ Work class = what drives the result; it decides the preview and the proof of 'do
 | [ARPL-ASM-0005](../library/assemblies-fabrication/assembly-naming-and-identical-panels/) Assembly naming and identical panels | 1 | W3 | candidate |
 | [ARPL-ASM-0006](../library/assemblies-fabrication/sloped-roof-assembly-component-families/) Sloped roof assembly from component families | 2 | W3 | candidate |
 | [ARPL-ASM-0007](../library/assemblies-fabrication/device-placement-follows-the-framing/) Device placement follows the framing (manufacturer's standpoint) | 2 | W3 | candidate |
+| [ARPL-ASM-0008](../library/assemblies-fabrication/slab-on-grade-from-the-framing-layout/) Slab on grade from the framing layout (anchors, recess, stub-ups) | 2 | W3 | candidate |
 | [ARPL-CON-0002](../library/connectors-systems/residential-branch-circuits-from-confirmed-layout/) Residential branch circuits from a confirmed layout | 3 | W3 | candidate |
 
 ## W4: Building model authoring (driven by a program and system families)

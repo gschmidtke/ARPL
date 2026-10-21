@@ -71,6 +71,30 @@
         "FP15",
         "FP16"
       ]
+    },
+    {
+      "entry_id": "IN-0003",
+      "received": "2026-10-21",
+      "contributor": {
+        "name": "Gottfried Schmidtke",
+        "github": "gschmidtke",
+        "with": "Claude (Anthropic)"
+      },
+      "source": "ADU-01 production session 2026-10-21 (three standard sliders, slab on grade, all views at 1:25)",
+      "submitted": "Door replacement with header sizing and NEC wall-space consequences, slab on grade derived from the framing, view rescale and sheet packing, failure patterns FP19-FP23",
+      "status": "filed",
+      "decision": "New pack ARPL-ASM-0008; revisions to ARPL-ASM-0002, ARPL-CON-0002, ARPL-DOC-0001",
+      "resulting_ids": [
+        "ARPL-ASM-0008",
+        "ARPL-ASM-0002",
+        "ARPL-CON-0002",
+        "ARPL-DOC-0001",
+        "FP19",
+        "FP20",
+        "FP21",
+        "FP22",
+        "FP23"
+      ]
     }
   ]
 }

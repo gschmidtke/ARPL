@@ -1,0 +1,5 @@
+{
+  "result": "Three openings framed with 2-2x8 headers under the plates, cripples above; 306 members, clash-free",
+  "problem": "The framing script used the wall stud size (2x6) for every header; a 5 ft opening in the bearing wall needs 2-2x8 by the span tables, and the 6.1 m opening had been left to the engineer",
+  "found_by": "header span check when the opening layout changed"
+}

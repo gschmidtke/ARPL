@@ -1,0 +1,5 @@
+{
+  "result": "45 views at 1:25, 20 plans cropped to the building + 1.5 m with annotation crop, sections trimmed to the building, every sheet re-packed inside its drawing area; two continuation sheets (S100A, W104A) for views that no longer fit beside the others; no viewport outside its border or overlapping",
+  "problem": "At 1:25 plans came out up to 3 x 2.5 m on paper: crops larger than the building, a 71 m section mark and perspective camera markers outside the crop inflated the viewport; the first packer then moved two single plans off their own sheets",
+  "found_by": "sheet fit check (viewport outline vs title block drawing area) after the scale change, and an element-by-element search for what extends past the crop"
+}

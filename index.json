@@ -410,7 +410,7 @@
     },
     {
       "id": "ARPL-ASM-0002",
-      "revision": 1,
+      "revision": 2,
       "title": "Door too tall for a header",
       "environment": {
         "revit_version": "2024.3",
@@ -453,9 +453,10 @@
         "FP07"
       ],
       "status": "candidate",
-      "rule": "Report every opening whose rough opening plus header doesn't fit under the plates as a decision for the user; never move a header into the top plates.",
+      "rule": "Report every opening whose rough opening plus header doesn't fit under the plates as a decision for the user; never move a header into the top plates. Size each header from the span tables for its opening and the load it carries (bearing wall under rafters vs non-bearing); never default to the stud size. Splitting a long opening into standard units with posts turns an engineered beam into table-sized headers.",
       "validation": [
-        "Rough opening and header heights dimensioned on the shop drawing"
+        "Rough opening and header heights dimensioned on the shop drawing",
+        "Header size per opening reported with its span and bearing condition"
       ],
       "validation_checks": [],
       "path": "library/assemblies-fabrication/opening-framing-header-fit-under-plates",
@@ -522,6 +523,72 @@
       "path": "library/assemblies-fabrication/sheathing-layout-minimum-remnant-at-openings",
       "last_evidence": "2026-10-19",
       "review_due": "2027-10-19",
+      "current_revit": "2027",
+      "unverified_in_current_revit": true
+    },
+    {
+      "id": "ARPL-ASM-0008",
+      "revision": 1,
+      "title": "Slab on grade from the framing layout (anchors, recess, stub-ups)",
+      "environment": {
+        "revit_version": "2024.3",
+        "tool": "RevitBridge 0.4.0 with run_csharp",
+        "compiler": "Roslyn 4.8.0 (C# 12)",
+        "agent": "Claude (Anthropic)"
+      },
+      "use_when": [
+        "a prefab timber building sits on a slab on grade",
+        "anchor bolts, slab recesses or plumbing stub-ups must match wall panels and fixtures"
+      ],
+      "not_for": [
+        "structural design of the slab or anchorage (engineer of record)",
+        "raised floors on piers or ground screws"
+      ],
+      "api_terms": [
+        "Floor.Create",
+        "FLOOR_HEIGHTABOVELEVEL_PARAM",
+        "DirectShape",
+        "BooleanOperationsUtils",
+        "AssemblyInstance.Create",
+        "Element.GetDependentElements"
+      ],
+      "level": 2,
+      "work_class": "W3",
+      "workflows": [
+        "assemblies-fabrication",
+        "geometry"
+      ],
+      "disciplines": [
+        "structural",
+        "architecture",
+        "plumbing"
+      ],
+      "project_types": [
+        "residential"
+      ],
+      "phases": [
+        "design-development",
+        "construction-documents",
+        "fabrication"
+      ],
+      "revit_versions_tested": [
+        "2024"
+      ],
+      "failure_patterns": [
+        "FP19"
+      ],
+      "status": "candidate",
+      "rule": "1) Take the slab edge from the framing outer faces and the anchor lines from the bottom-plate segments of the current wall panels; at door openings there is no plate and no anchor. 2) Place anchors per plate segment: max spacing and end distance from the engineer (assumed 1219 / 305 mm), at least two per segment, clear of stud axes. 3) Keep stub-ups out of the thickened edge and record them from one slab corner. 4) A curbless shower is a slab recess with the full slab thickness below it; subtract it from the edge beam where they meet. 5) Show the 2D layout and BOM for review, then model it as one assembly (slab floor, recess floor, edge as Structural Foundation DirectShape, bolts, stub-ups) and clash-check it against the wall assemblies: bolts through bottom plates are intended. 6) Re-derive the anchors whenever a wall panel is rebuilt.",
+      "validation": [
+        "Anchor report per plate segment: count, max gap, end distances, min distance to a stud axis",
+        "Stub-ups outside the thickened edge (except where intended)",
+        "Clash check against wall assemblies: only bolt x bottom plate / insulation",
+        "Placeholder host dependents checked before deletion"
+      ],
+      "validation_checks": [],
+      "path": "library/assemblies-fabrication/slab-on-grade-from-the-framing-layout",
+      "last_evidence": "2026-10-21",
+      "review_due": "2027-10-21",
       "current_revit": "2027",
       "unverified_in_current_revit": true
     },
@@ -772,7 +839,7 @@
     },
     {
       "id": "ARPL-CON-0002",
-      "revision": 2,
+      "revision": 3,
       "title": "Residential branch circuits from a confirmed layout",
       "environment": {
         "revit_version": "2024.3",
@@ -827,14 +894,15 @@
         "FP18"
       ],
       "status": "candidate",
-      "rule": "1) Lay out devices in 2D first, on top of the framing layout (ARPL-ASM-0007), and check them against NEC 210.52 (wall spacing 1.83 m, counter 600 mm, bath basin 900 mm, front/back exterior, HVAC service receptacle 7.5 m) before modelling; the owner confirms. 2) Check what content exists; author missing families from Family Templates with PowerBalanced connectors (ARPL-CON-0001); wall-mounted ones from 'Electrical Fixture.rft' (switch category if needed), not from 'Lighting Fixture.rft'. 3) Place wall devices on host-wall side faces, fetching fresh face references for every placement (FP18); ceiling devices on a horizontal reference plane at the finished ceiling. 4) Before circuiting, probe the panel's supply connector (voltage, poles) against the distribution system; template commercial panelboards are 208 V 3-pole. Probe device loads (some types carry 0 VA). 5) Create circuits in the order of the planned numbering; for loads above 80 % of the default 20 A rating expect a modal warning during ElectricalSystem.Create (FP17): watch the screen, or create them with a temporary small load. 6) Place the panel schedule, export the sheet as an image and look at it; sync after the checks pass. 7) Before rough-in, check every device against the framing: wall box centre ≥ 19 + half box width + 3 mm from a stud axis (47 mm single-gang, 75 mm round 4 in), ceiling device ≥ 19 + radius + 10 mm from a rafter axis and inside its room; move the device, then re-run the NEC spacing check. 8) Model the rough-in as members of the prefab assemblies (boxes, cut-outs, sleeves, nipples) and clash-check them: only insulation, sheathing, siding and drywall may be cut, never framing. Partition walls built on site get no rough-in pieces.",
+      "rule": "1) Lay out devices in 2D first, on top of the framing layout (ARPL-ASM-0007), and check them against NEC 210.52 (wall spacing 1.83 m, counter 600 mm, bath basin 900 mm, front/back exterior, HVAC service receptacle 7.5 m) before modelling; the owner confirms. 2) Check what content exists; author missing families from Family Templates with PowerBalanced connectors (ARPL-CON-0001); wall-mounted ones from 'Electrical Fixture.rft' (switch category if needed), not from 'Lighting Fixture.rft'. 3) Place wall devices on host-wall side faces, fetching fresh face references for every placement (FP18); ceiling devices on a horizontal reference plane at the finished ceiling. 4) Before circuiting, probe the panel's supply connector (voltage, poles) against the distribution system; template commercial panelboards are 208 V 3-pole. Probe device loads (some types carry 0 VA). 5) Create circuits in the order of the planned numbering; for loads above 80 % of the default 20 A rating expect a modal warning during ElectricalSystem.Create (FP17): watch the screen, or create them with a temporary small load. 6) Place the panel schedule, export the sheet as an image and look at it; sync after the checks pass. 7) Before rough-in, check every device against the framing: wall box centre ≥ 19 + half box width + 3 mm from a stud axis (47 mm single-gang, 75 mm round 4 in), ceiling device ≥ 19 + radius + 10 mm from a rafter axis and inside its room; move the device, then re-run the NEC spacing check. 8) Model the rough-in as members of the prefab assemblies (boxes, cut-outs, sleeves, nipples) and clash-check them: only insulation, sheathing, siding and drywall may be cut, never framing. Partition walls built on site get no rough-in pieces. 9) Re-run the wall-space check whenever doors or windows change: fixed panels of sliding glass doors count as wall space and the operable panels are doorways, so posts between standard sliders usually need their own receptacle. A wall panel rebuild deletes the rough-in in that assembly; re-run it for that wall only.",
       "validation": [
         "NEC 210.52 spacing checks pass on the 2D layout",
         "Every device placed within 2 mm of its face (report distance)",
         "Panel connector voltage/poles match the distribution system",
         "Circuit numbers equal the planned numbers; ratings and loads read back",
         "Panel schedule and sheet exported and inspected",
-        "Rough-in clash check: only soft layers cut (XPS, plywood, siding, drywall, batt)"
+        "Rough-in clash check: only soft layers cut (XPS, plywood, siding, drywall, batt)",
+        "Wall-space check re-run after every opening change"
       ],
       "validation_checks": [],
       "path": "library/connectors-systems/residential-branch-circuits-from-confirmed-layout",
@@ -845,7 +913,7 @@
     },
     {
       "id": "ARPL-DOC-0001",
-      "revision": 2,
+      "revision": 3,
       "title": "Shop drawings: invalid references and swapped elevations",
       "environment": {
         "revit_version": "2024.3",
@@ -890,12 +958,14 @@
         "FP08",
         "FP02",
         "FP11",
-        "FP16"
+        "FP16",
+        "FP23"
       ],
       "status": "candidate",
-      "rule": "Isolate risky annotation in its own transaction and verify every sheet visually. Regenerate the shop drawing whenever the assembly members are replaced: dimensions reference member faces and are deleted with them. DirectShape faces take dimension references like family geometry. Sloped faces cannot be dimensioned in an elevation chain; state the heights at both ends in a note on the view. Check the assembly frame first (FP16).",
+      "rule": "Isolate risky annotation in its own transaction and verify every sheet visually. Regenerate the shop drawing whenever the assembly members are replaced: dimensions reference member faces and are deleted with them. DirectShape faces take dimension references like family geometry. Sloped faces cannot be dimensioned in an elevation chain; state the heights at both ends in a note on the view. Check the assembly frame first (FP16). When rescaling: crop plans to the building first (clear scope boxes, which override the crop), turn on annotation crop, trim section width and far clip, hide markers that a template will not let you hide by category (HideElements), then re-pack sheets and check every viewport against the drawing area. A single-view sheet is centred, never emptied; continuation sheets (<number>A) only for real overflow on multi-view sheets (FP23).",
       "validation": [
-        "PDF export rendered and reviewed per sheet"
+        "PDF export rendered and reviewed per sheet",
+        "Every viewport inside the title block drawing area and no overlaps after a scale change"
       ],
       "validation_checks": [],
       "path": "library/documentation/assembly-shop-drawings",
@@ -2120,6 +2190,51 @@
       "name": "Stale geometry references after regeneration",
       "meaning": "Face references collected before other elements were placed on the same host can be invalid after a regeneration; using them for face-based placement throws a native SEHException instead of a managed error. Defence: fetch the host's face references immediately before each placement.",
       "found_by": "SEHException that did not reproduce in an isolated test",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ]
+    },
+    {
+      "id": "FP19",
+      "name": "Unknown tool parameter silently ignored",
+      "meaning": "A misspelled or unsupported parameter (here mode instead of transaction) is dropped without an error, so the call runs with defaults: scripts that start their own Transaction fail inside the default wrapper. Defence: load the tool schema before the first call and check the reported transaction mode in the result.",
+      "found_by": "\"Starting a new transaction is not permitted\" from a script that had worked before",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ]
+    },
+    {
+      "id": "FP20",
+      "name": "Application reminder dialog blocks an automated run",
+      "meaning": "Revit's periodic \"Changes Not Synchronized with Central\" reminder is modal and stops a running command past the bridge timeout; a partial run can leave half-finished state (old views deleted, new ones not yet created). Defence: screenshot on every timeout, dismiss the reminder, read the model state before re-running.",
+      "found_by": "screenshot after a 60 s timeout",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ]
+    },
+    {
+      "id": "FP21",
+      "name": "Read-only collection returned by the API",
+      "meaning": "ViewSheetSet.Views is a read-only ViewSet; Insert throws and, inside a TransactionGroup, rolls back everything before it. Defence: build a new ViewSet and assign it through PrintManager.ViewSheetSetting, and keep optional steps in their own try block.",
+      "found_by": "InvalidOperationException \"Collection is read-only\"",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ]
+    },
+    {
+      "id": "FP22",
+      "name": "Long export outlives the call timeout",
+      "meaning": "A combined PDF export of 14+ sheets takes over 60 s; the bridge call times out while Revit keeps exporting. Defence: watch the status bar until it reads Ready, then check the file size and time before the next command.",
+      "found_by": "status bar progress in a screenshot",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ]
+    },
+    {
+      "id": "FP23",
+      "name": "Viewport outline inflated by elements outside the crop",
+      "meaning": "Section marks, camera markers and similar elements beyond the crop region set the viewport outline, so a rescaled view looks too big for its sheet; an automatic packer then moves it away. Defence: crop and annotation-crop first, find elements whose view bounding box extends past the crop, trim or hide them, and never empty a single-view sheet.",
+      "found_by": "sheet fit check plus an element search against the crop box",
       "contributors": [
         "Gottfried Schmidtke with Claude"
       ]

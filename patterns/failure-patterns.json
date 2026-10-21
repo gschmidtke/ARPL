@@ -116,6 +116,51 @@
       "contributors": [
         "Gottfried Schmidtke with Claude"
       ]
+    },
+    {
+      "id": "FP19",
+      "name": "Unknown tool parameter silently ignored",
+      "meaning": "A misspelled or unsupported parameter (here mode instead of transaction) is dropped without an error, so the call runs with defaults: scripts that start their own Transaction fail inside the default wrapper. Defence: load the tool schema before the first call and check the reported transaction mode in the result.",
+      "found_by": "\"Starting a new transaction is not permitted\" from a script that had worked before",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ]
+    },
+    {
+      "id": "FP20",
+      "name": "Application reminder dialog blocks an automated run",
+      "meaning": "Revit's periodic \"Changes Not Synchronized with Central\" reminder is modal and stops a running command past the bridge timeout; a partial run can leave half-finished state (old views deleted, new ones not yet created). Defence: screenshot on every timeout, dismiss the reminder, read the model state before re-running.",
+      "found_by": "screenshot after a 60 s timeout",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ]
+    },
+    {
+      "id": "FP21",
+      "name": "Read-only collection returned by the API",
+      "meaning": "ViewSheetSet.Views is a read-only ViewSet; Insert throws and, inside a TransactionGroup, rolls back everything before it. Defence: build a new ViewSet and assign it through PrintManager.ViewSheetSetting, and keep optional steps in their own try block.",
+      "found_by": "InvalidOperationException \"Collection is read-only\"",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ]
+    },
+    {
+      "id": "FP22",
+      "name": "Long export outlives the call timeout",
+      "meaning": "A combined PDF export of 14+ sheets takes over 60 s; the bridge call times out while Revit keeps exporting. Defence: watch the status bar until it reads Ready, then check the file size and time before the next command.",
+      "found_by": "status bar progress in a screenshot",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ]
+    },
+    {
+      "id": "FP23",
+      "name": "Viewport outline inflated by elements outside the crop",
+      "meaning": "Section marks, camera markers and similar elements beyond the crop region set the viewport outline, so a rescaled view looks too big for its sheet; an automatic packer then moves it away. Defence: crop and annotation-crop first, find elements whose view bounding box extends past the crop, trim or hide them, and never empty a single-view sheet.",
+      "found_by": "sheet fit check plus an element search against the crop box",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ]
     }
   ]
 }

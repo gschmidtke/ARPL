@@ -142,3 +142,15 @@ Learn from what went wrong: each pack is listed under the failure patterns it re
 |---|---|---|---|
 | [ARPL-CON-0002](../library/connectors-systems/residential-branch-circuits-from-confirmed-layout/) Residential branch circuits from a confirmed layout | 3 | W3 | candidate |
 
+## FP19: Unknown tool parameter silently ignored
+
+| Pack | Level | Work class | Status |
+|---|---|---|---|
+| [ARPL-ASM-0008](../library/assemblies-fabrication/slab-on-grade-from-the-framing-layout/) Slab on grade from the framing layout (anchors, recess, stub-ups) | 2 | W3 | candidate |
+
+## FP23: Viewport outline inflated by elements outside the crop
+
+| Pack | Level | Work class | Status |
+|---|---|---|---|
+| [ARPL-DOC-0001](../library/documentation/assembly-shop-drawings/) Shop drawings: invalid references and swapped elevations | 2 | W6 | candidate |
+

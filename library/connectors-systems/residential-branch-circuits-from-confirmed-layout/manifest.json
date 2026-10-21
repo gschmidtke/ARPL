@@ -1,6 +1,6 @@
 {
   "id": "ARPL-CON-0002",
-  "revision": 2,
+  "revision": 3,
   "title": "Residential branch circuits from a confirmed layout",
   "use_when": [
     "electrical for a small dwelling unit or ADU: panel, receptacles, lighting, smoke alarms, circuits",
@@ -76,6 +76,14 @@
       "revision": 2,
       "date": "2026-10-21",
       "change": "Owner: LED wafer downlights, tags; framing coordination and rough-in in assemblies (v07, rules 7-8)",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ]
+    },
+    {
+      "revision": 3,
+      "date": "2026-10-21",
+      "change": "Fixed glass panels count as wall space; rough-in re-run per wall after a panel rebuild (v08, rule 9)",
       "contributors": [
         "Gottfried Schmidtke with Claude"
       ]

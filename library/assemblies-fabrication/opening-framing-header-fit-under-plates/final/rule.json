@@ -1,7 +1,8 @@
 {
   "lesson": "Conflicts between the architecture and the framing rule surface in the layout computation; they are design decisions, not things to fix silently.",
-  "rule": "Report every opening whose rough opening plus header doesn't fit under the plates as a decision for the user; never move a header into the top plates.",
+  "rule": "Report every opening whose rough opening plus header doesn't fit under the plates as a decision for the user; never move a header into the top plates. Size each header from the span tables for its opening and the load it carries (bearing wall under rafters vs non-bearing); never default to the stud size. Splitting a long opening into standard units with posts turns an engineered beam into table-sized headers.",
   "validation": [
-    "Rough opening and header heights dimensioned on the shop drawing"
+    "Rough opening and header heights dimensioned on the shop drawing",
+    "Header size per opening reported with its span and bearing condition"
   ]
 }

@@ -1,7 +1,8 @@
 {
   "lesson": "Per-element transactions contain failures; implicit state (assembly transforms) can't be trusted.",
-  "rule": "Isolate risky annotation in its own transaction and verify every sheet visually. Regenerate the shop drawing whenever the assembly members are replaced: dimensions reference member faces and are deleted with them. DirectShape faces take dimension references like family geometry. Sloped faces cannot be dimensioned in an elevation chain; state the heights at both ends in a note on the view. Check the assembly frame first (FP16).",
+  "rule": "Isolate risky annotation in its own transaction and verify every sheet visually. Regenerate the shop drawing whenever the assembly members are replaced: dimensions reference member faces and are deleted with them. DirectShape faces take dimension references like family geometry. Sloped faces cannot be dimensioned in an elevation chain; state the heights at both ends in a note on the view. Check the assembly frame first (FP16). When rescaling: crop plans to the building first (clear scope boxes, which override the crop), turn on annotation crop, trim section width and far clip, hide markers that a template will not let you hide by category (HideElements), then re-pack sheets and check every viewport against the drawing area. A single-view sheet is centred, never emptied; continuation sheets (<number>A) only for real overflow on multi-view sheets (FP23).",
   "validation": [
-    "PDF export rendered and reviewed per sheet"
+    "PDF export rendered and reviewed per sheet",
+    "Every viewport inside the title block drawing area and no overlaps after a scale change"
   ]
 }

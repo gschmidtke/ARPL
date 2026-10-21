@@ -1,6 +1,6 @@
 {
   "id": "ARPL-ASM-0002",
-  "revision": 1,
+  "revision": 2,
   "title": "Door too tall for a header",
   "use_when": [
     "framing a wall with openings where headers must fit under top plates",
@@ -58,6 +58,14 @@
       "revision": 1,
       "date": "2026-10-19",
       "change": "First recorded"
+    },
+    {
+      "revision": 2,
+      "date": "2026-10-21",
+      "change": "Header size from the span tables (2-2x8 at 5 ft in the bearing wall); long opening split into standard units (v03)",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ]
     }
   ]
 }

@@ -1,6 +1,6 @@
 {
   "id": "ARPL-DOC-0001",
-  "revision": 2,
+  "revision": 3,
   "title": "Shop drawings: invalid references and swapped elevations",
   "use_when": [
     "creating dimensioned shop drawings or assembly sheets",
@@ -49,7 +49,8 @@
     "FP08",
     "FP02",
     "FP11",
-    "FP16"
+    "FP16",
+    "FP23"
   ],
   "status": "candidate",
   "contributors": [
@@ -67,6 +68,14 @@
       "revision": 2,
       "date": "2026-10-20",
       "change": "Regenerate after member replacement; DirectShape references; note for sloped heights; frame check (FP16)",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ]
+    },
+    {
+      "revision": 3,
+      "date": "2026-10-21",
+      "change": "Rescale and re-pack sheets; viewport outline driven by everything visible (v04, FP23)",
       "contributors": [
         "Gottfried Schmidtke with Claude"
       ]

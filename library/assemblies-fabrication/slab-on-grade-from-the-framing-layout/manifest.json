@@ -1,0 +1,73 @@
+{
+  "id": "ARPL-ASM-0008",
+  "revision": 1,
+  "title": "Slab on grade from the framing layout (anchors, recess, stub-ups)",
+  "use_when": [
+    "a prefab timber building sits on a slab on grade",
+    "anchor bolts, slab recesses or plumbing stub-ups must match wall panels and fixtures"
+  ],
+  "not_for": [
+    "structural design of the slab or anchorage (engineer of record)",
+    "raised floors on piers or ground screws"
+  ],
+  "api_terms": [
+    "Floor.Create",
+    "FLOOR_HEIGHTABOVELEVEL_PARAM",
+    "DirectShape",
+    "BooleanOperationsUtils",
+    "AssemblyInstance.Create",
+    "Element.GetDependentElements"
+  ],
+  "level": 2,
+  "work_class": "W3",
+  "workflows": [
+    "assemblies-fabrication",
+    "geometry"
+  ],
+  "disciplines": [
+    "structural",
+    "architecture",
+    "plumbing"
+  ],
+  "roles": [
+    "designer",
+    "fabricator",
+    "bim-specialist"
+  ],
+  "project_types": [
+    "residential"
+  ],
+  "phases": [
+    "design-development",
+    "construction-documents",
+    "fabrication"
+  ],
+  "revit_versions_tested": [
+    "2024"
+  ],
+  "environment": {
+    "revit_version": "2024.3",
+    "tool": "RevitBridge 0.4.0 with run_csharp",
+    "compiler": "Roslyn 4.8.0 (C# 12)",
+    "agent": "Claude (Anthropic)"
+  },
+  "failure_patterns": [
+    "FP19"
+  ],
+  "status": "candidate",
+  "contributors": [
+    "Gottfried Schmidtke",
+    "Claude (Anthropic)"
+  ],
+  "recorded": "2026-10-21",
+  "changelog": [
+    {
+      "revision": 1,
+      "date": "2026-10-21",
+      "change": "First recorded (ADU-01 slab, v01-v02)",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ]
+    }
+  ]
+}

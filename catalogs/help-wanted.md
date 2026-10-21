@@ -16,6 +16,7 @@ ARPL becomes trustworthy when packs are reproduced by other people, in other mod
 | [ARPL-ASM-0005](../library/assemblies-fabrication/assembly-naming-and-identical-panels/) Assembly naming and identical panels | Revit 2024 | candidate |
 | [ARPL-ASM-0006](../library/assemblies-fabrication/sloped-roof-assembly-component-families/) Sloped roof assembly from component families | Revit 2024 | candidate |
 | [ARPL-ASM-0007](../library/assemblies-fabrication/device-placement-follows-the-framing/) Device placement follows the framing (manufacturer's standpoint) | Revit 2024 | candidate |
+| [ARPL-ASM-0008](../library/assemblies-fabrication/slab-on-grade-from-the-framing-layout/) Slab on grade from the framing layout (anchors, recess, stub-ups) | Revit 2024 | candidate |
 | [ARPL-CHG-0001](../library/model-change/lower-a-level-and-propagate-dependents/) Lowering a level: what doesn't follow | Revit 2024 | candidate |
 | [ARPL-CHG-0002](../library/model-change/replace-footprint-roof-revit-2024/) Changing a footprint roof's outline by API in Revit 2024 | Revit 2024 | candidate |
 | [ARPL-CON-0001](../library/connectors-systems/equipment-power-connector-with-load-data/) Power connector without load parameters | Revit 2024 | candidate |
@@ -43,6 +44,6 @@ ARPL becomes trustworthy when packs are reproduced by other people, in other mod
 
 No pack serves these yet. Your first protocol here starts a new branch of the library.
 
-- **Disciplines:** plumbing, fire-protection, civil-site, lighting, ict-data, security, facilities
+- **Disciplines:** fire-protection, civil-site, lighting, ict-data, security, facilities
 - **Project types:** healthcare, data-centers, airports, theme-parks, education, hospitality, commercial, industrial, infrastructure
 - **Phases:** construction, operations

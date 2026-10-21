@@ -1,0 +1,5 @@
+{
+  "result": "Cost comparison (slab about $5.5-8.5k vs ground screws $17.6-30k) and a 2D layout preview: thickened edge, 27 anchors from the bottom-plate segments and stud axes, 5 stub-ups, bill of materials",
+  "problem": "Two stub-ups fell into the thickened edge, one too close to a wall; the shower, kitchen hot water and terrace level were open questions",
+  "found_by": "layout preview reviewed against the edge zone and the room layout"
+}
