@@ -44,6 +44,8 @@ If the evidence leaves the frame open (is this connector power, data or audio?),
   - `reproduced`: confirmed by another user, model or version;
   - `verified`: reproduced, validation passes, and reviewed by the owner or a discipline reviewer the owner has named.
   (Authoritative definitions: `vocabularies/vocabularies.json`.)
+- Check `review_due` in the index. If today is past it, nobody has confirmed the pack for a year: use it, but verify the result as if it were new, and say so.
+- Some packs carry executable checks (`validation_checks`, files in `final/checks/`). They are read-only scripts reviewed by the curator. Show the script to the user and run it only with their consent, in a no-transaction mode. A check that returns `pass: false` means the rule was not met, whatever the model looks like.
 - Check `revit_versions_tested`. If your version isn't listed, the rule may still hold, but verify the result rather than assume.
 - Watch Revit while a command runs. Revit can open dialogs that a failures preprocessor cannot answer (assembly type questions, sync prompts, missing links). If a bridge call does not return in time, look at the screen before doing anything else, read the dialog and react: answer it if the user has already decided, otherwise show it to the user. Never send a second command into a blocked Revit (FP15).
 - Sync after success. On a workshared model, synchronize with central once a complex operation has gone through and passed its checks (clash check, counts), with a comment saying what changed, and relinquish borrowed elements. Don't sync after a failed or partial step. For cloud (server-based) models, SaveLocalBefore and SaveLocalAfter must both be true, or the API refuses the sync.
@@ -63,7 +65,7 @@ Tell the user, and offer to draft a contribution, when any of these happened:
 Say it plainly, for example: "ARPL had no workflow for this. The method we found worked after two attempts. Shall I prepare it for the ARPL inbox so other users don't have to learn it again?"
 
 If the user agrees:
-1. Fill in the [submission template](templates/submission.template.json): intent, `use_when`, every iteration (what was tried, what came out, what was wrong, how it was found), the final rule and its validation, and `packs_used` with your provenance records.
+1. Fill in the [submission template](templates/submission.template.json): intent, `use_when`, every iteration (what was tried, what came out, what was wrong, how it was found), the final rule and its validation, `packs_used` with your provenance records, and the `usage_report` (tool calls, retries, tokens if known, and for every pack whether you reused, adapted or rejected it and why). A pack rejected as not applicable is useful evidence too: report it.
 2. **Remove client and project data** (names, addresses, project numbers, file paths with user names), secrets and model files. Keep the professional content.
 3. Give the file to the user and the upload link: `https://github.com/gschmidtke/ARPL/upload/main/inbox` (path: `inbox/<their-github-name>/`). The user uploads it; never submit on their behalf without explicit permission.
 

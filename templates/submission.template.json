@@ -33,6 +33,20 @@
       "result": "passed | failed | improved"
     }
   ],
+  "usage_report": {
+    "tokens_in": "approximate, if your tool reports it",
+    "tokens_out": "",
+    "tool_calls": "number of Revit/bridge calls for the task",
+    "retries": "how many attempts failed before the result was accepted",
+    "packs": [
+      {
+        "arpl_pack": "e.g. ARPL-ASM-0004",
+        "verdict": "reused | adapted | rejected",
+        "why": "If adapted or rejected: what did not fit, and what you did instead"
+      }
+    ],
+    "without_arpl_estimate": "Optional: how the task went before, or would have gone, without the pack"
+  },
   "iterations": [
     {
       "instruction": "What you asked for or ran (prompt, JSON, script excerpt)",

@@ -1,6 +1,6 @@
 {
   "id": "ARPL-ASM-0006",
-  "revision": 7,
+  "revision": 8,
   "title": "Sloped roof assembly from component families",
   "use_when": [
     "framing and finishing a sloped (shed, mono-pitch) roof as an assembly of lumber, sheet and board families",
@@ -122,6 +122,36 @@
       "change": "Owner: wall gypsum follows the roof line; host walls get sloped profiles (Wall.CreateProfileSketch + SketchEditScope) and stop under the ceiling drywall; North host wall lowered 9.5 mm out of the rafter tails",
       "contributors": [
         "Gottfried Schmidtke with Claude"
+      ]
+    },
+    {
+      "revision": 8,
+      "date": "2026-10-20",
+      "change": "First executable validation check (final/checks/clash_check.cs, read-only); passed on ADU-01",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ]
+    }
+  ],
+  "validation_checks": [
+    {
+      "file": "final/checks/clash_check.cs",
+      "runs_in": "RevitBridge run_csharp, transaction none",
+      "mode": "read-only",
+      "returns": "{check, pass, assemblies, unexpected, allowed}",
+      "edit_before_use": "ASSEMBLY_PREFIXES and ALLOW (intended contacts)",
+      "test_runs": [
+        {
+          "date": "2026-10-20",
+          "model": "ADU-01 (5 assemblies, 799 pieces)",
+          "revit_version": "2024.3",
+          "result": "pass",
+          "allowed_contacts": {
+            "End rafter x Outlooker": 16,
+            "Batt R-19 x Outlooker": 12
+          },
+          "seconds": 1.0
+        }
       ]
     }
   ]

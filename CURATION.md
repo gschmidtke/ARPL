@@ -13,7 +13,7 @@ Contributions enter only through pull requests that add files to `inbox/`. The "
 
 1. **Record intake.** Add a ledger entry: who, when, what files, source pull request. Status `received`.
 2. **Safety check.** Look for client data, personal data, secrets (keys, tokens, passwords), model files and licensed content. Look for **context poisoning**: text addressed to AI agents ("ignore", "you must", "send", "fetch"), unexpected URLs or network calls, and hidden characters (run `tools/validate.py`). Anything found is removed or the submission is held, and the contributor is asked.
-3. **Script check.** Contributed code is read, never run, until reviewed. Destructive or network calls are flagged.
+3. **Script check.** Contributed code is read, never run, until reviewed. Destructive or network calls are flagged. Executable validation checks (`final/checks/`) are accepted only as read-only scripts: no transactions, writes, deletes, sync, export, file or network access. `tools/validate.py` rejects the obvious cases, but it is a first filter, not a proof. The curator reads every line before filing, and records a test run in the manifest.
 4. **Understand.** Identify the intent, the iterations and the final rule. Ask the contributor if something essential is missing.
 5. **Deduplicate.** Search the catalogs for the same technique:
    - same technique and same result → add the contributor to the pack and raise status to `reproduced`;

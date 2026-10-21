@@ -1,6 +1,6 @@
 """Validate every pack manifest against the schema and the controlled vocabularies.
 Usage: python tools/validate.py   (needs: pip install jsonschema)"""
-import json, glob, sys, os, re
+import json, re, glob, sys, os, re
 try:
     import jsonschema
 except ImportError:
@@ -35,6 +35,15 @@ for folder in ["library", "domains", "patterns", "project-workflows", "vocabular
 for f in ["AGENTS.md", "llms.txt", "index.json", "README.md"]:
     path = os.path.join(root, f)
     if os.path.exists(path) and HIDDEN.search(open(path, encoding="utf-8").read()): errors.append(f"{f}: contains hidden Unicode characters")
+# Executable checks must stay read-only: no transactions, no writes, no deletes, no sync/export, no file or network access
+FORBIDDEN = re.compile(r"\b(Transaction|TransactionGroup|SubTransaction|Delete|\.Set\(|SynchronizeWithCentral|Export\(|SaveAs|Save\(|File\.|Directory\.|Process|WebClient|HttpClient|Assembly\.Load)")
+for dp, dn, fn in os.walk(os.path.join(root, "library")):
+    if os.path.basename(dp) == "checks":
+        for f in fn:
+            src = open(os.path.join(dp, f), encoding="utf-8").read()
+            hit = FORBIDDEN.search(src)
+            if hit: errors.append(f"{os.path.relpath(os.path.join(dp, f), root)}: check scripts must be read-only (found '{hit.group(0)}')")
+
 print(f"{len(ids)} packs checked, {len(errors)} problems")
 for e in errors: print(" -", e)
 sys.exit(1 if errors else 0)

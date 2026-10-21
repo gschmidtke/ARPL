@@ -98,6 +98,21 @@ Shared instruction files are an attack surface. A [Cloud Security Alliance brief
 - [Archgyan: Revit automation with Claude Code skills](https://archgyan.com/revit-automation-claude-code-skills-architects/) (April 2026): six sample SKILL.md files (family auditor, schedule validator, warnings analyzer…) and a "common mistakes" list; no licence stated, no failure evidence, no contribution process.
 - Skill marketplaces list generic "Revit expert" skills (e.g. theneoai/awesome-skills `revit-bim-expert`) with self-assigned scores and no test evidence.
 
+## Research lineage: case-based reasoning and agent memory
+
+ARPL is not a new mechanism. It applies an old one to a new kind of evidence, and it should be read that way.
+
+- **Case-based reasoning.** [Aamodt and Plaza (1994)](https://doi.org/10.3233/AIC-1994-7104) describe the cycle *retrieve, reuse, revise, retain*. ARPL maps onto it directly: retrieve = index lookup (`lookup_order`); reuse = apply the pack's rule; revise = the `vNN` iterations and the validation (now partly executable, `final/checks/`); retain = inbox plus curation.
+- **Skill libraries for LLM agents.** [Voyager (Wang et al., 2023)](https://arxiv.org/abs/2305.16291) stores verified code skills and retrieves them for new tasks. [Agent Workflow Memory (Wang et al., 2024)](https://arxiv.org/abs/2409.07429) induces reusable workflows from past runs. [ExpeL (Zhao et al., 2023)](https://arxiv.org/abs/2308.10144) extracts insights from successes and failures. [Reflexion (Shinn et al., 2023)](https://arxiv.org/abs/2303.11366) keeps verbal lessons from failed attempts.
+- **What ARPL adds.** These systems are private to one agent, in an environment that verifies itself (a game, a website, a test suite). ARPL is shared across people, models and organizations, in a domain where "success" is judged professionally. A model can be geometrically valid and still wrong. So ARPL adds:
+  - failures kept with how they were found (`found_by`)
+  - an applicability envelope (`use_when`, `not_for`, Revit versions, environment)
+  - an evidence status that only rises through outside reproduction
+  - human curation with security checks
+  - attribution
+
+The contribution is the professional evidence format and its governance, not the retrieval loop.
+
 ## Research
 
 - [Heimig-Elschner, Du, Scheuvens, Borrmann, Beetz: A modular reference architecture for MCP servers enabling agentic BIM interaction](https://arxiv.org/html/2601.00809) (RWTH Aachen, TUM, BBSR; 2026). Knowledge service for API docs, workflows and codes via vector retrieval; no learning from past runs; model validation left as future work. Tool calls succeeded in every run while model success ranged 40–100%, which is ARPL's failure pattern FP05 measured.
