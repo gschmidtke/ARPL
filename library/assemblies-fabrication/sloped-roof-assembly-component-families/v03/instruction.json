@@ -1,0 +1,4 @@
+{
+  "version": "v03",
+  "instruction": "Cut vector -n: instance X = +X, Y (thickness) = +n, Z (height) = up-slope; barge boards: direction = up-slope u, cut vector -X gives height square to slope and thickness +X"
+}

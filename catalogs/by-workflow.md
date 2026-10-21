@@ -26,6 +26,7 @@ Primary entry for Revit users and developers: what area of Revit the work touche
 | Pack | Level | Work class | Status |
 |---|---|---|---|
 | [ARPL-ASM-0003](../library/assemblies-fabrication/wall-panels-families-not-parts/) Revit Parts for wall layers: a dead end | 2 | W3 | candidate |
+| [ARPL-ASM-0006](../library/assemblies-fabrication/sloped-roof-assembly-component-families/) Sloped roof assembly from component families | 2 | W3 | candidate |
 | [ARPL-CON-0001](../library/connectors-systems/equipment-power-connector-with-load-data/) Power connector without load parameters | 3 | W1 | candidate |
 | [ARPL-FAM-0001](../library/family-authoring/equipment-from-spec-sheet-overall-dimensions/) Coffee brewer from a spec sheet: overall height short | 2 | W1 | candidate |
 | [ARPL-FAM-0002](../library/family-authoring/orientation-from-multiple-source-views/) Faucet on the wrong side: mirrored source view | 2 | W1 | candidate |
@@ -69,6 +70,7 @@ Primary entry for Revit users and developers: what area of Revit the work touche
 | [ARPL-ASM-0003](../library/assemblies-fabrication/wall-panels-families-not-parts/) Revit Parts for wall layers: a dead end | 2 | W3 | candidate |
 | [ARPL-ASM-0004](../library/assemblies-fabrication/framing-members-disallow-auto-joins/) Vertical studs pulled by auto-joins | 1 | W3 | candidate |
 | [ARPL-ASM-0005](../library/assemblies-fabrication/assembly-naming-and-identical-panels/) Assembly naming and identical panels | 1 | W3 | candidate |
+| [ARPL-ASM-0006](../library/assemblies-fabrication/sloped-roof-assembly-component-families/) Sloped roof assembly from component families | 2 | W3 | candidate |
 | [ARPL-DOC-0001](../library/documentation/assembly-shop-drawings/) Shop drawings: invalid references and swapped elevations | 2 | W6 | candidate |
 | [ARPL-FAM-0005](../library/family-authoring/parametric-component-families-for-wall-panels/) Component families for a wall panel | 2 | W1 | candidate |
 | [ARPL-QA-0001](../library/validation-qaqc/layout-preview-as-review-step/) Layout preview as a review step | 2 | W8 | candidate |
@@ -107,6 +109,7 @@ Primary entry for Revit users and developers: what area of Revit the work touche
 | Pack | Level | Work class | Status |
 |---|---|---|---|
 | [ARPL-ASM-0004](../library/assemblies-fabrication/framing-members-disallow-auto-joins/) Vertical studs pulled by auto-joins | 1 | W3 | candidate |
+| [ARPL-ASM-0006](../library/assemblies-fabrication/sloped-roof-assembly-component-families/) Sloped roof assembly from component families | 2 | W3 | candidate |
 | [ARPL-MCX-0001](../library/model-context/read-camera-before-interpreting-markups/) Markup read without checking the camera | 1 | W8 | candidate |
 | [ARPL-PLH-0002](../library/placement-hosting/door-swing-verified-by-geometry/) Door swing reported correct without a test | 2 | W4 | candidate |
 | [ARPL-QA-0001](../library/validation-qaqc/layout-preview-as-review-step/) Layout preview as a review step | 2 | W8 | candidate |

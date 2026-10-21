@@ -1,0 +1,5 @@
+{
+  "result": "Not possible: level-based families cannot tilt to the roof slope",
+  "problem": "Family placement type decides what orientations are possible",
+  "found_by": "reading FAMILY_WORK_PLANE_BASED / FAMILY_ALWAYS_VERTICAL before building"
+}

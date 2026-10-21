@@ -30,6 +30,7 @@ Work class = what drives the result; it decides the preview and the proof of 'do
 | [ARPL-ASM-0003](../library/assemblies-fabrication/wall-panels-families-not-parts/) Revit Parts for wall layers: a dead end | 2 | W3 | candidate |
 | [ARPL-ASM-0004](../library/assemblies-fabrication/framing-members-disallow-auto-joins/) Vertical studs pulled by auto-joins | 1 | W3 | candidate |
 | [ARPL-ASM-0005](../library/assemblies-fabrication/assembly-naming-and-identical-panels/) Assembly naming and identical panels | 1 | W3 | candidate |
+| [ARPL-ASM-0006](../library/assemblies-fabrication/sloped-roof-assembly-component-families/) Sloped roof assembly from component families | 2 | W3 | candidate |
 
 ## W4: Building model authoring (driven by a program and system families)
 

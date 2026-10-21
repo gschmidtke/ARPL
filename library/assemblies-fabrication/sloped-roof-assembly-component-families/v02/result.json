@@ -1,0 +1,5 @@
+{
+  "result": "Sheet placed flipped: Height ran down-slope, Thickness pointed down",
+  "problem": "Instance Z = cutVec x direction, so the sign of the cut vector decides the orientation",
+  "found_by": "flex test, transform and bounding box read back"
+}

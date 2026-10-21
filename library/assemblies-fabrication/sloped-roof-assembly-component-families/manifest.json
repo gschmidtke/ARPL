@@ -1,0 +1,75 @@
+{
+  "id": "ARPL-ASM-0006",
+  "revision": 1,
+  "title": "Sloped roof assembly from component families",
+  "use_when": [
+    "framing and finishing a sloped (shed, mono-pitch) roof as an assembly of lumber, sheet and board families",
+    "placing sheet goods, insulation or trim on a sloped plane",
+    "covering rafter tails and fly rafters with fascia and barge boards"
+  ],
+  "not_for": [
+    "prefabricated trusses modelled as single families",
+    "curved roofs"
+  ],
+  "api_terms": [
+    "FamilyPlacementType.WorkPlaneBased",
+    "FAMILY_WORK_PLANE_BASED",
+    "FAMILY_ALWAYS_VERTICAL",
+    "Document.NewReferencePlane",
+    "NewFamilyInstance(Reference, XYZ, XYZ, FamilySymbol)",
+    "StructuralFramingUtils.DisallowJoinAtEnd",
+    "ElementIntersectsElementFilter",
+    "AssemblyInstance.Create"
+  ],
+  "level": 2,
+  "work_class": "W3",
+  "workflows": [
+    "assemblies-fabrication",
+    "family-authoring",
+    "validation-qaqc"
+  ],
+  "disciplines": [
+    "construction",
+    "architecture",
+    "structural"
+  ],
+  "roles": [
+    "bim-specialist",
+    "fabricator"
+  ],
+  "project_types": [
+    "residential",
+    "generic"
+  ],
+  "phases": [
+    "construction-documents",
+    "fabrication"
+  ],
+  "revit_versions_tested": [
+    "2024"
+  ],
+  "environment": {
+    "revit_version": "2024.3",
+    "tool": "RevitBridge 0.4.0 (local Revit API bridge, MCP) with run_csharp",
+    "compiler": "Roslyn 4.8 (C# 12)",
+    "agent": "Claude (Anthropic)",
+    "model": "ADU-01 (workshared cloud model)"
+  },
+  "failure_patterns": [
+    "FP02",
+    "FP05",
+    "FP04"
+  ],
+  "status": "candidate",
+  "contributors": [
+    "Gottfried Schmidtke with Claude"
+  ],
+  "recorded": "2026-10-20",
+  "changelog": [
+    {
+      "revision": 1,
+      "date": "2026-10-20",
+      "change": "First recorded (ADU-01 shed roof, 241 pieces)"
+    }
+  ]
+}

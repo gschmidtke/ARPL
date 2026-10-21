@@ -1,0 +1,4 @@
+{
+  "version": "v04",
+  "instruction": "Full build in a dry run with an all-pairs clash check (new pieces + wall assemblies)"
+}

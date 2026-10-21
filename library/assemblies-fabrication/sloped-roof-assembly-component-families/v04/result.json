@@ -1,0 +1,5 @@
+{
+  "result": "241 pieces; 12 kinds of contact",
+  "problem": "Square-cut ends of sloped members shift by depth x sin(slope): rafter tails 16 mm into the fascia, plywood 1.7 mm into fascia, batts 14 mm into frieze blocks, raked plate 3 mm into the pony plate; horizontal outlookers 4 mm above the sloped deck; rafters 1.7 mm into the north wall plywood top",
+  "found_by": "ElementIntersectsElementFilter over all new pieces and wall members"
+}
