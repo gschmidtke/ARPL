@@ -1,6 +1,6 @@
 {
   "id": "ARPL-ASM-0006",
-  "revision": 3,
+  "revision": 4,
   "title": "Sloped roof assembly from component families",
   "use_when": [
     "framing and finishing a sloped (shed, mono-pitch) roof as an assembly of lumber, sheet and board families",
@@ -84,6 +84,14 @@
       "revision": 3,
       "date": "2026-10-20",
       "change": "Owner rule: insulation only inside the exterior wall lines, never over overhangs; verified on the model",
+      "contributors": [
+        "Gottfried Schmidtke"
+      ]
+    },
+    {
+      "revision": 4,
+      "date": "2026-10-20",
+      "change": "Owner correction: members that carry the deck (outlookers, blocking under the deck) are rotated to the slope, top face parallel to the rafters; replaces 'sit level at the uphill edge'",
       "contributors": [
         "Gottfried Schmidtke"
       ]

@@ -1,0 +1,5 @@
+{
+  "result": "Corrected: cross-section rotation +5 deg (STRUCTURAL_BEND_DIR_ANGLE), top centre on the rafter-top plane; top face normal (0, 0.087, 0.996) equals the roof normal; no contact with the deck",
+  "problem": "Level outlookers are not how they are built: they carry the deck and must lie in the roof plane, parallel to the rafters. The 'lower it to the uphill edge' fix hid the error instead of correcting it.",
+  "found_by": "owner reviewing the section (outlookers drawn as level rectangles under a sloped deck)"
+}
