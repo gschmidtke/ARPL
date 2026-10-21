@@ -1,0 +1,71 @@
+{
+  "id": "ARPL-ASM-0007",
+  "revision": 1,
+  "title": "Device placement follows the framing (manufacturer's standpoint)",
+  "use_when": [
+    "placing receptacles, switches, lights, smoke alarms, floor boxes or other devices in framed walls, roofs or floors",
+    "layout previews for prefab wall, roof or floor panels"
+  ],
+  "not_for": [
+    "devices on concrete or masonry without framing (use slab sleeve / chase rules)",
+    "deciding code compliance (the code checks still apply)"
+  ],
+  "api_terms": [
+    "FamilyInstance.Host",
+    "LocationCurve",
+    "ElementTransformUtils.MoveElement"
+  ],
+  "level": 2,
+  "work_class": "W3",
+  "workflows": [
+    "assemblies-fabrication",
+    "connectors-systems"
+  ],
+  "disciplines": [
+    "electrical",
+    "architecture",
+    "structural"
+  ],
+  "roles": [
+    "designer",
+    "fabricator",
+    "bim-specialist"
+  ],
+  "project_types": [
+    "residential",
+    "generic"
+  ],
+  "phases": [
+    "design-development",
+    "construction-documents",
+    "fabrication"
+  ],
+  "revit_versions_tested": [
+    "2024"
+  ],
+  "environment": {
+    "revit_version": "2024.3",
+    "tool": "RevitBridge 0.4.0 with run_csharp",
+    "compiler": "Roslyn 4.8.0 (C# 12)",
+    "agent": "Claude (Anthropic)"
+  },
+  "failure_patterns": [
+    "FP05"
+  ],
+  "status": "candidate",
+  "contributors": [
+    "Gottfried Schmidtke",
+    "Claude (Anthropic)"
+  ],
+  "recorded": "2026-10-21",
+  "changelog": [
+    {
+      "revision": 1,
+      "date": "2026-10-21",
+      "change": "Owner rule: devices are placed from the manufacturer's standpoint in walls, roofs and floors",
+      "contributors": [
+        "Gottfried Schmidtke"
+      ]
+    }
+  ]
+}

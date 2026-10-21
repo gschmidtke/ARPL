@@ -1,0 +1,10 @@
+{
+  "lesson": "A layout that satisfies the code but ignores the framing is not buildable as drawn; the fabricator moves the device, and the drawings become wrong.",
+  "rule": "Place every device the way the panel manufacturer would build it: the framing is part of the layout from the first preview, not a correction at rough-in. 1) Build the layout preview on top of the framing layout (studs, plates, headers, rafters or joists, blocking, sheathing joints), not on the room outline alone. 2) Walls: box beside a stud, never on it (single-gang centre 47 mm from the stud axis, 2-gang and round boxes 75 mm), on the side that keeps the cavity widest; keep clear of corner and king/jack studs, headers, plates and sheathing joints; one standard height per device type (receptacles 300 mm, counter 1,100 mm, switches 1,220 mm) unless the code or the owner says otherwise. 3) Roofs and ceilings: devices centred in the rafter or joist bay where the room allows; minimum clearance 19 mm + device radius + 10 mm from the member axis; driver and junction boxes inside the same bay. 4) Floors: floor boxes, registers and drains in the joist bay (or in planned slab sleeves), never through a joist or beam. 5) Prefer devices on prefab panels in bays that are open in the factory; group devices so one bay or one wire run serves several. 6) After moving a device for the framing, re-run the code checks (NEC spacing) before modelling.",
+  "validation": [
+    "Every wall box \u2265 required distance from every stud axis (report the minimum)",
+    "Every ceiling device \u2265 clearance from every rafter or joist axis and inside its room",
+    "NEC spacing checks still pass after framing moves",
+    "Rough-in clash check: only soft layers cut"
+  ]
+}

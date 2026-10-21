@@ -1,0 +1,5 @@
+{
+  "result": "Code-compliant layout confirmed by the owner and modelled",
+  "problem": "9 of 14 ceiling devices on or next to a rafter, 4 wall boxes on a stud; every one had to be moved after modelling, and the layout preview had to be re-checked",
+  "found_by": "distance check against stud and rafter axes before adding rough-in (see ARPL-CON-0002 v07)"
+}
