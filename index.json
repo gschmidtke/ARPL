@@ -1759,6 +1759,15 @@
       "contributors": [
         "Gottfried Schmidtke with Claude"
       ]
+    },
+    {
+      "id": "FP16",
+      "name": "New assembly frame follows the project axes",
+      "meaning": "AssemblyInstance.Create gives the assembly a transform along the project X/Y axes, not along the element it describes. Assembly views (CreateDetailSection elevations, plan sections) and any dimensions computed in the assembly frame then look at the wrong side or collapse to one segment. Defence: after creating an assembly for a wall panel, call SetTransform so BasisX runs along the wall and BasisY points to the interior, before creating its views.",
+      "found_by": "West shop drawing came out with one stud dimension",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ]
     }
   ]
 }
