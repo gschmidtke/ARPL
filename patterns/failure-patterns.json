@@ -98,6 +98,24 @@
       "contributors": [
         "Gottfried Schmidtke with Claude"
       ]
+    },
+    {
+      "id": "FP17",
+      "name": "Modal warning raised inside an API call",
+      "meaning": "Some Revit API calls post a warning as a modal dialog during the call itself, before the script can change the condition (ElectricalSystem.Create checks the load against the default 20 A rating). The transaction's failures preprocessor does not see it; the bridge call blocks until a person answers. Defence: anticipate the condition (temporary small load, set limits first), and when a bridge call times out, look at the screen before anything else.",
+      "found_by": "Bridge timeout, screenshot",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ]
+    },
+    {
+      "id": "FP18",
+      "name": "Stale geometry references after regeneration",
+      "meaning": "Face references collected before other elements were placed on the same host can be invalid after a regeneration; using them for face-based placement throws a native SEHException instead of a managed error. Defence: fetch the host's face references immediately before each placement.",
+      "found_by": "SEHException that did not reproduce in an isolated test",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ]
     }
   ]
 }

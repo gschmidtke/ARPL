@@ -1,0 +1,4 @@
+{
+  "version": "v02",
+  "instruction": "Place wall devices on host-wall side faces (HostObjectUtils.GetSideFaces) with NewFamilyInstance(face reference, point, refDir, symbol); face list collected once"
+}

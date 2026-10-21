@@ -1,0 +1,76 @@
+{
+  "id": "ARPL-CON-0002",
+  "revision": 1,
+  "title": "Residential branch circuits from a confirmed layout",
+  "use_when": [
+    "electrical for a small dwelling unit or ADU: panel, receptacles, lighting, smoke alarms, circuits",
+    "placing wall and ceiling devices by API on host-wall faces and ceiling planes",
+    "creating circuits and a panel schedule by API"
+  ],
+  "not_for": [
+    "commercial distribution or three-phase systems",
+    "load calculations or code compliance sign-off (electrical engineer / AHJ)",
+    "conduit or cable routing"
+  ],
+  "api_terms": [
+    "HostObjectUtils.GetSideFaces",
+    "Document.Create.NewFamilyInstance(Reference, XYZ, XYZ, FamilySymbol)",
+    "Document.Create.NewReferencePlane",
+    "ElectricalSystem.Create",
+    "ElectricalSystem.SelectPanel",
+    "PanelScheduleView.CreateInstanceView",
+    "PanelScheduleSheetInstance.Create",
+    "Application.NewFamilyDocument",
+    "ConnectorElement.CreateElectricalConnector"
+  ],
+  "level": 3,
+  "work_class": "W3",
+  "workflows": [
+    "connectors-systems",
+    "family-authoring",
+    "parameters-data"
+  ],
+  "disciplines": [
+    "electrical"
+  ],
+  "roles": [
+    "design-engineer",
+    "bim-specialist"
+  ],
+  "project_types": [
+    "residential"
+  ],
+  "phases": [
+    "design-development",
+    "construction-documents"
+  ],
+  "revit_versions_tested": [
+    "2024"
+  ],
+  "environment": {
+    "revit_version": "2024.3",
+    "tool": "RevitBridge 0.4.0 with run_csharp",
+    "compiler": "Roslyn 4.8.0 (C# 12)",
+    "agent": "Claude (Anthropic)"
+  },
+  "failure_patterns": [
+    "FP05",
+    "FP17",
+    "FP18"
+  ],
+  "status": "candidate",
+  "contributors": [
+    "Gottfried Schmidtke with Claude"
+  ],
+  "recorded": "2026-10-21",
+  "changelog": [
+    {
+      "revision": 1,
+      "date": "2026-10-21",
+      "change": "First recorded (ADU-01: 43 devices, 10 circuits, panel schedule on E101)",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ]
+    }
+  ]
+}

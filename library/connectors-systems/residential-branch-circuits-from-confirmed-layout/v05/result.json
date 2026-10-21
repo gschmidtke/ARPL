@@ -1,0 +1,5 @@
+{
+  "result": "'Selected distribution system type is invalid'",
+  "problem": "The family's supply connector is fixed at 208 V 3 poles; copy the family, set its connector to 240 V 2 poles, swap the type",
+  "found_by": "error message, connector probe"
+}

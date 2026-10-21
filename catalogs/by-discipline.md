@@ -71,6 +71,7 @@ Entry for engineers and designers. 'generic' packs apply to every discipline.
 | Pack | Level | Work class | Status |
 |---|---|---|---|
 | [ARPL-CON-0001](../library/connectors-systems/equipment-power-connector-with-load-data/) Power connector without load parameters | 3 | W1 | candidate |
+| [ARPL-CON-0002](../library/connectors-systems/residential-branch-circuits-from-confirmed-layout/) Residential branch circuits from a confirmed layout | 3 | W3 | candidate |
 
 ## audio-av
 

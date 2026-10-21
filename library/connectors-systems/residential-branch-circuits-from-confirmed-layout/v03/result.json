@@ -1,0 +1,5 @@
+{
+  "result": "SEHException on face placement",
+  "problem": "Lighting Fixture template with a light source does not take face placement; rebuilt from 'Electrical Fixture.rft' with FamilyCategory switched to Lighting Fixtures",
+  "found_by": "isolated test"
+}

@@ -1,0 +1,5 @@
+{
+  "result": "Receptacles and switches placed on the right faces",
+  "problem": "SEHException on the exterior light; the same call worked in isolation: face references collected before other devices were placed had gone stale after regeneration (FP18)",
+  "found_by": "dry run, isolated test"
+}

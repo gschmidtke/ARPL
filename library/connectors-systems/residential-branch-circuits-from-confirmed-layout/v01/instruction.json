@@ -1,0 +1,4 @@
+{
+  "version": "v01",
+  "instruction": "Author missing electrical families with Family Templates (no local Autodesk library: only the cloud 'Load Autodesk Family' dialog, not reachable by API)"
+}

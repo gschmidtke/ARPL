@@ -1,0 +1,5 @@
+{
+  "result": "Numbering 1/3, 2, 4 ... 11/13 as planned",
+  "problem": "Revit raised a modal 80 %-of-rating warning during Create, against the default 20 A, before the script could set the rating; the failures preprocessor did not see it, the bridge call blocked until the owner clicked OK (FP17). Also: a downlight type carried 0 VA",
+  "found_by": "screenshot after a bridge timeout"
+}

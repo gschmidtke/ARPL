@@ -1,0 +1,4 @@
+{
+  "version": "v06",
+  "instruction": "Create circuits: ElectricalSystem.Create, then rating, then SelectPanel"
+}

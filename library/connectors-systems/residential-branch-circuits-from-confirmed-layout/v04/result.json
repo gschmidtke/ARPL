@@ -1,0 +1,5 @@
+{
+  "result": "Stayed at floor level",
+  "problem": "Offset parameter ignored for that family; place on a horizontal reference plane at the ceiling (cut -Y gives normal +Z, trim below the plane)",
+  "found_by": "bounding box read-back"
+}
