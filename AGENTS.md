@@ -45,6 +45,8 @@ If the evidence leaves the frame open (is this connector power, data or audio?),
   - `verified`: reproduced, validation passes, and reviewed by the owner or a discipline reviewer the owner has named.
   (Authoritative definitions: `vocabularies/vocabularies.json`.)
 - Check `revit_versions_tested`. If your version isn't listed, the rule may still hold, but verify the result rather than assume.
+- Watch Revit while a command runs. Revit can open dialogs that a failures preprocessor cannot answer (assembly type questions, sync prompts, missing links). If a bridge call does not return in time, look at the screen before doing anything else, read the dialog and react: answer it if the user has already decided, otherwise show it to the user. Never send a second command into a blocked Revit (FP15).
+- Sync after success. On a workshared model, synchronize with central once a complex operation has gone through and passed its checks (clash check, counts), with a comment saying what changed, and relinquish borrowed elements. Don't sync after a failed or partial step. For cloud (server-based) models, SaveLocalBefore and SaveLocalAfter must both be true, or the API refuses the sync.
 - Decisions that belong to the user (sizes, materials, conflicts) and to discipline authorities (structural adequacy, code compliance) stay theirs, even when a pack suggests a default.
 
 ## 3. After you act: give back
