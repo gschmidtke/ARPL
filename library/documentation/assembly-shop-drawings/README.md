@@ -1,4 +1,4 @@
-# ARPL-DOC-0001 rev 1: Shop drawings: invalid references and swapped elevations
+# ARPL-DOC-0001 rev 2: Shop drawings: invalid references and swapped elevations
 
 _Generated from this pack's files by tools/build_catalogs.py. Edit manifest.json, intent.md, vNN/ or final/rule.json instead._
 
@@ -14,7 +14,7 @@ _Generated from this pack's files by tools/build_catalogs.py. Edit manifest.json
 | Project types | residential |
 | Revit tested | 2024 |
 | API | AssemblyViewUtils, Dimension, Reference, TransactionGroup, IFailuresPreprocessor |
-| Failure patterns | FP08, FP02, FP11 |
+| Failure patterns | FP08, FP02, FP11, FP16 |
 | Contributors | Gottfried Schmidtke with Claude |
 
 **Intent:** Assembly shop drawings for three wall panels
@@ -31,7 +31,7 @@ _Generated from this pack's files by tools/build_catalogs.py. Edit manifest.json
 Per-element transactions contain failures; implicit state (assembly transforms) can't be trusted.
 
 ## Rule
-Isolate risky annotation in its own transaction and verify every sheet visually.
+Isolate risky annotation in its own transaction and verify every sheet visually. Regenerate the shop drawing whenever the assembly members are replaced: dimensions reference member faces and are deleted with them. DirectShape faces take dimension references like family geometry. Sloped faces cannot be dimensioned in an elevation chain; state the heights at both ends in a note on the view. Check the assembly frame first (FP16).
 
 ## Validation
 - PDF export rendered and reviewed per sheet

@@ -1,6 +1,6 @@
 {
   "id": "ARPL-PW-0001",
-  "revision": 1,
+  "revision": 2,
   "title": "ADU exterior wall fabrication package (LOD 400 + BOM)",
   "level": 4,
   "context": {
@@ -76,6 +76,21 @@
         "ARPL-SCH-0001",
         "ARPL-SCH-0002"
       ]
+    },
+    {
+      "step": 8,
+      "work_class": "W6",
+      "do": "Issue: one shop drawing sheet per panel that differs (identical panels once, with a quantity), add every assembly sheet to the print set, export the set to PDF, open the PDF and check each sheet",
+      "packs": [
+        "ARPL-DOC-0001",
+        "ARPL-ASM-0005"
+      ]
+    },
+    {
+      "step": 9,
+      "work_class": "W7",
+      "do": "Synchronize with central after the package passes its checks, with a comment; on cloud models save local before and after (operating rule in AGENTS.md)",
+      "packs": []
     }
   ],
   "decisions_for_the_user": [
@@ -99,5 +114,15 @@
   "contributors": [
     "Gottfried Schmidtke with Claude"
   ],
-  "recorded": "2026-10-19"
+  "recorded": "2026-10-19",
+  "changelog": [
+    {
+      "revision": 2,
+      "date": "2026-10-20",
+      "change": "Walls under a sloped roof are built to fit it (see ARPL-ASM-0006 v09); issue and sync steps added",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ]
+    }
+  ]
 }

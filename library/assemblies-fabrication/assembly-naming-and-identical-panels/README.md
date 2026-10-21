@@ -1,4 +1,4 @@
-# ARPL-ASM-0005 rev 1: Assembly naming and identical panels
+# ARPL-ASM-0005 rev 2: Assembly naming and identical panels
 
 _Generated from this pack's files by tools/build_catalogs.py. Edit manifest.json, intent.md, vNN/ or final/rule.json instead._
 
@@ -14,7 +14,7 @@ _Generated from this pack's files by tools/build_catalogs.py. Edit manifest.json
 | Project types | generic |
 | Revit tested | 2024 |
 | API | AssemblyInstance.Create, AssemblyType, AssemblyInstance.SetTransform |
-| Failure patterns | FP05 |
+| Failure patterns | FP05, FP15, FP16 |
 | Contributors | Gottfried Schmidtke with Claude |
 
 **Intent:** One named assembly per wall
@@ -30,7 +30,7 @@ _Generated from this pack's files by tools/build_catalogs.py. Edit manifest.json
 Revit detects identical assemblies and gives them one type.
 
 ## Rule
-Name assemblies after commit; document identical assemblies once with a quantity ('build 2').
+Name assemblies after commit; document identical assemblies once with a quantity ('build 2'). Identical panels may share one assembly type only while their geometry stays identical. When they diverge (raked end walls are mirror images, not copies), give each its own type before editing members: changing the members of one instance of a shared type opens a modal Revit dialog no script can answer and copies the change to the other instances (FP15). An assembly made with AssemblyInstance.Create gets a frame along the project axes; set it with SetTransform (BasisX along the wall, BasisY to the interior) before creating its views (FP16).
 
 ## Validation
 - Assembly type names and member counts read back

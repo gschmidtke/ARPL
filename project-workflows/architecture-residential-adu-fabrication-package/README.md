@@ -11,6 +11,8 @@ Level 4 project workflow: a sequence of canonical packs, each step tagged with i
 | 5 | W3 | Replay the rule in 3D per wall; disallow joins on all framing; verify every piece; group into assemblies | ARPL-ASM-0003, ARPL-ASM-0004, ARPL-ASM-0005 |
 | 6 | W6 | Assembly shop drawings: framing and sheathing elevations, plan section, 3D, part list; trade dimension style; PDF review | ARPL-DOC-0001, ARPL-DOC-0002, ARPL-VIEW-0001 |
 | 7 | W7 | Quantities and cost from the model; governed BOM parameters | ARPL-SCH-0001, ARPL-SCH-0002 |
+| 8 | W6 | Issue: one sheet per differing panel, all assembly sheets in the print set, PDF export, open and check every sheet | ARPL-DOC-0001, ARPL-ASM-0005 |
+| 9 | W7 | Synchronize with central after the package passes its checks, with a comment; on cloud models save local before and after (operating rule in AGENTS.md) | - |
 
 **Decisions that belong to the user:** Member sizes and spacing; Insulation material; Sheet size (4x8 + blocking or 4x9 cut); Minimum remnant width; Conflicts at openings (door height vs. wall height); Siding grade for pricing.
 

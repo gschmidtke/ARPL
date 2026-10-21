@@ -44,6 +44,33 @@
       ],
       "reviewed_by": "Claude (curator)",
       "closed": "2026-10-20"
+    },
+    {
+      "entry_id": "IN-0002",
+      "received": "2026-10-20",
+      "contributor": {
+        "name": "Gottfried Schmidtke",
+        "github": "gschmidtke",
+        "with": "Claude (Anthropic)"
+      },
+      "source": "ADU-01 production session 2026-10-20 (shed roof, walls fitted to the roof, shop drawings, issue)",
+      "submitted": "Roof assembly learning chain v01-v09, owner corrections (insulation inside walls only, deck-bearing members follow the slope, a wall is a wall), Revit crash journal, failure patterns FP13-FP16, operating rules (watch Revit for dialogs, sync after success)",
+      "status": "filed",
+      "decision": "New packs ARPL-ASM-0006, ARPL-CHG-0002, ARPL-ADM-0001 and workflow ARPL-PW-0002; revisions to ARPL-ASM-0005, ARPL-DOC-0001, ARPL-GEO-0002, ARPL-PW-0001; AGENTS.md operating rules",
+      "resulting_ids": [
+        "ARPL-ASM-0006",
+        "ARPL-CHG-0002",
+        "ARPL-ADM-0001",
+        "ARPL-PW-0002",
+        "ARPL-ASM-0005",
+        "ARPL-DOC-0001",
+        "ARPL-GEO-0002",
+        "ARPL-PW-0001",
+        "FP13",
+        "FP14",
+        "FP15",
+        "FP16"
+      ]
     }
   ]
 }

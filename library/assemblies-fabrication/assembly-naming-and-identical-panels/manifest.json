@@ -1,6 +1,6 @@
 {
   "id": "ARPL-ASM-0005",
-  "revision": 1,
+  "revision": 2,
   "title": "Assembly naming and identical panels",
   "use_when": [
     "creating and naming Revit assemblies",
@@ -43,7 +43,9 @@
     "agent": "Claude (Anthropic)"
   },
   "failure_patterns": [
-    "FP05"
+    "FP05",
+    "FP15",
+    "FP16"
   ],
   "status": "candidate",
   "contributors": [
@@ -56,6 +58,14 @@
       "revision": 1,
       "date": "2026-10-19",
       "change": "First recorded"
+    },
+    {
+      "revision": 2,
+      "date": "2026-10-20",
+      "change": "Shared type only while geometry is identical; split before editing (FP15); align new assembly frames (FP16)",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ]
     }
   ]
 }

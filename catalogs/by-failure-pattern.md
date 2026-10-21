@@ -118,5 +118,13 @@ Learn from what went wrong: each pack is listed under the failure patterns it re
 
 | Pack | Level | Work class | Status |
 |---|---|---|---|
+| [ARPL-ASM-0005](../library/assemblies-fabrication/assembly-naming-and-identical-panels/) Assembly naming and identical panels | 1 | W3 | candidate |
 | [ARPL-ASM-0006](../library/assemblies-fabrication/sloped-roof-assembly-component-families/) Sloped roof assembly from component families | 2 | W3 | candidate |
+
+## FP16: New assembly frame follows the project axes
+
+| Pack | Level | Work class | Status |
+|---|---|---|---|
+| [ARPL-ASM-0005](../library/assemblies-fabrication/assembly-naming-and-identical-panels/) Assembly naming and identical panels | 1 | W3 | candidate |
+| [ARPL-DOC-0001](../library/documentation/assembly-shop-drawings/) Shop drawings: invalid references and swapped elevations | 2 | W6 | candidate |
 

@@ -1,6 +1,6 @@
 {
   "lesson": "Profile walls replace attachment in the 2024 API, but they no longer follow levels (see W5-001).",
-  "rule": "Use profile walls for gables and register them as dependents of the roof and the levels.",
+  "rule": "Use profile walls for gables and register them as dependents of the roof and the levels. Revit 2024 API: an existing wall's profile can be edited: Wall.CreateProfileSketch() in its own transaction, then SketchEditScope.Start(sketch.Id), replace the curves with NewModelCurve on sketch.SketchPlane, and commit the scope with a failures preprocessor. (Footprint roof sketches cannot be edited this way.) Walls under a sloped roof take a profile that follows the rafter line, minus the ceiling drywall so the ceiling board runs over the wall top.",
   "validation": [
     "Section view check"
   ]

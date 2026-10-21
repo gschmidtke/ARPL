@@ -1,6 +1,6 @@
 {
   "id": "ARPL-GEO-0002",
-  "revision": 1,
+  "revision": 2,
   "title": "Gable walls without wall attachment",
   "use_when": [
     "walls under gable or sloped roofs",
@@ -55,6 +55,14 @@
       "revision": 1,
       "date": "2026-10-16",
       "change": "First recorded"
+    },
+    {
+      "revision": 2,
+      "date": "2026-10-20",
+      "change": "API method for editing an existing wall profile (2024, verified on ADU-01); walls under a sloped roof follow the rafter line",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ]
     }
   ]
 }

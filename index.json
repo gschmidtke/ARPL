@@ -29,7 +29,7 @@
   "project_workflows": [
     {
       "id": "ARPL-PW-0001",
-      "revision": 1,
+      "revision": 2,
       "title": "ADU exterior wall fabrication package (LOD 400 + BOM)",
       "level": 4,
       "context": {
@@ -105,6 +105,21 @@
             "ARPL-SCH-0001",
             "ARPL-SCH-0002"
           ]
+        },
+        {
+          "step": 8,
+          "work_class": "W6",
+          "do": "Issue: one shop drawing sheet per panel that differs (identical panels once, with a quantity), add every assembly sheet to the print set, export the set to PDF, open the PDF and check each sheet",
+          "packs": [
+            "ARPL-DOC-0001",
+            "ARPL-ASM-0005"
+          ]
+        },
+        {
+          "step": 9,
+          "work_class": "W7",
+          "do": "Synchronize with central after the package passes its checks, with a comment; on cloud models save local before and after (operating rule in AGENTS.md)",
+          "packs": []
         }
       ],
       "path": "project-workflows/architecture-residential-adu-fabrication-package",
@@ -215,7 +230,7 @@
   "packs": [
     {
       "id": "ARPL-ASM-0005",
-      "revision": 1,
+      "revision": 2,
       "title": "Assembly naming and identical panels",
       "environment": {
         "revit_version": "2024.3",
@@ -254,10 +269,12 @@
         "2024"
       ],
       "failure_patterns": [
-        "FP05"
+        "FP05",
+        "FP15",
+        "FP16"
       ],
       "status": "candidate",
-      "rule": "Name assemblies after commit; document identical assemblies once with a quantity ('build 2').",
+      "rule": "Name assemblies after commit; document identical assemblies once with a quantity ('build 2'). Identical panels may share one assembly type only while their geometry stays identical. When they diverge (raked end walls are mirror images, not copies), give each its own type before editing members: changing the members of one instance of a shared type opens a modal Revit dialog no script can answer and copies the change to the other instances (FP15). An assembly made with AssemblyInstance.Create gets a frame along the project axes; set it with SetTransform (BasisX along the wall, BasisY to the interior) before creating its views (FP16).",
       "validation": [
         "Assembly type names and member counts read back"
       ],
@@ -614,7 +631,7 @@
     },
     {
       "id": "ARPL-DOC-0001",
-      "revision": 1,
+      "revision": 2,
       "title": "Shop drawings: invalid references and swapped elevations",
       "environment": {
         "revit_version": "2024.3",
@@ -658,10 +675,11 @@
       "failure_patterns": [
         "FP08",
         "FP02",
-        "FP11"
+        "FP11",
+        "FP16"
       ],
       "status": "candidate",
-      "rule": "Isolate risky annotation in its own transaction and verify every sheet visually.",
+      "rule": "Isolate risky annotation in its own transaction and verify every sheet visually. Regenerate the shop drawing whenever the assembly members are replaced: dimensions reference member faces and are deleted with them. DirectShape faces take dimension references like family geometry. Sloped faces cannot be dimensioned in an elevation chain; state the heights at both ends in a note on the view. Check the assembly frame first (FP16).",
       "validation": [
         "PDF export rendered and reviewed per sheet"
       ],
@@ -1012,7 +1030,7 @@
     },
     {
       "id": "ARPL-GEO-0002",
-      "revision": 1,
+      "revision": 2,
       "title": "Gable walls without wall attachment",
       "environment": {
         "revit_version": "2024.3",
@@ -1053,7 +1071,7 @@
         "FP10"
       ],
       "status": "candidate",
-      "rule": "Use profile walls for gables and register them as dependents of the roof and the levels.",
+      "rule": "Use profile walls for gables and register them as dependents of the roof and the levels. Revit 2024 API: an existing wall's profile can be edited: Wall.CreateProfileSketch() in its own transaction, then SketchEditScope.Start(sketch.Id), replace the curves with NewModelCurve on sketch.SketchPlane, and commit the scope with a failures preprocessor. (Footprint roof sketches cannot be edited this way.) Walls under a sloped roof take a profile that follows the rafter line, minus the ceiling drywall so the ceiling board runs over the wall top.",
       "validation": [
         "Section view check"
       ],

@@ -1,6 +1,6 @@
 {
   "lesson": "Revit detects identical assemblies and gives them one type.",
-  "rule": "Name assemblies after commit; document identical assemblies once with a quantity ('build 2').",
+  "rule": "Name assemblies after commit; document identical assemblies once with a quantity ('build 2'). Identical panels may share one assembly type only while their geometry stays identical. When they diverge (raked end walls are mirror images, not copies), give each its own type before editing members: changing the members of one instance of a shared type opens a modal Revit dialog no script can answer and copies the change to the other instances (FP15). An assembly made with AssemblyInstance.Create gets a frame along the project axes; set it with SetTransform (BasisX along the wall, BasisY to the interior) before creating its views (FP16).",
   "validation": [
     "Assembly type names and member counts read back"
   ]

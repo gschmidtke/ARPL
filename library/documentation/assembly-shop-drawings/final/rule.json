@@ -1,6 +1,6 @@
 {
   "lesson": "Per-element transactions contain failures; implicit state (assembly transforms) can't be trusted.",
-  "rule": "Isolate risky annotation in its own transaction and verify every sheet visually.",
+  "rule": "Isolate risky annotation in its own transaction and verify every sheet visually. Regenerate the shop drawing whenever the assembly members are replaced: dimensions reference member faces and are deleted with them. DirectShape faces take dimension references like family geometry. Sloped faces cannot be dimensioned in an elevation chain; state the heights at both ends in a note on the view. Check the assembly frame first (FP16).",
   "validation": [
     "PDF export rendered and reviewed per sheet"
   ]

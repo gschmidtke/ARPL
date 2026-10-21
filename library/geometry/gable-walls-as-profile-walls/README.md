@@ -1,4 +1,4 @@
-# ARPL-GEO-0002 rev 1: Gable walls without wall attachment
+# ARPL-GEO-0002 rev 2: Gable walls without wall attachment
 
 _Generated from this pack's files by tools/build_catalogs.py. Edit manifest.json, intent.md, vNN/ or final/rule.json instead._
 
@@ -30,7 +30,7 @@ _Generated from this pack's files by tools/build_catalogs.py. Edit manifest.json
 Profile walls replace attachment in the 2024 API, but they no longer follow levels (see W5-001).
 
 ## Rule
-Use profile walls for gables and register them as dependents of the roof and the levels.
+Use profile walls for gables and register them as dependents of the roof and the levels. Revit 2024 API: an existing wall's profile can be edited: Wall.CreateProfileSketch() in its own transaction, then SketchEditScope.Start(sketch.Id), replace the curves with NewModelCurve on sketch.SketchPlane, and commit the scope with a failures preprocessor. (Footprint roof sketches cannot be edited this way.) Walls under a sloped roof take a profile that follows the rafter line, minus the ceiling drywall so the ceiling board runs over the wall top.
 
 ## Validation
 - Section view check
