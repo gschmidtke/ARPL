@@ -1,6 +1,6 @@
 {
   "id": "ARPL-ASM-0006",
-  "revision": 8,
+  "revision": 9,
   "title": "Sloped roof assembly from component families",
   "use_when": [
     "framing and finishing a sloped (shed, mono-pitch) roof as an assembly of lumber, sheet and board families",
@@ -131,6 +131,14 @@
       "contributors": [
         "Gottfried Schmidtke with Claude"
       ]
+    },
+    {
+      "revision": 9,
+      "date": "2026-10-21",
+      "change": "Check made portable: assembly filter optional, piece kind falls back to Category: Family Type; inputs, model assumptions and not_for documented",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ]
     }
   ],
   "validation_checks": [
@@ -139,7 +147,6 @@
       "runs_in": "RevitBridge run_csharp, transaction none",
       "mode": "read-only",
       "returns": "{check, pass, assemblies, unexpected, allowed}",
-      "edit_before_use": "ASSEMBLY_PREFIXES and ALLOW (intended contacts)",
       "test_runs": [
         {
           "date": "2026-10-20",
@@ -151,7 +158,28 @@
             "Batt R-19 x Outlooker": 12
           },
           "seconds": 1.0
+        },
+        {
+          "date": "2026-10-21",
+          "model": "ADU-01, ASSEMBLY_PREFIXES empty (all assemblies)",
+          "revit_version": "2024.3",
+          "result": "pass",
+          "seconds": 0.8,
+          "note": "after parameterization: kind falls back to Category: Family Type"
         }
+      ],
+      "inputs": {
+        "ASSEMBLY_PREFIXES": "assembly type name prefixes, empty = all assemblies",
+        "ALLOW": "intended contacts, 'Kind A x Kind B'"
+      },
+      "model_assumptions": [
+        "The pieces to check are members of assemblies",
+        "Piece kind comes from Comments when filled (ARPL build scripts), otherwise from Category: Family Type",
+        "Solid geometry exists for every piece (DirectShapes and family instances); linked models are not checked"
+      ],
+      "not_for": [
+        "Clash checks between linked models (use Navisworks or a link-aware check)",
+        "Proving structural adequacy: a clash-free model can still be wrong"
       ]
     }
   ]

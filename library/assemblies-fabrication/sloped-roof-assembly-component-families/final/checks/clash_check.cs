@@ -1,13 +1,18 @@
 // ARPL-ASM-0006 validation check: clash check across assemblies. READ-ONLY (no transaction, no writes).
 // Run with RevitBridge run_csharp, transaction "none". Show this script to the user before running it.
-// Edit ASSEMBLY_PREFIXES and ALLOW for your model. ALLOW lists intended contacts as "Comments A x Comments B" (order-free).
-// Members are identified by their Comments value (the piece kind), as written by the ARPL build scripts.
+// INPUTS (edit for your model):
+//   ASSEMBLY_PREFIXES: assembly type names to include; empty = every assembly in the model.
+//   ALLOW: intended contacts as "Kind A x Kind B" (order-free).
+// Piece kind = the Comments value when present (ARPL build scripts write it), otherwise "Category: Family Type".
+// So the check also runs on models not built with ARPL scripts; write ALLOW in the kinds it reports.
+// Tip: run once with an empty ALLOW, read "unexpected", and move only the contacts that are intended by design into ALLOW.
 string[] ASSEMBLY_PREFIXES = { "ROOF", "EXT WALL" };
 var ALLOW = new HashSet<string> { "End rafter x Outlooker", "Batt R-19 x Outlooker" };
-string K(Element e) => e?.get_Parameter(BuiltInParameter.ALL_MODEL_INSTANCE_COMMENTS)?.AsString() ?? "";
+string K(Element e) { var c = e?.get_Parameter(BuiltInParameter.ALL_MODEL_INSTANCE_COMMENTS)?.AsString(); if (!string.IsNullOrWhiteSpace(c)) return c;
+  var t = e == null ? null : doc.GetElement(e.GetTypeId()) as ElementType; return (e?.Category?.Name ?? "?") + ": " + (t == null ? e?.Name : t.FamilyName + " " + t.Name); }
 string Pair(string a, string b) => string.CompareOrdinal(a, b) <= 0 ? a + " x " + b : b + " x " + a;
 var allow = new HashSet<string>(ALLOW.Select(p => { var s = p.Split(new[] { " x " }, StringSplitOptions.None); return Pair(s[0], s[1]); }));
-var asms = new FilteredElementCollector(doc).OfClass(typeof(AssemblyInstance)).Cast<AssemblyInstance>().Where(a => ASSEMBLY_PREFIXES.Any(p => a.Name.StartsWith(p))).ToList();
+var asms = new FilteredElementCollector(doc).OfClass(typeof(AssemblyInstance)).Cast<AssemblyInstance>().Where(a => ASSEMBLY_PREFIXES.Length == 0 || ASSEMBLY_PREFIXES.Any(p => a.Name.StartsWith(p))).ToList();
 var pool = asms.SelectMany(a => a.GetMemberIds()).ToList();
 var unexpected = new Dictionary<string, int>(); var allowed = new Dictionary<string, int>(); 
 var tol = 1 / 304.8; var sw = System.Diagnostics.Stopwatch.StartNew();

@@ -2,7 +2,7 @@
 
 20 October 2026 · Gottfried Schmidtke
 
-ARPL (AI Revit Production Logic) is a public, curated knowledge pool for AI agents working in Revit, live on GitHub since 20 October 2026. It holds 25 instruction packs, all recorded once by one contributor in Revit 2024. It's ready for its first outside users, but not yet proven by them.
+ARPL (AI Revit Production Logic) is a public, curated knowledge pool for AI agents working in Revit, live on GitHub since 20 October 2026. It holds 28 instruction packs, all recorded by one contributor in Revit 2024 and refined in production (the shed roof pack went through nine iterations and five owner corrections). None has yet been reproduced by anyone else. It's ready for its first outside users, but not yet proven by them.
 
 ## Where ARPL stands today
 
@@ -18,12 +18,13 @@ What the learning pool contains:
 
 | Item | Count |
 | --- | --- |
-| Instruction packs (levels 1–3) | 25, all status "candidate", revision 1 |
-| Project workflows (level 4) | 1: ADU exterior wall fabrication package |
-| Failure patterns | 13 (FP01–FP13) |
+| Instruction packs (levels 1–3) | 28, all status "candidate" (recorded once, not reproduced outside); revisions 1–9 |
+| Project workflows (level 4) | 2: ADU exterior wall fabrication package, ADU shed roof assembly |
+| Failure patterns | 16 (FP01–FP16) |
+| Executable validation checks | 1, read-only (ARPL-ASM-0006 clash check) |
 | Discipline overlays | 1 (electrical power connector) |
 | Controlled vocabularies | 17 workflows, 18 disciplines, 12 roles, 11 project types, 8 phases, 8 work classes |
-| Revit versions tested | 2024 only |
+| Revit versions tested | 2024 only; every pack is flagged unverified in the current release (2027) |
 | Contributors | 1 (Gottfried Schmidtke, with Claude) |
 
 What already works:
@@ -32,7 +33,8 @@ What already works:
 - **Curation.** An AI curator under the owner's supervision runs every morning (daily for two weeks, then a slower rhythm). It reviews submissions, files them, credits contributors and writes a report for the owner.
 - **Agent access.** `AGENTS.md`, `llms.txt` and one machine-readable `index.json` let any AI with web access find and apply packs. `tools/arpl_search.py` is a lookup tool that bridge authors can add.
 - **Evidence tracking.** Every pack has a status, a revision, the Revit versions it ran in and a changelog.
-- **External review.** Zara (ChatGPT) and Grok reviewed the repository; their fixes are in.
+- **External review.** Zara (ChatGPT), Grok and Mistral reviewed the repository; their fixes are in, including the usage report, staleness triggers, research lineage and the first executable check.
+- **Owner corrections on record.** Professional judgment stays with the owner and is recorded as named revisions, e.g. ARPL-ASM-0006 rev 4: "members that carry the deck are rotated to the slope", rev 6: "walls are built to fit the roof".
 
 ## Purpose
 

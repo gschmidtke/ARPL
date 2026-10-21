@@ -42,3 +42,7 @@ After each curation session the curator writes a short report to `ledger/reports
 ## What the curator does not decide
 
 Changes to the vocabularies, the schema, the licence, `verified` status, removing a contributor's credit, and anything about discipline adequacy (structural, code compliance). These go to the owner.
+
+## Usage-only reports
+
+Filed unchanged under `ledger/usage/` and counted in the daily report: packs used, verdicts, environments. They change no pack. A `passed` report from another person, model, Revit version or bridge, with the pack's checks run, is reproduction evidence: the curator adds it to the pack's `reproductions` and proposes the status change to the owner.

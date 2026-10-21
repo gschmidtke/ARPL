@@ -1,4 +1,4 @@
-# ARPL-ASM-0006 rev 8: Sloped roof assembly from component families
+# ARPL-ASM-0006 rev 9: Sloped roof assembly from component families
 
 _Generated from this pack's files by tools/build_catalogs.py. Edit manifest.json, intent.md, vNN/ or final/rule.json instead._
 

@@ -1,0 +1,32 @@
+{
+  "_how_to": "For tasks where you used ARPL packs and learned nothing new. Copy to inbox/<your-github-name>/usage-<date>.json and open a pull request. No client or project data.",
+  "report_type": "usage-only",
+  "date": "",
+  "contributor": {
+    "name": "",
+    "github": ""
+  },
+  "environment": {
+    "revit_version": "",
+    "bridge": "",
+    "agent": "model name, if known"
+  },
+  "task": "One sentence, in professional terms",
+  "packs": [
+    {
+      "arpl_pack": "",
+      "pack_revision": 0,
+      "verdict": "reused | adapted | rejected",
+      "result": "passed | failed",
+      "checks_run": "e.g. final/checks/clash_check.cs: pass",
+      "why": "If adapted or rejected: what did not fit, and what you did instead"
+    }
+  ],
+  "usage": {
+    "tool_calls": "",
+    "retries": "",
+    "tokens_in": "if known",
+    "tokens_out": "if known"
+  },
+  "notes": ""
+}

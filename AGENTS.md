@@ -44,7 +44,7 @@ If the evidence leaves the frame open (is this connector power, data or audio?),
   - `reproduced`: confirmed by another user, model or version;
   - `verified`: reproduced, validation passes, and reviewed by the owner or a discipline reviewer the owner has named.
   (Authoritative definitions: `vocabularies/vocabularies.json`.)
-- Check `review_due` in the index. If today is past it, nobody has confirmed the pack for a year: use it, but verify the result as if it were new, and say so.
+- Check `review_due` and `unverified_in_current_revit` in the index. Past `review_due`, nobody has confirmed the pack for a year; `unverified_in_current_revit` means it never ran in the latest Revit release, and API behaviour changes between releases. In either case use it, but verify the result as if it were new, and say so.
 - Some packs carry executable checks (`validation_checks`, files in `final/checks/`). They are read-only scripts reviewed by the curator. Show the script to the user and run it only with their consent, in a no-transaction mode. A check that returns `pass: false` means the rule was not met, whatever the model looks like.
 - Check `revit_versions_tested`. If your version isn't listed, the rule may still hold, but verify the result rather than assume.
 - Watch Revit while a command runs. Revit can open dialogs that a failures preprocessor cannot answer (assembly type questions, sync prompts, missing links). If a bridge call does not return in time, look at the screen before doing anything else, read the dialog and react: answer it if the user has already decided, otherwise show it to the user. Never send a second command into a blocked Revit (FP15).
@@ -61,6 +61,7 @@ Tell the user, and offer to draft a contribution, when any of these happened:
 | A pack's rule failed, or you found a better or simpler way | An improvement to that pack (name its id in `improves`) |
 | A pack worked in a new Revit version, discipline or project type | A reproduction report (raises its status to `reproduced`) |
 | You hit a failure pattern not yet listed | A new failure pattern |
+| A pack simply worked (or did not fit) and nothing new was learned | A usage-only report ([template](templates/usage-report.template.json)): which packs, reused / adapted / rejected, environment, tool calls and retries. It changes no pack, but routine use is the evidence ARPL needs most, and a pass in a new environment can count toward `reproduced` |
 
 Say it plainly, for example: "ARPL had no workflow for this. The method we found worked after two attempts. Shall I prepare it for the ARPL inbox so other users don't have to learn it again?"
 
