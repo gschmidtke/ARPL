@@ -1,0 +1,4 @@
+{
+  "version": "v03",
+  "instruction": "Same, with the delete loop inside a Transaction and the sync with relinquish after it"
+}

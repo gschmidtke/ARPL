@@ -9,6 +9,7 @@ Entry for engineers and designers. 'generic' packs apply to every discipline.
 | Pack | Level | Work class | Status |
 |---|---|---|---|
 | [ARPL-ADM-0001](../library/model-administration/exception-in-open-transaction-crashes-revit/) An exception inside an open Transaction crashed Revit | 1 | W5 | candidate |
+| [ARPL-ADM-0002](../library/model-administration/reset-workshared-cloud-model-links-worksets/) Reset a workshared cloud model: remove all Revit links and delete user worksets with all worksets closed | 2 | W5 | candidate |
 | [ARPL-DOC-0002](../library/documentation/dimension-style-in-trade-units/) Project units round framing dimensions | 1 | W6 | candidate |
 | [ARPL-FAM-0001](../library/family-authoring/equipment-from-spec-sheet-overall-dimensions/) Coffee brewer from a spec sheet: overall height short | 2 | W1 | candidate |
 | [ARPL-FAM-0002](../library/family-authoring/orientation-from-multiple-source-views/) Faucet on the wrong side: mirrored source view | 2 | W1 | candidate |

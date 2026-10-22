@@ -9,6 +9,7 @@ Entry by building type. Project-level workflows are listed in project-workflows/
 | Pack | Level | Work class | Status |
 |---|---|---|---|
 | [ARPL-ADM-0001](../library/model-administration/exception-in-open-transaction-crashes-revit/) An exception inside an open Transaction crashed Revit | 1 | W5 | candidate |
+| [ARPL-ADM-0002](../library/model-administration/reset-workshared-cloud-model-links-worksets/) Reset a workshared cloud model: remove all Revit links and delete user worksets with all worksets closed | 2 | W5 | candidate |
 | [ARPL-ASM-0004](../library/assemblies-fabrication/framing-members-disallow-auto-joins/) Vertical studs pulled by auto-joins | 1 | W3 | candidate |
 | [ARPL-ASM-0005](../library/assemblies-fabrication/assembly-naming-and-identical-panels/) Assembly naming and identical panels | 1 | W3 | candidate |
 | [ARPL-ASM-0006](../library/assemblies-fabrication/sloped-roof-assembly-component-families/) Sloped roof assembly from component families | 2 | W3 | candidate |

@@ -1,0 +1,4 @@
+{
+  "version": "v01",
+  "instruction": "Open each model with default worksets, delete links, then WorksetTable.DeleteWorkset directly (no checkout, no transaction)"
+}

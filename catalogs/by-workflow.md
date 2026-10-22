@@ -126,6 +126,7 @@ Primary entry for Revit users and developers: what area of Revit the work touche
 | Pack | Level | Work class | Status |
 |---|---|---|---|
 | [ARPL-ADM-0001](../library/model-administration/exception-in-open-transaction-crashes-revit/) An exception inside an open Transaction crashed Revit | 1 | W5 | candidate |
+| [ARPL-ADM-0002](../library/model-administration/reset-workshared-cloud-model-links-worksets/) Reset a workshared cloud model: remove all Revit links and delete user worksets with all worksets closed | 2 | W5 | candidate |
 | [ARPL-FAM-0004](../library/family-authoring/annotation-family-version-and-reload/) Annotation family from a newer Revit version | 2 | W1 | candidate |
 
 ## model-change: Propagating a changed fundamental through dependents

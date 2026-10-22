@@ -9,6 +9,7 @@ Only versions in which the pack actually ran.
 | Pack | Level | Work class | Status |
 |---|---|---|---|
 | [ARPL-ADM-0001](../library/model-administration/exception-in-open-transaction-crashes-revit/) An exception inside an open Transaction crashed Revit | 1 | W5 | candidate |
+| [ARPL-ADM-0002](../library/model-administration/reset-workshared-cloud-model-links-worksets/) Reset a workshared cloud model: remove all Revit links and delete user worksets with all worksets closed | 2 | W5 | candidate |
 | [ARPL-ASM-0001](../library/assemblies-fabrication/sheathing-layout-minimum-remnant-at-openings/) Plywood slivers at openings | 2 | W3 | candidate |
 | [ARPL-ASM-0002](../library/assemblies-fabrication/opening-framing-header-fit-under-plates/) Door too tall for a header | 2 | W3 | candidate |
 | [ARPL-ASM-0003](../library/assemblies-fabrication/wall-panels-families-not-parts/) Revit Parts for wall layers: a dead end | 2 | W3 | candidate |

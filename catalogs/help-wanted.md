@@ -9,6 +9,7 @@ ARPL becomes trustworthy when packs are reproduced by other people, in other mod
 | Pack | Tested in | Status |
 |---|---|---|
 | [ARPL-ADM-0001](../library/model-administration/exception-in-open-transaction-crashes-revit/) An exception inside an open Transaction crashed Revit | Revit 2024 | candidate |
+| [ARPL-ADM-0002](../library/model-administration/reset-workshared-cloud-model-links-worksets/) Reset a workshared cloud model: remove all Revit links and delete user worksets with all worksets closed | Revit 2024 | candidate |
 | [ARPL-ASM-0001](../library/assemblies-fabrication/sheathing-layout-minimum-remnant-at-openings/) Plywood slivers at openings | Revit 2024 | candidate |
 | [ARPL-ASM-0002](../library/assemblies-fabrication/opening-framing-header-fit-under-plates/) Door too tall for a header | Revit 2024 | candidate |
 | [ARPL-ASM-0003](../library/assemblies-fabrication/wall-panels-families-not-parts/) Revit Parts for wall layers: a dead end | Revit 2024 | candidate |

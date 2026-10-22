@@ -1,0 +1,5 @@
+{
+  "result": "CanDeleteWorkset now true; DeleteWorkset threw",
+  "problem": "'Modification of the document is forbidden ... no open transaction': deleting a workset is a document modification and needs a Transaction even though checkout does not.",
+  "found_by": "exception message"
+}

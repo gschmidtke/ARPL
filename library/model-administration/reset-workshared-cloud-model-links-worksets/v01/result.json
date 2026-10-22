@@ -1,0 +1,5 @@
+{
+  "result": "Links removed; every workset deletion refused",
+  "problem": "CanDeleteWorkset returned false: the worksets were not owned by the current user. Opening all worksets also made each open slower.",
+  "found_by": "return values of CanDeleteWorkset"
+}

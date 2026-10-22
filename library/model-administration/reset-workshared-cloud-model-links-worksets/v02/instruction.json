@@ -1,0 +1,4 @@
+{
+  "version": "v02",
+  "instruction": "Open with all worksets closed (owner's instruction); CheckoutWorksets on the worksets plus Workset1; DeleteWorkset outside a transaction"
+}

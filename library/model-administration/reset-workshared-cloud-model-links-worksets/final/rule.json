@@ -1,0 +1,69 @@
+{
+  "id": "ARPL-ADM-0002",
+  "revision": 1,
+  "title": "Reset a workshared cloud model: remove all Revit links and delete user worksets with all worksets closed",
+  "use_when": [
+    "batch-clean several workshared cloud (ACC/BIM 360) models before a relinking run, a demo or a standards reset",
+    "delete user worksets and move their elements to Workset1 without opening the worksets",
+    "remove every RevitLinkType and RevitLinkInstance from a host model"
+  ],
+  "not_for": [
+    "detaching or archiving models (use DetachFromCentral instead)",
+    "non-workshared files",
+    "removing CAD imports or links (ImportInstance, CADLinkType)"
+  ],
+  "api_terms": [
+    "ModelPathUtils.ConvertCloudGUIDsToCloudPath",
+    "OpenOptions",
+    "WorksetConfiguration",
+    "WorksetConfigurationOption.CloseAllWorksets",
+    "RevitLinkType",
+    "RevitLinkInstance",
+    "WorksharingUtils.CheckoutWorksets",
+    "WorksetTable.CanDeleteWorkset",
+    "WorksetTable.DeleteWorkset",
+    "DeleteWorksetSettings",
+    "Document.SynchronizeWithCentral",
+    "RelinquishOptions"
+  ],
+  "level": 2,
+  "work_class": "W5",
+  "workflows": [
+    "model-administration"
+  ],
+  "disciplines": [
+    "generic"
+  ],
+  "project_types": [
+    "generic"
+  ],
+  "phases": [
+    "design-development",
+    "construction-documents"
+  ],
+  "revit_versions_tested": [
+    "2024"
+  ],
+  "failure_patterns": [
+    "FP15",
+    "FP19",
+    "FP24",
+    "FP25"
+  ],
+  "status": "candidate",
+  "environment": {
+    "revit_version": "2024.3",
+    "tool": "RevitBridge 0.4.0 (local Revit API bridge, MCP) with run_csharp",
+    "compiler": "Roslyn 4.8 (C# 12)",
+    "agent": "Claude (Anthropic)",
+    "model": "10 workshared ACC cloud test models (generic test project)"
+  },
+  "rule": "Per model, in one bridge call of at most 2-3 models (each cloud open+sync takes 15-25 s): 1) open by cloud GUIDs (ConvertCloudGUIDsToCloudPath) with WorksetConfiguration(CloseAllWorksets) and DoNotDetach; closed worksets are enough for both tasks and keep the open fast. 2) Delete all RevitLinkType and RevitLinkInstance ids in one Transaction with a failures preprocessor. 3) Collect user worksets; keep Workset1 and the shared levels/grids workset. Call WorksharingUtils.CheckoutWorksets on the worksets to delete plus Workset1 (works while they are closed); make Workset1 active. 4) In a Transaction, for each workset: DeleteWorksetSettings(MoveElementsToWorkset, Workset1), CanDeleteWorkset, then DeleteWorkset; collect failures per workset instead of aborting. 5) SynchronizeWithCentral with SaveLocalBefore and SaveLocalAfter true, RelinquishOptions(true) and a comment; skip the sync when nothing changed. 6) Close(false) in finally. Return per-model counts and timings. Check free disk space first: every cloud open fills the local collaboration cache.",
+  "validation": [
+    "Re-open check: RevitLinkType and RevitLinkInstance counts are 0",
+    "User worksets are exactly Workset1 plus the shared levels/grids workset",
+    "No elements or worksets remain borrowed after sync (relinquished)",
+    "Sync comment visible in the cloud model's version history"
+  ],
+  "validation_checks": []
+}

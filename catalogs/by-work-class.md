@@ -49,6 +49,7 @@ Work class = what drives the result; it decides the preview and the proof of 'do
 | Pack | Level | Work class | Status |
 |---|---|---|---|
 | [ARPL-ADM-0001](../library/model-administration/exception-in-open-transaction-crashes-revit/) An exception inside an open Transaction crashed Revit | 1 | W5 | candidate |
+| [ARPL-ADM-0002](../library/model-administration/reset-workshared-cloud-model-links-worksets/) Reset a workshared cloud model: remove all Revit links and delete user worksets with all worksets closed | 2 | W5 | candidate |
 | [ARPL-CHG-0001](../library/model-change/lower-a-level-and-propagate-dependents/) Lowering a level: what doesn't follow | 2 | W5 | candidate |
 | [ARPL-CHG-0002](../library/model-change/replace-footprint-roof-revit-2024/) Changing a footprint roof's outline by API in Revit 2024 | 2 | W5 | candidate |
 

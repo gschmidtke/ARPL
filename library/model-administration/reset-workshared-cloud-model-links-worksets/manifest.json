@@ -1,0 +1,76 @@
+{
+  "id": "ARPL-ADM-0002",
+  "revision": 1,
+  "title": "Reset a workshared cloud model: remove all Revit links and delete user worksets with all worksets closed",
+  "use_when": [
+    "batch-clean several workshared cloud (ACC/BIM 360) models before a relinking run, a demo or a standards reset",
+    "delete user worksets and move their elements to Workset1 without opening the worksets",
+    "remove every RevitLinkType and RevitLinkInstance from a host model"
+  ],
+  "not_for": [
+    "detaching or archiving models (use DetachFromCentral instead)",
+    "non-workshared files",
+    "removing CAD imports or links (ImportInstance, CADLinkType)"
+  ],
+  "api_terms": [
+    "ModelPathUtils.ConvertCloudGUIDsToCloudPath",
+    "OpenOptions",
+    "WorksetConfiguration",
+    "WorksetConfigurationOption.CloseAllWorksets",
+    "RevitLinkType",
+    "RevitLinkInstance",
+    "WorksharingUtils.CheckoutWorksets",
+    "WorksetTable.CanDeleteWorkset",
+    "WorksetTable.DeleteWorkset",
+    "DeleteWorksetSettings",
+    "Document.SynchronizeWithCentral",
+    "RelinquishOptions"
+  ],
+  "level": 2,
+  "work_class": "W5",
+  "workflows": [
+    "model-administration"
+  ],
+  "disciplines": [
+    "generic"
+  ],
+  "roles": [
+    "bim-manager",
+    "bim-specialist"
+  ],
+  "project_types": [
+    "generic"
+  ],
+  "phases": [
+    "design-development",
+    "construction-documents"
+  ],
+  "revit_versions_tested": [
+    "2024"
+  ],
+  "environment": {
+    "revit_version": "2024.3",
+    "tool": "RevitBridge 0.4.0 (local Revit API bridge, MCP) with run_csharp",
+    "compiler": "Roslyn 4.8 (C# 12)",
+    "agent": "Claude (Anthropic)",
+    "model": "10 workshared ACC cloud test models (generic test project)"
+  },
+  "failure_patterns": [
+    "FP15",
+    "FP19",
+    "FP24",
+    "FP25"
+  ],
+  "status": "candidate",
+  "contributors": [
+    "Gottfried Schmidtke with Claude"
+  ],
+  "recorded": "2026-10-21",
+  "changelog": [
+    {
+      "revision": 1,
+      "date": "2026-10-21",
+      "change": "First recorded from a 10-model ACC cleanup before a relinking demo"
+    }
+  ]
+}

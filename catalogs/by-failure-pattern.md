@@ -120,6 +120,7 @@ Learn from what went wrong: each pack is listed under the failure patterns it re
 
 | Pack | Level | Work class | Status |
 |---|---|---|---|
+| [ARPL-ADM-0002](../library/model-administration/reset-workshared-cloud-model-links-worksets/) Reset a workshared cloud model: remove all Revit links and delete user worksets with all worksets closed | 2 | W5 | candidate |
 | [ARPL-ASM-0005](../library/assemblies-fabrication/assembly-naming-and-identical-panels/) Assembly naming and identical panels | 1 | W3 | candidate |
 | [ARPL-ASM-0006](../library/assemblies-fabrication/sloped-roof-assembly-component-families/) Sloped roof assembly from component families | 2 | W3 | candidate |
 
@@ -146,6 +147,7 @@ Learn from what went wrong: each pack is listed under the failure patterns it re
 
 | Pack | Level | Work class | Status |
 |---|---|---|---|
+| [ARPL-ADM-0002](../library/model-administration/reset-workshared-cloud-model-links-worksets/) Reset a workshared cloud model: remove all Revit links and delete user worksets with all worksets closed | 2 | W5 | candidate |
 | [ARPL-ASM-0008](../library/assemblies-fabrication/slab-on-grade-from-the-framing-layout/) Slab on grade from the framing layout (anchors, recess, stub-ups) | 2 | W3 | candidate |
 
 ## FP23: Viewport outline inflated by elements outside the crop
@@ -153,4 +155,16 @@ Learn from what went wrong: each pack is listed under the failure patterns it re
 | Pack | Level | Work class | Status |
 |---|---|---|---|
 | [ARPL-DOC-0001](../library/documentation/assembly-shop-drawings/) Shop drawings: invalid references and swapped elevations | 2 | W6 | candidate |
+
+## FP24: Local cloud cache exhausts the disk during a batch run
+
+| Pack | Level | Work class | Status |
+|---|---|---|---|
+| [ARPL-ADM-0002](../library/model-administration/reset-workshared-cloud-model-links-worksets/) Reset a workshared cloud model: remove all Revit links and delete user worksets with all worksets closed | 2 | W5 | candidate |
+
+## FP25: Dependency inferred from a message string
+
+| Pack | Level | Work class | Status |
+|---|---|---|---|
+| [ARPL-ADM-0002](../library/model-administration/reset-workshared-cloud-model-links-worksets/) Reset a workshared cloud model: remove all Revit links and delete user worksets with all worksets closed | 2 | W5 | candidate |
 

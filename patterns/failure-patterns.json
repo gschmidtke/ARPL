@@ -161,6 +161,24 @@
       "contributors": [
         "Gottfried Schmidtke with Claude"
       ]
+    },
+    {
+      "id": "FP24",
+      "name": "Local cloud cache exhausts the disk during a batch run",
+      "meaning": "Every cloud model opened or synced is copied into the local collaboration cache (CollaborationCache under %LOCALAPPDATA%\\Autodesk\\Revit\\<version>). A batch over many models can fill the drive mid-run; Revit then fails saves or syncs in ways that look like model or network errors. Defence: check free space before a batch (several GB per dozen models), and let the user clear the cache with Revit closed; never delete it from a running session.",
+      "found_by": "user noticed under 100 MB free after an aborted batch relinking run",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ]
+    },
+    {
+      "id": "FP25",
+      "name": "Dependency inferred from a message string",
+      "meaning": "A help text, dialog message or log line names features that need a credential, licence or service, and the agent repeats it as fact. Such strings are often older than the code. Defence: confirm a dependency from the behaviour (does the command run without it?) or from the code path, and name the source when reporting it.",
+      "found_by": "the tool's author corrected the claim; the code path confirmed one command, not several",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ]
     }
   ]
 }
