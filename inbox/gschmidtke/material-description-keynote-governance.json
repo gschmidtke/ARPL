@@ -1,0 +1,67 @@
+{
+  "_how_to": "ARPL inbox submission. Intended path: inbox/gschmidtke/material-description-keynote-governance.json. Curator may assign final id, facets and status.",
+  "title": "Governed Material Descriptions and Material Keynotes for Revit",
+  "contributor": {
+    "name": "Gottfried Schmidtke",
+    "github": "gschmidtke",
+    "credit_as": "Gottfried Schmidtke"
+  },
+  "license_confirmation": "I wrote this or have the right to share it, and I agree to publish it under CC BY 4.0 (text/JSON) and MIT (code).",
+  "context": {
+    "revit_version": "2024-2027",
+    "tool_or_bridge": "ZEN material CSV workflow; applicable to a Revit Bridge / ExternalEvent workflow",
+    "discipline": "Architecture / BIM governance",
+    "project_type": "",
+    "phase": "Model governance and construction documentation"
+  },
+  "intent": "Normalize Revit Material Description and Keynote data so an AI agent can improve incomplete material metadata without inventing unsupported technical information, while preserving deterministic Revit round-trip behavior and producing keynote values suitable for material tags and sheet legends.",
+  "use_when": [
+    "A Revit material schedule contains blank, incomplete or contradictory Description values.",
+    "Materials need Keynote values for material tags or sheet keynote legends.",
+    "Material data is exported to CSV, AI-reviewed and read back into Revit.",
+    "A Revit Bridge reads material properties, requests an AI proposal, previews the proposal and commits approved changes."
+  ],
+  "not_for": [
+    "Inventing manufacturer, product, grade, performance or specification properties that are not supported by the source data.",
+    "Replacing an approved office or project keynote database without explicit authorization.",
+    "Treating appearance assets as authoritative physical specifications.",
+    "Automatically describing analytical, phase, poche, default or other graphic/system materials as construction materials unless the user explicitly wants them documented."
+  ],
+  "api_terms": [
+    "Autodesk.Revit.DB.Material",
+    "Autodesk.Revit.DB.AppearanceAssetElement",
+    "Autodesk.Revit.DB.Visual.Asset",
+    "Autodesk.Revit.DB.Visual.AssetProperty",
+    "Autodesk.Revit.DB.BuiltInParameter.KEYNOTE_PARAM",
+    "Autodesk.Revit.DB.Parameter.Set",
+    "Autodesk.Revit.DB.Transaction",
+    "Autodesk.Revit.UI.ExternalEvent"
+  ],
+  "improves": "",
+  "iterations": [
+    {
+      "instruction": "Export Revit materials and use AI to fill missing or inconsistent material descriptions from Name, Class, existing Description and appearance data.",
+      "result": "AI produced normalized descriptions for physical materials and corrected several contradictions.",
+      "problem": "The first description grammar also carried dimensions from material names into Description, for example panel and tile sizes.",
+      "found_by": "Human review of the edited material schedule in Excel showed that dimensions made the Description less reusable and duplicated type/name information."
+    },
+    {
+      "instruction": "Refine the material Description standard.",
+      "result": "Description was redefined as a dimension-free human-readable identity: base material, product/form, finish/treatment, color, pattern/texture, and supported grade/performance terms.",
+      "problem": "Appearance data can contain plausible but non-authoritative product information, and existing descriptions can conflict with Name or appearance.",
+      "found_by": "Examples showed conflicting colors and finishes between material Name, Description and Appearance Asset."
+    },
+    {
+      "instruction": "Create logic for assigning Material Keynotes used by Revit tags and legends.",
+      "result": "Keynote was separated from Description: Description identifies the material variant; Keynote is the documentation identity. Existing keys remain authoritative. A new local suffix system may be generated only when the user explicitly requests creation of a new project keynote set.",
+      "problem": "The alphabetic suffix after a classification section is not inherently an official semantic code and must not be treated as one without an authoritative keynote table.",
+      "found_by": "Existing material schedules contained repeated section-based keys with local suffixes that did not expose a universal letter meaning."
+    }
+  ],
+  "final_rule": {
+    "lesson": "Separate the four identities of a Revit material: Name is the BIM identifier, Description is the human-readable material identity, Keynote is the documentation/tagging identity, and Appearance is the visual identity. AI may interpret incomplete evidence, but deterministic rules control what is written back to Revit.",
+    "rule": "1. PRESERVE THE ROUND-TRIP SCHEMA\nWhen editing an exported material CSV intended for Revit re-import, do not add, remove, rename or reorder columns. Do not rename materials. Only modify fields explicitly authorized by the workflow, normally Description and/or Keynote.\n\n2. CLASSIFY BEFORE ENRICHING\nFirst decide whether the row represents a physical/documented material or a Revit system/graphic/analytical placeholder. Do not invent construction descriptions or classification keynotes for system-only rows unless a separate internal namespace is explicitly requested.\n\n3. MATERIAL DESCRIPTION GRAMMAR\nGenerate Description from supported evidence in this order:\nBase Material -> Product/Form -> Finish/Treatment -> Color -> Pattern/Texture -> Grade/Performance.\nOmit any component that is not supported.\n\nDescription describes what the material is and how it is finished. It does not describe its instance size or type dimensions.\n\nHard exclusions from Description:\n- dimensions, thicknesses and sizes;\n- model/type numbers unless they are part of the actual product identity explicitly required by the user;\n- project codes;\n- keynote numbers;\n- unsupported manufacturer/product claims.\n\n4. EVIDENCE AUTHORITY\nUse Name and Class primarily for material identity.\nUse an existing Description as evidence, but test it for contradictions.\nUse explicit terms in Name as strong evidence.\nUse Appearance Asset and appearance properties for visual attributes such as color, gloss, texture and transparency.\nDo not promote an appearance texture or asset name into a physical/specification claim unless corroborated.\nUse Keynote only as a classification hint, not as proof of physical properties.\n\n5. CONFLICT HANDLING\nIf Name, Description, Class and Appearance conflict, do not silently merge contradictory claims. Prefer explicit material identity over purely visual appearance. Produce a proposal for review when the conflict could change specification meaning. A directly committed correction is acceptable only when the contradiction is unambiguous and the governing workflow allows it.\n\n6. KEYNOTE AUTHORITY\nIf an approved office/project keynote table exists:\n- preserve existing valid keynotes unless remapping is explicitly authorized;\n- select only keys that exist in that table;\n- never invent a new key because a classification number merely looks plausible;\n- if no reliable match exists, leave the field blank or request review.\n\nMatch priority:\na. exact approved material/library match;\nb. equivalent approved material family;\nc. approved keynote database/table match;\nd. approved specification/classification mapping;\ne. no match -> review/blank.\n\n7. GENERATING A NEW PROJECT KEYNOTE SET\nOnly generate new material keynotes when the user explicitly requests creation of a new project keynote system and no governing table must be preserved.\nUse:\n<approved classification section>.<local family letter><variant number>\n\nThe classification section is the authoritative classification anchor.\nThe suffix is local project/office syntax, not an official meaning supplied by the classification standard.\nThe family letter groups related materials within a section.\nThe number distinguishes documented material variants.\n\nFor material-tag and sheet-legend workflows, default to a unique suffix when two variants must appear as separate legend entries. Variants may share a key only when they are intentionally represented by the same legend/specification entry.\n\nA generated keynote is not complete until a matching keynote text-table entry exists and resolves correctly in Revit.\n\n8. AI OUTPUT\nAI should return a proposal, not perform an uncontrolled write. The proposal should identify the material, proposed Description, proposed Keynote when applicable, evidence used, and conflicts/uncertainty. These fields may be transient and do not need to be added to the Revit import CSV.\n\n9. COMMIT\nCSV workflow:\nRevit export -> AI proposal/normalization -> human or rule-based approval -> edit only authorized existing cells -> Revit import.\n\nBridge workflow:\nRead Material -> gather governed evidence -> AI proposal -> preview/dry run -> approved ExternalEvent -> Transaction -> set values -> regenerate/read back -> verify.\n\n10. FAIL SAFE\nWhen evidence is insufficient, omit the unsupported description component or leave the keynote blank. Missing data is preferable to plausible invented BIM data.",
+    "validation": "Validate at both data and Revit levels.\n\nCSV validation:\n- row count unchanged;\n- column count, names and order unchanged;\n- material Name unchanged;\n- every non-authorized cell byte/value-equivalent to the source;\n- Description contains no copied dimensions/sizes;\n- no unsupported physical claim was introduced;\n- existing approved Keynotes remain unchanged unless remapping was authorized.\n\nKeynote validation:\n- every selected approved key exists in the governing keynote table; or, for a newly authorized project keynote set, every generated key has a corresponding text-table entry;\n- no single key resolves to conflicting legend text;\n- distinct material variants receive distinct keys when the intended sheet legend requires separate entries;\n- suffix semantics are documented as local, not represented as official classification semantics.\n\nRevit validation:\n- commit occurs inside the required Revit API transaction path;\n- read back Description and Keynote after commit;\n- confirm the material tag reports the expected keynote;\n- place or refresh a keynote legend and confirm key and text resolve as intended;\n- if read-back or legend resolution differs from the proposal, roll back or flag the material for review."
+  },
+  "notes": "Originated from a real ZEN material-governance exercise using an architectural sample material schedule. The project/source identity is intentionally omitted. The key learning was that AI should enrich governed metadata, not free-write it: Description and Keynote serve different documentation purposes, appearance is not specification authority, dimensions should stay out of Description, and a keynote suffix is local unless an authoritative keynote source defines it."
+}
