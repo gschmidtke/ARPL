@@ -1,0 +1,42 @@
+{
+  "title": "DesConOps relevance to ARPL",
+  "source": "LuhTech Holdings, DesConOps white paper, October 2026",
+  "scope_guard": "ARPL remains focused on repeatable, validated AI-assisted workflows inside Revit. DesConOps may inform workflow logic but does not expand ARPL into a general AEC production standard.",
+  "relevant_principles": [
+    {
+      "desconops": "Keyed input -> published requirement -> authority gate -> provenance-bearing output",
+      "arpl_use": "Strengthen Revit workflow packs so each task declares intent, governing requirement, validation, approval authority and evidence of completion."
+    },
+    {
+      "desconops": "A change is complete only when it passes its gate with evidence",
+      "arpl_use": "Treat API success as insufficient. Require read-back or other deterministic proof that the intended Revit state was actually achieved."
+    },
+    {
+      "desconops": "Standardize the interface, not the tool",
+      "arpl_use": "Describe Revit workflow intent and expected state independently of whether execution uses C#, Dynamo, MCP, a bridge or another Revit interface."
+    },
+    {
+      "desconops": "Learn from completed production and feed lessons forward",
+      "arpl_use": "Continue converting Revit failures, corrections and validated outcomes into curator-managed rules for future agents."
+    }
+  ],
+  "possible_arpl_refinement": {
+    "acceptance_contract": [
+      "intent",
+      "expected_revit_state",
+      "constraints",
+      "validation_checks",
+      "evidence",
+      "approval_authority",
+      "pass_fail_review"
+    ]
+  },
+  "not_in_scope": [
+    "construction procurement",
+    "site execution",
+    "handover and operations",
+    "industry-wide IFC/ETIM/COBie governance",
+    "DesConOps production metrics as ARPL metrics"
+  ],
+  "conclusion": "DesConOps is useful to ARPL mainly as a validation and interface-governance reference. Its strongest contribution is reinforcing that a Revit action is not finished when it executes, but when the intended state is verified against a requirement with evidence."
+}
