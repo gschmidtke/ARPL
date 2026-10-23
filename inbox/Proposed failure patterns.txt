@@ -1,0 +1,150 @@
+{
+  "_how_to": "ARPL inbox submission. Intended path: inbox/gschmidtke/mcp-tracker-api-fault-patterns.json. Curator may assign final ids, facets and status. Proposed ids FP24-FP29 assume the TBC submission (FP16-FP23) merges first; renumber otherwise.",
+  "title": "Proposed failure patterns: AI-agent-specific Revit faults, mined from Revit MCP-server issue trackers",
+  "contributor": {
+    "name": "Gottfried Schmidtke",
+    "github": "gschmidtke",
+    "credit_as": "Gottfried Schmidtke"
+  },
+  "license_confirmation": "I have the right to share this and agree to publish under CC BY 4.0 (text/JSON) and MIT (code). GitHub issue texts are user-generated content under GitHub's terms; every entry paraphrases and links its source issue rather than reproducing it. No code is copied from issue bodies or repositories.",
+  "context": {
+    "revit_version": "Sources cover Revit 2020-2027 through MCP bridges, 2024-2026 predominantly; every entry is candidate until reproduced in the target release",
+    "tool_or_bridge": "Agent access to Revit via MCP servers and bridges: mcp-servers-for-revit (mono-repo and archived revit-mcp), LuDattilo/revit-mcp-server, Demolinator/revit-mcp-server (pyRevit-based), oakplank/RevitMCP, plus upstream pyrevitlabs/pyRevit",
+    "discipline": "Cross-discipline: agent-bridge mechanics, not domain rules",
+    "project_type": "",
+    "phase": "AI agents driving Revit through MCP tool calls and generated-code execution"
+  },
+  "intent": "Teach AI agents the fault classes that appear only when a stateless agent drives Revit through a stateful bridge: tool surfaces that lie, parallel calls that silently merge, channels that blame valid requests, names corrupted in transit, code compiled inside an invisible host environment, and execution-context variables whose names are an unstated contract. TBC-mined patterns (FP16-FP23) cover what humans got wrong; these cover what breaks at the agent-to-Revit boundary, where the calls return HTTP 200 or cryptic errors that invite the agent to iterate on something that was never the problem.",
+  "use_when": [
+    "An agent drives Revit through an MCP server, pyRevit Routes, or any bridge over TCP/named pipes/stdio.",
+    "An agent framework issues tool calls in parallel, or fills optional arguments from the advertised schema.",
+    "An agent executes generated C#/Python inside Revit via a code-execution tool.",
+    "A workflow runs unattended, so nobody sees a wrong response, a skipped edit, or an untranslated name in time."
+  ],
+  "not_for": [
+    "Bridge implementation bugs: issues root-caused as packaging, installer or dead-code faults were extracted and deliberately excluded (see notes).",
+    "Security hardening of bridges (e.g. unauthenticated listeners): real faults, but they belong to a different ARPL facet than API failure patterns."
+  ],
+  "provenance": {
+    "source": "Issue trackers and discussion threads of five Revit MCP-server repositories (60 issues triaged, 21 read in full with comment threads) plus one upstream pyRevit issue. Repos: mcp-servers-for-revit/mcp-servers-for-revit, mcp-servers-for-revit/revit-mcp (archived Feb 2026), LuDattilo/revit-mcp-server, Demolinator/revit-mcp-server, oakplank/RevitMCP, pyrevitlabs/pyRevit.",
+    "method": "Hypothesis-driven triage: six fault-class hypotheses were stated first (session lifetime, transaction state across calls, timeouts and partial writes, hallucinated API members, serialization across the boundary, tool-contract desync), then every issue was read against them and given a verdict: agent fault (kept), bridge bug (dropped), or user/install error (dropped). Issue texts are paraphrased; each entry links its source issue.",
+    "status": "All entries are candidate (ARPL vocabulary). found_by is 'mined from Revit MCP-server issue trackers' for every entry. Unlike the TBC entries, most of these have live, runnable stacks, so candidate-to-reproduced promotion is cheap: the fault classes were reported on 2020-2026 Revit with named bridge versions."
+  },
+  "proposed_failure_patterns": [
+    {
+      "proposed_id": "FP24",
+      "name": "Advertised tool contract desync",
+      "meaning": "The bridge's advertised contract and its actual behaviour disagree, in two documented faces. (a) Registry desync: tools/list advertises tools the Revit side never registered. Agents call them and get 'Method not found' while every genuinely registered tool works; root-caused in the archived revit-mcp as implemented C# commands missing from the plugin's command manifest, so they were implemented but undiscoverable. An agent in this state burned multiple turns rotating through ai_element_filter, get_current_view_elements, send_code_to_revit and get_available_family_types, all listed, all 'not found', on two machines and two Revit versions. (b) Schema desync: a tool's JSON schema advertises null as the default for optional arguments, but the validator rejects null when a client actually sends it. Agent frameworks that fill every optional field from the schema get validation errors on tools that would have run had the field been omitted.",
+      "defence": "Treat tools/list and tool schemas as unverified advertisement, not ground truth. On 'Method not found' or an argument-validation error on an advertised tool, do not rewrite the request: probe a known-good cheap tool to separate channel faults from contract faults, then degrade to the tools that verifiably respond, and report the desync instead of iterating. When composing parallel plans, fill only arguments with real values and omit optionals rather than sending advertised defaults.",
+      "api_terms": ["tools/list", "tools/call", "JSON-RPC", "command registry", "tool input schema"],
+      "revit_versions": "Revit 2020-2026; client- and bridge-agnostic (reported on Claude Desktop and direct JSON-RPC)",
+      "sources": [
+        "https://github.com/mcp-servers-for-revit/revit-mcp/issues/30",
+        "https://github.com/mcp-servers-for-revit/revit-mcp/issues/28",
+        "https://github.com/mcp-servers-for-revit/revit-mcp/issues/21",
+        "https://github.com/Demolinator/revit-mcp-server/issues/24"
+      ],
+      "maps_to": null,
+      "status": "candidate",
+      "found_by": "mined from Revit MCP-server issue trackers"
+    },
+    {
+      "proposed_id": "FP25",
+      "name": "Parallel tool calls share one handler (false success, wrong data)",
+      "meaning": "Bridges built on a single module-level request handler / ExternalEvent cannot serve concurrent requests. When an MCP client (which issues tool calls in parallel by default) sends overlapping API-context calls, only some handlers execute, and every waiting caller receives the same response, all with HTTP 200. Model edits are skipped while their callers are told they succeeded, and follow-up requests are answered with the previous request's response until the server idles. No exception, no log entry: in the documented repro, six concurrent calls each received one handler's answer, only two of six handlers ran, and four model edits were skipped while reported as successful. Root-caused upstream in pyRevit Routes (one shared handler per request thread), fixed upstream, but the agent-facing fault class generalises to any single-threaded host bridge.",
+      "defence": "Never issue concurrent API-context tool calls; serialise all tool traffic to one Revit session. Treat HTTP 200 as unproven: after any write, read back the changed state before declaring success. If a bridge is known to serialise internally, still verify writes, because residual races remain (two server processes on one Revit, or a client-side timeout while the call still executes inside Revit, which re-applies on retry).",
+      "api_terms": ["ExternalEvent", "IExternalEventHandler", "pyRevit Routes", "Transaction"],
+      "revit_versions": "pyRevit 6.x/7.0 era; generalises to any bridge that funnels requests through one handler on a single-threaded host",
+      "sources": [
+        "https://github.com/Demolinator/revit-mcp-server/issues/23",
+        "https://github.com/pyrevitlabs/pyRevit/issues/3752"
+      ],
+      "maps_to": "FP18 (family: silent success that is not success)",
+      "status": "candidate",
+      "found_by": "mined from Revit MCP-server issue trackers"
+    },
+    {
+      "proposed_id": "FP26",
+      "name": "Bridge rejects or drops a valid request (channel faults that blame the caller)",
+      "meaning": "Transport- and protocol-level faults surface as errors that accuse the agent's request. A well-formed JSON-RPC body is answered with 'Invalid JSON' (-32700) because the plugin's embedded HTTP server omits the HTTP status line, so the response parses as HTTP/0.9. Node.js resolves 'localhost' to IPv6 ::1 while the Revit plugin listens on IPv4 only, so every tool call fails with ECONNREFUSED although the server is up and the requests are perfect. The agent's natural response — rewriting the payload, alternating encodings, retrying with variations — cannot succeed, and the transcript shows the agent unable to distinguish its own malformed request from a broken channel.",
+      "defence": "On a transport or parse error, verify the channel before touching the payload: connect by explicit 127.0.0.1 rather than localhost, probe the port, call a known-good healthcheck tool. Never 'fix' a request that was well-formed; distinguish 'request invalid' from 'channel broken' before any retry; cap the retry loop and escalate rather than mutate.",
+      "api_terms": ["JSON-RPC", "MCP transport (stdio/HTTP)", "TCP listener", "localhost resolution"],
+      "revit_versions": "reported on Revit 2024-2025, Windows 10/11, Node 17+; the IPv6/IPv4 and HTTP/0.9 mechanisms are version-independent",
+      "sources": [
+        "https://github.com/LuDattilo/revit-mcp-server/issues/7",
+        "https://github.com/mcp-servers-for-revit/mcp-servers-for-revit/issues/29"
+      ],
+      "maps_to": null,
+      "status": "candidate",
+      "found_by": "mined from Revit MCP-server issue trackers"
+    },
+    {
+      "proposed_id": "FP27",
+      "name": "Name mangling across the serialization boundary",
+      "meaning": "Non-ASCII element names (Cyrillic, CJK, Arabic, umlauts, accents) are replaced with '?' by ASCII-fallback normalization on the bridge side. Listing tools return names like '????? 1'; the agent then sends the mangled name back into any lookup-by-name tool, and the lookup fails. The agent reads this as 'element not found' and iterates on the lookup, when the element exists and its name was destroyed in transit. Documented on a pyRevit/IronPython bridge where str vs unicode matters, with an independent fix in a community fork confirming the fault recurs across implementations. This is the string face of the class FP16 covers for numbers: values corrupted crossing the bridge boundary, invisibly, with the round-trip as the trap.",
+      "defence": "Prefer ElementId over names as the round-trip key across any bridge. On first listing, test name integrity: fetch a name, query by it, and treat clusters of '?' or mojibake as a corruption signal, not as data. When a lookup fails for a name just returned by a listing tool, suspect boundary corruption before concluding the element is absent.",
+      "api_terms": ["ElementId", "FilteredElementCollector", "element name lookup", "JSON serialization"],
+      "revit_versions": "pyRevit/IronPython 2.7 era bridges; the ASCII-fallback mechanism is bridge- and version-independent",
+      "sources": [
+        "https://github.com/Demolinator/revit-mcp-server/issues/4"
+      ],
+      "maps_to": "FP16 (sibling: boundary corrupts the value; FP16 corrupts numbers by unit convention, this corrupts strings by encoding)",
+      "status": "candidate",
+      "found_by": "mined from Revit MCP-server issue trackers"
+    },
+    {
+      "proposed_id": "FP28",
+      "name": "Generated code compiled inside the host inherits an invisible environment",
+      "meaning": "Agent-authored C# sent to a code-execution tool is compiled by the bridge inside Revit, against an environment the agent cannot see. Three documented failure faces, one class: (a) the compiler adds every assembly loaded in the AppDomain as a metadata reference, so a third-party add-in with protected DLLs makes compilation fail before the agent's code is even parsed; (b) the bridge ships Roslyn with newer dependencies than the Revit release bundles, throwing a type-initializer exception on one Revit version while the identical call succeeds on the adjacent version; (c) Revit 2026 moved to .NET 8, which removed CodeDom compilation, so the legacy CSharpCodeProvider path throws 'Operation is not supported on this platform' — on Revit 2022 the same code ran. In all three faces the agent's code was correct, the compilation environment failed, and the transcripts show agents iterating on their own code, then falling back to manual instructions.",
+      "defence": "After a compile failure of generated code, first compile a minimal known-good template. If the template fails, the environment is at fault: stop, report an environmental failure, and do not rewrite working code. Pin the compile target to the host's runtime (.NET Framework 4.8 vs .NET 8), expect platform shifts between Revit releases, and treat 'works on one release, fails on the neighbour' as an environment signature.",
+      "api_terms": ["Roslyn", "Microsoft.CodeAnalysis", "CSharpCodeProvider", "CodeDom", "AppDomain assemblies"],
+      "revit_versions": "Revit 2021-2026; the .NET Framework 4.8 to .NET 8 shift lands in 2026",
+      "sources": [
+        "https://github.com/mcp-servers-for-revit/mcp-servers-for-revit/issues/59",
+        "https://github.com/mcp-servers-for-revit/mcp-servers-for-revit/issues/57",
+        "https://github.com/mcp-servers-for-revit/revit-mcp/issues/32"
+      ],
+      "maps_to": null,
+      "status": "candidate",
+      "found_by": "mined from Revit MCP-server issue trackers"
+    },
+    {
+      "proposed_id": "FP29",
+      "name": "Assumed execution-context variables in generated code",
+      "meaning": "Code-execution bridges inject the Revit context through template variables whose names are an unstated contract. The archived revit-mcp template exposed only lowercase 'document', while agents write 'Document' or 'doc' following the Dynamo and macro conventions, and expect 'uidoc' for selection work. The agent's code fails to access the current document although the document is passed to the executor, and the failure reads to the agent as a Revit API problem, or as its own hallucination — the reporter's own framing was 'wondering if this is a hallucination or fact?'. The fix was bridge-side aliases, confirming the contract, not the API, was at fault. The agent's own stack-trace diagnosis confidently blamed the wrong layer.",
+      "defence": "Before writing real code against a code-execution tool, probe the execution contract: run a trivial template that returns the available context variables and their types. Never assume Dynamo or macro naming. On a 'variable not found' or 'cannot access document' error, print the available scope first and treat the template contract as the suspect, not the Revit API.",
+      "api_terms": ["ExternalCommandData", "UIDocument", "Document", "code execution template"],
+      "revit_versions": "documented on the archived revit-mcp bridge; the class applies to any generated-code tool with an injected scope",
+      "sources": [
+        "https://github.com/mcp-servers-for-revit/revit-mcp/issues/29"
+      ],
+      "maps_to": "FP28 (sibling: generated code fails on an invisible contract; FP28 is the compile environment, FP29 is the runtime scope)",
+      "status": "candidate",
+      "found_by": "mined from Revit MCP-server issue trackers"
+    }
+  ],
+  "evidence_for_existing_patterns": [
+    {
+      "pattern": "FP17 - Stale geometry read after modify",
+      "evidence": "A pyRevit-based bridge's own tracker documents that views do not repaint after tool calls (element creation, colour overrides in inactive views) until the user clicks or pans, so 'users think the tool didn't work'. The same stale-state trap hits agents that verify visually or by re-reading before a refresh.",
+      "sources": ["https://github.com/Demolinator/revit-mcp-server/issues/16"],
+      "defence_addition": "After any write through a bridge, force a refresh (RefreshActiveView / UpdateAllOpenViews where available) before any verification pass, in addition to regenerate-then-read."
+    },
+    {
+      "pattern": "FP18 - Uncommitted transaction rolls back silently / false success family",
+      "evidence": "Two additions: a feature request to wrap an entire multi-call AI task in one TransactionGroup so a whole agent run is undoable in a single step (the community independently re-deriving FP23's mechanism for agent workflows); and the concurrency issue above showing four model edits skipped while their callers received success — read-back verification is the only defence that catches both.",
+      "sources": [
+        "https://github.com/Demolinator/revit-mcp-server/issues/14",
+        "https://github.com/Demolinator/revit-mcp-server/issues/23"
+      ],
+      "defence_addition": "For agent workflows spanning multiple tool calls, request a TransactionGroup wrapper so the run is atomic and undoable as one unit; keep read-back verification after every batch regardless."
+    },
+    {
+      "pattern": "FP19 - API call outside valid Revit context",
+      "evidence": "A timeout is often the only symptom of a context failure: on one bridge, the TCP connection establishes but Revit never responds, and every command, including trivial ones, times out after 30 seconds. The agent gets no context error — just silence — and a write that timed out client-side may still execute inside Revit later.",
+      "sources": ["https://github.com/LuDattilo/revit-mcp-server/issues/3"],
+      "defence_addition": "Treat a timeout as 'state unknown', not 'call failed': never blindly re-issue an identical write (double-apply risk); check for a blocking dialog, a busy Revit, or a dead ExternalEvent first, and make write retries idempotent."
+    }
+  ],
+  "notes": "Proposed handling: the six proposed_failure_patterns continue patterns/failure-patterns.json after the TBC submission (FP24-FP29 if FP16-FP23 merge first; curator renumbers otherwise); the three evidence entries merge into FP17, FP18 and FP19. Extraction triage: 60 issues across five trackers were inventoried, 21 read in full with comment threads; every issue received a verdict. Kept: agent-fault classes (FP24-FP29) and evidence additions. Deliberately dropped as bridge bugs or install/ops faults, with verdicts, so the curator can see the filter was applied: duplicate dependency DLL packaging (mono-repo #47/#48), Windows Zone.Identifier DLL blocking and duplicate add-in ClientId (mono-repo #12), multi-install installer failure (LuDattilo #2), dead code in save_document (Demolinator #10), FastMCP decorator mismatch (oakplank #2), pyRevit routes config error (oakplank #3), unauthenticated listener binding (mono-repo #54 - security, recommended as its own future submission). Every entry is candidate: unlike the TBC batch, these have live stacks, so each can be reproduced against the named bridge and Revit version and promoted quickly. These entries complement both earlier submissions: the material-governance walls were identity and listing faults; the TBC patterns were context, unit, transaction and interaction faults humans documented; these six are boundary faults unique to agent-driven access: lying tool contracts, merged parallel calls, channels that blame valid requests, corrupted names, invisible compile environments, and unstated scope contracts. Issue texts are paraphrased and linked, never reproduced."
+}
