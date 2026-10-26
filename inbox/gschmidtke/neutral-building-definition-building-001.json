@@ -1,0 +1,253 @@
+{
+  "submission_type": "new_pack_and_workflow_proposal",
+  "recorded": "2026-10-26",
+  "contributors": [
+    "Gottfried Schmidtke with ChatGPT and Grok"
+  ],
+  "title": "Neutral building definition from incomplete design evidence",
+  "proposed_id": "ARPL-NBS-0001",
+  "proposed_work_class": {
+    "id": "W9",
+    "name": "Neutral Building Definition",
+    "driven_by": "source evidence + program + explicit assumptions",
+    "input_examples": [
+      "hand sketch",
+      "image",
+      "PDF",
+      "written description",
+      "survey",
+      "manufacturer information"
+    ],
+    "output": "software-neutral machine-readable building specification",
+    "preview_before_commit": "human-readable plan/topology/evidence summary",
+    "proof_of_done": [
+      "all binding evidence preserved",
+      "unknowns remain unknown",
+      "relationships are explicit",
+      "geometry is reconstructable",
+      "validation invariants pass"
+    ]
+  },
+  "intent": "Convert incomplete human design evidence into a software-neutral, reconstructable building definition before choosing Revit, Archicad, Rhino, IFC, Blender, or another target platform.",
+  "use_when": [
+    "a sketch, image, PDF or written description defines a building or building object incompletely",
+    "the user wants geometry and data that can later be rebuilt in any software",
+    "the target authoring platform has not yet been selected",
+    "the source contains a mixture of explicit dimensions, visible topology, proportional hints and unresolved marks"
+  ],
+  "not_for": [
+    "surveyed geometry where the survey itself is already the authoritative digital source",
+    "fully specified construction documents that already define all required geometry and reference faces",
+    "tasks where the user explicitly wants immediate host-native production only"
+  ],
+  "problem_observed": "A general AI tends to collapse building requests into geometry-only outputs such as STL, or silently invent missing dimensions when reconstructing from sketches. That loses BIM semantics, relationships, evidence provenance and unresolved uncertainty.",
+  "building_001_case": {
+    "source": "hand sketch with plan and perspective",
+    "binding_dimensions": {
+      "overall_width_mm": 14000,
+      "overall_depth_mm": 14000,
+      "upper_bar_depth_mm": 6000,
+      "projecting_wing_width_mm": 6000
+    },
+    "derived_geometry": {
+      "projecting_wing_depth_mm": 8000,
+      "reentrant_x_mm": 8000,
+      "gross_footprint_area_m2": 132.0
+    },
+    "space_program": [
+      "bedroom",
+      "bath",
+      "kitchen",
+      "bedroom",
+      "living"
+    ],
+    "important_corrections_from_v0_1_to_v0_2": [
+      "Do not name sketch axes as compass directions without a north arrow.",
+      "Treat the right-side 14.0 m as dimensioned, not inferred.",
+      "Derive x = 8000 and the 8 m projecting depth arithmetically from binding dimensions.",
+      "Quarantine visually estimated 4500 mm and 3000 mm partition dimensions as proportional hints; do not build from them.",
+      "Record openings by visible host/topology without inventing counts, widths, heights or exact positions.",
+      "Preserve unresolved sketch marks instead of forcing semantic interpretations.",
+      "Interpret the roof only to the topology supported by the perspective; leave pitch, heights and overhang depth unresolved."
+    ]
+  },
+  "source_evidence_model": {
+    "source_kinds": {
+      "dimensioned": "A figure written on the source. Binding.",
+      "derived": "Arithmetic from binding dimensions or geometry. Binding only to the extent the derivation does not add an unsupported assumption.",
+      "observed": "Presence, host, topology or relation is visible; measure is not binding.",
+      "proportional": "Visual estimate only. Non-binding. Do not build from it.",
+      "convention": "Chosen to establish a local reference frame, such as local origin/elevation zero; not surveyed.",
+      "unknown": "Not resolved. Must remain null."
+    },
+    "rule": "Evidence status and confidence are independent. Confidence does not promote an observed or proportional value into binding geometry."
+  },
+  "new_lesson": {
+    "statement": "Evidence truth and reconstruction/buildability are independent axes.",
+    "reason": "A geometric boundary may be dimensioned or derived yet still have unresolved solidity, opening conditions, wall thickness or semantic representation.",
+    "proposed_build_states": [
+      "build_exact",
+      "build_topology_only",
+      "build_with_unknowns",
+      "record_only",
+      "do_not_build"
+    ],
+    "example": {
+      "object": "shared boundary between the right bedroom and living area",
+      "source_kind": "derived",
+      "build_state": "build_topology_only",
+      "known": "boundary lies on y = 6000 over the 6 m projecting wing width",
+      "unknown": "whether it is a continuous solid partition or interrupted by a corner opening"
+    }
+  },
+  "reference_method": [
+    "Establish a local source coordinate frame without inventing compass orientation.",
+    "Classify each source statement or mark by evidence kind before turning it into model geometry.",
+    "Extract binding dimensions exactly as written.",
+    "Derive only arithmetic consequences that add no unsupported design assumption.",
+    "Create authoritative points, edges, polygons and levels from binding evidence.",
+    "Record semantic objects and topology separately from their geometric completeness.",
+    "Record relationships such as contains, bounds, hosts, connects, separates and supports.",
+    "Assign a reconstruction/build state independently from source evidence status.",
+    "Preserve unknown values as null; never silently invent them to complete the model.",
+    "Store proportional readings separately as non-binding hints.",
+    "Generate validation invariants that another AI/software implementation must satisfy.",
+    "Only after the neutral model is stable, choose a target adapter such as Revit, Archicad, Rhino, IFC or Blender."
+  ],
+  "neutral_package_minimum": {
+    "geometry": [
+      "coordinate frame",
+      "points",
+      "edges",
+      "polygons",
+      "levels"
+    ],
+    "semantics": [
+      "object identity",
+      "space/program identity",
+      "building-element type when supported by evidence"
+    ],
+    "relationships": [
+      "contained_in",
+      "bounds",
+      "hosts",
+      "connects",
+      "separates",
+      "supports"
+    ],
+    "evidence": [
+      "source_kind",
+      "source reference",
+      "confidence"
+    ],
+    "reconstruction_policy": [
+      "build_state",
+      "unknowns",
+      "proportional hints",
+      "do-not-invent rules"
+    ],
+    "validation": [
+      "binding dimension preservation",
+      "topology preservation",
+      "semantic identity",
+      "null preservation",
+      "closed/non-self-intersecting geometry where applicable"
+    ]
+  },
+  "proposed_neutral_workflow": [
+    "Evidence extraction",
+    "Reference frame",
+    "Authoritative geometry",
+    "Topology",
+    "Semantics",
+    "Build-state assignment",
+    "Unknown/assumption register",
+    "Validation",
+    "Neutral JSON plus optional Markdown companion"
+  ],
+  "relationship_to_current_arpl": {
+    "current_state": "ARPL currently descends from professional production logic toward Revit/API execution.",
+    "gap": "The repository does not yet define an upstream software-neutral workflow that converts incomplete source evidence into a reconstructable building specification before platform selection.",
+    "proposal": "Add a software-neutral upstream work class and knowledge branch rather than forcing this workflow into existing W4 Revit building authoring.",
+    "possible_branch": "source-definition",
+    "possible_topics": [
+      "sketch-interpretation",
+      "dimensional-evidence",
+      "topology",
+      "neutral-semantics",
+      "reconstruction-policy"
+    ],
+    "downstream_handoff": "Neutral Building Specification -> target resolver/adapter -> W4 host-specific building authoring -> typed operation -> execution -> QA/QC"
+  },
+  "iterations": [
+    {
+      "version": "v0.1",
+      "instruction": "Translate the sketch directly into a neutral JSON building specification.",
+      "result": "Correct main L-shaped footprint and room program, but introduced unsupported compass directions and guessed partition coordinates; roof interpretation was too specific.",
+      "problem": "The first pass mixed authoritative evidence with proportional inference and silently elevated some guesses into buildable geometry.",
+      "found_by": "independent review by Grok against the source sketch"
+    },
+    {
+      "version": "v0.2",
+      "instruction": "Re-check every datum against the sketch and distinguish dimensioned, derived, observed, proportional, convention and unknown evidence.",
+      "result": "Binding geometry, observed topology, proportional hints, unknowns and validation policies were separated; unsupported compass and partition assumptions were withdrawn.",
+      "problem": "The remaining build rule still couples source_kind to buildability too tightly.",
+      "found_by": "review of derived shared boundary whose location is known but solidity/opening state remains unresolved"
+    },
+    {
+      "version": "proposed v0.3 lesson",
+      "instruction": "Separate evidence status from reconstruction status using an independent build_state.",
+      "result": "Allows exact topology to coexist with unresolved construction/semantic detail without forcing premature geometry.",
+      "problem": null,
+      "found_by": "Building 001 neutral reconstruction experiment"
+    }
+  ],
+  "final_rule": "When translating incomplete AEC evidence into a neutral model, preserve what is known, distinguish how it is known, keep unknowns null, and assign reconstruction/buildability independently from evidence confidence. Do not choose a host-software representation until the neutral specification is sufficiently resolved.",
+  "validation": [
+    "Every constructed coordinate or dimension must trace to dimensioned or explicitly valid derived evidence.",
+    "Observed and proportional evidence must not silently become exact geometry.",
+    "Fields listed as unknown remain null after neutral reconstruction.",
+    "Sketch axes must not acquire compass meaning without evidence.",
+    "Shared boundaries must be represented topologically even when their solidity or opening state is unresolved.",
+    "A downstream mapper must preserve identifiers, evidence kinds, nulls, relationships and validation checks.",
+    "Target-specific creation is a later mapping step, not part of the neutral evidence model."
+  ],
+  "failure_patterns_proposed": [
+    {
+      "name": "Semantic collapse to geometry-only output",
+      "example": "Treating 'wall' as an STL box instead of a semantic/relational building object or neutral specification."
+    },
+    {
+      "name": "Confidence promotes guess to geometry",
+      "example": "A visually plausible partition dimension becomes an exact coordinate even though it was never dimensioned."
+    },
+    {
+      "name": "Host-software assumptions leak upstream",
+      "example": "Choosing Revit wall families, levels or north/east axes before the neutral source frame justifies them."
+    },
+    {
+      "name": "Completeness pressure destroys uncertainty",
+      "example": "Inventing window sizes, roof pitch or wall thickness because a target model expects them."
+    }
+  ],
+  "usage_report": {
+    "packs_used": [],
+    "existing_arpl_fit": "No current pack or project workflow directly covers software-neutral source definition before target-platform selection.",
+    "tool_calls_and_retries": "Not recorded precisely for the initial experiment.",
+    "tokens": null,
+    "result": "candidate lesson; neutral Building 001 v0.2 created and independently reviewed",
+    "qaqc_feedback": [
+      "v0.1 footprint accepted",
+      "v0.1 compass naming rejected",
+      "v0.1 proportional partition coordinates rejected as binding",
+      "v0.1 equal-cross-gable interpretation rejected",
+      "v0.2 evidence classification accepted as stronger basis",
+      "independent build_state axis identified as next refinement"
+    ]
+  },
+  "curation_notes": [
+    "This contribution proposes a new upstream neutral-definition class and may require vocabulary/schema changes before it can become a canonical pack.",
+    "The existing ARPL name and Revit-focused library do not need to be renamed for this pilot; the neutral workflow can be introduced experimentally.",
+    "Building 001 is intended as the first reproducible case for testing whether another AI can reconstruct the same building without access to the source sketch."
+  ]
+}
