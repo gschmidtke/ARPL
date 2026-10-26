@@ -1,0 +1,159 @@
+{
+  "submission_type": "workflow_refinement",
+  "recorded": "2026-10-26",
+  "contributors": [
+    "Gottfried Schmidtke with ChatGPT"
+  ],
+  "title": "Architectural sketch reconstruction: dimensions bind, proportions fill gaps, contradictions trigger user clarification",
+  "improves": [
+    "inbox/gschmidtke/neutral-building-definition-building-001.json"
+  ],
+  "context": {
+    "proposed_work_class": "W9 Neutral Building Definition",
+    "case": "Building 001",
+    "source_type": "hand sketch with plan and perspective"
+  },
+  "problem_observed": "The first neutral reconstruction workflow treated non-dimensioned geometry too conservatively. Because sketches are inherently approximate, proportional room layouts, roof form, opening rhythm and other visible design intent were being quarantined or omitted, producing a geometrically truthful but architecturally impoverished model.",
+  "core_lesson": "Do not confuse uncertainty of measurement with uncertainty of design intent. Architectural sketches communicate design through a combination of explicit dimensions, topology, proportion and perspective. Preserve explicit dimensions exactly, infer undimensioned geometry proportionally, infer massing from perspective, and ask the user only when evidence conflicts or multiple materially different interpretations remain.",
+  "architectural_reconstruction_rule": {
+    "priority_order": [
+      "explicit_dimensions",
+      "geometry_derived_from_explicit_dimensions",
+      "visible_proportional_geometry",
+      "perspective_inference",
+      "user_clarification_for_conflicts_or_material_ambiguity"
+    ],
+    "summary": "Dimensions override proportion. Proportion fills the gaps. User clarification resolves contradictions."
+  },
+  "evidence_classes": {
+    "exact": {
+      "definition": "Explicitly dimensioned or stated by the user/source.",
+      "reconstruction_policy": "Build exactly."
+    },
+    "derived": {
+      "definition": "Calculated from exact information without adding an unsupported design assumption.",
+      "reconstruction_policy": "Build exactly to the valid derivation."
+    },
+    "approximate": {
+      "definition": "Geometry or dimensions are clearly implied by visible sketch proportion or perspective but are not explicitly dimensioned.",
+      "reconstruction_policy": "Build the best proportional interpretation and mark it approximate."
+    },
+    "observed": {
+      "definition": "Presence, relationship or topology is visible, but usable geometry cannot yet be inferred reliably.",
+      "reconstruction_policy": "Represent semantically/topologically if possible; do not invent exact geometry."
+    },
+    "ambiguous": {
+      "definition": "Two or more materially different interpretations are supported by the source.",
+      "reconstruction_policy": "Ask the user before committing to one interpretation."
+    },
+    "unknown": {
+      "definition": "The source provides no meaningful information.",
+      "reconstruction_policy": "Leave unresolved/null."
+    }
+  },
+  "sketch_method": [
+    "Read all explicit overall and local dimensions first; these are binding.",
+    "Construct the major envelope from exact and valid derived dimensions.",
+    "Fit undimensioned partitions, openings and other visible geometry proportionally inside the exact envelope.",
+    "Use perspective sketches to infer roof pitch, ridge hierarchy, eave/overhang relationships, relative heights, opening proportions and massing when the form is visually clear.",
+    "Mark all such inferred measurements and geometry as approximate rather than deleting them.",
+    "If a later exact dimension is supplied, replace the approximate value while preserving dependent relationships where possible.",
+    "Do not ask the user for every missing dimension. Ask only when the interpretation is materially ambiguous or conflicting evidence prevents a coherent reconstruction.",
+    "Never silently override an explicit dimension to make proportional geometry fit."
+  ],
+  "conflict_policy": {
+    "trigger_user_question_when": [
+      "an explicit dimension contradicts another explicit dimension",
+      "an explicit dimension materially contradicts visible geometry",
+      "two source readings imply materially different layouts or object identities",
+      "a mark could represent different object types whose choice changes the design",
+      "a proportional reconstruction cannot fit inside binding geometry without distortion beyond a reasonable sketch tolerance"
+    ],
+    "do_not_trigger_user_question_when": [
+      "a dimension is simply absent but the proportional location is visually clear",
+      "a roof pitch is not labeled but the perspective supports a plausible conceptual pitch",
+      "an opening size is not labeled but its relative size and location can be reconstructed for concept use"
+    ],
+    "required_behavior": "Present the contradiction briefly and ask the user which evidence should govern. Do not silently reconcile conflicting evidence."
+  },
+  "replacement_for_overly_conservative_rule": {
+    "old_pattern": "Non-dimensioned geometry is non-binding and therefore should not be built.",
+    "new_pattern": "Non-dimensioned geometry that clearly communicates design intent should be reconstructed proportionally and explicitly labeled approximate. Only materially ambiguous geometry should stop for clarification."
+  },
+  "example_building_001": {
+    "binding": [
+      "overall width = 14.0 m",
+      "overall depth = 14.0 m",
+      "upper bar depth = 6.0 m",
+      "projecting wing width = 6.0 m"
+    ],
+    "proportional_reconstruction": [
+      "bedroom/bath/kitchen partition positions",
+      "window locations and relative sizes",
+      "door locations where object identity is clear",
+      "roof pitch estimated from perspective",
+      "ridge and roof hierarchy",
+      "eave/overhang proportions",
+      "wall/eave height inferred from perspective for conceptual reconstruction"
+    ],
+    "clarification_cases": [
+      "which object a genuinely unclear mark represents",
+      "which host contains a corner opening when several interpretations materially change circulation",
+      "any contradiction between an explicit dimension and another binding dimension"
+    ]
+  },
+  "progressive_resolution": {
+    "rule": "Approximate values are first-class temporary model inputs, not discarded information.",
+    "example": {
+      "initial": {
+        "partition_position_mm": 4380,
+        "source_kind": "approximate",
+        "derived_from": "sketch_proportion"
+      },
+      "later_user_dimension": {
+        "partition_position_mm": 4200,
+        "source_kind": "exact"
+      },
+      "behavior": "Replace the approximate value with the exact value and revalidate dependent geometry."
+    }
+  },
+  "reconstruction_modes": {
+    "concept": "Use exact + derived + approximate geometry to preserve design intent. Clearly retain provenance.",
+    "production": "Use exact/derived geometry plus user-approved approximate geometry suitable for current production purpose.",
+    "fabrication": "Require sufficiently resolved dimensions, assemblies and tolerances; approximate geometry must be resolved or explicitly approved before fabrication use."
+  },
+  "failure_patterns_proposed": [
+    {
+      "name": "Uncertainty erasure by omission",
+      "description": "The system avoids hallucination by deleting all undimensioned geometry, destroying recognizable design intent."
+    },
+    {
+      "name": "Sketch treated as failed construction drawing",
+      "description": "The system expects every wall, roof and opening to be dimensioned before reconstructing a concept, instead of using proportion as architects do."
+    },
+    {
+      "name": "Silent proportional override of binding dimensions",
+      "description": "The system distorts an explicit overall/local dimension to make visually estimated geometry fit."
+    },
+    {
+      "name": "Excessive clarification",
+      "description": "The system asks the user to supply every missing dimension instead of reconstructing clear proportional intent."
+    }
+  ],
+  "validation": [
+    "All explicit dimensions are preserved unless the user explicitly resolves a contradiction differently.",
+    "Approximate geometry remains tagged as approximate and retains its source/provenance.",
+    "Visible topology and room/object relationships are preserved even when dimensions are approximate.",
+    "Perspective-derived roof and massing information is represented when visually clear rather than omitted solely because exact dimensions are missing.",
+    "No approximate value is silently promoted to exact.",
+    "No explicit dimension is silently changed to fit an approximation.",
+    "Material contradictions trigger a user clarification rather than automatic reconciliation.",
+    "A later exact value can replace an approximate value and trigger dependent revalidation."
+  ],
+  "final_rule": "Reconstruct architectural sketches as architects use them: preserve explicit dimensions, derive what can be calculated, place all remaining clear geometry proportionally, infer massing from perspective, label inferred values as approximate, and ask the user only when evidence conflicts or ambiguity would materially change the design.",
+  "curation_notes": [
+    "This refinement should be considered together with the earlier neutral-building-definition Building 001 submission.",
+    "It changes the proposed W9 default from evidence-only reconstruction toward architecturally faithful progressive approximation.",
+    "The curator may wish to add an 'approximate' evidence/source kind and explicit contradiction-handling rules to the proposed neutral-definition vocabulary."
+  ]
+}
