@@ -47,6 +47,7 @@ Entry by building type. Project-level workflows are listed in project-workflows/
 | [ARPL-DOC-0001](../library/documentation/assembly-shop-drawings/) Shop drawings: invalid references and swapped elevations | 2 | W6 | candidate |
 | [ARPL-FAM-0005](../library/family-authoring/parametric-component-families-for-wall-panels/) Component families for a wall panel | 2 | W1 | candidate |
 | [ARPL-GEO-0002](../library/geometry/gable-walls-as-profile-walls/) Gable walls without wall attachment | 2 | W4 | candidate |
+| [ARPL-GEO-0004](../library/geometry/concept-model-from-neutral-spec-staged-build/) Concept model from a neutral spec: staged, idempotent build with visual gates | 2 | W4 | candidate |
 | [ARPL-QA-0001](../library/validation-qaqc/layout-preview-as-review-step/) Layout preview as a review step | 2 | W8 | candidate |
 | [ARPL-SCH-0001](../library/schedules-quantities/cost-estimate-construction-method-first/) Cost estimate priced the wrong construction | 2 | W7 | candidate |
 

@@ -32,6 +32,7 @@ Only versions in which the pack actually ran.
 | [ARPL-GEO-0001](../library/geometry/adaptive-rig-reference-lines-not-model-lines/) Forms absorb model lines and break hosting | 2 | W2 | candidate |
 | [ARPL-GEO-0002](../library/geometry/gable-walls-as-profile-walls/) Gable walls without wall attachment | 2 | W4 | candidate |
 | [ARPL-GEO-0003](../library/geometry/wall-and-footing-corner-joins/) Footing corner notches | 2 | W4 | candidate |
+| [ARPL-GEO-0004](../library/geometry/concept-model-from-neutral-spec-staged-build/) Concept model from a neutral spec: staged, idempotent build with visual gates | 2 | W4 | candidate |
 | [ARPL-MCX-0001](../library/model-context/read-camera-before-interpreting-markups/) Markup read without checking the camera | 1 | W8 | candidate |
 | [ARPL-PAR-0001](../library/parameters-data/material-description-keynote-governance/) Governed material Descriptions and Keynotes | 2 | W7 | candidate |
 | [ARPL-PLH-0001](../library/placement-hosting/hosted-insert-sill-height-explicit/) Windows placed at sill 0 | 1 | W4 | candidate |

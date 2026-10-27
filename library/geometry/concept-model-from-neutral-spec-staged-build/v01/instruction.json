@@ -1,0 +1,4 @@
+{
+  "version": "v01",
+  "instruction": "Read-only survey: levels, length units, wall/floor/roof/column/railing/stair types, views. Then showed the user a mapping table (spec item -> evidence class -> Revit element) and the hypotheses before any write."
+}

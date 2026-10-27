@@ -41,6 +41,7 @@ Work class = what drives the result; it decides the preview and the proof of 'do
 |---|---|---|---|
 | [ARPL-GEO-0002](../library/geometry/gable-walls-as-profile-walls/) Gable walls without wall attachment | 2 | W4 | candidate |
 | [ARPL-GEO-0003](../library/geometry/wall-and-footing-corner-joins/) Footing corner notches | 2 | W4 | candidate |
+| [ARPL-GEO-0004](../library/geometry/concept-model-from-neutral-spec-staged-build/) Concept model from a neutral spec: staged, idempotent build with visual gates | 2 | W4 | candidate |
 | [ARPL-PLH-0001](../library/placement-hosting/hosted-insert-sill-height-explicit/) Windows placed at sill 0 | 1 | W4 | candidate |
 | [ARPL-PLH-0002](../library/placement-hosting/door-swing-verified-by-geometry/) Door swing reported correct without a test | 2 | W4 | candidate |
 

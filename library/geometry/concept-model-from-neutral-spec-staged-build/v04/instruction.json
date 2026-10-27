@@ -1,0 +1,4 @@
+{
+  "version": "v04",
+  "instruction": "Attach upper walls to the roof with Wall.AddAttachment; build rails with new NonContinuousRailInfo(); commit StairsEditScope without a failures preprocessor."
+}

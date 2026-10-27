@@ -32,6 +32,7 @@ ARPL becomes trustworthy when packs are reproduced by other people, in other mod
 | [ARPL-GEO-0001](../library/geometry/adaptive-rig-reference-lines-not-model-lines/) Forms absorb model lines and break hosting | Revit 2024 | candidate |
 | [ARPL-GEO-0002](../library/geometry/gable-walls-as-profile-walls/) Gable walls without wall attachment | Revit 2024 | candidate |
 | [ARPL-GEO-0003](../library/geometry/wall-and-footing-corner-joins/) Footing corner notches | Revit 2024 | candidate |
+| [ARPL-GEO-0004](../library/geometry/concept-model-from-neutral-spec-staged-build/) Concept model from a neutral spec: staged, idempotent build with visual gates | Revit 2024 | candidate |
 | [ARPL-MCX-0001](../library/model-context/read-camera-before-interpreting-markups/) Markup read without checking the camera | Revit 2024 | candidate |
 | [ARPL-PAR-0001](../library/parameters-data/material-description-keynote-governance/) Governed material Descriptions and Keynotes | Revit 2024 | candidate |
 | [ARPL-PLH-0001](../library/placement-hosting/hosted-insert-sill-height-explicit/) Windows placed at sill 0 | Revit 2024 | candidate |

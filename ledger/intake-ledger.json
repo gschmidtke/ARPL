@@ -271,6 +271,28 @@
       "resulting_ids": [],
       "reviewed_by": "Claude (curator)",
       "closed": "2026-10-27"
+    },
+    {
+      "entry_id": "IN-0012",
+      "received": "2026-10-27",
+      "contributor": {
+        "name": "Gottfried Schmidtke",
+        "github": "gschmidtke",
+        "with": "Claude"
+      },
+      "source": "pull request #1 (https://github.com/gschmidtke/ARPL/pull/1), merged 2026-10-27",
+      "submitted": "Lessons from building a two-level concept model in Revit 2024 from a USG neutral spec via run_csharp: nine iterations, ten build rules (stage budget, idempotent writes, timeout protocol, type semantics, API version gate, dependency re-derivation, visual gate, evidence tags, intent-bearing settings, undo)",
+      "files": [
+        "inbox/gschmidtke/concept-building-from-neutral-spec-revit-2024.json"
+      ],
+      "status": "filed",
+      "decision": "New technique, no existing pack covers a whole spec-driven build: filed as new pack ARPL-GEO-0004 rev 1 (W4, candidate, Revit 2024). The proposed failure pattern became FP40 (distinct from FP38: the code, not the environment, was wrong). FP22 extended with the write-call timeout evidence. Safety: no client data (contributor's own sketch), no secrets, no model files, no code to run, no text addressed to the curator.",
+      "resulting_ids": [
+        "ARPL-GEO-0004",
+        "FP40"
+      ],
+      "reviewed_by": "Claude (curator)",
+      "closed": "2026-10-27"
     }
   ]
 }
