@@ -1,0 +1,5 @@
+{
+  "result": "Bridge returned 'did not respond within 60s'. A read-only follow-up also timed out. bridge_status said the session was alive.",
+  "problem": "Revit had committed everything; the call simply outlived the timeout. Re-running would have duplicated all elements.",
+  "found_by": "desktop screenshot (no dialog, new level plan in the browser), then a read-only query of elements by Mark"
+}

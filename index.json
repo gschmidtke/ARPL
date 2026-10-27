@@ -1353,6 +1353,92 @@
       "unverified_in_current_revit": true
     },
     {
+      "id": "ARPL-GEO-0004",
+      "revision": 1,
+      "title": "Concept model from a neutral spec: staged, idempotent build with visual gates",
+      "environment": {
+        "revit_version": "2024 (24.3.60.12)",
+        "tool": "RevitBridge MCP with run_csharp",
+        "compiler": "Roslyn 4.8 (C# 12)",
+        "verification": "desktop screenshots of a dedicated review 3D view",
+        "agent": "Claude (Anthropic)",
+        "source": "USG neutral building spec (JSON) plus the contributor's own hand sketch"
+      },
+      "use_when": [
+        "An agent builds a whole concept model from a structured spec (JSON) through a code-execution bridge",
+        "A build script creates many elements of several categories in one call",
+        "Element heights depend on a host (roof, slab) that may change later",
+        "The model must show which geometry is source fact and which is an AI estimate"
+      ],
+      "not_for": [
+        "Detailed design or construction documentation (LOD 300+)",
+        "Workshared central models (no sync handling covered here)",
+        "Interpreting the sketch itself: that belongs to USG (see IN-0011 redirect)"
+      ],
+      "api_terms": [
+        "Floor.Create",
+        "FloorType.IsFoundationSlab",
+        "Document.Create.NewFootPrintRoof",
+        "FootPrintRoof.set_DefinesSlope / set_SlopeAngle",
+        "ROOF_LEVEL_OFFSET_PARAM",
+        "Wall.Create",
+        "WallType ALLOW_AUTO_EMBED",
+        "SPACING_LAYOUT_VERT (1 fixed distance, 3 maximum spacing)",
+        "Document.Create.NewOpening (floor)",
+        "Railing.Create",
+        "RailingType.RailStructure.AddNonContinuousRail",
+        "RailingType.BalusterPlacement",
+        "StairsEditScope",
+        "StairsRun.CreateStraightRun",
+        "StairsLanding.CreateAutomaticLanding",
+        "FAMILY_TOP_LEVEL_OFFSET_PARAM",
+        "ALL_MODEL_MARK / ALL_MODEL_INSTANCE_COMMENTS",
+        "View3D.SetSectionBox",
+        "UIDocument.RequestViewChange"
+      ],
+      "level": 2,
+      "work_class": "W4",
+      "workflows": [
+        "geometry",
+        "placement-hosting",
+        "validation-qaqc"
+      ],
+      "disciplines": [
+        "architecture"
+      ],
+      "project_types": [
+        "residential"
+      ],
+      "phases": [
+        "concept"
+      ],
+      "revit_versions_tested": [
+        "2024"
+      ],
+      "failure_patterns": [
+        "FP01",
+        "FP05",
+        "FP10",
+        "FP11",
+        "FP13",
+        "FP22",
+        "FP40"
+      ],
+      "status": "candidate",
+      "rule": "1. Stage budget: each write call finishes well inside the bridge timeout (target < 20 s); order: datums + types -> hosts (slabs, walls) -> hosted/dependent (openings, roof, railing, stair).\n2. Idempotent writes: find-or-duplicate for types; check for an existing element with the same Mark before creating.\n3. Timeout protocol: never retry a write; query state by Mark read-only; if Revit does not answer, take a screenshot before anything else (FP11, FP22).\n4. Type semantics: assert category and kind (Floors vs Structural Foundations, basic vs curtain vs stacked wall) before using a type; never choose by name (FP13, FP01).\n5. API version gate: reflect the installed API before using non-trivial members (attachments, rails, stairs, failure handling).\n6. Dependency re-derivation: record host -> dependant (column top -> roof underside, wall height -> roof underside, opening -> slab) and re-run dependants whenever a host changes (FP10).\n7. Visual gate: after each stage, look at a dedicated review 3D view (section box to the building, annotation categories hidden) before reporting success (FP05).\n8. Evidence tags: Mark = spec ID, Comments = 'USG | exact / derived / approximate'; promote to 'user-accepted (date)' only on explicit acceptance.\n9. Intent-bearing settings (grid layout fixed vs maximum spacing, railing typology, facade composition) are asked or flagged, not defaulted.\n10. Undo: one named transaction group per stage; tell the user the real number of undo steps.",
+      "validation": [
+        "After each stage, read-only: every element whose Comments start with 'USG' appears exactly once per expected Mark, in the expected category.",
+        "For every host-derived element (column top, wall top, opening), top elevation <= host underside at its XY.",
+        "A screenshot of the review 3D view is checked against the source sketch before the next stage starts."
+      ],
+      "validation_checks": [],
+      "path": "library/geometry/concept-model-from-neutral-spec-staged-build",
+      "last_evidence": "2026-10-27",
+      "review_due": "2027-10-27",
+      "current_revit": "2027",
+      "unverified_in_current_revit": true
+    },
+    {
       "id": "ARPL-GEO-0002",
       "revision": 2,
       "title": "Gable walls without wall attachment",
@@ -2441,6 +2527,12 @@
       "found_by": "status bar progress in a screenshot",
       "contributors": [
         "Gottfried Schmidtke with Claude"
+      ],
+      "evidence": [
+        {
+          "note": "Not only exports: a single run_csharp write call creating levels, slabs, columns and walls outlived the 60 s bridge timeout, and a read-only follow-up timed out too, while Revit had committed everything. Re-running would have duplicated every element. Defence: keep each write stage well inside the timeout, never retry a write after a timeout, and query the model by Mark before deciding (ARPL-GEO-0004).",
+          "intake": "IN-0012"
+        }
       ]
     },
     {
@@ -2820,6 +2912,27 @@
       ],
       "intake": "IN-0008",
       "related": "FP38 (sibling: generated code fails on an invisible contract; FP38 is the compile environment, FP39 is the runtime scope)"
+    },
+    {
+      "id": "FP40",
+      "name": "API member assumed from another Revit version",
+      "meaning": "Generated code calls API members the agent remembers from another Revit release or from documentation, not from the installed API. In a Revit 2024 build, Wall.AddAttachment and AttachmentLocation did not exist, NonContinuousRailInfo had no public constructor, and a bridge helper name was guessed; each cost a compile round. Unlike FP38 the compile environment was fine: the agent's code was wrong. Defence: before using non-trivial members (wall attachment, rails, stairs, failure handling), reflect the installed types (GetMethods, GetConstructors) or compile a probe, and write against what exists. Revit 2024 equivalents found: profile walls instead of attachment (ARPL-GEO-0002); RailingType.RailStructure.AddNonContinuousRail(name, height, offset), then configure ProfileId; StairsEditScope.Commit with an IFailuresPreprocessor.",
+      "found_by": "Roslyn compile errors, resolved by reflecting the installed types",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ],
+      "status": "candidate",
+      "api_terms": [
+        "Wall.AddAttachment",
+        "NonContinuousRailInfo",
+        "RailingType.RailStructure",
+        "StairsEditScope.Commit",
+        "IFailuresPreprocessor",
+        "Type.GetMethods"
+      ],
+      "revit_versions": "observed in 2024; members differ between releases",
+      "intake": "IN-0012",
+      "related": "FP38 (sibling: FP38 is the compile environment failing correct code; FP40 is the code itself written against a remembered API), FP34 (the bridge's advertised contract)"
     }
   ]
 }

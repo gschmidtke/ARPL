@@ -1,0 +1,93 @@
+{
+  "id": "ARPL-GEO-0004",
+  "revision": 1,
+  "title": "Concept model from a neutral spec: staged, idempotent build with visual gates",
+  "use_when": [
+    "An agent builds a whole concept model from a structured spec (JSON) through a code-execution bridge",
+    "A build script creates many elements of several categories in one call",
+    "Element heights depend on a host (roof, slab) that may change later",
+    "The model must show which geometry is source fact and which is an AI estimate"
+  ],
+  "not_for": [
+    "Detailed design or construction documentation (LOD 300+)",
+    "Workshared central models (no sync handling covered here)",
+    "Interpreting the sketch itself: that belongs to USG (see IN-0011 redirect)"
+  ],
+  "api_terms": [
+    "Floor.Create",
+    "FloorType.IsFoundationSlab",
+    "Document.Create.NewFootPrintRoof",
+    "FootPrintRoof.set_DefinesSlope / set_SlopeAngle",
+    "ROOF_LEVEL_OFFSET_PARAM",
+    "Wall.Create",
+    "WallType ALLOW_AUTO_EMBED",
+    "SPACING_LAYOUT_VERT (1 fixed distance, 3 maximum spacing)",
+    "Document.Create.NewOpening (floor)",
+    "Railing.Create",
+    "RailingType.RailStructure.AddNonContinuousRail",
+    "RailingType.BalusterPlacement",
+    "StairsEditScope",
+    "StairsRun.CreateStraightRun",
+    "StairsLanding.CreateAutomaticLanding",
+    "FAMILY_TOP_LEVEL_OFFSET_PARAM",
+    "ALL_MODEL_MARK / ALL_MODEL_INSTANCE_COMMENTS",
+    "View3D.SetSectionBox",
+    "UIDocument.RequestViewChange"
+  ],
+  "level": 2,
+  "work_class": "W4",
+  "workflows": [
+    "geometry",
+    "placement-hosting",
+    "validation-qaqc"
+  ],
+  "disciplines": [
+    "architecture"
+  ],
+  "roles": [
+    "designer",
+    "modeler",
+    "bim-specialist"
+  ],
+  "project_types": [
+    "residential"
+  ],
+  "phases": [
+    "concept"
+  ],
+  "revit_versions_tested": [
+    "2024"
+  ],
+  "environment": {
+    "revit_version": "2024 (24.3.60.12)",
+    "tool": "RevitBridge MCP with run_csharp",
+    "compiler": "Roslyn 4.8 (C# 12)",
+    "verification": "desktop screenshots of a dedicated review 3D view",
+    "agent": "Claude (Anthropic)",
+    "source": "USG neutral building spec (JSON) plus the contributor's own hand sketch"
+  },
+  "failure_patterns": [
+    "FP01",
+    "FP05",
+    "FP10",
+    "FP11",
+    "FP13",
+    "FP22",
+    "FP40"
+  ],
+  "status": "candidate",
+  "contributors": [
+    "Gottfried Schmidtke with Claude"
+  ],
+  "recorded": "2026-10-27",
+  "changelog": [
+    {
+      "revision": 1,
+      "date": "2026-10-27",
+      "change": "First recorded (IN-0012, PR #1)",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ]
+    }
+  ]
+}

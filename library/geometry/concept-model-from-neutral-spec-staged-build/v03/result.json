@@ -1,0 +1,5 @@
+{
+  "result": "Both slabs landed in Structural Foundations.",
+  "problem": "The type was a foundation slab (IsFoundationSlab = true). Type change across categories is impossible; slabs were deleted and recreated with a Floors type.",
+  "found_by": "category column in the verification query"
+}

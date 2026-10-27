@@ -187,6 +187,12 @@
       "found_by": "status bar progress in a screenshot",
       "contributors": [
         "Gottfried Schmidtke with Claude"
+      ],
+      "evidence": [
+        {
+          "note": "Not only exports: a single run_csharp write call creating levels, slabs, columns and walls outlived the 60 s bridge timeout, and a read-only follow-up timed out too, while Revit had committed everything. Re-running would have duplicated every element. Defence: keep each write stage well inside the timeout, never retry a write after a timeout, and query the model by Mark before deciding (ARPL-GEO-0004).",
+          "intake": "IN-0012"
+        }
       ]
     },
     {
@@ -566,6 +572,27 @@
       ],
       "intake": "IN-0008",
       "related": "FP38 (sibling: generated code fails on an invisible contract; FP38 is the compile environment, FP39 is the runtime scope)"
+    },
+    {
+      "id": "FP40",
+      "name": "API member assumed from another Revit version",
+      "meaning": "Generated code calls API members the agent remembers from another Revit release or from documentation, not from the installed API. In a Revit 2024 build, Wall.AddAttachment and AttachmentLocation did not exist, NonContinuousRailInfo had no public constructor, and a bridge helper name was guessed; each cost a compile round. Unlike FP38 the compile environment was fine: the agent's code was wrong. Defence: before using non-trivial members (wall attachment, rails, stairs, failure handling), reflect the installed types (GetMethods, GetConstructors) or compile a probe, and write against what exists. Revit 2024 equivalents found: profile walls instead of attachment (ARPL-GEO-0002); RailingType.RailStructure.AddNonContinuousRail(name, height, offset), then configure ProfileId; StairsEditScope.Commit with an IFailuresPreprocessor.",
+      "found_by": "Roslyn compile errors, resolved by reflecting the installed types",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ],
+      "status": "candidate",
+      "api_terms": [
+        "Wall.AddAttachment",
+        "NonContinuousRailInfo",
+        "RailingType.RailStructure",
+        "StairsEditScope.Commit",
+        "IFailuresPreprocessor",
+        "Type.GetMethods"
+      ],
+      "revit_versions": "observed in 2024; members differ between releases",
+      "intake": "IN-0012",
+      "related": "FP38 (sibling: FP38 is the compile environment failing correct code; FP40 is the code itself written against a remembered API), FP34 (the bridge's advertised contract)"
     }
   ]
 }

@@ -1,0 +1,5 @@
+{
+  "result": "Each 10 m face: 6 panels of 1500 plus one 1000 remainder.",
+  "problem": "The design intent was '~1.5 m, equal panels'. Switched to maximum spacing 1500: equal panels of 1467 (8.8 m opening) and 1360 (6.8 m opening).",
+  "found_by": "panel count in the result + user review"
+}

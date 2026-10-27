@@ -1,0 +1,5 @@
+{
+  "result": "Compile errors: AddAttachment / AttachmentLocation do not exist in the 2024 API; NonContinuousRailInfo has no public constructor; the bridge helper name was guessed wrong.",
+  "problem": "Code written against a remembered API, not the installed one.",
+  "found_by": "Roslyn compile errors; fixed by reflecting the types (GetMethods/GetConstructors) and using RailStructure.AddNonContinuousRail and the bridge's Failures() collector"
+}

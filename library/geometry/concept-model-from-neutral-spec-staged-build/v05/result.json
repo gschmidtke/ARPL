@@ -1,0 +1,5 @@
+{
+  "result": "Transaction committed with no warning.",
+  "problem": "Columns pierced the roof: the roof underside at the column positions was lower than the level. When the roof later changed from gable to flat, walls and columns had to be re-derived again.",
+  "found_by": "screenshot of a dedicated review 3D view only"
+}
