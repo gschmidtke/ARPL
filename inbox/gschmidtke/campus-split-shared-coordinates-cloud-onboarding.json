@@ -1,0 +1,83 @@
+{
+  "title": "Split a multi-building campus model into per-building cloud models on one shared coordinate system, then register each for federation",
+  "contributor": {
+    "name": "Gottfried Schmidtke",
+    "github": "gschmidtke",
+    "credit_as": "Gottfried Schmidtke (Tiverit LLC)"
+  },
+  "license_confirmation": "I wrote this or have the right to share it, and I agree to publish it under CC BY 4.0 (text/JSON) and MIT (code).",
+  "context": {
+    "revit_version": "2024.3 (24.3.60.12)",
+    "tool_or_bridge": "RevitBridge (MCP, run_csharp with Roslyn) plus desktop screenshots to watch dialogs",
+    "discipline": "Architecture / BIM management",
+    "project_type": "Multi-building campus, concept/massing stage (13 buildings, one with a circular radial grid)",
+    "phase": "Concept design, model setup for federation"
+  },
+  "intent": "Take one campus model with all buildings' grids, masses and floors, give it a real-world shared coordinate system anchored on one authority building, split it into one file per building that all carry the same shared coordinates, upload each file as a workshared cloud model and record its cloud identifiers in a model registry CSV so a batch linker can federate them later by shared coordinates.",
+  "use_when": [
+    "A campus or masterplan model has to be split into per-building models that will be linked back by shared coordinates.",
+    "One building is designated the coordinate authority and the site location comes from a map pick (lat/long) rather than a survey file.",
+    "Many local models have to be uploaded to the cloud and registered one after another by an agent."
+  ],
+  "not_for": [
+    "Projects with a surveyed control point or a civil/site model to acquire coordinates from: acquire from that instead of a map pick.",
+    "Models already in the cloud and workshared: only the registration part applies.",
+    "Splits where buildings share elements that cannot be assigned to one building (shared podium, site-wide topography): decide ownership first."
+  ],
+  "api_terms": [
+    "ProjectLocation.SetProjectPosition(XYZ.Zero, ProjectPosition)",
+    "ProjectLocation.GetTotalTransform",
+    "SiteLocation.Latitude / Longitude / TimeZone",
+    "Application.OpenDocumentFile",
+    "Document.Delete, Document.Save, Document.Close",
+    "ProjectInfo.BuildingName / Name",
+    "Document.SaveAsCloudModel(accountId, projectId, folderId, modelName)",
+    "Document.EnableCloudWorksharing",
+    "Document.GetCloudModelPath, ModelPath.GetProjectGUID / GetModelGUID",
+    "Document.GetHubId / GetProjectId / GetCloudFolderId",
+    "UIApplication.PostCommand(RevitCommandId.LookupCommandId)",
+    "Document.SynchronizeWithCentral"
+  ],
+  "improves": "",
+  "packs_used": [],
+  "usage_report": {
+    "tokens_in": "",
+    "tokens_out": "",
+    "tool_calls": "about 25 bridge calls for coordinates + split of 13 files + onboarding of 1 file; about 10 screen actions for dialogs",
+    "retries": "3 (two compile errors from referencing the ribbon assembly, one wrong floor assignment in the split that was redone)",
+    "packs": [],
+    "without_arpl_estimate": "Manually: specify coordinates, then 13 x (Save As, delete other buildings, check) and 13 x (Collaborate, registry export) by hand."
+  },
+  "iterations": [
+    {
+      "instruction": "Give the campus model shared coordinates matching the site. Site taken from a map: pointer on the authority building (circular building) gives lat/long; converted to the local state plane (US survey feet) outside Revit.",
+      "result": "SetProjectPosition(XYZ.Zero, new ProjectPosition(E - c.X, N - c.Y, 0, 0)) where c is the centre of the authority building's arc grid in internal coordinates. Site lat/long and time zone set; location renamed after the coordinate system. Dry run first, then commit; verified by transforming c with GetTotalTransform().Inverse and reading back exactly E/N.",
+      "problem": "Sign convention is easy to get wrong: ProjectPosition gives the shared coordinates of the internal origin, so it is E - c.X, not c.X - E. Also, map picks are accurate to a few metres only, and grid north differs from true north by the convergence angle (about 0.13 deg here).",
+      "found_by": "Read-back of the anchor point in shared coordinates; dry run with rollback before commit."
+    },
+    {
+      "instruction": "Split into one file per building: copy the campus file, open the copy, delete every grid, mass and floor that does not belong to the building, save.",
+      "result": "Grids assigned by name prefix (B01-, B02- ...), masses by name, floors by nearest mass bounding box. 13 files; every file kept the same ProjectPosition (shared coordinates travel with a file copy).",
+      "problem": "Nearest-mass assignment of floors failed where two buildings touch: a building lost its floors to the neighbour. A floor centre can be closer to the neighbour's mass box than to its own.",
+      "found_by": "Per-file count report: one building had 0 floors and its neighbour had too many. Checking that the total equals the source count (48) is the guard."
+    },
+    {
+      "instruction": "Redo the split for the two affected buildings with floors assigned by the smallest grid extent that contains the floor centre.",
+      "result": "Correct counts; 0 floors unassigned; totals match the source.",
+      "problem": "None.",
+      "found_by": "Floor levels per file match the building's storeys."
+    },
+    {
+      "instruction": "Onboard one building: open local file, set Project Information, save as cloud model into the same cloud folder as an already uploaded sibling (ids read from the open sibling with GetHubId/GetProjectId/GetCloudFolderId), enable cloud worksharing, run the registry tool's command by PostCommand, sync.",
+      "result": "Model uploaded and workshared, registry row appended, synced.",
+      "problem": "1) The first cloud save took longer than the bridge's 60 s reply wait, so the call timed out on the agent side although it completed in Revit. 2) The posted registry command opened a file dialog and then a Windows 'already exists, replace?' prompt; while those modals were open the bridge did not answer at all. 3) On the sibling uploaded earlier, the registry key came out as the literal text 'Building Name': the template placeholder in Project Information is not empty, so the tool did not ask for a key and used the placeholder.",
+      "found_by": "1) get_revit_info showed the document as cloud + workshared after the timeout. 2) A screenshot showed the dialogs. 3) Reading the registry CSV."
+    }
+  ],
+  "final_rule": {
+    "lesson": "Set shared coordinates once in the parent model before splitting so every child inherits them; assign elements to buildings by containment, not nearest distance; set identity fields before any tool reads them; treat a timed-out cloud save as 'probably done' and verify instead of resending; any command posted with PostCommand may open modal dialogs that freeze the bridge until handled.",
+    "rule": "1. Pick the authority building and an anchor point on it (e.g. arc-grid centre). Compute the state-plane E/N for the anchor outside Revit. In the parent model call SetProjectPosition(XYZ.Zero, new ProjectPosition(E - anchor.X, N - anchor.Y, elev, angle)), set SiteLocation lat/long/time zone, dry-run, read back the anchor through GetTotalTransform().Inverse, then commit and save. 2. Split only after that: copy the file per building, delete what does not belong (grids by name prefix, masses by name, hosted/floor elements by containment in the building's own grid extent, smallest containing extent wins), save. Guard: per-file counts must add up to the parent's counts, and no element may be unassigned. 3. Per building, before any upload or registry step: set ProjectInfo.BuildingName to a unique key (the model name) and ProjectInfo.Name to the project; never leave the template placeholder text. 4. Upload with SaveAsCloudModel into the folder of an existing sibling (read its hub/project/folder ids), then EnableCloudWorksharing. If the bridge call times out, do not resend: check that the active document is now cloud + workshared. 5. When a third-party command is started by PostCommand, take a screenshot right after: file pickers and confirmation prompts block the bridge until closed. Before confirming an 'overwrite' prompt for a registry/CSV file, know whether the tool appends or replaces, and keep a copy of existing rows to restore. 6. Verify the registry file (one row per model, key = BuildingName, GUIDs present), then SynchronizeWithCentral.",
+    "validation": "Anchor point reads back the intended E/N in shared coordinates. Every child file has the same ProjectPosition at XYZ.Zero as the parent. Element counts per building sum to the parent counts. Each cloud model reports IsModelInCloud and IsWorkshared. Registry has one row per model with a real key (never 'Building Name') and project/model GUIDs."
+  },
+  "notes": "Proposed failure patterns (curator to number): (a) Long cloud save outlives the bridge reply timeout (close to FP22 but for SaveAsCloudModel). (b) Modal dialog from a posted command blocks the bridge. (c) Template placeholder text taken as a real identity value. (d) Nearest-distance assignment misfiles elements between touching buildings. Related: ARPL-ADM-0002 (cloud model administration). Site and tool names omitted on purpose."
+}
