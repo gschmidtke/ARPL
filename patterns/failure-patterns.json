@@ -24,7 +24,19 @@
     {
       "id": "FP05",
       "name": "API succeeded, model result wrong",
-      "meaning": "The call returned without error but Revit changed something else (auto-joins, ignored defaults, silent overrides)."
+      "meaning": "The call returned without error but Revit changed something else (auto-joins, ignored defaults, silent overrides). Defence: after placement or modification at scale, verify positions after commit and regeneration, not at call time.",
+      "sources": [
+        "https://jeremytammik.github.io/tbc/a/0357_autojoinelements.htm"
+      ],
+      "evidence": [
+        {
+          "note": "Document.AutoJoinElements discussion: when a transaction is committed, Revit automatically joins elements to their neighbours where appropriate, so geometry verified at placement time can silently change at commit. This is the documented mechanism behind the framing-stud case in ARPL-ASM-0004.",
+          "intake": "IN-0006"
+        }
+      ],
+      "contributors": [
+        "Gottfried Schmidtke"
+      ]
     },
     {
       "id": "FP06",
@@ -54,7 +66,21 @@
     {
       "id": "FP11",
       "name": "Runtime blocked by a dialog",
-      "meaning": "A modal Revit dialog or warning blocked the automation; nothing visible in the API result."
+      "meaning": "A modal Revit dialog or warning blocked the automation; nothing visible in the API result. Defence: unattended bridges must register a failure preprocessor (IFailuresPreprocessor) and a DialogBoxShowing handler before the first batch write, or a single warning freezes the run.",
+      "sources": [
+        "https://jeremytammik.github.io/tbc/a/0430_unwanted_dialogue.htm",
+        "https://jeremytammik.github.io/tbc/a/1099_failure_api.htm",
+        "https://jeremytammik.github.io/tbc/a/1621_return_failure_info.html"
+      ],
+      "evidence": [
+        {
+          "note": "Two documented suppression routes: the DialogBoxShowing event (dismiss a dialog programmatically) and the Revit 2011 failure processing API, which does more than dialog suppression. An unattended run without one of these blocks silently.",
+          "intake": "IN-0006"
+        }
+      ],
+      "contributors": [
+        "Gottfried Schmidtke"
+      ]
     },
     {
       "id": "FP12",
@@ -75,10 +101,20 @@
     {
       "id": "FP14",
       "name": "Exception leaves a transaction open",
-      "meaning": "A scripted error escapes while the script's own Transaction is still open. Inside an enclosing TransactionGroup this can crash Revit (fatal error) instead of failing the script. Defence: using-blocks for every Transaction, try/catch around the body, dry runs.",
+      "meaning": "A scripted error escapes while the script's own Transaction is still open. Inside an enclosing TransactionGroup this can crash Revit (fatal error) instead of failing the script. Defence: using-blocks for every Transaction, try/catch around the body, dry runs. See FP28: the using-block pattern is the defence, and also the trap when Commit is never reached.",
       "found_by": "Revit journal after a fatal error",
       "contributors": [
         "Gottfried Schmidtke with Claude"
+      ],
+      "sources": [
+        "https://jeremytammik.github.io/tbc/a/1250_transaction.htm",
+        "https://jeremytammik.github.io/tbc/a/1280_transaction_group.htm"
+      ],
+      "evidence": [
+        {
+          "note": "Arnost Lobel's transaction advice series: scope transactions in using-blocks (which automagically dispose and roll back), check transaction status, and handle transaction groups deliberately - the foundation of the FP14 defence.",
+          "intake": "IN-0006"
+        }
       ]
     },
     {
@@ -179,6 +215,357 @@
       "contributors": [
         "Gottfried Schmidtke with Claude"
       ]
+    },
+    {
+      "id": "FP26",
+      "name": "Internal database units assumed",
+      "meaning": "The Revit API returns and expects raw database units; length is feet and area is square feet, regardless of the project's display units. A '200 mm' wall reads as 0.656 in the API. An agent that writes millimetre or metre values into geometry calls produces a model wrong by a factor of 304.8 or 3.28 - with no error, no warning, no failed call. Defence: Treat every raw API length as feet and every area as square feet. Never mix project display units into geometry calls. Convert explicitly (UnitUtils, or the 0.3048 factor) only at display and export boundaries. Sanity-check one known dimension against the UI before any batch write.",
+      "found_by": "mined from The Building Coder archive",
+      "contributors": [
+        "Gottfried Schmidtke"
+      ],
+      "status": "candidate",
+      "evidence_kind": "mined from documentation, not yet reproduced by an agent in Revit",
+      "api_terms": [
+        "UnitUtils",
+        "UnitTypeId",
+        "Element.get_Parameter",
+        "LocationCurve"
+      ],
+      "revit_versions": "all; conversion API changed in 2021 (UnitTypeId), the underlying database units did not",
+      "sources": [
+        "https://jeremytammik.github.io/tbc/a/0011_units.htm",
+        "https://jeremytammik.github.io/tbc/a/0196_unit_conversion.htm"
+      ],
+      "intake": "IN-0006"
+    },
+    {
+      "id": "FP27",
+      "name": "Stale geometry read after modify",
+      "meaning": "After changing an element (parameter, location, type), geometry queried before regeneration or commit reflects the old state. In batch workflows and manual regeneration mode this becomes systematic: the agent measures and validates against yesterday's model. Source quote: 'The only problem is the risk of missing a regeneration and retrieving stale data.' Defence: Modify, then regenerate (or commit), then measure. Never read geometry to validate a change made in the same unregenerated pass. Regenerating more often than necessary is cheap; a stale read is invisible. After any write through a bridge, force a refresh (RefreshActiveView / UpdateAllOpenViews where available) before any verification pass, in addition to regenerate-then-read.",
+      "found_by": "mined from The Building Coder archive",
+      "contributors": [
+        "Gottfried Schmidtke"
+      ],
+      "status": "candidate",
+      "evidence_kind": "mined from documentation, not yet reproduced by an agent in Revit",
+      "api_terms": [
+        "Document.Regenerate",
+        "Element.get_Geometry",
+        "Regeneration"
+      ],
+      "revit_versions": "regeneration modes changed in 2011; the stale-read trap persists in batch code",
+      "sources": [
+        "https://jeremytammik.github.io/tbc/a/0348_regen_option_rules.htm",
+        "https://github.com/Demolinator/revit-mcp-server/issues/16"
+      ],
+      "intake": "IN-0006",
+      "evidence": [
+        {
+          "note": "A pyRevit-based bridge's own tracker documents that views do not repaint after tool calls (element creation, colour overrides in inactive views) until the user clicks or pans, so 'users think the tool didn't work'. The same stale-state trap hits agents that verify visually or by re-reading before a refresh.",
+          "intake": "IN-0008"
+        }
+      ],
+      "related": "FP18 (sibling: FP18 is face references invalidated by regeneration, FP27 is geometry read before regeneration)"
+    },
+    {
+      "id": "FP28",
+      "name": "Uncommitted transaction rolls back silently",
+      "meaning": "A Transaction in a using-block that never reaches Commit() disposes and rolls back with no exception: the code appears to succeed and the model is unchanged. The opposite face (an exception escaping with an open transaction crashing Revit inside a TransactionGroup) is already FP14; this entry adds the silent-rollback side, which is the one an agent cannot notice from the return values alone. Defence: Commit explicitly inside the using block, check the returned TransactionStatus, and treat RollBack-on-dispose as a failure path, not a default. Wrap the body in try/catch so no exception escapes with the transaction open. After any batch: read back a sample of changes to confirm they exist. For agent workflows spanning multiple tool calls, request a TransactionGroup wrapper so the run is atomic and undoable as one unit; keep read-back verification after every batch regardless.",
+      "found_by": "mined from The Building Coder archive",
+      "contributors": [
+        "Gottfried Schmidtke"
+      ],
+      "status": "candidate",
+      "evidence_kind": "mined from documentation, not yet reproduced by an agent in Revit",
+      "api_terms": [
+        "Transaction",
+        "Transaction.Commit",
+        "TransactionStatus",
+        "Transaction.RollBack"
+      ],
+      "revit_versions": "all",
+      "sources": [
+        "https://jeremytammik.github.io/tbc/a/1250_transaction.htm",
+        "https://jeremytammik.github.io/tbc/a/1280_transaction_group.htm",
+        "https://github.com/Demolinator/revit-mcp-server/issues/14",
+        "https://github.com/Demolinator/revit-mcp-server/issues/23"
+      ],
+      "intake": "IN-0006",
+      "related": "FP14 (extends)",
+      "evidence": [
+        {
+          "note": "Two additions: a feature request to wrap an entire multi-call AI task in one TransactionGroup so a whole agent run is undoable in a single step (the community independently re-deriving FP33's mechanism for agent workflows); and the concurrency issue recorded as FP35 showing four model edits skipped while their callers received success — read-back verification is the only defence that catches both.",
+          "intake": "IN-0008"
+        }
+      ]
+    },
+    {
+      "id": "FP29",
+      "name": "API call outside valid Revit context",
+      "meaning": "Revit API calls are valid only inside an API context (external command, ExternalEvent). Called from background threads, timers or modeless dialogs they fail unpredictably: a transaction 'refuses to start for no apparent reason', a call that worked before fails 'except for the exact time', sometimes Revit records errors only in the journal or crashes. Intermittent, non-reproducible failures are the signature. Defence: Never call the Revit API from a thread or UI callback. Marshal every request through a raised ExternalEvent and keep Idling as a last resort. If an API call fails intermittently with no code change, suspect the calling context before the call. Treat a timeout as 'state unknown', not 'call failed': never blindly re-issue an identical write (double-apply risk); check for a blocking dialog, a busy Revit, or a dead ExternalEvent first, and make write retries idempotent.",
+      "found_by": "mined from The Building Coder archive",
+      "contributors": [
+        "Gottfried Schmidtke"
+      ],
+      "status": "candidate",
+      "evidence_kind": "mined from documentation, not yet reproduced by an agent in Revit",
+      "api_terms": [
+        "ExternalEvent",
+        "ExternalEvent.Raise",
+        "IExternalEventHandler",
+        "UIApplication.Idling"
+      ],
+      "revit_versions": "all; the canonical explanation is Arnost Lobel's (Revit development team)",
+      "sources": [
+        "https://jeremytammik.github.io/tbc/a/0353_asynchronous.htm",
+        "https://jeremytammik.github.io/tbc/a/0743_external_event.htm",
+        "https://jeremytammik.github.io/tbc/a/1383_external_event_10_year.html",
+        "https://github.com/LuDattilo/revit-mcp-server/issues/3"
+      ],
+      "intake": "IN-0006",
+      "evidence": [
+        {
+          "note": "A timeout is often the only symptom of a context failure: on one bridge, the TCP connection establishes but Revit never responds, and every command, including trivial ones, times out after 30 seconds. The agent gets no context error — just silence — and a write that timed out client-side may still execute inside Revit later.",
+          "intake": "IN-0008"
+        }
+      ],
+      "related": "FP20, FP22 (a timeout means state unknown: read the screen and the model before re-running)"
+    },
+    {
+      "id": "FP30",
+      "name": "Modification attempted in read-only context",
+      "meaning": "Many event handlers (DocumentChanged, ViewActivated, application-level events) are notification-only: the document cannot be modified inside the handler. An agent that 'reacts to an event' with direct edits gets an exception or a silent no-op, and the event list is shorter than agents assume. Defence: Event handlers only record and queue. Every model edit goes through an ExternalEvent raised from the handler and executed later in a valid, writable context.",
+      "found_by": "mined from The Building Coder archive",
+      "contributors": [
+        "Gottfried Schmidtke"
+      ],
+      "status": "candidate",
+      "evidence_kind": "mined from documentation, not yet reproduced by an agent in Revit",
+      "api_terms": [
+        "Application.DocumentChanged",
+        "ExternalEvent",
+        "IExternalEventHandler"
+      ],
+      "revit_versions": "all",
+      "sources": [
+        "https://jeremytammik.github.io/tbc/a/0726_doc_changed_event.htm",
+        "https://jeremytammik.github.io/tbc/a/1942_prevent_modification.html"
+      ],
+      "intake": "IN-0006",
+      "related": "FP29 (sibling: same defence, different trigger)"
+    },
+    {
+      "id": "FP31",
+      "name": "Name-based parameter lookup ambiguity",
+      "meaning": "Name-based parameter lookups return the first match and null on no match. With shared and project parameter name collisions, or family versus type parameters, an agent silently reads or writes the wrong parameter, or dereferences null and the run dies mid-batch. Defence: Prefer BuiltInParameter or parameter GUID lookups. Null-check every parameter before use. When only a name is available, verify the result (owning element, definition, storage type) before reading or writing. Treat a duplicate name as an error, not a first-match windfall.",
+      "found_by": "mined from The Building Coder archive",
+      "contributors": [
+        "Gottfried Schmidtke"
+      ],
+      "status": "candidate",
+      "evidence_kind": "mined from documentation, not yet reproduced by an agent in Revit",
+      "api_terms": [
+        "Element.LookupParameter",
+        "Element.get_Parameter",
+        "BuiltInParameter",
+        "FilteredElementCollector"
+      ],
+      "revit_versions": "all",
+      "sources": [
+        "https://jeremytammik.github.io/tbc/a/1659_param_filter.html"
+      ],
+      "intake": "IN-0006"
+    },
+    {
+      "id": "FP32",
+      "name": "Posted command assumed immediate",
+      "meaning": "PostCommand queues a built-in command for the idle state; it does not execute inline. Code that posts a command and then reads or edits the model runs before the command executes, so results are stale or the context is invalid. Defence: Treat a posted command as fire-and-forget: schedule any follow-up work in an ExternalEvent, and never read model state in the same call sequence assuming the posted command already ran.",
+      "found_by": "mined from The Building Coder archive",
+      "contributors": [
+        "Gottfried Schmidtke"
+      ],
+      "status": "candidate",
+      "evidence_kind": "mined from documentation, not yet reproduced by an agent in Revit",
+      "api_terms": [
+        "UIApplication.PostCommand",
+        "RevitCommandId",
+        "ExternalEvent"
+      ],
+      "revit_versions": "2014+; custom-command posting needed UR1 to work consistently",
+      "sources": [
+        "https://jeremytammik.github.io/tbc/a/1040_postcommand.htm",
+        "https://jeremytammik.github.io/tbc/a/1364_postcommand_rules.html"
+      ],
+      "intake": "IN-0006"
+    },
+    {
+      "id": "FP33",
+      "name": "Dry-run transaction group assimilated instead of rolled back",
+      "meaning": "TransactionGroup.Assimilate() merges the enclosed sub-transactions into one committed change; RollBack() undoes them. An agent that wraps a dry run in a TransactionGroup and calls Assimilate on the 'success' path commits exactly the changes it meant to discard - no error, full undo history pointing at the agent. Defence: Dry run always ends in TransactionGroup.RollBack(). Call Assimilate only after validation passed. After the group ends, read back a sample before the next step to confirm the document is in the expected state.",
+      "found_by": "mined from The Building Coder archive",
+      "contributors": [
+        "Gottfried Schmidtke"
+      ],
+      "status": "candidate",
+      "evidence_kind": "mined from documentation, not yet reproduced by an agent in Revit",
+      "api_terms": [
+        "TransactionGroup",
+        "TransactionGroup.Assimilate",
+        "TransactionGroup.RollBack"
+      ],
+      "revit_versions": "2011+",
+      "sources": [
+        "https://jeremytammik.github.io/tbc/a/1280_transaction_group.htm",
+        "https://jeremytammik.github.io/tbc/a/1700_transaction_group.html"
+      ],
+      "intake": "IN-0006",
+      "related": "FP28 (family: silent success that is not success)"
+    },
+    {
+      "id": "FP34",
+      "name": "Advertised tool contract desync",
+      "meaning": "The bridge's advertised contract and its actual behaviour disagree, in two documented faces. (a) Registry desync: tools/list advertises tools the Revit side never registered. Agents call them and get 'Method not found' while every genuinely registered tool works; root-caused in the archived revit-mcp as implemented C# commands missing from the plugin's command manifest, so they were implemented but undiscoverable. An agent in this state burned multiple turns rotating through ai_element_filter, get_current_view_elements, send_code_to_revit and get_available_family_types, all listed, all 'not found', on two machines and two Revit versions. (b) Schema desync: a tool's JSON schema advertises null as the default for optional arguments, but the validator rejects null when a client actually sends it. Agent frameworks that fill every optional field from the schema get validation errors on tools that would have run had the field been omitted. Defence: Treat tools/list and tool schemas as unverified advertisement, not ground truth. On 'Method not found' or an argument-validation error on an advertised tool, do not rewrite the request: probe a known-good cheap tool to separate channel faults from contract faults, then degrade to the tools that verifiably respond, and report the desync instead of iterating. When composing parallel plans, fill only arguments with real values and omit optionals rather than sending advertised defaults.",
+      "found_by": "mined from Revit MCP-server issue trackers",
+      "contributors": [
+        "Gottfried Schmidtke"
+      ],
+      "status": "candidate",
+      "evidence_kind": "mined from documentation, not yet reproduced by an agent in Revit",
+      "api_terms": [
+        "tools/list",
+        "tools/call",
+        "JSON-RPC",
+        "command registry",
+        "tool input schema"
+      ],
+      "revit_versions": "Revit 2020-2026; client- and bridge-agnostic (reported on Claude Desktop and direct JSON-RPC)",
+      "sources": [
+        "https://github.com/mcp-servers-for-revit/revit-mcp/issues/30",
+        "https://github.com/mcp-servers-for-revit/revit-mcp/issues/28",
+        "https://github.com/mcp-servers-for-revit/revit-mcp/issues/21",
+        "https://github.com/Demolinator/revit-mcp-server/issues/24"
+      ],
+      "intake": "IN-0008",
+      "related": "FP19 (sibling: FP19 is an unknown parameter silently ignored by the tool, FP34 is the advertised contract itself being wrong)"
+    },
+    {
+      "id": "FP35",
+      "name": "Parallel tool calls share one handler (false success, wrong data)",
+      "meaning": "Bridges built on a single module-level request handler / ExternalEvent cannot serve concurrent requests. When an MCP client (which issues tool calls in parallel by default) sends overlapping API-context calls, only some handlers execute, and every waiting caller receives the same response, all with HTTP 200. Model edits are skipped while their callers are told they succeeded, and follow-up requests are answered with the previous request's response until the server idles. No exception, no log entry: in the documented repro, six concurrent calls each received one handler's answer, only two of six handlers ran, and four model edits were skipped while reported as successful. Root-caused upstream in pyRevit Routes (one shared handler per request thread), fixed upstream, but the agent-facing fault class generalises to any single-threaded host bridge. Defence: Never issue concurrent API-context tool calls; serialise all tool traffic to one Revit session. Treat HTTP 200 as unproven: after any write, read back the changed state before declaring success. If a bridge is known to serialise internally, still verify writes, because residual races remain (two server processes on one Revit, or a client-side timeout while the call still executes inside Revit, which re-applies on retry).",
+      "found_by": "mined from Revit MCP-server issue trackers",
+      "contributors": [
+        "Gottfried Schmidtke"
+      ],
+      "status": "candidate",
+      "evidence_kind": "mined from documentation, not yet reproduced by an agent in Revit",
+      "api_terms": [
+        "ExternalEvent",
+        "IExternalEventHandler",
+        "pyRevit Routes",
+        "Transaction"
+      ],
+      "revit_versions": "pyRevit 6.x/7.0 era; generalises to any bridge that funnels requests through one handler on a single-threaded host",
+      "sources": [
+        "https://github.com/Demolinator/revit-mcp-server/issues/23",
+        "https://github.com/pyrevitlabs/pyRevit/issues/3752"
+      ],
+      "intake": "IN-0008",
+      "related": "FP28 (family: silent success that is not success)"
+    },
+    {
+      "id": "FP36",
+      "name": "Bridge rejects or drops a valid request (channel faults that blame the caller)",
+      "meaning": "Transport- and protocol-level faults surface as errors that accuse the agent's request. A well-formed JSON-RPC body is answered with 'Invalid JSON' (-32700) because the plugin's embedded HTTP server omits the HTTP status line, so the response parses as HTTP/0.9. Node.js resolves 'localhost' to IPv6 ::1 while the Revit plugin listens on IPv4 only, so every tool call fails with ECONNREFUSED although the server is up and the requests are perfect. The agent's natural response — rewriting the payload, alternating encodings, retrying with variations — cannot succeed, and the transcript shows the agent unable to distinguish its own malformed request from a broken channel. Defence: On a transport or parse error, verify the channel before touching the payload: connect by explicit 127.0.0.1 rather than localhost, probe the port, call a known-good healthcheck tool. Never 'fix' a request that was well-formed; distinguish 'request invalid' from 'channel broken' before any retry; cap the retry loop and escalate rather than mutate.",
+      "found_by": "mined from Revit MCP-server issue trackers",
+      "contributors": [
+        "Gottfried Schmidtke"
+      ],
+      "status": "candidate",
+      "evidence_kind": "mined from documentation, not yet reproduced by an agent in Revit",
+      "api_terms": [
+        "JSON-RPC",
+        "MCP transport (stdio/HTTP)",
+        "TCP listener",
+        "localhost resolution"
+      ],
+      "revit_versions": "reported on Revit 2024-2025, Windows 10/11, Node 17+; the IPv6/IPv4 and HTTP/0.9 mechanisms are version-independent",
+      "sources": [
+        "https://github.com/LuDattilo/revit-mcp-server/issues/7",
+        "https://github.com/mcp-servers-for-revit/mcp-servers-for-revit/issues/29"
+      ],
+      "intake": "IN-0008"
+    },
+    {
+      "id": "FP37",
+      "name": "Name mangling across the serialization boundary",
+      "meaning": "Non-ASCII element names (Cyrillic, CJK, Arabic, umlauts, accents) are replaced with '?' by ASCII-fallback normalization on the bridge side. Listing tools return names like '????? 1'; the agent then sends the mangled name back into any lookup-by-name tool, and the lookup fails. The agent reads this as 'element not found' and iterates on the lookup, when the element exists and its name was destroyed in transit. Documented on a pyRevit/IronPython bridge where str vs unicode matters, with an independent fix in a community fork confirming the fault recurs across implementations. This is the string face of the class FP26 covers for numbers: values corrupted crossing the bridge boundary, invisibly, with the round-trip as the trap. Defence: Prefer ElementId over names as the round-trip key across any bridge. On first listing, test name integrity: fetch a name, query by it, and treat clusters of '?' or mojibake as a corruption signal, not as data. When a lookup fails for a name just returned by a listing tool, suspect boundary corruption before concluding the element is absent.",
+      "found_by": "mined from Revit MCP-server issue trackers",
+      "contributors": [
+        "Gottfried Schmidtke"
+      ],
+      "status": "candidate",
+      "evidence_kind": "mined from documentation, not yet reproduced by an agent in Revit",
+      "api_terms": [
+        "ElementId",
+        "FilteredElementCollector",
+        "element name lookup",
+        "JSON serialization"
+      ],
+      "revit_versions": "pyRevit/IronPython 2.7 era bridges; the ASCII-fallback mechanism is bridge- and version-independent",
+      "sources": [
+        "https://github.com/Demolinator/revit-mcp-server/issues/4"
+      ],
+      "intake": "IN-0008",
+      "related": "FP26 (sibling: boundary corrupts the value; FP26 corrupts numbers by unit convention, this corrupts strings by encoding)"
+    },
+    {
+      "id": "FP38",
+      "name": "Generated code compiled inside the host inherits an invisible environment",
+      "meaning": "Agent-authored C# sent to a code-execution tool is compiled by the bridge inside Revit, against an environment the agent cannot see. Three documented failure faces, one class: (a) the compiler adds every assembly loaded in the AppDomain as a metadata reference, so a third-party add-in with protected DLLs makes compilation fail before the agent's code is even parsed; (b) the bridge ships Roslyn with newer dependencies than the Revit release bundles, throwing a type-initializer exception on one Revit version while the identical call succeeds on the adjacent version; (c) Revit 2026 moved to .NET 8, which removed CodeDom compilation, so the legacy CSharpCodeProvider path throws 'Operation is not supported on this platform' — on Revit 2022 the same code ran. In all three faces the agent's code was correct, the compilation environment failed, and the transcripts show agents iterating on their own code, then falling back to manual instructions. Defence: After a compile failure of generated code, first compile a minimal known-good template. If the template fails, the environment is at fault: stop, report an environmental failure, and do not rewrite working code. Pin the compile target to the host's runtime (.NET Framework 4.8 vs .NET 8), expect platform shifts between Revit releases, and treat 'works on one release, fails on the neighbour' as an environment signature.",
+      "found_by": "mined from Revit MCP-server issue trackers",
+      "contributors": [
+        "Gottfried Schmidtke"
+      ],
+      "status": "candidate",
+      "evidence_kind": "mined from documentation, not yet reproduced by an agent in Revit",
+      "api_terms": [
+        "Roslyn",
+        "Microsoft.CodeAnalysis",
+        "CSharpCodeProvider",
+        "CodeDom",
+        "AppDomain assemblies"
+      ],
+      "revit_versions": "Revit 2021-2026; the .NET Framework 4.8 to .NET 8 shift lands in 2026",
+      "sources": [
+        "https://github.com/mcp-servers-for-revit/mcp-servers-for-revit/issues/59",
+        "https://github.com/mcp-servers-for-revit/mcp-servers-for-revit/issues/57",
+        "https://github.com/mcp-servers-for-revit/revit-mcp/issues/32"
+      ],
+      "intake": "IN-0008"
+    },
+    {
+      "id": "FP39",
+      "name": "Assumed execution-context variables in generated code",
+      "meaning": "Code-execution bridges inject the Revit context through template variables whose names are an unstated contract. The archived revit-mcp template exposed only lowercase 'document', while agents write 'Document' or 'doc' following the Dynamo and macro conventions, and expect 'uidoc' for selection work. The agent's code fails to access the current document although the document is passed to the executor, and the failure reads to the agent as a Revit API problem, or as its own hallucination — the reporter's own framing was 'wondering if this is a hallucination or fact?'. The fix was bridge-side aliases, confirming the contract, not the API, was at fault. The agent's own stack-trace diagnosis confidently blamed the wrong layer. Defence: Before writing real code against a code-execution tool, probe the execution contract: run a trivial template that returns the available context variables and their types. Never assume Dynamo or macro naming. On a 'variable not found' or 'cannot access document' error, print the available scope first and treat the template contract as the suspect, not the Revit API.",
+      "found_by": "mined from Revit MCP-server issue trackers",
+      "contributors": [
+        "Gottfried Schmidtke"
+      ],
+      "status": "candidate",
+      "evidence_kind": "mined from documentation, not yet reproduced by an agent in Revit",
+      "api_terms": [
+        "ExternalCommandData",
+        "UIDocument",
+        "Document",
+        "code execution template"
+      ],
+      "revit_versions": "documented on the archived revit-mcp bridge; the class applies to any generated-code tool with an injected scope",
+      "sources": [
+        "https://github.com/mcp-servers-for-revit/revit-mcp/issues/29"
+      ],
+      "intake": "IN-0008",
+      "related": "FP38 (sibling: generated code fails on an invisible contract; FP38 is the compile environment, FP39 is the runtime scope)"
     }
   ]
 }
