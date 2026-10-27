@@ -1,0 +1,130 @@
+{
+  "title": "Masterplan rebuild from a neutral rebuild package: floors, DirectShape envelopes and domain-based grids (incl. arcs) via the Revit API",
+  "contributor": {
+    "name": "Gottfried Schmidtke",
+    "github": "gschmidtke",
+    "credit_as": "Gottfried Schmidtke with Claude"
+  },
+  "license_confirmation": "I wrote this or have the right to share it, and I agree to publish it under CC BY 4.0 (text/JSON) and MIT (code).",
+  "context": {
+    "revit_version": "2024 (24.3.60.12)",
+    "tool_or_bridge": "RevitBridge MCP (run_csharp, Roslyn 4.8 / C# 12); payload files written to the user's computer and read by Revit from disk; desktop screenshots and Revit image export for visual checks",
+    "discipline": "architecture",
+    "project_type": "healthcare campus masterplan (the contributor's own design), concept",
+    "phase": "concept"
+  },
+  "intent": "Rebuild a 13-building masterplan in an empty Revit project from a compact, tool-neutral rebuild package (levels, 22 floor-profile prototypes placed as 48 floors, 13 exact mass envelopes as triangle face loops) and then create structural/reference grids per building, without re-reading the original SketchUp source and without inventing walls, rooms or structure.",
+  "use_when": [
+    "A neutral package of levels, floor profiles and exact envelopes must become native Revit elements",
+    "Exact source mass geometry (triangle face loops) has to enter Revit as DirectShape",
+    "Grids must be created for many buildings at once, including rotated wings and curved (arc) buildings",
+    "A payload is too large to embed in a code-execution call"
+  ],
+  "not_for": [
+    "Reading or interpreting the original source model (that is the upstream USG intake)",
+    "Structural design: grid intersections are column-centreline candidates only",
+    "Workshared central models"
+  ],
+  "api_terms": [
+    "Level.Create",
+    "ViewPlan.Create",
+    "Floor.Create (multiple disjoint CurveLoops)",
+    "HOST_AREA_COMPUTED",
+    "SubTransaction",
+    "TessellatedShapeBuilder / TessellatedFace",
+    "TessellatedShapeBuilderTarget.AnyGeometry, TessellatedShapeBuilderFallback.Mesh",
+    "TessellatedShapeBuilderResult.Outcome / GetGeometricalObjects",
+    "DirectShape.CreateElement (OST_Mass), DirectShape.SetShape, DirectShape.SetName, ApplicationId / ApplicationDataId",
+    "Grid.Create(Document, Line) / Grid.Create(Document, Arc)",
+    "Arc.Create(center, radius, startAngle, endAngle, xAxis, yAxis)",
+    "Document.Delete",
+    "View3D.CreateIsometric, View3D.SetSectionBox, OverrideGraphicSettings.SetSurfaceTransparency",
+    "ViewPlan.CropBoxActive",
+    "Document.ExportImage / ImageExportOptions"
+  ],
+  "improves": "ARPL-GEO-0004",
+  "packs_used": [
+    {
+      "arpl_pack": "ARPL-GEO-0004",
+      "pack_revision": 1,
+      "revit_version": "2024",
+      "result": "improved"
+    }
+  ],
+  "usage_report": {
+    "tokens_in": "",
+    "tokens_out": "",
+    "tool_calls": "Rebuild: 9 Revit calls (levels 1, floors 1, envelopes 5 incl. 3 failed + 2 rolled-back dry runs, STK-09 envelope 1, review view 2). Grids v1: 1 build + 2 read-backs. Grids v2: 1 replace + 1 read-back/export + 1 view + 1 export. About 4.6 s of Revit execution in successful build calls.",
+    "retries": "3 failed envelope calls (wrong API member; a single-read result read twice); 1 verification read-back that found 0 grids (silent tag failure); 1 image export of a cropped template view",
+    "packs": [
+      {
+        "arpl_pack": "ARPL-GEO-0004",
+        "verdict": "adapted",
+        "why": "Staging, idempotent tags, Mark/Comments evidence tags and the visual gate were reused as written. Adapted for a masterplan: stages became levels -> floors -> envelopes -> grids; the visual gate used Revit image export of a dedicated uncropped view instead of driving the UI; the version gate (rule 5) was not applied up front for TessellatedShapeBuilder and cost two failed calls (see iterations)."
+      }
+    ],
+    "without_arpl_estimate": "Rule 5 of ARPL-GEO-0004 (reflect the API before non-trivial members) would have prevented 2 of the 3 failed envelope calls had it been followed for TessellatedShapeBuilderResult."
+  },
+  "iterations": [
+    {
+      "instruction": "Embed the build data in the C# snippet.",
+      "result": "Not attempted for envelopes: the largest envelope was 200 KB (5,907 triangles).",
+      "problem": "Inline payloads that large are error-prone to pass through a code tool.",
+      "found_by": "payload size check before the build"
+    },
+    {
+      "instruction": "Write the payload JSON files to a folder on the user's computer (one-time folder approval) and read them in Revit with File.ReadAllText + JObject.Parse.",
+      "result": "Worked for all stages; 15 files, read in milliseconds.",
+      "problem": "None.",
+      "found_by": "build results"
+    },
+    {
+      "instruction": "Create 48 floors with Floor.Create, one call, each in a SubTransaction; 9 profiles have two disjoint regions, passed as two CurveLoops to one Floor.Create.",
+      "result": "48/48 created in 2.1 s; multi-region floors created as single elements; total area 3,134,736 sq ft equals the package; max per-floor deviation 0.001 sq ft (HOST_AREA_COMPUTED vs shoelace area of the source).",
+      "problem": "None. A Revit floor always has thickness; the owner chose the template's 'Generic - 12\"' as a tagged stand-in.",
+      "found_by": "area comparison in the same call"
+    },
+    {
+      "instruction": "Build 12 envelopes with TessellatedShapeBuilder; log r.GetNumberOfIssues(); set ds.Name; read r.GetGeometricalObjects() for SetShape and again for volume.",
+      "result": "Compile error: GetNumberOfIssues does not exist. Then runtime InvalidOperationException with no message, twice.",
+      "problem": "Method assumed from memory (FP40). GetGeometricalObjects() can be read only once per build result; the second read throws. (The DirectShape.Name setter was a first suspect; SetName() is the method to use.)",
+      "found_by": "rolled-back dry run with step markers, then a per-file dry run in try/catch that showed every build succeeding up to SetShape"
+    },
+    {
+      "instruction": "Read GetGeometricalObjects() once into a variable; use ds.SetName(); Target AnyGeometry, Fallback Mesh.",
+      "result": "12 envelopes in 48 ms, STK-09 (5,907 triangles) in 372 ms. Outcomes: 10 Solid, 2 Mesh, 1 Sheet. Bounding boxes match the source exactly; volumes of the 10 solids match the source signed volume to the cubic foot.",
+      "problem": "The Mesh/Sheet outcomes are not adapter errors: an edge-count check of the source triangles found 1 and 2 non-manifold edges (Mesh) and 1,069 open edges (Sheet). A Sheet's volume is not meaningful.",
+      "found_by": "per-envelope Outcome, then an edge-use count (edges used once = open, more than twice = non-manifold) on the source data"
+    },
+    {
+      "instruction": "Create 261 grids from the package's CSV (bounding-box grids per building); tag each with Comments; verify by reading back grids whose Comments start with the tag.",
+      "result": "261 created in 0.9 s, but the read-back found 0 grids.",
+      "problem": "Grid datums have no ALL_MODEL_INSTANCE_COMMENTS parameter; the write used get_Parameter(...)?.Set(...), so the null-conditional silently skipped every tag. Separately, the owner's test case rejected the bounding-box grids: floors of three narrow wings extended 17.6-50.6 ft beyond their grids.",
+      "found_by": "read-back count; floor-vs-grid coverage check in the building's grid frame"
+    },
+    {
+      "instruction": "Replace with domain-based grids (one grid domain per wing, standard bays with rational end bays, a curved building as radial lines plus concentric arcs): delete the 261 grids and create 361 (357 lines, 4 arcs) in one transaction, then read back by name prefix.",
+      "result": "361/361 in 1.3 s, one undo step; read-back by name: names unique, 4 arcs are Arc curves, line endpoints and arc radii/centres at 0.0 ft deviation; 0 grids cross another building, 0 run into another wing of the same building.",
+      "problem": "Deleting first in the same transaction avoids name clashes with the old grids (same naming scheme). Grid heads crowd where several wings meet; per-building scope boxes would fix this, but scope boxes cannot be created through the Revit API.",
+      "found_by": "read-back; image export of a plan view"
+    },
+    {
+      "instruction": "Visual check: bring Revit to the front with the desktop-control open-application call and press ZF.",
+      "result": "A second, empty Revit 2024 instance started (splash screen); the model stayed in the first instance, which the bridge kept using.",
+      "problem": "Opening an already-running desktop application can launch a new instance instead of focusing the running one.",
+      "found_by": "screenshot showing the splash; bridge status listing two live Revit sessions"
+    },
+    {
+      "instruction": "Visual check without the UI: Document.ExportImage of the template's ground-floor plan.",
+      "result": "The image showed only a small corner near the origin.",
+      "problem": "The template plan view had an active crop region.",
+      "found_by": "looking at the exported image; fixed by creating a dedicated plan view with CropBoxActive = false, no template, elevation/section/mass categories hidden, and exporting that"
+    }
+  ],
+  "final_rule": {
+    "lesson": "A neutral rebuild package becomes native Revit quickly and exactly when data travels as files, every element is identified by name or Mark (not by a parameter that may not exist), envelopes are pre-checked for closure, and visual checks use API image export rather than the desktop UI.",
+    "rule": "1. Payload: write data files next to the model and read them in Revit; do not embed large data in scripts.\n2. Floors: Floor.Create accepts several disjoint CurveLoops as one floor (2024); verify HOST_AREA_COMPUTED against the source area in the same call; a Revit floor always has thickness, so tag it as a stand-in.\n3. Envelopes as DirectShape: TessellatedShapeBuilder with Target AnyGeometry + Fallback Mesh; read GetGeometricalObjects() exactly once; name with SetName(); store the source id in ApplicationDataId and Mark.\n4. Before building envelopes, count edge use in the source triangles: open or non-manifold edges predict Mesh/Sheet outcomes; report volume only for closed solids.\n5. Grids: datums carry no Comments; identify grids by a unique name prefix and verify by name. Create arcs with Grid.Create(doc, Arc). To replace a grid set that reuses names, delete and create in one transaction.\n6. Grid logic: one grid domain per building wing (standard bays with rational end bays), curved buildings as radial lines plus concentric arcs; never one grid per bounding box. Check that no grid crosses another building or another wing of the same building.\n7. Parameter writes: avoid get_Parameter(...)?.Set(...) where the tag matters; a null parameter must fail loudly.\n8. Visual checks: prefer Document.ExportImage of a dedicated view (no template, CropBoxActive = false) over driving the desktop; do not use open-application on a running Revit.\n9. Scope boxes cannot be created through the API: report legibility of dense site views as a UI task for the user.",
+    "validation": "Counts per stage equal the package (levels, floors, envelopes, grids); floor area equals the source area per floor (here max 0.001 sq ft); envelope bounding boxes equal the source (0.0 ft); closed envelopes' volumes equal the source signed volume; grids read back by name with 0.0 ft endpoint/radius deviation; geometric checks for grid lines crossing other buildings and other wings return 0; an exported plan image is checked before reporting."
+  },
+  "notes": "Measured build performance (Revit 2024, laptop): 8 levels 0.3 s; 48 floors 2.1 s; 12 envelopes 0.05 s; 5,907-triangle envelope 0.37 s; 361 grids incl. delete 1.3 s. Failure pattern candidates: (a) 'Opening a running desktop app starts a second instance' (desktop-control layer, not the Revit API); (b) 'Null-conditional parameter write silently skips a tag' (get_Parameter returns null for a parameter the category does not have; ?. hides it; related to FP05 and FP31). TessellatedShapeBuilderResult.GetNumberOfIssues was assumed and does not exist in 2024 (FP40 evidence). The decomposition and grid-generation scripts used for the domain grids are kept with the owner; the upstream reading of the source belongs to USG, not ARPL. No client data: the masterplan is the contributor's own design."
+}
