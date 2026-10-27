@@ -10,11 +10,13 @@ Entry for engineers and designers. 'generic' packs apply to every discipline.
 |---|---|---|---|
 | [ARPL-ADM-0001](../library/model-administration/exception-in-open-transaction-crashes-revit/) An exception inside an open Transaction crashed Revit | 1 | W5 | candidate |
 | [ARPL-ADM-0002](../library/model-administration/reset-workshared-cloud-model-links-worksets/) Reset a workshared cloud model: remove all Revit links and delete user worksets with all worksets closed | 2 | W5 | candidate |
+| [ARPL-ADM-0003](../library/model-administration/batch-cloud-onboarding-with-registry/) Batch-onboard local models to the cloud and register each one: verify by document state, handle posted-command dialogs | 2 | W7 | candidate |
 | [ARPL-DOC-0002](../library/documentation/dimension-style-in-trade-units/) Project units round framing dimensions | 1 | W6 | candidate |
 | [ARPL-FAM-0001](../library/family-authoring/equipment-from-spec-sheet-overall-dimensions/) Coffee brewer from a spec sheet: overall height short | 2 | W1 | candidate |
 | [ARPL-FAM-0002](../library/family-authoring/orientation-from-multiple-source-views/) Faucet on the wrong side: mirrored source view | 2 | W1 | candidate |
 | [ARPL-FAM-0003](../library/family-authoring/family-template-hidden-geometry/) Template with hidden geometry | 1 | W1 | candidate |
 | [ARPL-GEO-0001](../library/geometry/adaptive-rig-reference-lines-not-model-lines/) Forms absorb model lines and break hosting | 2 | W2 | candidate |
+| [ARPL-LNK-0002](../library/links-coordinates/batch-cloud-links-by-shared-coordinates/) Batch-link cloud models from a registry and link matrix, placed by shared coordinates; verify by link transform | 2 | W7 | candidate |
 | [ARPL-MCX-0001](../library/model-context/read-camera-before-interpreting-markups/) Markup read without checking the camera | 1 | W8 | candidate |
 | [ARPL-VIEW-0001](../library/views-graphics/crop-overridden-by-scope-box/) Crops silently ignored | 1 | W6 | candidate |
 | [ARPL-VIEW-0002](../library/views-graphics/section-view-direction/) Section looking the wrong way | 1 | W6 | candidate |
@@ -39,6 +41,8 @@ Entry for engineers and designers. 'generic' packs apply to every discipline.
 | [ARPL-GEO-0002](../library/geometry/gable-walls-as-profile-walls/) Gable walls without wall attachment | 2 | W4 | candidate |
 | [ARPL-GEO-0003](../library/geometry/wall-and-footing-corner-joins/) Footing corner notches | 2 | W4 | candidate |
 | [ARPL-GEO-0004](../library/geometry/concept-model-from-neutral-spec-staged-build/) Concept model from a neutral spec: staged, idempotent build with visual gates | 2 | W4 | candidate |
+| [ARPL-GEO-0005](../library/geometry/masterplan-from-neutral-rebuild-package/) Masterplan from a neutral rebuild package: floors, DirectShape envelopes and domain-based grids | 2 | W4 | candidate |
+| [ARPL-LNK-0001](../library/links-coordinates/shared-coordinates-before-splitting-a-campus/) Set shared coordinates on an authority building, then split a campus model into per-building files | 2 | W5 | candidate |
 | [ARPL-PAR-0001](../library/parameters-data/material-description-keynote-governance/) Governed material Descriptions and Keynotes | 2 | W7 | candidate |
 | [ARPL-PLH-0001](../library/placement-hosting/hosted-insert-sill-height-explicit/) Windows placed at sill 0 | 1 | W4 | candidate |
 | [ARPL-PLH-0002](../library/placement-hosting/door-swing-verified-by-geometry/) Door swing reported correct without a test | 2 | W4 | candidate |
@@ -109,7 +113,10 @@ Entry for engineers and designers. 'generic' packs apply to every discipline.
 
 | Pack | Level | Work class | Status |
 |---|---|---|---|
+| [ARPL-ADM-0003](../library/model-administration/batch-cloud-onboarding-with-registry/) Batch-onboard local models to the cloud and register each one: verify by document state, handle posted-command dialogs | 2 | W7 | candidate |
 | [ARPL-FAM-0004](../library/family-authoring/annotation-family-version-and-reload/) Annotation family from a newer Revit version | 2 | W1 | candidate |
+| [ARPL-LNK-0001](../library/links-coordinates/shared-coordinates-before-splitting-a-campus/) Set shared coordinates on an authority building, then split a campus model into per-building files | 2 | W5 | candidate |
+| [ARPL-LNK-0002](../library/links-coordinates/batch-cloud-links-by-shared-coordinates/) Batch-link cloud models from a registry and link matrix, placed by shared coordinates; verify by link transform | 2 | W7 | candidate |
 | [ARPL-PAR-0001](../library/parameters-data/material-description-keynote-governance/) Governed material Descriptions and Keynotes | 2 | W7 | candidate |
 | [ARPL-SCH-0002](../library/schedules-quantities/bom-needs-governed-parameters/) Cost per type can't carry a BOM | 2 | W7 | candidate |
 

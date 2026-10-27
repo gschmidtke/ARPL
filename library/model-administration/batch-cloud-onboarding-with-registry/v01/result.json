@@ -1,0 +1,5 @@
+{
+  "result": "The call timed out on the agent side (60 s) but finished in Revit; while 'Enable Worksharing' ran, further bridge calls also timed out.",
+  "problem": "A timeout says nothing about success; resending would try a second upload (FP22).",
+  "found_by": "wait, then read IsModelInCloud / IsWorkshared / GetCloudModelPath().GetModelGUID() in a short call"
+}

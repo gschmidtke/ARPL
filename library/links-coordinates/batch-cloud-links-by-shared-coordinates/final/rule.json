@@ -1,0 +1,8 @@
+{
+  "lesson": "A generated link configuration must be read before a batch run: defaults can contradict the project's coordinate setup. After the run, placement is proven by the link transform, not by looking.",
+  "rule": "1. Before the run, read the generated matrix: placement by shared coordinates on every row; link type, workset, load-on-open and room bounding as the project wants. Change it on a backup copy only (FP46).\n2. Close every model the batch will open; set the batch output folder explicitly.\n3. After the run: every host has as many link instances as its matrix rows; when all models share one coordinate system and internal origin, every link instance's total transform is identity; otherwise compare it with the transform implied by the shared coordinates.\n4. For later read-only checks, open hosts with all worksets closed so links on their own worksets stay unloaded.",
+  "validation": [
+    "Per host: link instances = matrix rows for that host; 0 skipped or errored.",
+    "Every RevitLinkInstance.GetTotalTransform() equals the expected transform (identity in a common-origin federation)."
+  ]
+}

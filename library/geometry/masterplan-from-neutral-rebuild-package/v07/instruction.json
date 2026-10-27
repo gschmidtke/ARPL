@@ -1,0 +1,4 @@
+{
+  "version": "v07",
+  "instruction": "Replace with domain-based grids (one grid domain per wing, standard bays with rational end bays, a curved building as radial lines plus concentric arcs): delete the 261 and create 361 (357 lines, 4 arcs) in one transaction; read back by name prefix."
+}

@@ -1,0 +1,4 @@
+{
+  "version": "v01",
+  "instruction": "Open the local model, set Project Information, SaveAsCloudModel + EnableCloudWorksharing in one bridge call."
+}

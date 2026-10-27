@@ -1,0 +1,5 @@
+{
+  "result": "Counts correct; 0 floors unassigned; per-file totals equal the parent.",
+  "problem": "None.",
+  "found_by": "floor levels per file match each building's storeys"
+}

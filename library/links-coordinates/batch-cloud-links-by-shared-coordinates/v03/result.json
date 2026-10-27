@@ -1,0 +1,5 @@
+{
+  "result": "All link instances have an identity total transform (all models share one coordinate system and one internal origin); all link types loaded after creation. Worksets-closed opens take about 30 s and keep the links unloaded.",
+  "problem": "None.",
+  "found_by": "RevitLinkInstance.GetTotalTransform().IsIdentity on every instance"
+}

@@ -1,0 +1,5 @@
+{
+  "result": "ProjectPosition and element counts compared with the split report; one model had been uploaded before its split was corrected, and the check confirmed the cloud copy held the corrected version.",
+  "problem": "A model uploaded by someone else may predate a local fix.",
+  "found_by": "counts and coordinates against the known-good split report"
+}

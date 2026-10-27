@@ -1,0 +1,81 @@
+{
+  "id": "ARPL-LNK-0001",
+  "revision": 1,
+  "title": "Set shared coordinates on an authority building, then split a campus model into per-building files",
+  "use_when": [
+    "A campus or masterplan model has to be split into per-building models that will be linked back by shared coordinates",
+    "One building is the coordinate authority and the site location comes from a map pick (lat/long) rather than a survey file",
+    "Elements (grids, masses, floors) must be assigned to buildings automatically before a split"
+  ],
+  "not_for": [
+    "Projects with a surveyed control point or a civil/site model to acquire coordinates from: acquire from that instead",
+    "Splits where buildings share elements that cannot be assigned to one building (shared podium, site-wide topography): decide ownership first"
+  ],
+  "api_terms": [
+    "ProjectLocation.SetProjectPosition",
+    "ProjectPosition",
+    "ProjectLocation.GetTotalTransform",
+    "SiteLocation.Latitude",
+    "SiteLocation.Longitude",
+    "SiteLocation.TimeZone",
+    "Application.OpenDocumentFile",
+    "Document.Delete",
+    "Document.Save",
+    "Document.Close",
+    "Grid.Curve",
+    "Element.get_BoundingBox"
+  ],
+  "level": 2,
+  "work_class": "W5",
+  "workflows": [
+    "links-coordinates",
+    "model-administration",
+    "coordination"
+  ],
+  "disciplines": [
+    "bim-vdc",
+    "architecture"
+  ],
+  "roles": [
+    "bim-manager",
+    "coordinator",
+    "bim-specialist"
+  ],
+  "project_types": [
+    "healthcare",
+    "generic"
+  ],
+  "phases": [
+    "concept",
+    "schematic-design"
+  ],
+  "revit_versions_tested": [
+    "2024"
+  ],
+  "environment": {
+    "revit_version": "2024.3 (24.3.60.12)",
+    "tool": "RevitBridge MCP with run_csharp",
+    "compiler": "Roslyn 4.8 (C# 12)",
+    "agent": "Claude (Anthropic)",
+    "model": "13-building campus model (contributor's own design), site picked from a map, state plane (US survey feet) computed outside Revit"
+  },
+  "failure_patterns": [
+    "FP05",
+    "FP44"
+  ],
+  "status": "candidate",
+  "contributors": [
+    "Gottfried Schmidtke with Claude"
+  ],
+  "recorded": "2026-10-27",
+  "changelog": [
+    {
+      "revision": 1,
+      "date": "2026-10-27",
+      "change": "First recorded (IN-0014, PR #5)",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ]
+    }
+  ]
+}

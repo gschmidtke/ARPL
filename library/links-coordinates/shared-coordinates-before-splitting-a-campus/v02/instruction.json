@@ -1,0 +1,4 @@
+{
+  "version": "v02",
+  "instruction": "Split: copy the campus file per building, open the copy, delete grids, masses and floors of other buildings, save. Grids by name prefix, masses by name, floors by nearest mass bounding box."
+}

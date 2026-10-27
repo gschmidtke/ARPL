@@ -1,0 +1,93 @@
+{
+  "id": "ARPL-ADM-0003",
+  "revision": 1,
+  "title": "Batch-onboard local models to the cloud and register each one: verify by document state, handle posted-command dialogs",
+  "use_when": [
+    "An agent uploads or registers a series of local models to one cloud project folder",
+    "A bridge call outlasts the bridge's reply wait (cloud save, enable worksharing, sync)",
+    "An add-in command started by PostCommand opens file pickers, confirmation prompts or result dialogs",
+    "Some models may already exist in the cloud folder, uploaded earlier by someone else"
+  ],
+  "not_for": [
+    "Single interactive uploads done by a person",
+    "Batch tools that already run headless without dialogs: use those and skip the screen handling"
+  ],
+  "api_terms": [
+    "Document.SaveAsCloudModel",
+    "Autodesk.Revit.Exceptions.RevitServerModelAlreadyExistsException",
+    "Document.EnableCloudWorksharing",
+    "Document.IsModelInCloud",
+    "Document.IsWorkshared",
+    "Document.PathName",
+    "Document.GetCloudModelPath",
+    "ModelPath.GetModelGUID",
+    "ModelPath.GetProjectGUID",
+    "Document.GetHubId",
+    "Document.GetProjectId",
+    "Document.GetCloudFolderId",
+    "ModelPathUtils.ConvertCloudGUIDsToCloudPath",
+    "UIApplication.OpenAndActivateDocument",
+    "UIApplication.PostCommand",
+    "RevitCommandId.LookupCommandId",
+    "ProjectInfo.BuildingName",
+    "Document.SynchronizeWithCentral",
+    "RelinquishOptions",
+    "OpenOptions.DetachFromCentralOption"
+  ],
+  "level": 2,
+  "work_class": "W7",
+  "workflows": [
+    "model-administration",
+    "links-coordinates"
+  ],
+  "disciplines": [
+    "bim-vdc",
+    "generic"
+  ],
+  "roles": [
+    "bim-manager",
+    "coordinator",
+    "bim-specialist"
+  ],
+  "project_types": [
+    "generic"
+  ],
+  "phases": [
+    "concept",
+    "design-development",
+    "construction-documents"
+  ],
+  "revit_versions_tested": [
+    "2024"
+  ],
+  "environment": {
+    "revit_version": "2024.3 (24.3.60.12)",
+    "tool": "RevitBridge MCP with run_csharp",
+    "compiler": "Roslyn 4.8 (C# 12)",
+    "agent": "Claude (Anthropic)",
+    "desktop": "screenshots, mouse and keyboard for add-in dialogs",
+    "model": "13 per-building models of one campus, cloud project folder"
+  },
+  "failure_patterns": [
+    "FP22",
+    "FP32",
+    "FP41",
+    "FP43",
+    "FP45"
+  ],
+  "status": "candidate",
+  "contributors": [
+    "Gottfried Schmidtke with Claude"
+  ],
+  "recorded": "2026-10-27",
+  "changelog": [
+    {
+      "revision": 1,
+      "date": "2026-10-27",
+      "change": "First recorded (IN-0015, PR #6; onboarding iteration of IN-0014, PR #5)",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ]
+    }
+  ]
+}

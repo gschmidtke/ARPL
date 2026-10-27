@@ -1,0 +1,5 @@
+{
+  "result": "The image showed only a corner near the origin.",
+  "problem": "The template plan view had an active crop region.",
+  "found_by": "the exported image; fixed with a dedicated plan view, CropBoxActive = false, no template"
+}

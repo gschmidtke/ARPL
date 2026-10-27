@@ -1,0 +1,4 @@
+{
+  "version": "v02",
+  "instruction": "Run the registry add-in command on a sibling uploaded earlier, before its Building Name was set."
+}

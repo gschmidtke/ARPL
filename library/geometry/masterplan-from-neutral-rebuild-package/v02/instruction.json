@@ -1,0 +1,4 @@
+{
+  "version": "v02",
+  "instruction": "Write the payload JSON files to a folder on the user's computer (one-time folder approval) and read them in Revit with File.ReadAllText + JObject.Parse."
+}

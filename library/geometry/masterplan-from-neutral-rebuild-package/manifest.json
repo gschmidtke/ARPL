@@ -1,0 +1,92 @@
+{
+  "id": "ARPL-GEO-0005",
+  "revision": 1,
+  "title": "Masterplan from a neutral rebuild package: floors, DirectShape envelopes and domain-based grids",
+  "use_when": [
+    "A neutral package of levels, floor profiles and exact envelopes must become native Revit elements",
+    "Exact source mass geometry (triangle face loops) has to enter Revit as DirectShape",
+    "Grids must be created for many buildings at once, including rotated wings and curved (arc) buildings",
+    "A payload is too large to embed in a code-execution call"
+  ],
+  "not_for": [
+    "Reading or interpreting the original source model (upstream intake, USG)",
+    "Structural design: grid intersections are column-centreline candidates only",
+    "Workshared central models"
+  ],
+  "api_terms": [
+    "Level.Create",
+    "ViewPlan.Create",
+    "Floor.Create (multiple disjoint CurveLoops)",
+    "HOST_AREA_COMPUTED",
+    "SubTransaction",
+    "TessellatedShapeBuilder",
+    "TessellatedShapeBuilderTarget.AnyGeometry",
+    "TessellatedShapeBuilderFallback.Mesh",
+    "TessellatedShapeBuilderResult.Outcome",
+    "TessellatedShapeBuilderResult.GetGeometricalObjects",
+    "DirectShape.CreateElement",
+    "DirectShape.SetShape",
+    "DirectShape.SetName",
+    "Grid.Create(Document, Line)",
+    "Grid.Create(Document, Arc)",
+    "Arc.Create",
+    "Document.Delete",
+    "ViewPlan.CropBoxActive",
+    "Document.ExportImage",
+    "ImageExportOptions"
+  ],
+  "level": 2,
+  "work_class": "W4",
+  "workflows": [
+    "geometry",
+    "model-context",
+    "validation-qaqc"
+  ],
+  "disciplines": [
+    "architecture"
+  ],
+  "roles": [
+    "designer",
+    "modeler",
+    "bim-specialist"
+  ],
+  "project_types": [
+    "healthcare"
+  ],
+  "phases": [
+    "concept"
+  ],
+  "revit_versions_tested": [
+    "2024"
+  ],
+  "environment": {
+    "revit_version": "2024.3 (24.3.60.12)",
+    "tool": "RevitBridge MCP with run_csharp",
+    "compiler": "Roslyn 4.8 (C# 12)",
+    "agent": "Claude (Anthropic)",
+    "payload": "15 JSON files on the user's computer, read in Revit with File.ReadAllText",
+    "verification": "Document.ExportImage of a dedicated uncropped plan view"
+  },
+  "failure_patterns": [
+    "FP05",
+    "FP31",
+    "FP40",
+    "FP41",
+    "FP42"
+  ],
+  "status": "candidate",
+  "contributors": [
+    "Gottfried Schmidtke with Claude"
+  ],
+  "recorded": "2026-10-27",
+  "changelog": [
+    {
+      "revision": 1,
+      "date": "2026-10-27",
+      "change": "First recorded (IN-0013, PR #4); builds on ARPL-GEO-0004 (adapted)",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ]
+    }
+  ]
+}

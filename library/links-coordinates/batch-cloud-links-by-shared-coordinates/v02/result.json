@@ -1,0 +1,5 @@
+{
+  "result": "13/13 hosts OK, 12 links each, 0 dialogs, 21 min.",
+  "problem": "None.",
+  "found_by": "batch log and per-host reports (rows found = instances created, 0 skipped)"
+}

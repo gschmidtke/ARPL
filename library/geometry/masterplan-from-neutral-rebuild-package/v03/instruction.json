@@ -1,0 +1,4 @@
+{
+  "version": "v03",
+  "instruction": "Create 48 floors with Floor.Create in one call, each in a SubTransaction; profiles with two disjoint regions passed as two CurveLoops to one Floor.Create."
+}

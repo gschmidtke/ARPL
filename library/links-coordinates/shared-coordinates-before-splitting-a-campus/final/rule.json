@@ -1,0 +1,9 @@
+{
+  "lesson": "Set shared coordinates once in the parent before splitting, so every child inherits them; assign elements to buildings by containment, never by nearest distance.",
+  "rule": "1. Pick the authority building and an anchor point on it (for example an arc-grid centre). Compute the state-plane E/N of the anchor outside Revit.\n2. In the parent: SetProjectPosition(XYZ.Zero, new ProjectPosition(E - anchor.X, N - anchor.Y, elevation, angle)); set SiteLocation latitude, longitude and time zone; dry-run, read the anchor back through GetTotalTransform().Inverse, then commit and save. Record the accuracy of the source (map pick: metres) and the grid-north convergence you did or did not apply.\n3. Split only after that: copy the file per building and delete what does not belong. Grids by name prefix, masses by name, hosted/floor elements by containment in the building's own grid extent (smallest containing extent wins).\n4. Guard: per-file counts must add up to the parent's counts, no element unassigned, and every child's ProjectPosition at XYZ.Zero equals the parent's.",
+  "validation": [
+    "The anchor reads back the intended E/N in shared coordinates.",
+    "Every child file has the same ProjectPosition at XYZ.Zero as the parent.",
+    "Element counts per building sum to the parent counts; 0 unassigned."
+  ]
+}

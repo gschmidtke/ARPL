@@ -1,0 +1,5 @@
+{
+  "result": "261 created in 0.9 s, but the read-back found 0 grids.",
+  "problem": "Grid datums have no ALL_MODEL_INSTANCE_COMMENTS; get_Parameter(...)?.Set(...) skipped every tag silently (FP42). The owner also rejected bounding-box grids: floors of three narrow wings extended 17.6-50.6 ft beyond their grids.",
+  "found_by": "read-back count; floor-vs-grid coverage check in the building's grid frame"
+}

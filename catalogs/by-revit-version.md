@@ -10,6 +10,7 @@ Only versions in which the pack actually ran.
 |---|---|---|---|
 | [ARPL-ADM-0001](../library/model-administration/exception-in-open-transaction-crashes-revit/) An exception inside an open Transaction crashed Revit | 1 | W5 | candidate |
 | [ARPL-ADM-0002](../library/model-administration/reset-workshared-cloud-model-links-worksets/) Reset a workshared cloud model: remove all Revit links and delete user worksets with all worksets closed | 2 | W5 | candidate |
+| [ARPL-ADM-0003](../library/model-administration/batch-cloud-onboarding-with-registry/) Batch-onboard local models to the cloud and register each one: verify by document state, handle posted-command dialogs | 2 | W7 | candidate |
 | [ARPL-ASM-0001](../library/assemblies-fabrication/sheathing-layout-minimum-remnant-at-openings/) Plywood slivers at openings | 2 | W3 | candidate |
 | [ARPL-ASM-0002](../library/assemblies-fabrication/opening-framing-header-fit-under-plates/) Door too tall for a header | 2 | W3 | candidate |
 | [ARPL-ASM-0003](../library/assemblies-fabrication/wall-panels-families-not-parts/) Revit Parts for wall layers: a dead end | 2 | W3 | candidate |
@@ -33,6 +34,9 @@ Only versions in which the pack actually ran.
 | [ARPL-GEO-0002](../library/geometry/gable-walls-as-profile-walls/) Gable walls without wall attachment | 2 | W4 | candidate |
 | [ARPL-GEO-0003](../library/geometry/wall-and-footing-corner-joins/) Footing corner notches | 2 | W4 | candidate |
 | [ARPL-GEO-0004](../library/geometry/concept-model-from-neutral-spec-staged-build/) Concept model from a neutral spec: staged, idempotent build with visual gates | 2 | W4 | candidate |
+| [ARPL-GEO-0005](../library/geometry/masterplan-from-neutral-rebuild-package/) Masterplan from a neutral rebuild package: floors, DirectShape envelopes and domain-based grids | 2 | W4 | candidate |
+| [ARPL-LNK-0001](../library/links-coordinates/shared-coordinates-before-splitting-a-campus/) Set shared coordinates on an authority building, then split a campus model into per-building files | 2 | W5 | candidate |
+| [ARPL-LNK-0002](../library/links-coordinates/batch-cloud-links-by-shared-coordinates/) Batch-link cloud models from a registry and link matrix, placed by shared coordinates; verify by link transform | 2 | W7 | candidate |
 | [ARPL-MCX-0001](../library/model-context/read-camera-before-interpreting-markups/) Markup read without checking the camera | 1 | W8 | candidate |
 | [ARPL-PAR-0001](../library/parameters-data/material-description-keynote-governance/) Governed material Descriptions and Keynotes | 2 | W7 | candidate |
 | [ARPL-PLH-0001](../library/placement-hosting/hosted-insert-sill-height-explicit/) Windows placed at sill 0 | 1 | W4 | candidate |

@@ -42,6 +42,7 @@ Work class = what drives the result; it decides the preview and the proof of 'do
 | [ARPL-GEO-0002](../library/geometry/gable-walls-as-profile-walls/) Gable walls without wall attachment | 2 | W4 | candidate |
 | [ARPL-GEO-0003](../library/geometry/wall-and-footing-corner-joins/) Footing corner notches | 2 | W4 | candidate |
 | [ARPL-GEO-0004](../library/geometry/concept-model-from-neutral-spec-staged-build/) Concept model from a neutral spec: staged, idempotent build with visual gates | 2 | W4 | candidate |
+| [ARPL-GEO-0005](../library/geometry/masterplan-from-neutral-rebuild-package/) Masterplan from a neutral rebuild package: floors, DirectShape envelopes and domain-based grids | 2 | W4 | candidate |
 | [ARPL-PLH-0001](../library/placement-hosting/hosted-insert-sill-height-explicit/) Windows placed at sill 0 | 1 | W4 | candidate |
 | [ARPL-PLH-0002](../library/placement-hosting/door-swing-verified-by-geometry/) Door swing reported correct without a test | 2 | W4 | candidate |
 
@@ -53,6 +54,7 @@ Work class = what drives the result; it decides the preview and the proof of 'do
 | [ARPL-ADM-0002](../library/model-administration/reset-workshared-cloud-model-links-worksets/) Reset a workshared cloud model: remove all Revit links and delete user worksets with all worksets closed | 2 | W5 | candidate |
 | [ARPL-CHG-0001](../library/model-change/lower-a-level-and-propagate-dependents/) Lowering a level: what doesn't follow | 2 | W5 | candidate |
 | [ARPL-CHG-0002](../library/model-change/replace-footprint-roof-revit-2024/) Changing a footprint roof's outline by API in Revit 2024 | 2 | W5 | candidate |
+| [ARPL-LNK-0001](../library/links-coordinates/shared-coordinates-before-splitting-a-campus/) Set shared coordinates on an authority building, then split a campus model into per-building files | 2 | W5 | candidate |
 
 ## W6: Documentation production (driven by views and sheets)
 
@@ -67,6 +69,8 @@ Work class = what drives the result; it decides the preview and the proof of 'do
 
 | Pack | Level | Work class | Status |
 |---|---|---|---|
+| [ARPL-ADM-0003](../library/model-administration/batch-cloud-onboarding-with-registry/) Batch-onboard local models to the cloud and register each one: verify by document state, handle posted-command dialogs | 2 | W7 | candidate |
+| [ARPL-LNK-0002](../library/links-coordinates/batch-cloud-links-by-shared-coordinates/) Batch-link cloud models from a registry and link matrix, placed by shared coordinates; verify by link transform | 2 | W7 | candidate |
 | [ARPL-PAR-0001](../library/parameters-data/material-description-keynote-governance/) Governed material Descriptions and Keynotes | 2 | W7 | candidate |
 | [ARPL-SCH-0001](../library/schedules-quantities/cost-estimate-construction-method-first/) Cost estimate priced the wrong construction | 2 | W7 | candidate |
 | [ARPL-SCH-0002](../library/schedules-quantities/bom-needs-governed-parameters/) Cost per type can't carry a BOM | 2 | W7 | candidate |

@@ -1,0 +1,5 @@
+{
+  "result": "Committed; the anchor read back through GetTotalTransform().Inverse at exactly E/N.",
+  "problem": "Sign convention is easy to flip: ProjectPosition is the shared position of the internal origin, so E - c.X, not c.X - E. A map pick is accurate to a few metres only, and grid north differs from true north by the convergence angle (about 0.13 deg here).",
+  "found_by": "read-back of the anchor in shared coordinates; rolled-back dry run before commit"
+}
