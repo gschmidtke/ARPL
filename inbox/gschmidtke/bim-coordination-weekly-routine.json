@@ -1,0 +1,109 @@
+{
+  "title": "Weekly BIM coordination routine for a federated cloud project: collect, check, correct, report, archive",
+  "contributor": {
+    "name": "Gottfried Schmidtke",
+    "github": "gschmidtke",
+    "credit_as": "Gottfried Schmidtke (Tiverit LLC)"
+  },
+  "license_confirmation": "I wrote this or have the right to share it, and I agree to publish it under CC BY 4.0 (text/JSON) and MIT (code).",
+  "submission_kind": "project workflow proposal (role: BIM coordinator), plus proposed packs",
+  "context": {
+    "revit_version": "2024.3",
+    "tool_or_bridge": "Revit bridge (MCP, run_csharp) for read-only collection and targeted fixes; any batch tool that opens cloud models from a registry and runs per-model exports (health check, link and workset report, schedule export, family sizes); optional cloud API for file sizes",
+    "discipline": "BIM management / coordination",
+    "project_type": "Multi-model federated project; designed on a 13-model campus with 156 cloud links",
+    "phase": "Design through construction documentation, recurring weekly"
+  },
+  "intent": "Keep a federated cloud project current in one weekly session: collect model data in an unattended batch, check it against fixed rules and last week's snapshot, repair what is safe to repair, queue the rest for the coordinator's approval, and report the result as a dashboard with week-over-week trends.",
+  "use_when": [
+    "A project has several linked cloud models and a registry of their identifiers (model key, project and model GUIDs).",
+    "A coordinator needs a recurring, comparable health and federation report rather than one-off checks.",
+    "An agent is asked to act as BIM coordinator: links, coordinates, standards, warnings, parameter completeness."
+  ],
+  "not_for": [
+    "Single-model projects with no links: use the individual checks only.",
+    "Clash detection between disciplines (geometry against geometry): a separate workflow.",
+    "Decisions on design content or discipline adequacy: those stay with the coordinator and the discipline leads."
+  ],
+  "api_terms": [
+    "ModelPathUtils.ConvertCloudGUIDsToCloudPath",
+    "OpenOptions.SetOpenWorksetsConfiguration(WorksetConfigurationOption.CloseAllWorksets)",
+    "RevitLinkInstance.GetTotalTransform",
+    "RevitLinkType.IsLoaded",
+    "ProjectLocation.GetProjectPosition",
+    "ProjectInfo.BuildingName",
+    "Document.GetWarnings, FailureMessage.GetDescriptionText",
+    "WorksharingUtils.GetCheckoutStatus",
+    "ViewSchedule, TableData",
+    "Document.SynchronizeWithCentral"
+  ],
+  "improves": "",
+  "packs_used": [],
+  "workflow_proposal": {
+    "role": "BIM coordinator",
+    "sequence": [
+      {"step": 0, "do": "Preflight: application idle, bridge alive, disk and cloud cache space, registry compared with the cloud folder (new or renamed models), no model open", "proposed_pack": "registry-vs-cloud-folder-check"},
+      {"step": 1, "do": "Collect in batch (unattended): per-model health export, link and workset report, schedule exports, family size report; outputs to REPORTS/<date>", "proposed_pack": null},
+      {"step": 2, "do": "Collect deep (read-only, bridge): warnings by type, link status and transform, ProjectPosition against the authority model, Project Information keys, element counts. Open each model with all worksets closed so links stay unloaded (about 30 s per open)", "proposed_pack": "read-only-model-snapshot-worksets-closed"},
+      {"step": 3, "do": "Check: load all outputs into one dataset keyed by model and week, compare with last week, apply the rule table", "proposed_pack": "coordination-rule-table"},
+      {"step": 4, "do": "Correct: safe fixes automatically (repair links to match the link matrix, set missing building name, import missing standard schedules, sync); everything that moves geometry, changes coordinates or deletes waits for approval", "proposed_pack": "links-placed-by-shared-coordinates-check"},
+      {"step": 5, "do": "Report: refresh dashboard pages (project health, federation, model quality, data quality) and a one-page summary", "proposed_pack": null},
+      {"step": 6, "do": "Archive: append the week to history tables; never edit raw outputs; submit new lessons to the inbox", "proposed_pack": null}
+    ],
+    "rule_table": [
+      {"check": "Links complete", "rule": "Every host has each link its matrix defines, none missing or duplicated", "fix": "auto (repair from matrix)"},
+      {"check": "Links in place", "rule": "Every link instance placed by shared coordinates; when all models share one coordinate system and one internal origin, the link transform is identity", "fix": "approval"},
+      {"check": "Coordinates", "rule": "Shared origin and angle equal the authority model, tolerance 0.01 ft", "fix": "approval"},
+      {"check": "Model identity", "rule": "Building name equals the registry key; no template placeholder text", "fix": "auto"},
+      {"check": "Warnings", "rule": "Count up more than 10% week over week, or a new warning type", "fix": "report"},
+      {"check": "File size", "rule": "Over 300 MB or up more than 15% in a week", "fix": "report; purge for approval"},
+      {"check": "Families", "rule": "Any family over 5 MB; in-place count rising", "fix": "report"},
+      {"check": "Parameter completeness", "rule": "Required fields filled in at least 95% of instances per category", "fix": "report"},
+      {"check": "Sheets", "rule": "Sheet numbers unique; sheets without views flagged", "fix": "report"},
+      {"check": "Worksets", "rule": "Links on their own link worksets; elements on the default workset below a set limit", "fix": "approval"},
+      {"check": "Standards", "rule": "Standard schedules and view templates present", "fix": "auto"},
+      {"check": "Registry", "rule": "Every model in the cloud folder has a registry row, and the reverse", "fix": "approval"}
+    ],
+    "data_model": "Star schema keyed by ModelKey and SnapshotDate: Models, Snapshots (dimensions); ModelHealth, Warnings, Links (host x link), ParameterFill (model x category x parameter), Families, Findings (model x rule) as facts. Raw outputs per run in REPORTS/<date>, history appended per table in HISTORY.",
+    "guardrails": [
+      "Collection is read-only.",
+      "Agent alone: collection, analysis, reporting, link repair to the matrix, missing building name, missing standard schedules, sync after a successful fix.",
+      "Coordinator approval: re-placing links, applying coordinates, moving elements between worksets, purge, registering new models, any delete.",
+      "Never automated: changes to the link matrix or registry rules, the authority model, anything another user has borrowed."
+    ]
+  },
+  "usage_report": {
+    "tokens_in": "",
+    "tokens_out": "",
+    "tool_calls": "",
+    "retries": "",
+    "packs": [],
+    "without_arpl_estimate": "Estimated 6 to 8 hours per week by hand for 13 models; routine estimated at 60 to 75 minutes machine time and about 10 minutes of coordinator time. Basis measured on 2026-10-27: batch opens of cloud models 7 to 11 s each, 156 links created in 21 min, schedule import for 5 models about 2.5 min, worksets-closed open about 30 s."
+  },
+  "iterations": [
+    {
+      "instruction": "Design the routine from one day of federation work on a 13-model campus (coordinate setup, split, cloud onboarding, registry, batch linking, standard schedule import).",
+      "result": "Routine, rule table, data model and guardrails as above. Not yet run end to end.",
+      "problem": "Thresholds are starting values; the required-parameter list per category and the dashboard delivery (in-session dashboard or external BI tool) are open decisions for the coordinator.",
+      "found_by": "Review of the day's measured timings and failures."
+    },
+    {
+      "instruction": "Generate the link matrix from the registry with a batch tool's default export, then batch-create links.",
+      "result": "The exported matrix had 'use shared coordinates' set to false on every row; links would have been placed origin to origin.",
+      "problem": "A generated default silently contradicted the project's coordinate setup.",
+      "found_by": "Reading the matrix values before the run. Fixed by setting the column to true (backup kept); 13/13 hosts linked, link transforms identity."
+    },
+    {
+      "instruction": "Batch-import standard schedules with a batch tool's per-model action.",
+      "result": "The batch action needed a source model file that already contains the schedules, not the definition workbook the per-model command used. Cloud models could not be detached to a local file through the 2024 API (DetachFromCentralOption not valid for cloud models).",
+      "problem": "Different inputs for the single-model and batch variants of the same operation.",
+      "found_by": "The batch tool's file dialog. Built a local source file once (local copy + workbook import) and reused it."
+    }
+  ],
+  "final_rule": {
+    "lesson": "Coordination work is recurring and comparable only when every check produces a pass/fail per model and week from fixed rules, and every run keeps its raw outputs. Collection must be read-only and unattended; corrections split into safe-automatic and approval-required.",
+    "rule": "Run weekly: preflight, unattended batch collection, read-only deep collection with worksets closed, checks against the rule table and last week's snapshot, automatic safe fixes, approval queue for the rest, dashboard and summary, archive. Verify every generated configuration (link matrix, coordinates) against the project setup before a batch run.",
+    "validation": "Each run produces one row per model per rule; history tables grow by one snapshot; link transforms identity and ProjectPosition equal to the authority for every model; registry and cloud folder agree."
+  },
+  "notes": "Proposed as a project workflow for a 'BIM coordinator' role plus packs: registry-vs-cloud-folder-check, read-only-model-snapshot-worksets-closed, links-placed-by-shared-coordinates-check, coordination-rule-table. Related: the two submissions of 2026-10-27 (campus split and shared coordinates; batch cloud onboarding with registry). Proposed failure pattern: generated default configuration contradicts the project setup (link matrix shared-coordinates flag). Product, site and project identifiers omitted on purpose."
+}
