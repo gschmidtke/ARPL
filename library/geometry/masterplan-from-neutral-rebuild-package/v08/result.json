@@ -1,0 +1,5 @@
+{
+  "result": "A second, empty Revit instance started; the model stayed in the first instance.",
+  "problem": "Opening an already-running desktop application can launch a new instance instead of focusing it (FP41).",
+  "found_by": "screenshot of the splash; bridge status listing two live Revit sessions"
+}

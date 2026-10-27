@@ -1,0 +1,4 @@
+{
+  "version": "v06",
+  "instruction": "Create 261 grids from bounding boxes per building; tag each with Comments; verify by reading back grids whose Comments start with the tag."
+}

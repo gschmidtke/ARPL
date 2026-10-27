@@ -1,0 +1,4 @@
+{
+  "version": "v07",
+  "instruction": "Handle the dialog chain by keyboard: click into the file-name field, Ctrl+A, type the file name, Enter, Alt+Y, then close the result dialog."
+}

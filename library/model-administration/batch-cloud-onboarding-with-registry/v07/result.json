@@ -1,0 +1,5 @@
+{
+  "result": "Stable for all remaining models; the tool appended a row each time (verified by reading the CSV, backup taken first).",
+  "problem": "None once the click into the field always came first.",
+  "found_by": "zoom on the result dialog showing the key; final CSV check: 13 rows, unique keys and GUIDs"
+}

@@ -1,0 +1,5 @@
+{
+  "result": "Compile error: GetNumberOfIssues does not exist. Then runtime InvalidOperationException with no message, twice.",
+  "problem": "Method assumed from memory (FP40). GetGeometricalObjects() can be read only once per build result; the second read throws. Use SetName() rather than the Name setter.",
+  "found_by": "rolled-back dry run with step markers, then a per-file dry run in try/catch"
+}

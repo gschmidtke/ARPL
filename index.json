@@ -226,6 +226,77 @@
       ],
       "path": "project-workflows/architecture-residential-adu-shed-roof-assembly",
       "status": "candidate"
+    },
+    {
+      "id": "ARPL-PW-0003",
+      "revision": 1,
+      "title": "Weekly BIM coordination of a federated cloud project: collect, check, correct, report, archive",
+      "level": 4,
+      "context": {
+        "discipline": "bim-vdc",
+        "role": "coordinator",
+        "project_type": "generic",
+        "subtype": "multi-model federated cloud project",
+        "phase": "design-development",
+        "platform": "revit",
+        "revit_version": "2024"
+      },
+      "intent": "Keep a federated cloud project current in one weekly session: collect model data in an unattended batch, check it against fixed rules and last week's snapshot, repair what is safe to repair, queue the rest for approval, and report a dashboard with week-over-week trends.",
+      "steps": [
+        {
+          "step": 1,
+          "work_class": "W8",
+          "do": "Preflight: application idle, bridge alive, disk and cloud cache space, registry compared with the cloud folder (new or renamed models), no model open",
+          "packs": [
+            "ARPL-ADM-0002",
+            "ARPL-ADM-0003"
+          ]
+        },
+        {
+          "step": 2,
+          "work_class": "W8",
+          "do": "Collect in batch (unattended): per-model health export, link and workset report, schedule exports, family size report; raw outputs to REPORTS/<date>",
+          "packs": []
+        },
+        {
+          "step": 3,
+          "work_class": "W8",
+          "do": "Collect deep, read-only: warnings by type, link status and transform, ProjectPosition against the authority, Project Information keys, element counts; open each model with all worksets closed",
+          "packs": [
+            "ARPL-LNK-0002",
+            "ARPL-LNK-0001"
+          ]
+        },
+        {
+          "step": 4,
+          "work_class": "W8",
+          "do": "Check: one dataset keyed by model and week, compared with last week, against the rule table",
+          "packs": []
+        },
+        {
+          "step": 5,
+          "work_class": "W5",
+          "do": "Correct: safe fixes automatically (repair links to the matrix, missing building name, missing standard schedules, sync); anything that moves geometry, changes coordinates or deletes waits for the coordinator's approval",
+          "packs": [
+            "ARPL-LNK-0002",
+            "ARPL-ADM-0003"
+          ]
+        },
+        {
+          "step": 6,
+          "work_class": "W7",
+          "do": "Report: dashboard pages (project health, federation, model quality, data quality) and a one-page summary",
+          "packs": []
+        },
+        {
+          "step": 7,
+          "work_class": "W7",
+          "do": "Archive: append the week to history tables; never edit raw outputs; submit new lessons to the inbox",
+          "packs": []
+        }
+      ],
+      "path": "project-workflows/bim-coordination-weekly-federated-cloud",
+      "status": "candidate"
     }
   ],
   "packs": [
@@ -1493,6 +1564,93 @@
       "unverified_in_current_revit": true
     },
     {
+      "id": "ARPL-GEO-0005",
+      "revision": 1,
+      "title": "Masterplan from a neutral rebuild package: floors, DirectShape envelopes and domain-based grids",
+      "environment": {
+        "revit_version": "2024.3 (24.3.60.12)",
+        "tool": "RevitBridge MCP with run_csharp",
+        "compiler": "Roslyn 4.8 (C# 12)",
+        "agent": "Claude (Anthropic)",
+        "payload": "15 JSON files on the user's computer, read in Revit with File.ReadAllText",
+        "verification": "Document.ExportImage of a dedicated uncropped plan view"
+      },
+      "use_when": [
+        "A neutral package of levels, floor profiles and exact envelopes must become native Revit elements",
+        "Exact source mass geometry (triangle face loops) has to enter Revit as DirectShape",
+        "Grids must be created for many buildings at once, including rotated wings and curved (arc) buildings",
+        "A payload is too large to embed in a code-execution call"
+      ],
+      "not_for": [
+        "Reading or interpreting the original source model (upstream intake, USG)",
+        "Structural design: grid intersections are column-centreline candidates only",
+        "Workshared central models"
+      ],
+      "api_terms": [
+        "Level.Create",
+        "ViewPlan.Create",
+        "Floor.Create (multiple disjoint CurveLoops)",
+        "HOST_AREA_COMPUTED",
+        "SubTransaction",
+        "TessellatedShapeBuilder",
+        "TessellatedShapeBuilderTarget.AnyGeometry",
+        "TessellatedShapeBuilderFallback.Mesh",
+        "TessellatedShapeBuilderResult.Outcome",
+        "TessellatedShapeBuilderResult.GetGeometricalObjects",
+        "DirectShape.CreateElement",
+        "DirectShape.SetShape",
+        "DirectShape.SetName",
+        "Grid.Create(Document, Line)",
+        "Grid.Create(Document, Arc)",
+        "Arc.Create",
+        "Document.Delete",
+        "ViewPlan.CropBoxActive",
+        "Document.ExportImage",
+        "ImageExportOptions"
+      ],
+      "level": 2,
+      "work_class": "W4",
+      "workflows": [
+        "geometry",
+        "model-context",
+        "validation-qaqc"
+      ],
+      "disciplines": [
+        "architecture"
+      ],
+      "project_types": [
+        "healthcare"
+      ],
+      "phases": [
+        "concept"
+      ],
+      "revit_versions_tested": [
+        "2024"
+      ],
+      "failure_patterns": [
+        "FP05",
+        "FP31",
+        "FP40",
+        "FP41",
+        "FP42"
+      ],
+      "status": "candidate",
+      "rule": "1. Payload: write data files next to the model and read them in Revit; do not embed large data in scripts.\n2. Floors: Floor.Create accepts several disjoint CurveLoops as one floor (2024); verify HOST_AREA_COMPUTED against the source area in the same call; a Revit floor always has thickness, so tag it as a stand-in.\n3. Envelopes as DirectShape: TessellatedShapeBuilder with Target AnyGeometry + Fallback Mesh; read GetGeometricalObjects() exactly once; name with SetName(); store the source id in ApplicationDataId and Mark.\n4. Before building envelopes, count edge use in the source triangles: open or non-manifold edges predict Mesh/Sheet outcomes; report volume only for closed solids.\n5. Grids: datums carry no Comments; identify grids by a unique name prefix and verify by name. Create arcs with Grid.Create(doc, Arc). To replace a grid set that reuses names, delete and create in one transaction.\n6. Grid logic: one grid domain per building wing (standard bays with rational end bays), curved buildings as radial lines plus concentric arcs; never one grid per bounding box. Check that no grid crosses another building or another wing.\n7. Parameter writes: avoid get_Parameter(...)?.Set(...) where the tag matters; a null parameter must fail loudly (FP42).\n8. Visual checks: prefer Document.ExportImage of a dedicated view (no template, CropBoxActive = false) over driving the desktop; do not use open-application on a running Revit (FP41).\n9. Scope boxes cannot be created through the API: report legibility of dense site views as a UI task for the user.",
+      "validation": [
+        "Counts per stage equal the package (levels, floors, envelopes, grids).",
+        "Floor area equals the source area per floor (here max 0.001 sq ft).",
+        "Envelope bounding boxes equal the source; closed envelopes' volumes equal the source signed volume.",
+        "Grids read back by name with 0.0 ft endpoint/radius deviation; no grid crosses another building or wing.",
+        "An exported plan image is checked before reporting."
+      ],
+      "validation_checks": [],
+      "path": "library/geometry/masterplan-from-neutral-rebuild-package",
+      "last_evidence": "2026-10-27",
+      "review_due": "2027-10-27",
+      "current_revit": "2027",
+      "unverified_in_current_revit": true
+    },
+    {
       "id": "ARPL-GEO-0003",
       "revision": 1,
       "title": "Footing corner notches",
@@ -1542,6 +1700,236 @@
       "path": "library/geometry/wall-and-footing-corner-joins",
       "last_evidence": "2026-10-16",
       "review_due": "2027-10-16",
+      "current_revit": "2027",
+      "unverified_in_current_revit": true
+    },
+    {
+      "id": "ARPL-LNK-0002",
+      "revision": 1,
+      "title": "Batch-link cloud models from a registry and link matrix, placed by shared coordinates; verify by link transform",
+      "environment": {
+        "revit_version": "2024.3 (24.3.60.12)",
+        "tool": "RevitBridge MCP with run_csharp",
+        "compiler": "Roslyn 4.8 (C# 12)",
+        "agent": "Claude (Anthropic)",
+        "batch_tool": "registry-driven batch tool that opens each cloud model, creates the links in its matrix rows, syncs and closes",
+        "model": "13 cloud models, 156 links"
+      },
+      "use_when": [
+        "Every model of a federated cloud project must link the others, driven by a registry and a host-by-link matrix",
+        "A batch tool generated the link matrix and its settings must be checked before the run",
+        "Link placement has to be proven after the run"
+      ],
+      "not_for": [
+        "Projects whose models do not share one coordinate system: set coordinates first (ARPL-LNK-0001)",
+        "Local file links"
+      ],
+      "api_terms": [
+        "RevitLinkType.Create(Document, ModelPath, RevitLinkOptions)",
+        "RevitLinkInstance.Create(Document, ElementId, ImportPlacement)",
+        "ImportPlacement.Shared",
+        "RevitLinkInstance.GetTotalTransform",
+        "Transform.IsIdentity",
+        "RevitLinkType.IsLoaded",
+        "ModelPathUtils.ConvertCloudGUIDsToCloudPath",
+        "WorksetConfigurationOption.CloseAllWorksets"
+      ],
+      "level": 2,
+      "work_class": "W7",
+      "workflows": [
+        "links-coordinates",
+        "coordination",
+        "model-administration"
+      ],
+      "disciplines": [
+        "bim-vdc",
+        "generic"
+      ],
+      "project_types": [
+        "generic"
+      ],
+      "phases": [
+        "schematic-design",
+        "design-development",
+        "construction-documents"
+      ],
+      "revit_versions_tested": [
+        "2024"
+      ],
+      "failure_patterns": [
+        "FP46",
+        "FP24"
+      ],
+      "status": "candidate",
+      "rule": "1. Before the run, read the generated matrix: placement by shared coordinates on every row; link type, workset, load-on-open and room bounding as the project wants. Change it on a backup copy only (FP46).\n2. Close every model the batch will open; set the batch output folder explicitly.\n3. After the run: every host has as many link instances as its matrix rows; when all models share one coordinate system and internal origin, every link instance's total transform is identity; otherwise compare it with the transform implied by the shared coordinates.\n4. For later read-only checks, open hosts with all worksets closed so links on their own worksets stay unloaded.",
+      "validation": [
+        "Per host: link instances = matrix rows for that host; 0 skipped or errored.",
+        "Every RevitLinkInstance.GetTotalTransform() equals the expected transform (identity in a common-origin federation)."
+      ],
+      "validation_checks": [],
+      "path": "library/links-coordinates/batch-cloud-links-by-shared-coordinates",
+      "last_evidence": "2026-10-27",
+      "review_due": "2027-10-27",
+      "current_revit": "2027",
+      "unverified_in_current_revit": true
+    },
+    {
+      "id": "ARPL-LNK-0001",
+      "revision": 1,
+      "title": "Set shared coordinates on an authority building, then split a campus model into per-building files",
+      "environment": {
+        "revit_version": "2024.3 (24.3.60.12)",
+        "tool": "RevitBridge MCP with run_csharp",
+        "compiler": "Roslyn 4.8 (C# 12)",
+        "agent": "Claude (Anthropic)",
+        "model": "13-building campus model (contributor's own design), site picked from a map, state plane (US survey feet) computed outside Revit"
+      },
+      "use_when": [
+        "A campus or masterplan model has to be split into per-building models that will be linked back by shared coordinates",
+        "One building is the coordinate authority and the site location comes from a map pick (lat/long) rather than a survey file",
+        "Elements (grids, masses, floors) must be assigned to buildings automatically before a split"
+      ],
+      "not_for": [
+        "Projects with a surveyed control point or a civil/site model to acquire coordinates from: acquire from that instead",
+        "Splits where buildings share elements that cannot be assigned to one building (shared podium, site-wide topography): decide ownership first"
+      ],
+      "api_terms": [
+        "ProjectLocation.SetProjectPosition",
+        "ProjectPosition",
+        "ProjectLocation.GetTotalTransform",
+        "SiteLocation.Latitude",
+        "SiteLocation.Longitude",
+        "SiteLocation.TimeZone",
+        "Application.OpenDocumentFile",
+        "Document.Delete",
+        "Document.Save",
+        "Document.Close",
+        "Grid.Curve",
+        "Element.get_BoundingBox"
+      ],
+      "level": 2,
+      "work_class": "W5",
+      "workflows": [
+        "links-coordinates",
+        "model-administration",
+        "coordination"
+      ],
+      "disciplines": [
+        "bim-vdc",
+        "architecture"
+      ],
+      "project_types": [
+        "healthcare",
+        "generic"
+      ],
+      "phases": [
+        "concept",
+        "schematic-design"
+      ],
+      "revit_versions_tested": [
+        "2024"
+      ],
+      "failure_patterns": [
+        "FP05",
+        "FP44"
+      ],
+      "status": "candidate",
+      "rule": "1. Pick the authority building and an anchor point on it (for example an arc-grid centre). Compute the state-plane E/N of the anchor outside Revit.\n2. In the parent: SetProjectPosition(XYZ.Zero, new ProjectPosition(E - anchor.X, N - anchor.Y, elevation, angle)); set SiteLocation latitude, longitude and time zone; dry-run, read the anchor back through GetTotalTransform().Inverse, then commit and save. Record the accuracy of the source (map pick: metres) and the grid-north convergence you did or did not apply.\n3. Split only after that: copy the file per building and delete what does not belong. Grids by name prefix, masses by name, hosted/floor elements by containment in the building's own grid extent (smallest containing extent wins).\n4. Guard: per-file counts must add up to the parent's counts, no element unassigned, and every child's ProjectPosition at XYZ.Zero equals the parent's.",
+      "validation": [
+        "The anchor reads back the intended E/N in shared coordinates.",
+        "Every child file has the same ProjectPosition at XYZ.Zero as the parent.",
+        "Element counts per building sum to the parent counts; 0 unassigned."
+      ],
+      "validation_checks": [],
+      "path": "library/links-coordinates/shared-coordinates-before-splitting-a-campus",
+      "last_evidence": "2026-10-27",
+      "review_due": "2027-10-27",
+      "current_revit": "2027",
+      "unverified_in_current_revit": true
+    },
+    {
+      "id": "ARPL-ADM-0003",
+      "revision": 1,
+      "title": "Batch-onboard local models to the cloud and register each one: verify by document state, handle posted-command dialogs",
+      "environment": {
+        "revit_version": "2024.3 (24.3.60.12)",
+        "tool": "RevitBridge MCP with run_csharp",
+        "compiler": "Roslyn 4.8 (C# 12)",
+        "agent": "Claude (Anthropic)",
+        "desktop": "screenshots, mouse and keyboard for add-in dialogs",
+        "model": "13 per-building models of one campus, cloud project folder"
+      },
+      "use_when": [
+        "An agent uploads or registers a series of local models to one cloud project folder",
+        "A bridge call outlasts the bridge's reply wait (cloud save, enable worksharing, sync)",
+        "An add-in command started by PostCommand opens file pickers, confirmation prompts or result dialogs",
+        "Some models may already exist in the cloud folder, uploaded earlier by someone else"
+      ],
+      "not_for": [
+        "Single interactive uploads done by a person",
+        "Batch tools that already run headless without dialogs: use those and skip the screen handling"
+      ],
+      "api_terms": [
+        "Document.SaveAsCloudModel",
+        "Autodesk.Revit.Exceptions.RevitServerModelAlreadyExistsException",
+        "Document.EnableCloudWorksharing",
+        "Document.IsModelInCloud",
+        "Document.IsWorkshared",
+        "Document.PathName",
+        "Document.GetCloudModelPath",
+        "ModelPath.GetModelGUID",
+        "ModelPath.GetProjectGUID",
+        "Document.GetHubId",
+        "Document.GetProjectId",
+        "Document.GetCloudFolderId",
+        "ModelPathUtils.ConvertCloudGUIDsToCloudPath",
+        "UIApplication.OpenAndActivateDocument",
+        "UIApplication.PostCommand",
+        "RevitCommandId.LookupCommandId",
+        "ProjectInfo.BuildingName",
+        "Document.SynchronizeWithCentral",
+        "RelinquishOptions",
+        "OpenOptions.DetachFromCentralOption"
+      ],
+      "level": 2,
+      "work_class": "W7",
+      "workflows": [
+        "model-administration",
+        "links-coordinates"
+      ],
+      "disciplines": [
+        "bim-vdc",
+        "generic"
+      ],
+      "project_types": [
+        "generic"
+      ],
+      "phases": [
+        "concept",
+        "design-development",
+        "construction-documents"
+      ],
+      "revit_versions_tested": [
+        "2024"
+      ],
+      "failure_patterns": [
+        "FP22",
+        "FP32",
+        "FP41",
+        "FP43",
+        "FP45"
+      ],
+      "status": "candidate",
+      "rule": "Per model:\n1. Open the local file and set identity fields (Building Name = model name, Project Name) in one short call; never leave template placeholder text (FP43); close other documents.\n2. Read hub, project and folder ids from an already uploaded sibling (GetHubId, GetProjectId, GetCloudFolderId). Cloud save + enable worksharing in one call; expect a timeout and do not resend (FP22). Wait 60-90 s, then read IsModelInCloud, IsWorkshared and GetCloudModelPath().GetModelGUID() in a short call. Never judge by PathName (FP45).\n3. If IsModelInCloud is false, the name already exists in the folder: open that cloud model (cloud-open UI after refresh, or by GUID) and check its coordinates and element counts before touching it.\n4. Post the registry command, move the mouse over the application so it runs (FP32), screenshot.\n5. Click into the dialog's input field first, then type and confirm by keyboard (FP41); confirm an overwrite prompt only if the tool is known to append and a backup exists.\n6. Read the result dialog (key and GUID), close it, then sync with central.\nAfter the batch: one registry row per model, unique keys and GUIDs, no placeholder values. Cloud models cannot be detached to local files through the 2024 API.",
+      "validation": [
+        "Every model: IsModelInCloud and IsWorkshared true, synced, Building Name equals the model name.",
+        "Registry: row count equals model count, keys and model GUIDs unique, no template placeholder text.",
+        "Models uploaded by others: coordinates and element counts match the source."
+      ],
+      "validation_checks": [],
+      "path": "library/model-administration/batch-cloud-onboarding-with-registry",
+      "last_evidence": "2026-10-27",
+      "review_due": "2027-10-27",
       "current_revit": "2027",
       "unverified_in_current_revit": true
     },
@@ -2532,6 +2920,10 @@
         {
           "note": "Not only exports: a single run_csharp write call creating levels, slabs, columns and walls outlived the 60 s bridge timeout, and a read-only follow-up timed out too, while Revit had committed everything. Re-running would have duplicated every element. Defence: keep each write stage well inside the timeout, never retry a write after a timeout, and query the model by Mark before deciding (ARPL-GEO-0004).",
           "intake": "IN-0012"
+        },
+        {
+          "note": "Cloud operations too: SaveAsCloudModel plus EnableCloudWorksharing took 60-90 s and outlived the bridge reply every time; during 'Enable Worksharing' further calls also timed out. The model was uploaded each time. Defence: one long call per model, then wait and read IsModelInCloud / IsWorkshared / the cloud model GUID in a short call; never resend (ARPL-ADM-0003).",
+          "intake": "IN-0015"
         }
       ]
     },
@@ -2729,7 +3121,8 @@
       "meaning": "PostCommand queues a built-in command for the idle state; it does not execute inline. Code that posts a command and then reads or edits the model runs before the command executes, so results are stale or the context is invalid. Defence: Treat a posted command as fire-and-forget: schedule any follow-up work in an ExternalEvent, and never read model state in the same call sequence assuming the posted command already ran.",
       "found_by": "mined from The Building Coder archive",
       "contributors": [
-        "Gottfried Schmidtke"
+        "Gottfried Schmidtke",
+        "Gottfried Schmidtke with Claude"
       ],
       "status": "candidate",
       "evidence_kind": "mined from documentation, not yet reproduced by an agent in Revit",
@@ -2743,7 +3136,13 @@
         "https://jeremytammik.github.io/tbc/a/1040_postcommand.htm",
         "https://jeremytammik.github.io/tbc/a/1364_postcommand_rules.html"
       ],
-      "intake": "IN-0006"
+      "intake": "IN-0006",
+      "evidence": [
+        {
+          "note": "Reproduced by an agent in Revit 2024: an add-in command posted through the bridge did not start until the mouse moved over the Revit window; its file picker, the OS overwrite prompt and its result dialog then blocked the bridge (calls timed out) until closed. Defence: after posting, move the mouse over the application, screenshot, handle each dialog, and only then send the next bridge call (ARPL-ADM-0003).",
+          "intake": "IN-0015"
+        }
+      ]
     },
     {
       "id": "FP33",
@@ -2932,7 +3331,117 @@
       ],
       "revit_versions": "observed in 2024; members differ between releases",
       "intake": "IN-0012",
-      "related": "FP38 (sibling: FP38 is the compile environment failing correct code; FP40 is the code itself written against a remembered API), FP34 (the bridge's advertised contract)"
+      "related": "FP38 (sibling: FP38 is the compile environment failing correct code; FP40 is the code itself written against a remembered API), FP34 (the bridge's advertised contract)",
+      "evidence": [
+        {
+          "note": "TessellatedShapeBuilderResult.GetNumberOfIssues was assumed and does not exist in Revit 2024; a compile round lost (ARPL-GEO-0005).",
+          "intake": "IN-0013"
+        }
+      ]
+    },
+    {
+      "id": "FP41",
+      "name": "Desktop action reaches the wrong window or instance",
+      "meaning": "Desktop-control actions act on whatever the operating system gives them, not on the model the agent means. Opening an application that is already running can start a second, empty instance instead of focusing the running one; typed text goes to whichever window has focus, for example the chat window that came to the front. Defence: never use open-application on a running Revit; prefer API routes (Document.ExportImage of a dedicated view) for visual checks; before typing into a dialog, click into its input field and confirm with a screenshot or zoom.",
+      "found_by": "screenshot showing a second Revit splash; bridge status listing two live sessions; a screenshot with the chat window in front of a file dialog",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ],
+      "status": "candidate",
+      "api_terms": [
+        "Document.ExportImage",
+        "ImageExportOptions"
+      ],
+      "revit_versions": "observed in 2024; desktop layer, not the Revit API",
+      "intake": "IN-0013, IN-0015",
+      "related": "FP11 (dialogs), FP32 (posted commands)"
+    },
+    {
+      "id": "FP42",
+      "name": "Null-conditional parameter write skips silently",
+      "meaning": "get_Parameter(...)?.Set(...) does nothing when the element has no such parameter, and the null-conditional hides it. 261 grids were 'tagged' with Comments, but grid datums have no ALL_MODEL_INSTANCE_COMMENTS, so no tag was written and a read-back found 0 grids. Defence: where a tag or value matters, fetch the parameter, fail loudly when it is null or read-only, and identify datums by a unique name prefix instead.",
+      "found_by": "read-back by tag returned 0 of 261",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ],
+      "status": "candidate",
+      "api_terms": [
+        "Element.get_Parameter",
+        "BuiltInParameter.ALL_MODEL_INSTANCE_COMMENTS",
+        "Parameter.Set",
+        "Grid"
+      ],
+      "revit_versions": "observed in 2024",
+      "intake": "IN-0013",
+      "related": "FP05 (API succeeded, model result wrong), FP31 (name-based parameter lookup)"
+    },
+    {
+      "id": "FP43",
+      "name": "Template placeholder taken as a real value",
+      "meaning": "Project templates ship with placeholder text in Project Information ('Building Name', 'Project Name'). The value is not empty, so tools that ask only for a missing value take the placeholder as real data: a model registry got 'Building Name' as a model key. Defence: before any step that reads identity fields, set them explicitly, and treat known placeholder strings as missing.",
+      "found_by": "reading the registry CSV",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ],
+      "status": "candidate",
+      "api_terms": [
+        "ProjectInfo.BuildingName",
+        "ProjectInfo.Name"
+      ],
+      "revit_versions": "any; template content",
+      "intake": "IN-0014, IN-0015"
+    },
+    {
+      "id": "FP44",
+      "name": "Nearest-distance assignment misfiles elements",
+      "meaning": "Assigning elements to a building (or zone) by the nearest bounding box fails where buildings touch: a floor centre can be closer to the neighbour's box than to its own, so one building loses elements and its neighbour gains them. Defence: assign by containment in the owner's own extent (smallest containing extent wins), and check that per-group counts add up to the source total with nothing unassigned.",
+      "found_by": "per-file counts: one building with 0 floors, its neighbour with too many",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ],
+      "status": "candidate",
+      "api_terms": [
+        "Element.get_BoundingBox",
+        "Grid.Curve"
+      ],
+      "revit_versions": "any; algorithmic",
+      "intake": "IN-0014"
+    },
+    {
+      "id": "FP45",
+      "name": "Document state read from the path string",
+      "meaning": "After a failed or late-failing SaveAsCloudModel (name already exists), Document.PathName showed the cloud path although nothing had been saved: IsModelInCloud false, IsModified true, and EnableCloudWorksharing failed with 'does not have a central location'. An agent that judges success by PathName or by the title bar is wrong. Defence: read IsModelInCloud, IsWorkshared and GetCloudModelPath() (which throws for a non-cloud document).",
+      "found_by": "GetCloudModelPath threw 'not a cloud model' while PathName showed the cloud path",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ],
+      "status": "candidate",
+      "api_terms": [
+        "Document.PathName",
+        "Document.IsModelInCloud",
+        "Document.GetCloudModelPath",
+        "Document.SaveAsCloudModel",
+        "RevitServerModelAlreadyExistsException"
+      ],
+      "revit_versions": "observed in 2024",
+      "intake": "IN-0015",
+      "related": "FP22 (the exception arrived after the reply timeout)"
+    },
+    {
+      "id": "FP46",
+      "name": "Generated default contradicts the project setup",
+      "meaning": "A tool-generated configuration (here a host-by-link matrix exported from a registry) carries defaults that contradict decisions already made for the project: 'use shared coordinates' was false on every row of a federation built on shared coordinates. Run as generated, every link would have been placed origin to origin. Defence: before a batch run, read the generated configuration against the project's setup (coordinates, worksets, load behaviour) and change it on a backup copy.",
+      "found_by": "reading the matrix values before the run",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ],
+      "status": "candidate",
+      "api_terms": [
+        "ImportPlacement.Shared",
+        "RevitLinkInstance.GetTotalTransform"
+      ],
+      "revit_versions": "any; tool configuration",
+      "intake": "IN-0016"
     }
   ]
 }

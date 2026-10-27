@@ -192,6 +192,10 @@
         {
           "note": "Not only exports: a single run_csharp write call creating levels, slabs, columns and walls outlived the 60 s bridge timeout, and a read-only follow-up timed out too, while Revit had committed everything. Re-running would have duplicated every element. Defence: keep each write stage well inside the timeout, never retry a write after a timeout, and query the model by Mark before deciding (ARPL-GEO-0004).",
           "intake": "IN-0012"
+        },
+        {
+          "note": "Cloud operations too: SaveAsCloudModel plus EnableCloudWorksharing took 60-90 s and outlived the bridge reply every time; during 'Enable Worksharing' further calls also timed out. The model was uploaded each time. Defence: one long call per model, then wait and read IsModelInCloud / IsWorkshared / the cloud model GUID in a short call; never resend (ARPL-ADM-0003).",
+          "intake": "IN-0015"
         }
       ]
     },
@@ -389,7 +393,8 @@
       "meaning": "PostCommand queues a built-in command for the idle state; it does not execute inline. Code that posts a command and then reads or edits the model runs before the command executes, so results are stale or the context is invalid. Defence: Treat a posted command as fire-and-forget: schedule any follow-up work in an ExternalEvent, and never read model state in the same call sequence assuming the posted command already ran.",
       "found_by": "mined from The Building Coder archive",
       "contributors": [
-        "Gottfried Schmidtke"
+        "Gottfried Schmidtke",
+        "Gottfried Schmidtke with Claude"
       ],
       "status": "candidate",
       "evidence_kind": "mined from documentation, not yet reproduced by an agent in Revit",
@@ -403,7 +408,13 @@
         "https://jeremytammik.github.io/tbc/a/1040_postcommand.htm",
         "https://jeremytammik.github.io/tbc/a/1364_postcommand_rules.html"
       ],
-      "intake": "IN-0006"
+      "intake": "IN-0006",
+      "evidence": [
+        {
+          "note": "Reproduced by an agent in Revit 2024: an add-in command posted through the bridge did not start until the mouse moved over the Revit window; its file picker, the OS overwrite prompt and its result dialog then blocked the bridge (calls timed out) until closed. Defence: after posting, move the mouse over the application, screenshot, handle each dialog, and only then send the next bridge call (ARPL-ADM-0003).",
+          "intake": "IN-0015"
+        }
+      ]
     },
     {
       "id": "FP33",
@@ -592,7 +603,117 @@
       ],
       "revit_versions": "observed in 2024; members differ between releases",
       "intake": "IN-0012",
-      "related": "FP38 (sibling: FP38 is the compile environment failing correct code; FP40 is the code itself written against a remembered API), FP34 (the bridge's advertised contract)"
+      "related": "FP38 (sibling: FP38 is the compile environment failing correct code; FP40 is the code itself written against a remembered API), FP34 (the bridge's advertised contract)",
+      "evidence": [
+        {
+          "note": "TessellatedShapeBuilderResult.GetNumberOfIssues was assumed and does not exist in Revit 2024; a compile round lost (ARPL-GEO-0005).",
+          "intake": "IN-0013"
+        }
+      ]
+    },
+    {
+      "id": "FP41",
+      "name": "Desktop action reaches the wrong window or instance",
+      "meaning": "Desktop-control actions act on whatever the operating system gives them, not on the model the agent means. Opening an application that is already running can start a second, empty instance instead of focusing the running one; typed text goes to whichever window has focus, for example the chat window that came to the front. Defence: never use open-application on a running Revit; prefer API routes (Document.ExportImage of a dedicated view) for visual checks; before typing into a dialog, click into its input field and confirm with a screenshot or zoom.",
+      "found_by": "screenshot showing a second Revit splash; bridge status listing two live sessions; a screenshot with the chat window in front of a file dialog",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ],
+      "status": "candidate",
+      "api_terms": [
+        "Document.ExportImage",
+        "ImageExportOptions"
+      ],
+      "revit_versions": "observed in 2024; desktop layer, not the Revit API",
+      "intake": "IN-0013, IN-0015",
+      "related": "FP11 (dialogs), FP32 (posted commands)"
+    },
+    {
+      "id": "FP42",
+      "name": "Null-conditional parameter write skips silently",
+      "meaning": "get_Parameter(...)?.Set(...) does nothing when the element has no such parameter, and the null-conditional hides it. 261 grids were 'tagged' with Comments, but grid datums have no ALL_MODEL_INSTANCE_COMMENTS, so no tag was written and a read-back found 0 grids. Defence: where a tag or value matters, fetch the parameter, fail loudly when it is null or read-only, and identify datums by a unique name prefix instead.",
+      "found_by": "read-back by tag returned 0 of 261",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ],
+      "status": "candidate",
+      "api_terms": [
+        "Element.get_Parameter",
+        "BuiltInParameter.ALL_MODEL_INSTANCE_COMMENTS",
+        "Parameter.Set",
+        "Grid"
+      ],
+      "revit_versions": "observed in 2024",
+      "intake": "IN-0013",
+      "related": "FP05 (API succeeded, model result wrong), FP31 (name-based parameter lookup)"
+    },
+    {
+      "id": "FP43",
+      "name": "Template placeholder taken as a real value",
+      "meaning": "Project templates ship with placeholder text in Project Information ('Building Name', 'Project Name'). The value is not empty, so tools that ask only for a missing value take the placeholder as real data: a model registry got 'Building Name' as a model key. Defence: before any step that reads identity fields, set them explicitly, and treat known placeholder strings as missing.",
+      "found_by": "reading the registry CSV",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ],
+      "status": "candidate",
+      "api_terms": [
+        "ProjectInfo.BuildingName",
+        "ProjectInfo.Name"
+      ],
+      "revit_versions": "any; template content",
+      "intake": "IN-0014, IN-0015"
+    },
+    {
+      "id": "FP44",
+      "name": "Nearest-distance assignment misfiles elements",
+      "meaning": "Assigning elements to a building (or zone) by the nearest bounding box fails where buildings touch: a floor centre can be closer to the neighbour's box than to its own, so one building loses elements and its neighbour gains them. Defence: assign by containment in the owner's own extent (smallest containing extent wins), and check that per-group counts add up to the source total with nothing unassigned.",
+      "found_by": "per-file counts: one building with 0 floors, its neighbour with too many",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ],
+      "status": "candidate",
+      "api_terms": [
+        "Element.get_BoundingBox",
+        "Grid.Curve"
+      ],
+      "revit_versions": "any; algorithmic",
+      "intake": "IN-0014"
+    },
+    {
+      "id": "FP45",
+      "name": "Document state read from the path string",
+      "meaning": "After a failed or late-failing SaveAsCloudModel (name already exists), Document.PathName showed the cloud path although nothing had been saved: IsModelInCloud false, IsModified true, and EnableCloudWorksharing failed with 'does not have a central location'. An agent that judges success by PathName or by the title bar is wrong. Defence: read IsModelInCloud, IsWorkshared and GetCloudModelPath() (which throws for a non-cloud document).",
+      "found_by": "GetCloudModelPath threw 'not a cloud model' while PathName showed the cloud path",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ],
+      "status": "candidate",
+      "api_terms": [
+        "Document.PathName",
+        "Document.IsModelInCloud",
+        "Document.GetCloudModelPath",
+        "Document.SaveAsCloudModel",
+        "RevitServerModelAlreadyExistsException"
+      ],
+      "revit_versions": "observed in 2024",
+      "intake": "IN-0015",
+      "related": "FP22 (the exception arrived after the reply timeout)"
+    },
+    {
+      "id": "FP46",
+      "name": "Generated default contradicts the project setup",
+      "meaning": "A tool-generated configuration (here a host-by-link matrix exported from a registry) carries defaults that contradict decisions already made for the project: 'use shared coordinates' was false on every row of a federation built on shared coordinates. Run as generated, every link would have been placed origin to origin. Defence: before a batch run, read the generated configuration against the project's setup (coordinates, worksets, load behaviour) and change it on a backup copy.",
+      "found_by": "reading the matrix values before the run",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ],
+      "status": "candidate",
+      "api_terms": [
+        "ImportPlacement.Shared",
+        "RevitLinkInstance.GetTotalTransform"
+      ],
+      "revit_versions": "any; tool configuration",
+      "intake": "IN-0016"
     }
   ]
 }

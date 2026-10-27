@@ -1,0 +1,4 @@
+{
+  "version": "v03",
+  "instruction": "Redo the two affected files with floors assigned by containment in the smallest grid extent that holds the floor centre."
+}

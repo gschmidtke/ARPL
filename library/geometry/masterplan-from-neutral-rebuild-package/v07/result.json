@@ -1,0 +1,5 @@
+{
+  "result": "361/361 in 1.3 s, one undo step; names unique; arcs are Arc curves; endpoints and radii at 0.0 ft deviation; no grid crosses another building or another wing.",
+  "problem": "Delete first in the same transaction to avoid name clashes. Grid heads crowd where wings meet; scope boxes would help but cannot be created through the API.",
+  "found_by": "read-back; image export of a plan view"
+}

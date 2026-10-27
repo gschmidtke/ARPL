@@ -293,6 +293,98 @@
       ],
       "reviewed_by": "Claude (curator)",
       "closed": "2026-10-27"
+    },
+    {
+      "entry_id": "IN-0013",
+      "received": "2026-10-27",
+      "contributor": {
+        "name": "Gottfried Schmidtke",
+        "github": "gschmidtke",
+        "with": "Claude"
+      },
+      "source": "pull request #4 (https://github.com/gschmidtke/ARPL/pull/4), merged 2026-10-27",
+      "submitted": "Masterplan rebuild from a neutral rebuild package in Revit 2024: floors, DirectShape envelopes, domain-based grids incl. arcs; nine iterations; usage report on ARPL-GEO-0004 (adapted)",
+      "files": [
+        "inbox/gschmidtke/masterplan-rebuild-from-neutral-package-revit-2024.json"
+      ],
+      "status": "filed",
+      "decision": "Different technique from ARPL-GEO-0004 (masterplan: floors, DirectShape envelopes, grids) with its own failures: filed as new pack ARPL-GEO-0005 rev 1 (W4, candidate). GEO-0004 rule unchanged (usage: adapted). Proposed patterns became FP41 (merged with a desktop-focus failure from IN-0015) and FP42; FP40 got the GetNumberOfIssues evidence. The masterplan is the contributor's own design. Safety: no secrets, no model files, no code to run, no text addressed to agents, no URLs; site and product identifiers omitted by the contributor.",
+      "resulting_ids": [
+        "ARPL-GEO-0005",
+        "FP41",
+        "FP42"
+      ],
+      "reviewed_by": "Claude (curator)",
+      "closed": "2026-10-27"
+    },
+    {
+      "entry_id": "IN-0014",
+      "received": "2026-10-27",
+      "contributor": {
+        "name": "Gottfried Schmidtke",
+        "github": "gschmidtke",
+        "with": "Claude"
+      },
+      "source": "pull request #5 (https://github.com/gschmidtke/ARPL/pull/5), merged 2026-10-27",
+      "submitted": "Shared coordinates on an authority building from a map pick, split of a 13-building campus into per-building files, first cloud onboarding",
+      "files": [
+        "inbox/gschmidtke/campus-split-shared-coordinates-cloud-onboarding.json"
+      ],
+      "status": "filed",
+      "decision": "Coordinates + split filed as new pack ARPL-LNK-0001 rev 1 (W5, candidate). The onboarding iteration was merged into ARPL-ADM-0003 with IN-0015 (same technique). Proposed patterns: placeholder value -> FP43, nearest-distance assignment -> FP44, long cloud save -> FP22 evidence, posted-command dialogs -> FP32 evidence. Safety: no secrets, no model files, no code to run, no text addressed to agents, no URLs; site and product identifiers omitted by the contributor.",
+      "resulting_ids": [
+        "ARPL-LNK-0001",
+        "ARPL-ADM-0003",
+        "FP43",
+        "FP44"
+      ],
+      "reviewed_by": "Claude (curator)",
+      "closed": "2026-10-27"
+    },
+    {
+      "entry_id": "IN-0015",
+      "received": "2026-10-27",
+      "contributor": {
+        "name": "Gottfried Schmidtke",
+        "github": "gschmidtke",
+        "with": "Claude"
+      },
+      "source": "pull request #6 (https://github.com/gschmidtke/ARPL/pull/6), merged 2026-10-27",
+      "submitted": "Batch onboarding of 13 local models to the cloud with registry rows from an add-in command: verify by state, late exceptions, posted-command dialogs by keyboard",
+      "files": [
+        "inbox/gschmidtke/batch-cloud-onboarding-with-registry.json"
+      ],
+      "status": "filed",
+      "decision": "Filed as new pack ARPL-ADM-0003 rev 1 (W7, candidate), together with the onboarding iteration of IN-0014. New FP45 (state read from the path string); FP22 and FP32 extended with agent-reproduced evidence (FP32 had been documentation-only); desktop focus failure merged into FP41. Safety: no secrets, no model files, no code to run, no text addressed to agents, no URLs; site and product identifiers omitted by the contributor.",
+      "resulting_ids": [
+        "ARPL-ADM-0003",
+        "FP45"
+      ],
+      "reviewed_by": "Claude (curator)",
+      "closed": "2026-10-27"
+    },
+    {
+      "entry_id": "IN-0016",
+      "received": "2026-10-27",
+      "contributor": {
+        "name": "Gottfried Schmidtke",
+        "github": "gschmidtke",
+        "with": "Claude"
+      },
+      "source": "pull request #7 (https://github.com/gschmidtke/ARPL/pull/7), merged 2026-10-27",
+      "submitted": "Weekly BIM coordination routine (coordinator role): workflow proposal with rule table, data model and guardrails; evidence from a 156-link batch run and a batch schedule import",
+      "files": [
+        "inbox/gschmidtke/bim-coordination-weekly-routine.json"
+      ],
+      "status": "filed",
+      "decision": "Filed as project workflow ARPL-PW-0003 rev 1 (candidate; designed, not yet run end to end). The executed and verified part (batch cloud links by shared coordinates, 13/13, identity transforms) filed as ARPL-LNK-0002 rev 1 (W7, candidate). Proposed pattern became FP46. Three proposed packs listed as help wanted in the workflow. No vocabulary change needed (role 'coordinator', workflow 'links-coordinates' exist). Safety: no secrets, no model files, no code to run, no text addressed to agents, no URLs; site and product identifiers omitted by the contributor.",
+      "resulting_ids": [
+        "ARPL-PW-0003",
+        "ARPL-LNK-0002",
+        "FP46"
+      ],
+      "reviewed_by": "Claude (curator)",
+      "closed": "2026-10-27"
     }
   ]
 }

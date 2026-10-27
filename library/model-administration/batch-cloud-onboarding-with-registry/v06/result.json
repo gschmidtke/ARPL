@@ -1,0 +1,5 @@
+{
+  "result": "Nothing appeared until the mouse moved over the application; then a file picker, the OS 'already exists, replace?' prompt and a result dialog. While they were open the bridge did not answer. Once the chat window was in front and would have received the typing.",
+  "problem": "PostCommand runs only when the application is idle and receives input (FP32); keyboard input lands in whatever window has focus (FP41).",
+  "found_by": "screenshots after each step"
+}

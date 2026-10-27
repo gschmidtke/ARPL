@@ -1,0 +1,4 @@
+{
+  "version": "v04",
+  "instruction": "Build 12 envelopes with TessellatedShapeBuilder; log r.GetNumberOfIssues(); set ds.Name; read r.GetGeometricalObjects() for SetShape and again for volume."
+}

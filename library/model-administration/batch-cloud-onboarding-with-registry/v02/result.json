@@ -1,0 +1,5 @@
+{
+  "result": "The registry key came out as the literal text 'Building Name'.",
+  "problem": "The template's placeholder in Project Information is not empty, so the tool did not ask for a key and used the placeholder (FP43).",
+  "found_by": "reading the registry CSV"
+}

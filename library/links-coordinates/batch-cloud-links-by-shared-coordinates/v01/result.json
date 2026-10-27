@@ -1,0 +1,5 @@
+{
+  "result": "Not run as generated: reading the matrix showed 'use shared coordinates' = false on all 169 rows (also load-on-open false, room bounding false).",
+  "problem": "A generated default silently contradicted the project's coordinate setup; links would have been placed origin to origin (FP46).",
+  "found_by": "reading the matrix values before the run"
+}

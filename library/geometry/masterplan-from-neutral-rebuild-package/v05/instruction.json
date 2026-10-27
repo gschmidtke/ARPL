@@ -1,0 +1,4 @@
+{
+  "version": "v05",
+  "instruction": "Read GetGeometricalObjects() once into a variable; ds.SetName(); Target AnyGeometry, Fallback Mesh."
+}

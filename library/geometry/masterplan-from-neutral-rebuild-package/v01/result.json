@@ -1,0 +1,5 @@
+{
+  "result": "Not attempted for envelopes: the largest envelope was 200 KB (5,907 triangles).",
+  "problem": "Inline payloads that large are error-prone to pass through a code tool.",
+  "found_by": "payload size check before the build"
+}

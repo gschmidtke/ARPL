@@ -1,0 +1,11 @@
+{
+  "lesson": "A neutral rebuild package becomes native Revit quickly and exactly when data travels as files, every element is identified by name or Mark (not by a parameter that may not exist), envelopes are pre-checked for closure, and visual checks use API image export rather than the desktop UI.",
+  "rule": "1. Payload: write data files next to the model and read them in Revit; do not embed large data in scripts.\n2. Floors: Floor.Create accepts several disjoint CurveLoops as one floor (2024); verify HOST_AREA_COMPUTED against the source area in the same call; a Revit floor always has thickness, so tag it as a stand-in.\n3. Envelopes as DirectShape: TessellatedShapeBuilder with Target AnyGeometry + Fallback Mesh; read GetGeometricalObjects() exactly once; name with SetName(); store the source id in ApplicationDataId and Mark.\n4. Before building envelopes, count edge use in the source triangles: open or non-manifold edges predict Mesh/Sheet outcomes; report volume only for closed solids.\n5. Grids: datums carry no Comments; identify grids by a unique name prefix and verify by name. Create arcs with Grid.Create(doc, Arc). To replace a grid set that reuses names, delete and create in one transaction.\n6. Grid logic: one grid domain per building wing (standard bays with rational end bays), curved buildings as radial lines plus concentric arcs; never one grid per bounding box. Check that no grid crosses another building or another wing.\n7. Parameter writes: avoid get_Parameter(...)?.Set(...) where the tag matters; a null parameter must fail loudly (FP42).\n8. Visual checks: prefer Document.ExportImage of a dedicated view (no template, CropBoxActive = false) over driving the desktop; do not use open-application on a running Revit (FP41).\n9. Scope boxes cannot be created through the API: report legibility of dense site views as a UI task for the user.",
+  "validation": [
+    "Counts per stage equal the package (levels, floors, envelopes, grids).",
+    "Floor area equals the source area per floor (here max 0.001 sq ft).",
+    "Envelope bounding boxes equal the source; closed envelopes' volumes equal the source signed volume.",
+    "Grids read back by name with 0.0 ft endpoint/radius deviation; no grid crosses another building or wing.",
+    "An exported plan image is checked before reporting."
+  ]
+}

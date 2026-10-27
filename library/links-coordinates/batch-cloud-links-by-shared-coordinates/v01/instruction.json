@@ -1,0 +1,4 @@
+{
+  "version": "v01",
+  "instruction": "Generate the host-by-link matrix from the registry with the batch tool's default export and run the batch."
+}

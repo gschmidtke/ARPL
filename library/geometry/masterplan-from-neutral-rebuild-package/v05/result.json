@@ -1,0 +1,5 @@
+{
+  "result": "12 envelopes in 48 ms, the large one in 372 ms. Outcomes: 10 Solid, 2 Mesh, 1 Sheet. Bounding boxes equal the source; volumes of the 10 solids equal the source signed volume to the cubic foot.",
+  "problem": "Mesh/Sheet outcomes came from the source: 1 and 2 non-manifold edges (Mesh) and 1,069 open edges (Sheet). A Sheet's volume is not meaningful.",
+  "found_by": "per-envelope Outcome, then an edge-use count on the source triangles"
+}

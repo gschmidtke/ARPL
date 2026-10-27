@@ -1,0 +1,5 @@
+{
+  "result": "SaveAsCloudModel threw RevitServerModelAlreadyExistsException after about 58 s; on one model after the 60 s wait, so the agent never saw it.",
+  "problem": "Afterwards PathName showed 'Autodesk Docs://<project>/<name>.rvt' although nothing was saved: IsModelInCloud false, IsModified true; EnableCloudWorksharing then failed with 'does not have a central location' (FP45).",
+  "found_by": "reading IsModelInCloud and GetCloudModelPath() instead of PathName"
+}

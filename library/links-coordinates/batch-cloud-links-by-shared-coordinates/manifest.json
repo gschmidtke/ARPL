@@ -1,0 +1,77 @@
+{
+  "id": "ARPL-LNK-0002",
+  "revision": 1,
+  "title": "Batch-link cloud models from a registry and link matrix, placed by shared coordinates; verify by link transform",
+  "use_when": [
+    "Every model of a federated cloud project must link the others, driven by a registry and a host-by-link matrix",
+    "A batch tool generated the link matrix and its settings must be checked before the run",
+    "Link placement has to be proven after the run"
+  ],
+  "not_for": [
+    "Projects whose models do not share one coordinate system: set coordinates first (ARPL-LNK-0001)",
+    "Local file links"
+  ],
+  "api_terms": [
+    "RevitLinkType.Create(Document, ModelPath, RevitLinkOptions)",
+    "RevitLinkInstance.Create(Document, ElementId, ImportPlacement)",
+    "ImportPlacement.Shared",
+    "RevitLinkInstance.GetTotalTransform",
+    "Transform.IsIdentity",
+    "RevitLinkType.IsLoaded",
+    "ModelPathUtils.ConvertCloudGUIDsToCloudPath",
+    "WorksetConfigurationOption.CloseAllWorksets"
+  ],
+  "level": 2,
+  "work_class": "W7",
+  "workflows": [
+    "links-coordinates",
+    "coordination",
+    "model-administration"
+  ],
+  "disciplines": [
+    "bim-vdc",
+    "generic"
+  ],
+  "roles": [
+    "bim-manager",
+    "coordinator"
+  ],
+  "project_types": [
+    "generic"
+  ],
+  "phases": [
+    "schematic-design",
+    "design-development",
+    "construction-documents"
+  ],
+  "revit_versions_tested": [
+    "2024"
+  ],
+  "environment": {
+    "revit_version": "2024.3 (24.3.60.12)",
+    "tool": "RevitBridge MCP with run_csharp",
+    "compiler": "Roslyn 4.8 (C# 12)",
+    "agent": "Claude (Anthropic)",
+    "batch_tool": "registry-driven batch tool that opens each cloud model, creates the links in its matrix rows, syncs and closes",
+    "model": "13 cloud models, 156 links"
+  },
+  "failure_patterns": [
+    "FP46",
+    "FP24"
+  ],
+  "status": "candidate",
+  "contributors": [
+    "Gottfried Schmidtke with Claude"
+  ],
+  "recorded": "2026-10-27",
+  "changelog": [
+    {
+      "revision": 1,
+      "date": "2026-10-27",
+      "change": "First recorded (IN-0016, PR #7)",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ]
+    }
+  ]
+}

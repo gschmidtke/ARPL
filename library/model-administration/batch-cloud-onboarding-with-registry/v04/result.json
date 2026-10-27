@@ -1,0 +1,5 @@
+{
+  "result": "Web viewer not signed in; sync folder not synced; the cloud-open view listed the folder after pressing its refresh (the first view was cached).",
+  "problem": "Without GUIDs, existing cloud models cannot be opened through the API.",
+  "found_by": "screenshot of the cloud-open view after refresh"
+}

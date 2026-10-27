@@ -1,0 +1,4 @@
+{
+  "version": "v02",
+  "instruction": "Back up the matrix, set the shared-coordinates column to true on every row, close the models the batch will open, run the batch."
+}

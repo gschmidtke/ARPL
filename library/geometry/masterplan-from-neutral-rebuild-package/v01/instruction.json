@@ -1,0 +1,4 @@
+{
+  "version": "v01",
+  "instruction": "Embed the build data in the C# snippet."
+}

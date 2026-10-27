@@ -1,0 +1,5 @@
+{
+  "result": "13 files; each kept the parent's ProjectPosition.",
+  "problem": "Nearest-distance assignment misfiled floors where two buildings touch: one building got 0 floors, its neighbour too many (FP44).",
+  "found_by": "per-file count report against the parent total (48 floors)"
+}

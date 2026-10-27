@@ -1,0 +1,5 @@
+{
+  "result": "ArgumentException: detach option is not valid for cloud model (Revit 2024 API).",
+  "problem": "Cloud models cannot be detached to a local file through this API; build the source from a local file instead.",
+  "found_by": "the exception"
+}

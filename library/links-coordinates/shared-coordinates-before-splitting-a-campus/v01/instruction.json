@@ -1,0 +1,4 @@
+{
+  "version": "v01",
+  "instruction": "Shared coordinates from a map pick: pointer on the authority building gives lat/long, converted to the local state plane (US survey feet) outside Revit. SetProjectPosition(XYZ.Zero, new ProjectPosition(E - c.X, N - c.Y, 0, 0)), c = centre of the authority building's arc grid in internal coordinates; site lat/long and time zone set; dry run first."
+}

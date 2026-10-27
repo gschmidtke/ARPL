@@ -1,0 +1,5 @@
+{
+  "result": "48/48 in 2.1 s; multi-region floors as single elements; total area equals the package; max per-floor deviation 0.001 sq ft (HOST_AREA_COMPUTED vs shoelace area).",
+  "problem": "None. A Revit floor always has thickness; the owner chose a template floor type as a tagged stand-in.",
+  "found_by": "area comparison in the same call"
+}
