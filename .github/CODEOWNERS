@@ -1,0 +1,31 @@
+# ARPL canonical ownership
+#
+# The repository owner controls canonical knowledge and governance; the AI
+# curator works under the owner's supervision (CURATION.md).
+# Public contributors submit learning under inbox/** through pull requests.
+
+* @gschmidtke
+
+# Explicitly protect governance and canonical surfaces.
+/.github/ @gschmidtke
+/AGENTS.md @gschmidtke
+/CURATION.md @gschmidtke
+/CONTRIBUTING.md @gschmidtke
+/README.md @gschmidtke
+/llms.txt @gschmidtke
+/index.json @gschmidtke
+/library/ @gschmidtke
+/project-workflows/ @gschmidtke
+/domains/ @gschmidtke
+/patterns/ @gschmidtke
+/catalogs/ @gschmidtke
+/vocabularies/ @gschmidtke
+/schema/ @gschmidtke
+/templates/ @gschmidtke
+/tools/ @gschmidtke
+/ledger/ @gschmidtke
+/docs/ @gschmidtke
+
+# Inbox content is still curator-reviewed before merge, but this path is the
+# only public contribution surface permitted by the "Inbox only" check.
+/inbox/ @gschmidtke
