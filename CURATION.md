@@ -9,6 +9,17 @@ The curator keeps the library consistent so it stays useful as it grows. The own
 
 Contributions enter only through pull requests that add files to `inbox/`. The "Inbox only" check rejects pull requests that touch anything else. If a contribution arrives another way (an issue, an email), the curator replies with the upload link instead of filing it from there. The library, catalogs, ledger, vocabularies and schemas are written only by the curator and the owner.
 
+## Repository protection
+
+The same protection as USG:
+
+- **Ruleset on `main`** ("Protect ARPL main"): no deletion, no force push, every change through a pull request with all review threads resolved, and two required checks: `inbox-only` and `canonical-validation`.
+- **`inbox-only`** (`.github/workflows/inbox-only.yml`): pull requests by anyone other than the owner may touch only `inbox/`, with no model files or binaries, and must pass `tools/validate.py`.
+- **`canonical-validation`** (`.github/workflows/canonical-validation.yml`): for the owner's and curator's pull requests and every push to `main`, runs `tools/validate.py` and fails if the catalogs or `index.json` differ from what `tools/build_catalogs.py` generates.
+- **CODEOWNERS**: `@gschmidtke` owns every path.
+
+The curator therefore never pushes to `main`. Each curation run works on a branch, opens a pull request, waits for both checks, and then merges it.
+
 ## Review process for each submission
 
 1. **Record intake.** Add a ledger entry: who, when, what files, source pull request. Status `received`.
@@ -21,7 +32,7 @@ Contributions enter only through pull requests that add files to `inbox/`. The "
    - new technique → create a new pack.
 6. **Structure.** Write manifest (including `use_when`, `not_for`, `api_terms`, so agents can find the pack), intent, iterations and final rule; assign facets from the controlled vocabularies only. New vocabulary values are proposed to the owner, not added silently.
 7. **Revise.** Any change to an existing pack's rule, validation or iterations raises its `revision` by 1 and adds a `changelog` entry naming the contributor.
-8. **Validate.** Run `python tools/validate.py`, then `python tools/build_catalogs.py` (regenerates the catalogs and `index.json`).
+8. **Validate.** Run `python tools/validate.py`, then `python tools/build_catalogs.py` (regenerates the catalogs and `index.json`), and commit the result: `canonical-validation` fails on catalogs that were not regenerated.
 9. **Close.** Update the ledger entry (decision, resulting pack ids), credit the contributor in CONTRIBUTORS.md, reply in the pull request with thanks and links, and move the raw submission to `ledger/archive/<entry-id>/`.
 
 ## Status rules

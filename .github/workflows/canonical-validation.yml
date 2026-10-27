@@ -1,0 +1,42 @@
+name: Canonical ARPL validation
+
+# Runs for curator/owner pull requests and every push to main. External
+# contributions are checked by "Inbox only" instead and may touch inbox/ only.
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate-canonical-change:
+    name: canonical-validation
+    if: >-
+      github.event_name == 'push' ||
+      github.event.pull_request.user.login == 'gschmidtke'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Validate packs, vocabularies, hidden characters and read-only checks
+        run: |
+          pip install --quiet jsonschema==4.23.0
+          python tools/validate.py
+
+      - name: Check catalogs and index.json are generated from the library
+        run: |
+          python tools/build_catalogs.py
+          if ! git diff --quiet; then
+            echo "::error::Catalogs or index.json are out of date. Run: python tools/build_catalogs.py and commit the result."
+            git diff --stat
+            exit 1
+          fi
