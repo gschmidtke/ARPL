@@ -1,0 +1,98 @@
+{
+  "title": "Batch-onboard many local models to the cloud and register each one: verify by state, not by reply; handle posted-command dialogs by keyboard",
+  "contributor": {
+    "name": "Gottfried Schmidtke",
+    "github": "gschmidtke",
+    "credit_as": "Gottfried Schmidtke (Tiverit LLC)"
+  },
+  "license_confirmation": "I wrote this or have the right to share it, and I agree to publish it under CC BY 4.0 (text/JSON) and MIT (code).",
+  "context": {
+    "revit_version": "2024.3 (24.3.60.12)",
+    "tool_or_bridge": "RevitBridge (MCP, run_csharp with Roslyn, 60 s reply wait) plus desktop screenshots, mouse and keyboard for dialogs",
+    "discipline": "BIM management",
+    "project_type": "Multi-building campus, 13 per-building models split from one parent",
+    "phase": "Model setup for federation"
+  },
+  "intent": "For each of 13 local per-building models: set its identity in Project Information, save it as a workshared cloud model into one shared cloud folder, run a third-party add-in command that appends the model's cloud GUIDs to a registry CSV, and sync. Some models had already been uploaded by a person earlier, without the agent knowing which.",
+  "use_when": [
+    "An agent uploads or registers a series of models to a cloud project, one after another.",
+    "A bridge call outlasts the bridge's reply wait (cloud save, enable worksharing, sync).",
+    "An add-in command is started by PostCommand and opens file pickers, confirmation prompts or result dialogs."
+  ],
+  "not_for": [
+    "Single interactive uploads done by a person.",
+    "Batch tools that already run headless without dialogs: use those and skip the screen handling."
+  ],
+  "api_terms": [
+    "Document.SaveAsCloudModel",
+    "Autodesk.Revit.Exceptions.RevitServerModelAlreadyExistsException",
+    "Document.EnableCloudWorksharing",
+    "Document.IsModelInCloud, Document.IsWorkshared, Document.PathName",
+    "Document.GetCloudModelPath, ModelPath.GetModelGUID",
+    "ModelPathUtils.ConvertCloudGUIDsToCloudPath",
+    "UIApplication.OpenAndActivateDocument",
+    "UIApplication.PostCommand, RevitCommandId.LookupCommandId",
+    "Document.SynchronizeWithCentral, RelinquishOptions",
+    "ProjectLocation.GetProjectPosition"
+  ],
+  "improves": "",
+  "packs_used": [],
+  "usage_report": {
+    "tokens_in": "",
+    "tokens_out": "",
+    "tool_calls": "about 90 bridge and screen actions for 13 models (about 3 to 4 minutes per model once the routine was stable)",
+    "retries": "0 destructive retries; every timed-out call was checked by state instead of being resent",
+    "packs": [],
+    "without_arpl_estimate": "First model took about 15 minutes and several surprises; the stable routine took about 3 to 4 minutes per model."
+  },
+  "iterations": [
+    {
+      "instruction": "Open local model, set Project Information, SaveAsCloudModel + EnableCloudWorksharing in one bridge call.",
+      "result": "The call timed out on the agent side (60 s) but finished in Revit. A progress dialog 'Enable Worksharing' was visible on screen meanwhile; while it ran, further bridge calls also timed out.",
+      "problem": "A timeout says nothing about success. Resending would try to upload a second time.",
+      "found_by": "Waiting, then reading IsModelInCloud / IsWorkshared / GetCloudModelPath().GetModelGUID() in a separate short call."
+    },
+    {
+      "instruction": "Upload a model whose name already existed in the cloud folder (uploaded earlier by a person).",
+      "result": "SaveAsCloudModel threw RevitServerModelAlreadyExistsException, but only after about 58 s. On one model the exception arrived after the 60 s wait, so the agent never saw it.",
+      "problem": "Afterwards the document's PathName showed the cloud path ('Autodesk Docs://<project>/<name>.rvt') although nothing was saved: IsModelInCloud false, IsWorkshared false, IsModified true. EnableCloudWorksharing then failed with 'does not have a central location'. Judging success by PathName would have been wrong.",
+      "found_by": "Reading IsModelInCloud and GetCloudModelPath() (which throws 'not a cloud model') instead of PathName."
+    },
+    {
+      "instruction": "Find out which models already exist in the cloud folder: web viewer, desktop sync folder.",
+      "result": "Web viewer was not signed in; the desktop sync folder had not synced the project. The application's own cloud-open view (File > Open > Cloud Model) listed the folder after a refresh, and showed that all models (old and new) were in the same folder, with no duplicates.",
+      "problem": "Without GUIDs, existing cloud models cannot be opened through the API; the cloud-open UI was the only reliable list.",
+      "found_by": "Screenshot of the cloud-open view after pressing its refresh button (the first view was cached and showed only the older models)."
+    },
+    {
+      "instruction": "Open each pre-existing cloud model through the UI, then check it before changing anything.",
+      "result": "Checked ProjectPosition at XYZ.Zero (same shared coordinates as the parent) and element counts (grids, floors) against the split report. One model had been uploaded before its split was corrected; the check confirmed the cloud copy held the corrected version.",
+      "problem": "A model uploaded by someone else may be an older version of the local file.",
+      "found_by": "Counts and coordinates compared to the known-good split report."
+    },
+    {
+      "instruction": "Run the registry command by PostCommand right after the bridge call.",
+      "result": "Nothing appeared until the mouse moved over the application window; then the add-in's file picker opened, then the OS 'file already exists, replace?' prompt, then a result dialog.",
+      "problem": "PostCommand runs only when the application is idle and receives input. While its modal dialogs are open the bridge does not answer. Once, the chat window was in front, so typing would have gone into the wrong window.",
+      "found_by": "Screenshots after each step."
+    },
+    {
+      "instruction": "Handle the dialog chain by keyboard: click into the file-name field, Ctrl+A, type the registry file name, Enter, Alt+Y on the overwrite prompt, then Escape on the result dialog.",
+      "result": "Stable for all remaining models. The add-in appended a row each time; nothing was overwritten (verified by reading the CSV after the first run, with a backup copy taken before editing it).",
+      "problem": "None once the click into the field was always done first (focus guard).",
+      "found_by": "Zoom on the result dialog showing the model key for that model; final CSV check."
+    },
+    {
+      "instruction": "Fix the one registry row that had the template placeholder as its key (from a model registered before its Building Name was set).",
+      "result": "Set Building Name in the model, synced, and corrected the CSV row in place after a .bak copy.",
+      "problem": "None.",
+      "found_by": "Final check: 13 rows, 13 unique keys, 13 unique model GUIDs, no placeholder key."
+    }
+  ],
+  "final_rule": {
+    "lesson": "In a batch of cloud uploads, the bridge reply is not the result: long calls time out, failures can arrive late and leave a misleading PathName, and posted commands open dialogs that block the bridge. Verify each step by reading document state, keep each call short, and drive dialogs by keyboard with a focus guard.",
+    "rule": "Per model: (1) open local file and set identity fields (Building Name = model name, Project Name) in one short call; close other documents. (2) Cloud save + enable worksharing in one call and expect a timeout; do not resend. Wait 60 to 90 s, then in a short call read IsModelInCloud, IsWorkshared and GetCloudModelPath().GetModelGUID(). Never judge by PathName. If IsModelInCloud is false, the name already exists in the folder: open that cloud model instead (cloud-open UI after refresh, or by GUID if known) and check its coordinates and element counts before touching it. (3) Post the registry command, move the mouse over the application to let it run, screenshot. (4) Click into the dialog's input field first, then type and confirm by keyboard; confirm an overwrite prompt only if the tool is known to append and a backup exists. (5) Read the result dialog (key and GUID), close it, then sync with central. (6) After the batch: one registry row per model, unique keys and GUIDs, no placeholder values; spot-check models uploaded by others for coordinates and counts.",
+    "validation": "Every model: IsModelInCloud and IsWorkshared true, synced, Building Name equals the model name, shared coordinates equal to the authority. Registry: row count equals model count, keys and model GUIDs unique, no template placeholder text."
+  },
+  "notes": "Follow-up to the submission 'Split a multi-building campus model into per-building cloud models on one shared coordinate system' (same session). Proposed failure patterns for the curator: (a) Late exception after the reply timeout leaves the document with a cloud PathName but no cloud model. (b) Posted command does not start until the application receives input. (c) Keyboard input lands in the wrong window when another app is in front (always click into the target field first). (d) Pre-existing cloud copy may predate a local fix. Tool, site and project identifiers omitted on purpose."
+}
