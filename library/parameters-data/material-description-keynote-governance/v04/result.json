@@ -1,0 +1,5 @@
+{
+  "result": "The logic was tightened by naming actors, adding classification criteria and proposal states, anchoring family equivalence to approved mappings, quarantining suspicious keynotes, forbidding completion-looking placeholders, specifying a sidecar proposal schema, and requiring runtime API/keynote resolution checks.",
+  "problem": "Several rules were individually sound but left implicit authority boundaries or undefined terms such as equivalent family, valid keynote, direct commit, and proposal storage.",
+  "found_by": "External model review (Mistral) tested the rule set under adversarial reading and identified ambiguities that did not require restructuring but did require explicit machine-readable constraints."
+}

@@ -108,10 +108,13 @@
       "files": [
         "inbox/gschmidtke/material-description-keynote-governance.json"
       ],
-      "status": "held",
-      "decision": "New technique, no existing pack covers it; drafted as a new pack in parameters-data. Held: the schema requires revit_versions_tested (versions it actually ran in) and the submission gives only an applicability range (2024-2027) and a CSV/Excel review, no Revit read-back. Waiting for the owner to say which Revit version the round-trip ran in, or that it has not run in Revit yet.",
-      "resulting_ids": [],
-      "reviewed_by": "Claude (curator)"
+      "status": "filed",
+      "decision": "New pack ARPL-PAR-0001 in parameters-data (new series prefix PAR), candidate, revit_versions_tested 2024 as confirmed by the contributor on 2026-10-27. Tool name left out of the pack environment.",
+      "resulting_ids": [
+        "ARPL-PAR-0001"
+      ],
+      "reviewed_by": "Claude (curator)",
+      "closed": "2026-10-27"
     },
     {
       "entry_id": "IN-0005",
@@ -119,18 +122,20 @@
       "contributor": {
         "name": "Gottfried Schmidtke",
         "github": "gschmidtke",
-        "with": "third-party feedback from Erik (LuhTech), LinkedIn"
+        "with": "anonymized community feedback"
       },
       "source": "direct upload to main by the owner (commit 5151092, be234c2, a236b72); no pull request",
-      "submitted": "Erik's LinkedIn feedback on deliverable intent and automated validation, the owner's reply, and a curator note proposing a deliverable acceptance contract; plus a superseded pointer file",
+      "submitted": "Community feedback on deliverable intent and automated validation, the owner's reply, and a curator note proposing a deliverable acceptance contract",
       "files": [
-        "inbox/erik-feedback-deliverable-validation.txt",
-        "inbox/Eriks comments.txt"
+        "two text files in inbox/ (feedback record and a superseded pointer), removed 2026-10-27"
       ],
-      "status": "held",
-      "decision": "No pack: a proposal to change ARPL's structure (acceptance contract), which is the owner's decision. Held because the file quotes a named third party's comment verbatim in a public repository; waiting for the owner to confirm Erik agreed to be quoted and credited, or to reduce it to a paraphrase.",
-      "resulting_ids": [],
-      "reviewed_by": "Claude (curator)"
+      "status": "filed",
+      "decision": "At the owner's request the commenter is not named. Raw files removed from the inbox; an anonymized record is in ledger/archive/IN-0005/. The idea is written up with IN-0007 as docs/proposals/deliverable-acceptance-contract.md (proposal, not adopted).",
+      "resulting_ids": [
+        "docs/proposals/deliverable-acceptance-contract.md"
+      ],
+      "reviewed_by": "Claude (curator)",
+      "closed": "2026-10-27"
     },
     {
       "entry_id": "IN-0006",
@@ -170,13 +175,15 @@
         "github": "gschmidtke"
       },
       "source": "direct upload to main by the owner (commit a629924); no pull request",
-      "submitted": "Note on the relevance of the DesConOps white paper (LuhTech Holdings) to ARPL: acceptance contract, read-back as proof of done",
+      "submitted": "Note on the relevance of a DesConOps white paper (October 2026) to ARPL: acceptance contract, read-back as proof of done",
       "files": [
         "inbox/desconops-relevance-to-arpl.json"
       ],
       "status": "closed",
-      "decision": "No pack: a design reference, not a recorded Revit run. Archived; the acceptance-contract proposal is listed for the owner together with IN-0005.",
-      "resulting_ids": [],
+      "decision": "No pack: a design reference, not a recorded Revit run. Archived; its acceptance-contract idea is in docs/proposals/deliverable-acceptance-contract.md together with IN-0005.",
+      "resulting_ids": [
+        "docs/proposals/deliverable-acceptance-contract.md"
+      ],
       "reviewed_by": "Claude (curator)",
       "closed": "2026-10-27"
     },
@@ -259,10 +266,11 @@
         "inbox/gschmidtke/neutral-building-definition-building-001.json",
         "inbox/gschmidtke/architectural-sketch-proportional-reconstruction-rule.json"
       ],
-      "status": "held",
-      "decision": "Cannot be filed with the current vocabularies and schema: work_class must be W1-W8 and there is no software-neutral workflow value; the method also runs before any Revit session, so revit_versions_tested cannot be filled. Held for the owner's decision on W9, the new workflow value and scope (docs/scope.md). The two files are one submission; the refinement supersedes the first file's 'do not build proportional geometry' default.",
+      "status": "closed",
+      "decision": "Redirected to USG (gschmidtke/USG), the upstream repository. USG already owns this stratum: its AGENTS.md defines the same evidence classes (exact, derived, approximate, observed, ambiguous, unknown), docs/proposals/architectural-sketch-reconstruction.md holds the same sketch rule, and its inbox has a Building 001 review (2026-10-26). No W9 or new workflow value is needed in ARPL. ARPL keeps the downstream side: the USG -> ARPL handoff (acceptance invariants, approximate values not promoted to exact in Revit), to be filed as a pack once it has run in Revit. Raw files archived.",
       "resulting_ids": [],
-      "reviewed_by": "Claude (curator)"
+      "reviewed_by": "Claude (curator)",
+      "closed": "2026-10-27"
     }
   ]
 }

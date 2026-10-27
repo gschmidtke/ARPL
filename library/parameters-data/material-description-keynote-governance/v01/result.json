@@ -1,0 +1,5 @@
+{
+  "result": "AI produced normalized descriptions for physical materials and corrected several contradictions.",
+  "problem": "The first description grammar also carried dimensions from material names into Description, for example panel and tile sizes.",
+  "found_by": "Human review of the edited material schedule in Excel showed that dimensions made the Description less reusable and duplicated type/name information."
+}

@@ -1,0 +1,5 @@
+{
+  "result": "Keynote was separated from Description: Description identifies the material variant; Keynote is the documentation identity. Existing keys remain authoritative. A new local suffix system may be generated only when the user explicitly requests creation of a new project keynote set.",
+  "problem": "The alphabetic suffix after a classification section is not inherently an official semantic code and must not be treated as one without an authoritative keynote table.",
+  "found_by": "Existing material schedules contained repeated section-based keys with local suffixes that did not expose a universal letter meaning."
+}

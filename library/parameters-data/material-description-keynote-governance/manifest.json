@@ -1,0 +1,81 @@
+{
+  "id": "ARPL-PAR-0001",
+  "revision": 1,
+  "title": "Governed material Descriptions and Keynotes",
+  "use_when": [
+    "A Revit material schedule contains blank, incomplete or contradictory Description values.",
+    "Materials need Keynote values for material tags or sheet keynote legends.",
+    "Material data is exported to CSV, AI-reviewed and read back into Revit.",
+    "A Revit Bridge reads material properties, requests an AI proposal, previews the proposal and commits approved changes."
+  ],
+  "not_for": [
+    "Inventing manufacturer, product, grade, performance or specification properties that are not supported by the source data.",
+    "Replacing an approved office or project keynote database without explicit authorization.",
+    "Treating appearance assets as authoritative physical specifications.",
+    "Automatically describing analytical, phase, poche, default or other graphic/system materials as construction materials unless the user explicitly wants them documented.",
+    "Merging, deduplicating, renaming or deleting Revit materials as a side effect of metadata enrichment."
+  ],
+  "api_terms": [
+    "Material",
+    "AppearanceAssetElement",
+    "Asset",
+    "AssetProperty",
+    "KEYNOTE_PARAM",
+    "KeynoteTable",
+    "KeynoteEntry",
+    "Parameter.Set",
+    "Transaction",
+    "ExternalEvent"
+  ],
+  "level": 2,
+  "work_class": "W7",
+  "workflows": [
+    "parameters-data",
+    "documentation",
+    "model-administration"
+  ],
+  "disciplines": [
+    "architecture",
+    "bim-vdc"
+  ],
+  "roles": [
+    "bim-manager",
+    "bim-specialist",
+    "technical-architect"
+  ],
+  "project_types": [
+    "generic"
+  ],
+  "phases": [
+    "design-development",
+    "construction-documents"
+  ],
+  "revit_versions_tested": [
+    "2024"
+  ],
+  "environment": {
+    "revit_version": "2024",
+    "tool": "Revit material export to CSV, AI proposal reviewed in Excel, re-import into Revit",
+    "review": "adversarial rule review by a second model (Mistral)"
+  },
+  "failure_patterns": [
+    "FP03",
+    "FP06",
+    "FP07"
+  ],
+  "status": "candidate",
+  "contributors": [
+    "Gottfried Schmidtke"
+  ],
+  "recorded": "2026-10-23",
+  "changelog": [
+    {
+      "revision": 1,
+      "date": "2026-10-27",
+      "change": "First recorded (IN-0004); Revit version confirmed by the contributor",
+      "contributors": [
+        "Gottfried Schmidtke"
+      ]
+    }
+  ]
+}

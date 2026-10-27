@@ -1,0 +1,4 @@
+{
+  "version": "v04",
+  "instruction": "Adversarially review the governance logic for places where a human-readable rule could be misread by an autonomous agent."
+}

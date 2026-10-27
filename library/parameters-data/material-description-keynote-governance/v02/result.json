@@ -1,0 +1,5 @@
+{
+  "result": "Description was redefined as a dimension-free human-readable identity: base material, product/form, finish/treatment, color, pattern/texture, and supported grade/performance terms.",
+  "problem": "Appearance data can contain plausible but non-authoritative product information, and existing descriptions can conflict with Name or appearance.",
+  "found_by": "Examples showed conflicting colors and finishes between material Name, Description and Appearance Asset."
+}

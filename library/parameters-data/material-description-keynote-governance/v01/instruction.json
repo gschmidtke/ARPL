@@ -1,0 +1,4 @@
+{
+  "version": "v01",
+  "instruction": "Export Revit materials and use AI to fill missing or inconsistent material descriptions from Name, Class, existing Description and appearance data."
+}
