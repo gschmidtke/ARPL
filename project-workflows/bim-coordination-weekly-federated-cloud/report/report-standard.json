@@ -1,0 +1,662 @@
+{
+  "id": "ARPL-RPT-0001",
+  "title": "Weekly BIM coordination report: structure and data contract",
+  "version": "1.0",
+  "status": "candidate",
+  "recorded": "2026-10-28",
+  "applies_to": "ARPL-PW-0003 step 8 (Report)",
+  "contributors": [
+    "Gottfried Schmidtke with Claude"
+  ],
+  "source": "Weekly reports built on 2026-10-27 for a 13-model campus (partial: checks, links, models) and the 6-model Snowdon Towers sample (complete); the Snowdon structure is the standard",
+  "principles": [
+    "Every figure, chart and table comes from a dataset or a named calculation; no number is typed into the text",
+    "One dataset per source, keyed by ModelKey (or element pair) and snapshot week; raw outputs per run in REPORTS/<date>",
+    "Sections keep their order and ids; a section whose source did not run stays out and is listed under 'Not collected this week'",
+    "Week 1 is the baseline: trend rules read 'baseline'; from week 2 they compare with last week's datasets",
+    "Recommendations name owning teams and actions, never figures; recurring causes first",
+    "Project constants are stated on the page: coordinate authority, tolerance, LOIN target and LOIN basis"
+  ],
+  "constants": {
+    "AUTHORITY_MODEL_KEY": "ModelKey of the coordinate authority model (the user decides)",
+    "TOL_FT": 0.01,
+    "ANGLE_TOL_DEG": 0.001,
+    "LOIN_TARGET": 0.95,
+    "MODEL_KEY_PREFIX": "common ModelKey prefix shortened in charts (optional)"
+  },
+  "datasets": {
+    "models": {
+      "file": "datasets/models.csv",
+      "file_name": "<project>_models_<yyyy-mm-dd>.csv",
+      "key": "model",
+      "grain": "one row per model per week",
+      "collected_by": "step 2 ZEN ACC Gate Model Health Check (counts) + step 3 read-only bridge read (position, links, identity, schedules)",
+      "columns": [
+        {
+          "name": "model",
+          "type": "string",
+          "meaning": "ModelKey = registry key = Project Information > Building Name"
+        },
+        {
+          "name": "model_name",
+          "type": "string",
+          "meaning": "model (file) title"
+        },
+        {
+          "name": "discipline",
+          "type": "string",
+          "meaning": "discipline of the model"
+        },
+        {
+          "name": "snapshot",
+          "type": "date",
+          "meaning": "week of the run, YYYY-MM-DD"
+        },
+        {
+          "name": "in_health_run",
+          "type": "yes|no",
+          "meaning": "the model was in the batch health run"
+        },
+        {
+          "name": "warnings",
+          "type": "integer",
+          "meaning": "warnings total"
+        },
+        {
+          "name": "views",
+          "type": "integer",
+          "meaning": "views total"
+        },
+        {
+          "name": "view_templates",
+          "type": "integer",
+          "meaning": "view templates"
+        },
+        {
+          "name": "views_not_on_sheets",
+          "type": "integer",
+          "meaning": "views not placed on a sheet"
+        },
+        {
+          "name": "sheets",
+          "type": "integer",
+          "meaning": "sheets total"
+        },
+        {
+          "name": "unplaced_rooms",
+          "type": "integer"
+        },
+        {
+          "name": "unplaced_areas",
+          "type": "integer"
+        },
+        {
+          "name": "cad_imports",
+          "type": "integer"
+        },
+        {
+          "name": "cad_links",
+          "type": "integer"
+        },
+        {
+          "name": "revit_links",
+          "type": "integer",
+          "meaning": "Revit link instances in the host"
+        },
+        {
+          "name": "in_place_families",
+          "type": "integer"
+        },
+        {
+          "name": "model_groups",
+          "type": "integer"
+        },
+        {
+          "name": "detail_groups",
+          "type": "integer"
+        },
+        {
+          "name": "levels",
+          "type": "integer"
+        },
+        {
+          "name": "grids",
+          "type": "integer"
+        },
+        {
+          "name": "raster_images",
+          "type": "integer"
+        },
+        {
+          "name": "design_options",
+          "type": "integer"
+        },
+        {
+          "name": "building_name",
+          "type": "string",
+          "meaning": "Project Information > Building Name as read"
+        },
+        {
+          "name": "site",
+          "type": "string",
+          "meaning": "active project location (site) name"
+        },
+        {
+          "name": "shared_ew_ft",
+          "type": "number",
+          "meaning": "shared position of the internal origin, east-west, feet"
+        },
+        {
+          "name": "shared_ns_ft",
+          "type": "number",
+          "meaning": "north-south, feet"
+        },
+        {
+          "name": "elevation_ft",
+          "type": "number",
+          "meaning": "elevation, feet"
+        },
+        {
+          "name": "angle_deg",
+          "type": "number",
+          "meaning": "angle to true north, degrees"
+        },
+        {
+          "name": "links_on_own_workset",
+          "type": "integer",
+          "meaning": "link instances on their own XX_<LinkKey> workset"
+        },
+        {
+          "name": "links_in_place",
+          "type": "integer",
+          "meaning": "link instances placed as the matrix defines (identity transform when all models share one origin)"
+        },
+        {
+          "name": "worksets",
+          "type": "integer",
+          "meaning": "user worksets"
+        },
+        {
+          "name": "has_instance_parameters",
+          "type": "yes|no",
+          "meaning": "standard INSTANCE PARAMETERS schedule present"
+        },
+        {
+          "name": "has_sheet_list",
+          "type": "yes|no",
+          "meaning": "standard SHEET LIST schedule present"
+        }
+      ]
+    },
+    "links": {
+      "file": "datasets/links.csv",
+      "file_name": "<project>_links_<yyyy-mm-dd>.csv",
+      "key": "host,link",
+      "grain": "one row per link instance per week",
+      "collected_by": "step 3 read-only bridge read with links loaded where placement is judged (ARPL-LNK-0002)",
+      "columns": [
+        {
+          "name": "host",
+          "type": "string",
+          "meaning": "host ModelKey"
+        },
+        {
+          "name": "link",
+          "type": "string",
+          "meaning": "linked ModelKey"
+        },
+        {
+          "name": "workset",
+          "type": "string",
+          "meaning": "workset of the link instance"
+        },
+        {
+          "name": "workset_ok",
+          "type": "yes|no",
+          "meaning": "on the link's own workset"
+        },
+        {
+          "name": "placement",
+          "type": "string",
+          "meaning": "identity transform | moved: <offset>"
+        },
+        {
+          "name": "link_status",
+          "type": "string",
+          "meaning": "loaded state as read"
+        },
+        {
+          "name": "source",
+          "type": "string",
+          "meaning": "how it was read"
+        }
+      ]
+    },
+    "warnings": {
+      "file": "datasets/warnings.csv",
+      "file_name": "<project>_warnings_<yyyy-mm-dd>.csv",
+      "key": "model,rank",
+      "grain": "top five warning types per model per week",
+      "collected_by": "step 2 ZEN health check 'Top Warning' lines",
+      "columns": [
+        {
+          "name": "model",
+          "type": "string",
+          "meaning": "ModelKey"
+        },
+        {
+          "name": "rank",
+          "type": "integer",
+          "meaning": "1-5"
+        },
+        {
+          "name": "count",
+          "type": "integer",
+          "meaning": "instances of this warning"
+        },
+        {
+          "name": "message",
+          "type": "string",
+          "meaning": "warning text as Revit writes it"
+        }
+      ]
+    },
+    "loin": {
+      "file": "datasets/loin.csv",
+      "file_name": "<project>_loin_<yyyy-mm-dd>.csv",
+      "key": "model,category,field",
+      "grain": "one row per model, category and information field per week",
+      "collected_by": "step 4 count over the INSTANCE PARAMETERS schedule export (ARPL-QA-0002)",
+      "columns": [
+        {
+          "name": "model",
+          "type": "string",
+          "meaning": "ModelKey"
+        },
+        {
+          "name": "category",
+          "type": "string",
+          "meaning": "Revit category"
+        },
+        {
+          "name": "element_kind",
+          "type": "family element|system / analytical",
+          "meaning": "family elements count towards LOIN; system and analytical rows are reported separately"
+        },
+        {
+          "name": "field",
+          "type": "string",
+          "meaning": "information field (schedule column)"
+        },
+        {
+          "name": "instances",
+          "type": "integer",
+          "meaning": "instances in the category"
+        },
+        {
+          "name": "filled",
+          "type": "integer",
+          "meaning": "instances with the field filled"
+        }
+      ]
+    },
+    "clashes": {
+      "file": "datasets/clashes.csv",
+      "file_name": "<project>_clashes_<yyyy-mm-dd>.csv",
+      "key": "uid_a,uid_b",
+      "grain": "one row per clashing element pair per week",
+      "collected_by": "step 5 clash run (ARPL-CRD-0001) or a cloud clash service export",
+      "columns": [
+        {
+          "name": "snapshot",
+          "type": "date"
+        },
+        {
+          "name": "pair",
+          "type": "string",
+          "meaning": "pair code, e.g. ELExCEIL"
+        },
+        {
+          "name": "discipline_a",
+          "type": "string",
+          "meaning": "discipline of element a"
+        },
+        {
+          "name": "discipline_b",
+          "type": "string",
+          "meaning": "discipline of element b"
+        },
+        {
+          "name": "kind",
+          "type": "clash|penetration",
+          "meaning": "penetration = planned vertical run through a ceiling, not counted as a clash"
+        },
+        {
+          "name": "group",
+          "type": "string",
+          "meaning": "group id; clashes sharing an element share a group"
+        },
+        {
+          "name": "owner",
+          "type": "string",
+          "meaning": "discipline that moves, by routing priority"
+        },
+        {
+          "name": "category_a",
+          "type": "string"
+        },
+        {
+          "name": "family_type_a",
+          "type": "string"
+        },
+        {
+          "name": "level_a",
+          "type": "string"
+        },
+        {
+          "name": "id_a",
+          "type": "integer",
+          "meaning": "element id"
+        },
+        {
+          "name": "uid_a",
+          "type": "string",
+          "meaning": "UniqueId, stable week to week"
+        },
+        {
+          "name": "category_b",
+          "type": "string"
+        },
+        {
+          "name": "family_type_b",
+          "type": "string"
+        },
+        {
+          "name": "level_b",
+          "type": "string"
+        },
+        {
+          "name": "id_b",
+          "type": "integer"
+        },
+        {
+          "name": "uid_b",
+          "type": "string"
+        },
+        {
+          "name": "volume_cf",
+          "type": "number",
+          "meaning": "intersection volume, cubic feet"
+        },
+        {
+          "name": "x",
+          "type": "number",
+          "meaning": "clash point, feet, internal coordinates"
+        },
+        {
+          "name": "y",
+          "type": "number"
+        },
+        {
+          "name": "z",
+          "type": "number"
+        }
+      ]
+    }
+  },
+  "calculations": [
+    {
+      "id": "loin_by_model",
+      "inputs": [
+        "loin"
+      ],
+      "output": "model, field, instances, filled, fill",
+      "rule": "family elements only; fill = filled / instances"
+    },
+    {
+      "id": "loin_by_category",
+      "inputs": [
+        "loin"
+      ],
+      "output": "model, category, instances, description_fill, type_mark_fill, missing",
+      "rule": "family elements only; missing = sum(instances - filled) over fields; top 15 by missing"
+    },
+    {
+      "id": "loin_summary",
+      "inputs": [
+        "loin"
+      ],
+      "output": "completeness, required_values, filled_values, system_instances",
+      "rule": "completeness = sum(filled) / sum(instances) over family elements; system instances counted once (Description rows)"
+    },
+    {
+      "id": "clash_summary",
+      "inputs": [
+        "clashes"
+      ],
+      "output": "clashes, groups, penetrations",
+      "rule": "kind = clash counts; penetrations separately"
+    },
+    {
+      "id": "clash_pairs",
+      "inputs": [
+        "clashes"
+      ],
+      "output": "pair, clashes, groups",
+      "rule": "per 'discipline_a × discipline_b', largest first"
+    },
+    {
+      "id": "clash_owners",
+      "inputs": [
+        "clashes"
+      ],
+      "output": "owner, clashes, groups",
+      "rule": "per owner (team that moves)"
+    },
+    {
+      "id": "clash_groups",
+      "inputs": [
+        "clashes"
+      ],
+      "output": "group, pair, level, owner, element, clashes",
+      "rule": "top 12 groups by clashes; most frequent level, owner and element (category, family type, id)"
+    },
+    {
+      "id": "findings",
+      "inputs": [
+        "models",
+        "loin_by_model"
+      ],
+      "output": "model + one column per rule",
+      "rule": "see rules"
+    },
+    {
+      "id": "summary",
+      "inputs": [
+        "models",
+        "findings"
+      ],
+      "output": "models, links, warnings, views_not_on_sheets, model_groups, checks_passed, checks_failed, checks_total, pass_share",
+      "rule": "sums over models; pass_share = passed / (passed + failed); baseline and n/c are not counted"
+    },
+    {
+      "id": "warning_types",
+      "inputs": [
+        "warnings"
+      ],
+      "output": "message, count, models",
+      "rule": "top-five rows of every model combined by message; numbered system names normalised ('<name> 31:' to '<name> <n>:')"
+    }
+  ],
+  "rules": [
+    {
+      "id": "links_complete",
+      "label": "Links complete",
+      "pass_when": "revit_links = number of models - 1 (every host links every other model), or as the link matrix defines"
+    },
+    {
+      "id": "links_workset",
+      "label": "Link worksets",
+      "pass_when": "links_on_own_workset = revit_links"
+    },
+    {
+      "id": "links_in_place",
+      "label": "Links in place",
+      "pass_when": "links_in_place = revit_links"
+    },
+    {
+      "id": "coordinates",
+      "label": "Coordinates",
+      "pass_when": "|shared_ew_ft - authority| <= TOL_FT and |shared_ns_ft - authority| <= TOL_FT and |angle_deg - authority| < ANGLE_TOL_DEG"
+    },
+    {
+      "id": "identity",
+      "label": "Model identity",
+      "pass_when": "building_name = model (ModelKey)"
+    },
+    {
+      "id": "standards",
+      "label": "Standard schedules",
+      "pass_when": "has_instance_parameters = yes and has_sheet_list = yes"
+    },
+    {
+      "id": "loin",
+      "label": "LOIN ≥ target",
+      "pass_when": "model completeness >= LOIN_TARGET; n/c when the model has no LOIN rows"
+    },
+    {
+      "id": "warnings",
+      "label": "Warnings trend",
+      "pass_when": "warnings <= last week's warnings; 'baseline' in the first week"
+    },
+    {
+      "id": "health",
+      "label": "Health data",
+      "pass_when": "in_health_run = yes, else n/c"
+    }
+  ],
+  "check_values": [
+    "pass",
+    "fail",
+    "baseline",
+    "n/c"
+  ],
+  "sections": [
+    {
+      "order": 1,
+      "id": "header",
+      "title": "Title, week and one-sentence summary",
+      "from": "summary, warning_types, loin_summary, clash_summary",
+      "content": "{{PROJECT}} weekly BIM report; 'Week of …'; baseline week or trend week; the summary sentence carries only marked figures"
+    },
+    {
+      "order": 2,
+      "id": "tiles",
+      "title": "Headline figures",
+      "from": "loin_summary, clash_summary, summary",
+      "content": "LOIN completeness; hard clashes (with groups); warnings; checks passing; Revit links; views not on sheets; model groups"
+    },
+    {
+      "order": 3,
+      "id": "recommendations",
+      "title": "Recommendations for the team",
+      "from": "written",
+      "content": "ordered by impact; each: finding, owning team, action; recurring causes first; no figures in the text"
+    },
+    {
+      "order": 4,
+      "id": "clash-pairs",
+      "title": "Hard clashes by discipline pair",
+      "from": "clash_pairs",
+      "content": "bar chart"
+    },
+    {
+      "order": 5,
+      "id": "clash-owners",
+      "title": "Clashes by team that moves",
+      "from": "clash_owners",
+      "content": "bar chart; routing priority stated"
+    },
+    {
+      "order": 6,
+      "id": "clash-groups",
+      "title": "Largest clash groups",
+      "from": "clash_groups",
+      "content": "table keyed by group, with element ids"
+    },
+    {
+      "order": 7,
+      "id": "loin",
+      "title": "LOIN completeness by model and field",
+      "from": "loin_by_model",
+      "content": "model × field grid of fill rates; state the LOIN basis"
+    },
+    {
+      "order": 8,
+      "id": "loin-gaps",
+      "title": "Largest LOIN gaps by category",
+      "from": "loin_by_category, loin_summary",
+      "content": "table keyed by model, category; system and analytical instances reported separately"
+    },
+    {
+      "order": 9,
+      "id": "warning-types",
+      "title": "Warnings by type",
+      "from": "warning_types",
+      "content": "bar chart with full message in the tooltip"
+    },
+    {
+      "order": 10,
+      "id": "warnings-by-model",
+      "title": "Warnings by model",
+      "from": "models",
+      "content": "bar chart; week-over-week from week 2"
+    },
+    {
+      "order": 11,
+      "id": "checks",
+      "title": "Rule checks by model",
+      "from": "findings",
+      "content": "table: one row per model, one column per rule; pass, fail, baseline, n/c"
+    },
+    {
+      "order": 12,
+      "id": "links",
+      "title": "Link matrix, host by linked model",
+      "from": "links",
+      "content": "host × link grid coloured by workset and placement"
+    },
+    {
+      "order": 13,
+      "id": "models",
+      "title": "Model contents",
+      "from": "models",
+      "content": "table of the health-check counts"
+    },
+    {
+      "order": 14,
+      "id": "gaps",
+      "title": "Not collected this week",
+      "from": "written",
+      "content": "every source or rule that did not run, and why"
+    }
+  ],
+  "template": {
+    "file": "template/index.html",
+    "for": "Claude Dashboard artifact type (one-writer page, dash.* runtime, d3); any other BI tool can read the same CSVs and follow sections, calculations and rules",
+    "placeholders": [
+      "{{PROJECT}}",
+      "{{WEEK}}",
+      "{{BASELINE_OR_TREND}}",
+      "{{SCOPE}}",
+      "{{AUTHORITY_MODEL_KEY}}",
+      "{{AUTHORITY_NOTE}}",
+      "{{MODEL_KEY_PREFIX}}",
+      "{{LOIN_BASIS}}",
+      "{{CLASH_SCOPE}}",
+      "{{FINDING}}",
+      "{{OWNING_TEAM}}",
+      "{{ACTION}}"
+    ]
+  }
+}
