@@ -1,0 +1,10 @@
+{
+  "lesson": "A BOM is a deterministic grouping of deduplicated instance data under a governed category rule table; anything that does not fit becomes a named exception, never a guess.",
+  "rule": "1. Input: the INSTANCE PARAMETERS export of every model, with instance key and unique id (ARPL-PAR-0003).\n2. Deduplicate by unique id before counting (FP55).\n3. Keep only the purchase phases (default New Construction); existing work is an exception.\n4. Take quantity basis, unit, quantity field, grouping and required fields only from the category rule table of ARPL-BOM-0001; match on category, source discipline (first letter of the instance key) and material condition.\n5. A category modelled in two disciplines is counted from the discipline the table names; the other rows are exceptions.\n6. Convert units explicitly: Revit feet-inch text to feet, CF to CY.\n7. Write the BOM, a trace row per element and an exceptions list with a reason per element; reconcile before handing anything over.\n8. Leave procurement quantities (waste, purchase units, suppliers, packages) to the GC item table; do not invent them.",
+  "validation": [
+    "No unique id twice in the trace",
+    "Elements read = traced + exceptions",
+    "Each line's quantity = sum of its trace",
+    "Rules marked proposed are flagged until the BIM manager and GC confirm them"
+  ]
+}

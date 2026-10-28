@@ -1,0 +1,4 @@
+{
+  "result": "17,783 unique elements: 16,713 traced into 486 BOM lines (334 EA, 86 SF, 45 LF, 21 CY), 1,070 exceptions with reasons (559 counted from the other discipline's model, 256 existing phase, 205 no rule: site, planting, parking, 45 curtain panels without area, 5 non-concrete structural floors). Every line equals the sum of its trace; elements read = traced + exceptions.",
+  "found_by": "reconciliation built into the builder"
+}

@@ -566,6 +566,26 @@
       ],
       "reviewed_by": "Claude (curator)",
       "closed": "2026-10-28"
+    },
+    {
+      "entry_id": "IN-0025",
+      "received": "2026-10-28",
+      "contributor": {
+        "name": "Gottfried Schmidtke",
+        "github": "gschmidtke",
+        "with": "Claude"
+      },
+      "source": "owner: comments (from another AI) on how the Snowdon data enables a GC BOM; owner chose the simplified structure in the session",
+      "submitted": "Proposal for a standard BOM format: three levels (QTO, BOM, procurement BOM), traceability to instances, category quantity rules, GC procurement attributes",
+      "files": [],
+      "status": "filed",
+      "decision": "Filed as standard ARPL-BOM-0001 under standards/bom/ (STANDARD.md, bom-standard.json, category-rules.csv with 47 proposed rules, dataset headers, reference builder build_bom.py) and procedure pack ARPL-SCH-0003. Simplified against the proposal on the owner's choice: no second Revit BOM schedule (built from INSTANCE PARAMETERS), commercial data in a GC item table, not in families. Tested on Snowdon: 486 lines, reconciled.",
+      "resulting_ids": [
+        "ARPL-BOM-0001",
+        "ARPL-SCH-0003"
+      ],
+      "reviewed_by": "Claude (curator)",
+      "closed": "2026-10-28"
     }
   ]
 }
