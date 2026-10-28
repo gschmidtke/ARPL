@@ -1,0 +1,5 @@
+{
+  "result": "282 hard clashes in 74 groups; 83 penetrations reported separately. Three quarters of the clashes are services running inside the ceiling layer at L2 to L5: one ceiling-plenum decision per level, not hundreds of fixes. Structure: 17 small touches. Owners: Electrical 112, HVAC 85, Plumbing 85.",
+  "problem": "Fittings at the drop points (elbows) are still counted as clashes because a fitting has no run direction; ceiling figures are slightly high.",
+  "found_by": "reviewing the largest groups"
+}

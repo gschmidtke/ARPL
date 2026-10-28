@@ -385,6 +385,33 @@
       ],
       "reviewed_by": "Claude (curator)",
       "closed": "2026-10-27"
+    },
+    {
+      "entry_id": "IN-0017",
+      "received": "2026-10-27",
+      "contributor": {
+        "name": "Gottfried Schmidtke",
+        "github": "gschmidtke",
+        "with": "Claude"
+      },
+      "source": "curator session with the owner, 2026-10-27 evening (owner instruction: update the BIM coordinator workflow with the latest report form and workflow; no inbox file)",
+      "submitted": "Weekly coordination run end to end on two projects: ZEN ACC Gate collection, LOIN snapshot from the instance-parameter schedule, clash run by solid intersection in Revit, dashboard report form with recommendations",
+      "files": [],
+      "status": "filed",
+      "decision": "ARPL-PW-0003 raised to rev 2 (run end to end; LOIN and clash steps; report form; tool per step with bridge alternative). New packs ARPL-CRD-0001 (first pack in 'coordination'), ARPL-QA-0002, ARPL-ADM-0004 (ZEN, named by owner decision). New failure patterns FP47-FP51. Scope: ARPL is Revit-specific; ZEN lessons are recorded by name. Safety: no secrets or client data; the sample project is Autodesk's public Snowdon Towers; cloud hub, project and folder ids left out; the clash script is read-only on the models and writes CSVs, so it is filed under final/, not final/checks/.",
+      "resulting_ids": [
+        "ARPL-PW-0003",
+        "ARPL-CRD-0001",
+        "ARPL-QA-0002",
+        "ARPL-ADM-0004",
+        "FP47",
+        "FP48",
+        "FP49",
+        "FP50",
+        "FP51"
+      ],
+      "reviewed_by": "Claude (curator)",
+      "closed": "2026-10-27"
     }
   ]
 }

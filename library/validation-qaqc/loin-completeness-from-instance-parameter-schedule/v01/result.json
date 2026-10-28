@@ -1,0 +1,5 @@
+{
+  "result": "Overall 30.9% (13,110 of 42,396 required values) against a 95% target; by model 0.1% (Plumbing) to 51% (Architecture). Description filled on 1.5% of family elements, Type Mark on 64%; Plumbing has no Type Marks on 3,056 pipes and 2,656 fittings. 571 system and analytical instances counted separately.",
+  "problem": "No client LOIN table yet, so 'required' was assumed to be every information column of the schedule (FP49). The counting script was not kept; the method is recorded, the code is help wanted.",
+  "found_by": "comparing the score with what the client actually asked for"
+}

@@ -1,0 +1,4 @@
+{
+  "version": "v03",
+  "instruction": "Classify: a vertical run through a ceiling is a penetration; everything else a clash. Group clashes that share an element (union of element pairs). Owner = the side with lower routing priority (structure and ceilings stay; then gravity drainage, ducts, pressure pipes, conduits)."
+}

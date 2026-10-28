@@ -1,0 +1,9 @@
+{
+  "lesson": "LOIN completeness is only meaningful against the client's requirement per category; until that table exists, state the assumption next to the number.",
+  "rule": "1. Use one standard instance-parameter schedule in every model (same columns, Family and Category included); export it per model each week.\n2. Count per model, category and information column: instances, and filled values (non-empty after trimming).\n3. Count family elements only; rows without a family (circuits, systems, analytical elements) are reported separately, never in the score.\n4. Required fields: the client's LOIN table per category and stage; until it exists, every information column, and say so beside the score.\n5. Report: overall completeness (filled ÷ required values), a model × field grid, and the categories ranked by missing values (instances × unfilled fields).\n6. Target per project (95% used as a placeholder); a model below it fails the LOIN rule in the weekly checks.",
+  "validation": [
+    "Instance totals per model equal the schedule row count.",
+    "System and analytical rows excluded from the score and shown separately.",
+    "The assumption about required fields is printed next to the score until a client LOIN table exists."
+  ]
+}

@@ -203,6 +203,12 @@ Learn from what went wrong: each pack is listed under the failure patterns it re
 |---|---|---|---|
 | [ARPL-ADM-0003](../library/model-administration/batch-cloud-onboarding-with-registry/) Batch-onboard local models to the cloud and register each one: verify by document state, handle posted-command dialogs | 2 | W7 | candidate |
 
+## FP38: Generated code compiled inside the host inherits an invisible environment
+
+| Pack | Level | Work class | Status |
+|---|---|---|---|
+| [ARPL-CRD-0001](../library/coordination/clash-run-by-solid-intersection/) Weekly clash run inside Revit by solid intersection across open cloud models; penetrations separated, clashes grouped, owner by routing priority | 2 | W8 | candidate |
+
 ## FP40: API member assumed from another Revit version
 
 | Pack | Level | Work class | Status |
@@ -228,6 +234,7 @@ Learn from what went wrong: each pack is listed under the failure patterns it re
 | Pack | Level | Work class | Status |
 |---|---|---|---|
 | [ARPL-ADM-0003](../library/model-administration/batch-cloud-onboarding-with-registry/) Batch-onboard local models to the cloud and register each one: verify by document state, handle posted-command dialogs | 2 | W7 | candidate |
+| [ARPL-ADM-0004](../library/model-administration/zen-acc-gate-weekly-collection/) ZEN ACC Gate as the weekly collection batch: health, links and worksets, schedule exports; what each output contains and how to drive it from a bridge | 2 | W8 | candidate |
 
 ## FP44: Nearest-distance assignment misfiles elements
 
@@ -245,5 +252,36 @@ Learn from what went wrong: each pack is listed under the failure patterns it re
 
 | Pack | Level | Work class | Status |
 |---|---|---|---|
+| [ARPL-ADM-0004](../library/model-administration/zen-acc-gate-weekly-collection/) ZEN ACC Gate as the weekly collection batch: health, links and worksets, schedule exports; what each output contains and how to drive it from a bridge | 2 | W8 | candidate |
 | [ARPL-LNK-0002](../library/links-coordinates/batch-cloud-links-by-shared-coordinates/) Batch-link cloud models from a registry and link matrix, placed by shared coordinates; verify by link transform | 2 | W7 | candidate |
+
+## FP47: Planned penetrations counted as clashes
+
+| Pack | Level | Work class | Status |
+|---|---|---|---|
+| [ARPL-CRD-0001](../library/coordination/clash-run-by-solid-intersection/) Weekly clash run inside Revit by solid intersection across open cloud models; penetrations separated, clashes grouped, owner by routing priority | 2 | W8 | candidate |
+
+## FP48: Expected cloud service missing from the project
+
+| Pack | Level | Work class | Status |
+|---|---|---|---|
+| [ARPL-CRD-0001](../library/coordination/clash-run-by-solid-intersection/) Weekly clash run inside Revit by solid intersection across open cloud models; penetrations separated, clashes grouped, owner by routing priority | 2 | W8 | candidate |
+
+## FP49: Completeness scored against an assumed requirement
+
+| Pack | Level | Work class | Status |
+|---|---|---|---|
+| [ARPL-QA-0002](../library/validation-qaqc/loin-completeness-from-instance-parameter-schedule/) LOIN completeness snapshot from an exported instance-parameter schedule: fill rate per model, field and category, family elements only | 2 | W7 | candidate |
+
+## FP50: Batch report describes links as the batch opened them
+
+| Pack | Level | Work class | Status |
+|---|---|---|---|
+| [ARPL-ADM-0004](../library/model-administration/zen-acc-gate-weekly-collection/) ZEN ACC Gate as the weekly collection batch: health, links and worksets, schedule exports; what each output contains and how to drive it from a bridge | 2 | W8 | candidate |
+
+## FP51: Dialog remembers another project's folder
+
+| Pack | Level | Work class | Status |
+|---|---|---|---|
+| [ARPL-ADM-0004](../library/model-administration/zen-acc-gate-weekly-collection/) ZEN ACC Gate as the weekly collection batch: health, links and worksets, schedule exports; what each output contains and how to drive it from a bridge | 2 | W8 | candidate |
 

@@ -1,0 +1,4 @@
+{
+  "version": "v02",
+  "instruction": "Open the other three models; run the full matrix (MEP against structure, MEP against MEP, MEP against architectural ceilings) in two calls; one CSV per pair with both unique ids, levels, volume and centroid."
+}

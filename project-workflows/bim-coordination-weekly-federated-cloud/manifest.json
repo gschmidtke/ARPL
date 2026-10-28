@@ -1,6 +1,6 @@
 {
   "id": "ARPL-PW-0003",
-  "revision": 1,
+  "revision": 2,
   "title": "Weekly BIM coordination of a federated cloud project: collect, check, correct, report, archive",
   "level": 4,
   "context": {
@@ -12,58 +12,94 @@
     "platform": "revit",
     "revit_version": "2024"
   },
-  "intent": "Keep a federated cloud project current in one weekly session: collect model data in an unattended batch, check it against fixed rules and last week's snapshot, repair what is safe to repair, queue the rest for approval, and report a dashboard with week-over-week trends.",
+  "intent": "Keep a federated cloud project current in one weekly session: collect model data in an unattended batch, add LOIN completeness and a clash run, check everything against fixed rules and last week's snapshot, repair what is safe to repair, queue the rest for approval, and publish one dashboard report with recommendations for the team.",
   "sequence": [
     {
       "step": 1,
       "work_class": "W8",
-      "do": "Preflight: application idle, bridge alive, disk and cloud cache space, registry compared with the cloud folder (new or renamed models), no model open",
+      "do": "Preflight: Revit idle at Home with no model open (ask before closing the user's work), bridge alive, disk and collaboration cache space, registry compared with the cloud folder (new or renamed models), report folder REPORTS/<date> created",
       "packs": [
         "ARPL-ADM-0002",
         "ARPL-ADM-0003"
-      ]
+      ],
+      "tools": "RevitBridge; ZEN registry CSV",
+      "without_tool": "registry as a plain CSV of model name, project and model GUIDs"
     },
     {
       "step": 2,
       "work_class": "W8",
-      "do": "Collect in batch (unattended): per-model health export, link and workset report, schedule exports, family size report; raw outputs to REPORTS/<date>",
-      "packs": []
+      "do": "Collect in batch (unattended): Model Health Check and PBP + Worksets report over all registry models, then Export Schedules (instance parameters, project information, sheet list); output folder typed explicitly",
+      "packs": [
+        "ARPL-ADM-0004"
+      ],
+      "tools": "ZEN ACC Gate started by PostCommand",
+      "without_tool": "bridge script that opens each cloud model with link worksets closed and writes the same fields (warnings by type, views, sheets, links, groups, levels, grids) and the schedule rows"
     },
     {
       "step": 3,
       "work_class": "W8",
-      "do": "Collect deep, read-only: warnings by type, link status and transform, ProjectPosition against the authority, Project Information keys, element counts; open each model with all worksets closed",
+      "do": "Collect deep, read-only: shared position at the internal origin per model against the authority, link instances per host with workset and total transform (links loaded, not from the batch report), Project Information keys, standard schedules present",
       "packs": [
         "ARPL-LNK-0002",
         "ARPL-LNK-0001"
-      ]
+      ],
+      "tools": "RevitBridge run_csharp",
+      "without_tool": "-"
     },
     {
       "step": 4,
-      "work_class": "W8",
-      "do": "Check: one dataset keyed by model and week, compared with last week, against the rule table",
-      "packs": []
+      "work_class": "W7",
+      "do": "LOIN snapshot: from the exported instance-parameter schedules count filled values per model, category and field (family elements only); score against the client's LOIN table, or state the assumption",
+      "packs": [
+        "ARPL-QA-0002"
+      ],
+      "tools": "schedule CSVs from step 2",
+      "without_tool": "schedule export by ViewSchedule.Export from the bridge"
     },
     {
       "step": 5,
-      "work_class": "W5",
-      "do": "Correct: safe fixes automatically (repair links to the matrix, missing building name, missing standard schedules, sync); anything that moves geometry, changes coordinates or deletes waits for the coordinator's approval",
+      "work_class": "W8",
+      "do": "Clash run: open the discipline models in one session (link worksets closed), intersect the agreed category pairs, separate penetrations, group clashes, owner by routing priority; close the models unsaved. Use the cloud clash service instead where the project has one",
       "packs": [
-        "ARPL-LNK-0002",
-        "ARPL-ADM-0003"
-      ]
+        "ARPL-CRD-0001"
+      ],
+      "tools": "RevitBridge run_csharp",
+      "without_tool": "cloud coordination service export (tracked clash groups)"
     },
     {
       "step": 6,
-      "work_class": "W7",
-      "do": "Report: dashboard pages (project health, federation, model quality, data quality) and a one-page summary",
-      "packs": []
+      "work_class": "W8",
+      "do": "Check: one dataset per source (models, links, warnings, LOIN, clashes) keyed by model or pair and week; findings per model and rule; week-over-week deltas from the second week on",
+      "packs": [],
+      "tools": "report calculations",
+      "without_tool": "-"
     },
     {
       "step": 7,
+      "work_class": "W5",
+      "do": "Correct: safe fixes automatically (repair links to the matrix, missing building name, missing standard schedules, then sync); anything that moves geometry, changes coordinates or deletes waits for the coordinator's approval",
+      "packs": [
+        "ARPL-LNK-0002",
+        "ARPL-ADM-0003"
+      ],
+      "tools": "ZEN ACC Gate (Create Cloud Links, Import Standard Schedules) or bridge",
+      "without_tool": "bridge scripts"
+    },
+    {
+      "step": 8,
       "work_class": "W7",
-      "do": "Archive: append the week to history tables; never edit raw outputs; submit new lessons to the inbox",
-      "packs": []
+      "do": "Report: one dashboard page in the fixed report form (headline, tiles, recommendations, clashes, LOIN, warnings, checks, link matrix, model contents, not collected); every number drawn from the datasets, none typed",
+      "packs": [],
+      "tools": "dashboard artifact with datasets",
+      "without_tool": "any BI tool reading the same CSVs"
+    },
+    {
+      "step": 9,
+      "work_class": "W7",
+      "do": "Archive: keep raw outputs in REPORTS/<date>; append the week's datasets to history; submit new lessons to the ARPL inbox (Revit and ZEN alike)",
+      "packs": [],
+      "tools": "-",
+      "without_tool": "-"
     }
   ],
   "rule_table": [
@@ -89,8 +125,13 @@
     },
     {
       "check": "Warnings",
-      "rule": "Count up more than 10% week over week, or a new warning type",
+      "rule": "Count up more than 10% week over week, or a new warning type in a model's top five; week 1 is the baseline",
       "fix": "report"
+    },
+    {
+      "check": "Clashes",
+      "rule": "No new hard clashes in the agreed pairs; open clash groups falling week over week; penetrations reported separately",
+      "fix": "report; owners by routing priority"
     },
     {
       "check": "File size",
@@ -103,9 +144,9 @@
       "fix": "report"
     },
     {
-      "check": "Parameter completeness",
-      "rule": "Required fields filled in at least 95% of instances per category",
-      "fix": "report"
+      "check": "LOIN completeness",
+      "rule": "Filled ÷ required values of family elements in the instance-parameter schedule at or above the project target (95% placeholder) per model; required fields from the client's LOIN table, else every information column with the assumption stated",
+      "fix": "report; recommendations name the categories with the most missing values"
     },
     {
       "check": "Sheets",
@@ -128,11 +169,12 @@
       "fix": "approval"
     }
   ],
-  "data_model": "Star schema keyed by ModelKey and SnapshotDate: Models and Snapshots (dimensions); ModelHealth, Warnings, Links (host x link), ParameterFill (model x category x parameter), Families, Findings (model x rule) as facts. Raw outputs per run in REPORTS/<date>; history appended per table in HISTORY.",
+  "data_model": "Datasets keyed by ModelKey (or discipline pair) and SnapshotDate: models, links (host x link), warnings (model x rank), loin (model x category x field), clashes (element pair), findings (model x rule, calculated). Raw outputs per run in REPORTS/<date>; history appended per dataset.",
   "decisions_for_the_user": [
-    "Required parameters per category for the fill-rate check",
+    "The client's LOIN table: required fields per category and stage, and the target",
+    "The clash matrix: category pairs, hard or clearance, routing priority",
+    "The coordinate authority model",
     "Thresholds of the rule table",
-    "Dashboard delivery (in-session dashboard or an external BI tool)",
     "Approval of every geometry, coordinate, workset or delete fix"
   ],
   "discipline_authority": [
@@ -140,13 +182,21 @@
   ],
   "packs_proposed": [
     "registry-vs-cloud-folder-check",
-    "read-only-model-snapshot-worksets-closed",
-    "coordination-rule-table"
+    "loin-count-script (code for ARPL-QA-0002)",
+    "clash-new-and-resolved-week-over-week",
+    "clearance-clashes-by-inflated-solids"
   ],
   "results_recorded": {
-    "note": "Designed from one day of federation work; not yet run end to end. Measured parts: 156 links in 21 min; standard schedules for 5 models in about 2.5 min; batch opens 7-11 s per model.",
+    "note": "Run end to end on 2026-10-27 on two projects: a 13-model campus (health, PBP, links, schedules) and the 6-model Snowdon Towers sample (all steps including LOIN and clash run). First weeks are baselines; trends start with the second run.",
+    "measured": [
+      "ACC Gate health + PBP: 12 models, about 2 min, 8-11 s per open",
+      "ACC Gate Export Schedules: 6 models, 3 schedules each",
+      "Clash run: 5 models opened in 33 s; 9 pairs in about 3 min; 365 intersections -> 282 clashes in 74 groups + 83 penetrations",
+      "LOIN: 6 models, 20,327 instances, 30.9% against 95%",
+      "Batch cloud links: 156 links in 21 min (setup week)"
+    ],
     "estimate_minutes_per_week": [
-      60,
+      45,
       75
     ],
     "estimate_manual_hours_per_week": [
@@ -158,5 +208,45 @@
   "contributors": [
     "Gottfried Schmidtke with Claude"
   ],
-  "recorded": "2026-10-27"
+  "recorded": "2026-10-27",
+  "report_form": {
+    "note": "One page, top to bottom. Every figure comes from a dataset or a calculation, never typed into the text; recommendations name owners but no numbers.",
+    "sections": [
+      "Header: project, week, baseline or trend week; one sentence with checks passed, warnings and top warning type, LOIN completeness against target, hard clashes and groups",
+      "Tiles: LOIN completeness, hard clashes (with groups), warnings, checks passing, Revit links, views not on sheets, model groups",
+      "Recommendations for the team: ordered by impact, each with the owning team and the action; recurring causes first (one decision that clears many items)",
+      "Clashes: bars by discipline pair, bars by team that moves, table of the largest groups (pair, level, owner, main element with id)",
+      "LOIN: model x field grid of fill rates; categories ranked by missing values; system and analytical elements counted separately",
+      "Warnings: types across models (top five per model), warnings by model",
+      "Checks: one row per model, one column per rule (pass, fail, baseline, not collected)",
+      "Link matrix: host x link heat map (placed, workset, transform)",
+      "Model contents: health fields per model",
+      "Not collected this week: every gap and every assumption, in plain words"
+    ],
+    "datasets": {
+      "models": "one row per model: health fields, shared position, link and workset counts, schedules present",
+      "links": "host x link: instance, workset, transform, status",
+      "warnings": "model, rank, count, message",
+      "loin": "model, category, element_kind, field, instances, filled",
+      "clashes": "one row per element pair: pair, disciplines, kind, group, owner, categories, family and type, levels, ids and unique ids, volume, centroid"
+    }
+  },
+  "changelog": [
+    {
+      "revision": 1,
+      "date": "2026-10-27",
+      "change": "Designed from one day of federation work (IN-0016, PR #7)",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ]
+    },
+    {
+      "revision": 2,
+      "date": "2026-10-27",
+      "change": "Run end to end on two projects; LOIN step and clash run added; report form, datasets and tool per step recorded, ZEN named (IN-0017)",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ]
+    }
+  ]
 }

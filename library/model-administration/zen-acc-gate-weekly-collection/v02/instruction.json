@@ -1,0 +1,4 @@
+{
+  "version": "v02",
+  "instruction": "Second project (6 models): ACC Gate Model Health Check + PBP, then Export Schedules (INSTANCE PARAMETERS, PROJECT-INFO, SHEET LIST) to REPORTS/<date>/Schedules; join health to the registry by model name."
+}

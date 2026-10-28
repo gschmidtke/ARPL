@@ -229,7 +229,7 @@
     },
     {
       "id": "ARPL-PW-0003",
-      "revision": 1,
+      "revision": 2,
       "title": "Weekly BIM coordination of a federated cloud project: collect, check, correct, report, archive",
       "level": 4,
       "context": {
@@ -241,12 +241,12 @@
         "platform": "revit",
         "revit_version": "2024"
       },
-      "intent": "Keep a federated cloud project current in one weekly session: collect model data in an unattended batch, check it against fixed rules and last week's snapshot, repair what is safe to repair, queue the rest for approval, and report a dashboard with week-over-week trends.",
+      "intent": "Keep a federated cloud project current in one weekly session: collect model data in an unattended batch, add LOIN completeness and a clash run, check everything against fixed rules and last week's snapshot, repair what is safe to repair, queue the rest for approval, and publish one dashboard report with recommendations for the team.",
       "steps": [
         {
           "step": 1,
           "work_class": "W8",
-          "do": "Preflight: application idle, bridge alive, disk and cloud cache space, registry compared with the cloud folder (new or renamed models), no model open",
+          "do": "Preflight: Revit idle at Home with no model open (ask before closing the user's work), bridge alive, disk and collaboration cache space, registry compared with the cloud folder (new or renamed models), report folder REPORTS/<date> created",
           "packs": [
             "ARPL-ADM-0002",
             "ARPL-ADM-0003"
@@ -255,13 +255,15 @@
         {
           "step": 2,
           "work_class": "W8",
-          "do": "Collect in batch (unattended): per-model health export, link and workset report, schedule exports, family size report; raw outputs to REPORTS/<date>",
-          "packs": []
+          "do": "Collect in batch (unattended): Model Health Check and PBP + Worksets report over all registry models, then Export Schedules (instance parameters, project information, sheet list); output folder typed explicitly",
+          "packs": [
+            "ARPL-ADM-0004"
+          ]
         },
         {
           "step": 3,
           "work_class": "W8",
-          "do": "Collect deep, read-only: warnings by type, link status and transform, ProjectPosition against the authority, Project Information keys, element counts; open each model with all worksets closed",
+          "do": "Collect deep, read-only: shared position at the internal origin per model against the authority, link instances per host with workset and total transform (links loaded, not from the batch report), Project Information keys, standard schedules present",
           "packs": [
             "ARPL-LNK-0002",
             "ARPL-LNK-0001"
@@ -269,29 +271,45 @@
         },
         {
           "step": 4,
-          "work_class": "W8",
-          "do": "Check: one dataset keyed by model and week, compared with last week, against the rule table",
-          "packs": []
+          "work_class": "W7",
+          "do": "LOIN snapshot: from the exported instance-parameter schedules count filled values per model, category and field (family elements only); score against the client's LOIN table, or state the assumption",
+          "packs": [
+            "ARPL-QA-0002"
+          ]
         },
         {
           "step": 5,
+          "work_class": "W8",
+          "do": "Clash run: open the discipline models in one session (link worksets closed), intersect the agreed category pairs, separate penetrations, group clashes, owner by routing priority; close the models unsaved. Use the cloud clash service instead where the project has one",
+          "packs": [
+            "ARPL-CRD-0001"
+          ]
+        },
+        {
+          "step": 6,
+          "work_class": "W8",
+          "do": "Check: one dataset per source (models, links, warnings, LOIN, clashes) keyed by model or pair and week; findings per model and rule; week-over-week deltas from the second week on",
+          "packs": []
+        },
+        {
+          "step": 7,
           "work_class": "W5",
-          "do": "Correct: safe fixes automatically (repair links to the matrix, missing building name, missing standard schedules, sync); anything that moves geometry, changes coordinates or deletes waits for the coordinator's approval",
+          "do": "Correct: safe fixes automatically (repair links to the matrix, missing building name, missing standard schedules, then sync); anything that moves geometry, changes coordinates or deletes waits for the coordinator's approval",
           "packs": [
             "ARPL-LNK-0002",
             "ARPL-ADM-0003"
           ]
         },
         {
-          "step": 6,
+          "step": 8,
           "work_class": "W7",
-          "do": "Report: dashboard pages (project health, federation, model quality, data quality) and a one-page summary",
+          "do": "Report: one dashboard page in the fixed report form (headline, tiles, recommendations, clashes, LOIN, warnings, checks, link matrix, model contents, not collected); every number drawn from the datasets, none typed",
           "packs": []
         },
         {
-          "step": 7,
+          "step": 9,
           "work_class": "W7",
-          "do": "Archive: append the week to history tables; never edit raw outputs; submit new lessons to the inbox",
+          "do": "Archive: keep raw outputs in REPORTS/<date>; append the week's datasets to history; submit new lessons to the ARPL inbox (Revit and ZEN alike)",
           "packs": []
         }
       ],
@@ -979,6 +997,88 @@
       "path": "library/connectors-systems/residential-branch-circuits-from-confirmed-layout",
       "last_evidence": "2026-10-21",
       "review_due": "2027-10-21",
+      "current_revit": "2027",
+      "unverified_in_current_revit": true
+    },
+    {
+      "id": "ARPL-CRD-0001",
+      "revision": 1,
+      "title": "Weekly clash run inside Revit by solid intersection across open cloud models; penetrations separated, clashes grouped, owner by routing priority",
+      "environment": {
+        "revit_version": "2024.3 (24.3.60.12)",
+        "tool": "RevitBridge MCP with run_csharp",
+        "compiler": "Roslyn 4.8 (C# 12)",
+        "agent": "Claude (Anthropic)",
+        "model": "Autodesk sample Snowdon Towers, 6 cloud discipline models; 9 pairs"
+      },
+      "use_when": [
+        "A federated project needs a weekly clash number per discipline pair and the cloud project has no clash service (no Model Coordination module)",
+        "Clash results must carry element unique ids so next week's run can report new and resolved clashes",
+        "A quick hard-clash check before publishing models for formal coordination"
+      ],
+      "not_for": [
+        "Clearance (soft) clashes: needs inflated solids, not recorded yet",
+        "Walls and floors against services when the service openings are not modelled: every crossing would count",
+        "Models that do not share one internal origin and shared position: transform one side by the link transform first",
+        "Replacing a coordination service where one is available: use its tracked clash groups instead"
+      ],
+      "api_terms": [
+        "BooleanOperationsUtils.ExecuteBooleanOperation",
+        "BooleanOperationsType.Intersect",
+        "BoundingBoxIntersectsFilter",
+        "ElementMulticategoryFilter",
+        "Options.DetailLevel",
+        "GeometryInstance.GetInstanceGeometry",
+        "Solid.ComputeCentroid",
+        "WorksharingUtils.GetUserWorksetInfo",
+        "WorksetConfiguration.Open",
+        "OpenOptions.SetOpenWorksetsConfiguration",
+        "ModelPathUtils.ConvertCloudGUIDsToCloudPath",
+        "ProjectLocation.GetProjectPosition",
+        "Document.Close"
+      ],
+      "level": 2,
+      "work_class": "W8",
+      "workflows": [
+        "coordination",
+        "validation-qaqc",
+        "links-coordinates"
+      ],
+      "disciplines": [
+        "bim-vdc",
+        "mechanical",
+        "plumbing",
+        "electrical",
+        "structural",
+        "architecture"
+      ],
+      "project_types": [
+        "generic"
+      ],
+      "phases": [
+        "design-development",
+        "construction-documents"
+      ],
+      "revit_versions_tested": [
+        "2024"
+      ],
+      "failure_patterns": [
+        "FP47",
+        "FP48",
+        "FP38"
+      ],
+      "status": "candidate",
+      "rule": "1. Agree the clash matrix with the team first: category pairs, hard or clearance, routing priority (who moves).\n2. Open every model in one session with link worksets closed; check that all report the same shared position (ProjectLocation.GetProjectPosition at the origin) and that link transforms are identity. Otherwise transform the second model's solids by the link transform.\n3. Per pair: bounding-box prefilter, then BooleanOperationsUtils intersection; count a clash when the intersection volume exceeds a small threshold (0.0001 cf used). Cache solids; walk GeometryInstance with GetInstanceGeometry.\n4. Write one row per element pair: both unique ids and element ids, categories, family and type, levels, volume, centroid. Keep it under the bridge's reply limit by splitting pairs across calls and appending to a run log; on a timeout read the log, never rerun blindly.\n5. Classify: vertical runs through ceilings (and later through walls or floors with modelled openings) are penetrations, reported separately.\n6. Group clashes that share an element (union-find); report groups, not only clashes. Owner by routing priority.\n7. Close the opened models without saving (Document.Close(false)); they were only read.\n8. Next week: match by the pair of unique ids to report new, resolved and still open.",
+      "validation": [
+        "Every model reports the same shared position; every link transform is identity (or the transform was applied).",
+        "Run log lists every pair of the agreed matrix with a count and duration.",
+        "Penetrations + clashes = raw intersections; each clash has a group and an owner.",
+        "Opened models closed unchanged (no sync)."
+      ],
+      "validation_checks": [],
+      "path": "library/coordination/clash-run-by-solid-intersection",
+      "last_evidence": "2026-10-27",
+      "review_due": "2027-10-27",
       "current_revit": "2027",
       "unverified_in_current_revit": true
     },
@@ -2069,6 +2169,73 @@
       "unverified_in_current_revit": true
     },
     {
+      "id": "ARPL-ADM-0004",
+      "revision": 1,
+      "title": "ZEN ACC Gate as the weekly collection batch: health, links and worksets, schedule exports; what each output contains and how to drive it from a bridge",
+      "environment": {
+        "revit_version": "2024.3 (24.3.60.12)",
+        "tool": "RevitBridge MCP with run_csharp",
+        "compiler": "Roslyn 4.8 (C# 12)",
+        "agent": "Claude (Anthropic)",
+        "batch_tool": "ZEN 1.2 (Revit add-in by Tiverit LLC), ACC Gate",
+        "model": "13-model campus and 6-model Snowdon Towers sample, both in ACC cloud"
+      },
+      "use_when": [
+        "The ZEN add-in (Tiverit LLC) is installed and a project has a ZEN model registry",
+        "A weekly coordination run needs per-model health, link placement and schedule data without opening each model by hand",
+        "An agent drives ZEN commands from a Revit bridge"
+      ],
+      "not_for": [
+        "Projects without ZEN: collect the same data with read-only bridge scripts (ARPL-PW-0003 lists the fields)",
+        "Cloud file sizes: they need ZEN's Refresh Sizes with APS credentials"
+      ],
+      "api_terms": [
+        "UIApplication.PostCommand",
+        "RevitCommandId.LookupCommandId",
+        "ModelPathUtils.ConvertCloudGUIDsToCloudPath"
+      ],
+      "level": 2,
+      "work_class": "W8",
+      "workflows": [
+        "model-administration",
+        "validation-qaqc",
+        "links-coordinates"
+      ],
+      "disciplines": [
+        "bim-vdc",
+        "generic"
+      ],
+      "project_types": [
+        "generic"
+      ],
+      "phases": [
+        "design-development",
+        "construction-documents"
+      ],
+      "revit_versions_tested": [
+        "2024"
+      ],
+      "failure_patterns": [
+        "FP43",
+        "FP46",
+        "FP50",
+        "FP51"
+      ],
+      "status": "candidate",
+      "rule": "1. Start ZEN commands from the bridge with UIApplication.PostCommand(RevitCommandId.LookupCommandId(id)); the command runs after the bridge call returns, and only once Revit is idle (move the mouse over Revit if it waits). Ids: ACC Gate CustomCtrl_%CustomCtrl_%ZEN%Federation%CmdAccGate; Cloud GUIDs CustomCtrl_%CustomCtrl_%CustomCtrl_%ZEN%Federation%ZenRegistry%CmdDumpCloudModelGuids; Export Cloud Link Matrix CustomCtrl_%CustomCtrl_%CustomCtrl_%ZEN%Federation%ZenLinkMatrix%CmdGenerateCloudLinkMatrixFromRegistry; Import Schedule Definitions CustomCtrl_%CustomCtrl_%CustomCtrl_%ZEN%Project Standards%ZenSchedules%CmdImportStandardScheduleDefinitions.\n2. While a ZEN dialog is open the bridge does not answer: take a screenshot, finish the dialog, then continue.\n3. Run ACC Gate from Revit Home with no model open; close or ask about models the user has open.\n4. Type the output folder every time (REPORTS/<date>); the dialog remembers other projects' folders.\n5. Model Health via ACC Gate = full Field/Value schema per model (ModelHealth/<Model>_HEALTH CHECK.csv); pivot the dynamic 'Revit Link Status – <status>' lines; read 'Top Warning' lines for warning types; join by Model Name.\n6. Do not judge link placement from the batch health or PBP report: links are unloaded there. Check placement by link transform with links loaded (ARPL-LNK-0002).\n7. Export Schedules writes one CSV per schedule and model; the instance-parameter schedule feeds the LOIN snapshot (ARPL-QA-0002). Import Standard Schedules asks for a SOURCE .rvt that already holds the schedules, not the definitions workbook.\n8. Export Cloud Link Matrix defaults UseSharedCoordinates, LoadOnOpen and RoomBounding to FALSE: edit a backup copy before linking (FP46). Cloud GUIDs takes Project Information > Building Name as model key: set it first; the template placeholder text counts as a value (FP43).\n9. Cloud file size reads 'n/a' unless Refresh Sizes (APS credentials) ran first.",
+      "validation": [
+        "Batch log: every selected model OK, failures listed.",
+        "One health CSV per model; every registry model matched by name.",
+        "Output written to the folder of this project and date."
+      ],
+      "validation_checks": [],
+      "path": "library/model-administration/zen-acc-gate-weekly-collection",
+      "last_evidence": "2026-10-27",
+      "review_due": "2027-10-27",
+      "current_revit": "2027",
+      "unverified_in_current_revit": true
+    },
+    {
       "id": "ARPL-CHG-0001",
       "revision": 1,
       "title": "Lowering a level: what doesn't follow",
@@ -2617,6 +2784,70 @@
       "path": "library/validation-qaqc/layout-preview-as-review-step",
       "last_evidence": "2026-10-19",
       "review_due": "2027-10-19",
+      "current_revit": "2027",
+      "unverified_in_current_revit": true
+    },
+    {
+      "id": "ARPL-QA-0002",
+      "revision": 1,
+      "title": "LOIN completeness snapshot from an exported instance-parameter schedule: fill rate per model, field and category, family elements only",
+      "environment": {
+        "revit_version": "2024.3 (24.3.60.12)",
+        "tool": "RevitBridge MCP with run_csharp",
+        "compiler": "Roslyn 4.8 (C# 12)",
+        "agent": "Claude (Anthropic)",
+        "batch_tool": "ZEN ACC Gate 'Export Schedules' (one CSV per schedule and model)",
+        "model": "Autodesk sample Snowdon Towers, 6 cloud discipline models, 20,327 instances"
+      },
+      "use_when": [
+        "The client asks where the project stands on information requirements (LOIN) and every model carries the same instance-parameter schedule",
+        "A weekly report needs a completeness number and a ranked list of gaps"
+      ],
+      "not_for": [
+        "Checking values for correctness: this counts filled, not right",
+        "Type parameters that the schedule does not show per instance"
+      ],
+      "api_terms": [
+        "ViewSchedule",
+        "ScheduleDefinition",
+        "ViewSchedule.Export",
+        "Element.LookupParameter"
+      ],
+      "level": 2,
+      "work_class": "W7",
+      "workflows": [
+        "validation-qaqc",
+        "parameters-data",
+        "schedules-quantities"
+      ],
+      "disciplines": [
+        "bim-vdc",
+        "generic"
+      ],
+      "project_types": [
+        "generic"
+      ],
+      "phases": [
+        "design-development",
+        "construction-documents"
+      ],
+      "revit_versions_tested": [
+        "2024"
+      ],
+      "failure_patterns": [
+        "FP49"
+      ],
+      "status": "candidate",
+      "rule": "1. Use one standard instance-parameter schedule in every model (same columns, Family and Category included); export it per model each week.\n2. Count per model, category and information column: instances, and filled values (non-empty after trimming).\n3. Count family elements only; rows without a family (circuits, systems, analytical elements) are reported separately, never in the score.\n4. Required fields: the client's LOIN table per category and stage; until it exists, every information column, and say so beside the score.\n5. Report: overall completeness (filled ÷ required values), a model × field grid, and the categories ranked by missing values (instances × unfilled fields).\n6. Target per project (95% used as a placeholder); a model below it fails the LOIN rule in the weekly checks.",
+      "validation": [
+        "Instance totals per model equal the schedule row count.",
+        "System and analytical rows excluded from the score and shown separately.",
+        "The assumption about required fields is printed next to the score until a client LOIN table exists."
+      ],
+      "validation_checks": [],
+      "path": "library/validation-qaqc/loin-completeness-from-instance-parameter-schedule",
+      "last_evidence": "2026-10-27",
+      "review_due": "2027-10-27",
       "current_revit": "2027",
       "unverified_in_current_revit": true
     },
@@ -3442,6 +3673,78 @@
       ],
       "revit_versions": "any; tool configuration",
       "intake": "IN-0016"
+    },
+    {
+      "id": "FP47",
+      "name": "Planned penetrations counted as clashes",
+      "meaning": "A geometric clash run reports every crossing, including services that are meant to pass through an element (a pipe dropping through a ceiling to a fixture, a duct through a wall with an opening still to come). Counted as clashes they bury the real conflicts and make the number meaningless. Defence: classify before reporting (direction of the run, modelled opening, category rule) and report penetrations separately; check fittings at those points by hand until they can be classified.",
+      "found_by": "reading the clash list by orientation of the running element",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ],
+      "status": "candidate",
+      "api_terms": [
+        "BooleanOperationsUtils.ExecuteBooleanOperation",
+        "LocationCurve"
+      ],
+      "revit_versions": "any",
+      "intake": "IN-0017"
+    },
+    {
+      "id": "FP48",
+      "name": "Expected cloud service missing from the project",
+      "meaning": "A workflow was planned around a cloud service (clash detection in ACC Model Coordination) that the project's subscription does not include; the project menu showed Data Management, Build, Design and admin modules only, and the product had been renamed (Autodesk Forma), so the expected entry was not where the instructions said. Defence: before planning on a cloud service, open the project's module list and confirm it; keep a bridge-based fallback (ARPL-CRD-0001).",
+      "found_by": "user screenshots of the project module menu",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ],
+      "status": "candidate",
+      "api_terms": [],
+      "revit_versions": "any; cloud platform",
+      "intake": "IN-0017"
+    },
+    {
+      "id": "FP49",
+      "name": "Completeness scored against an assumed requirement",
+      "meaning": "A fill-rate score is reported before the client's information requirement exists, with every schedule column assumed required. The number looks precise but measures the assumption: one optional field (Description) halved the score. Defence: print the assumption next to the number, and replace it with the client's LOIN table per category and stage as soon as it exists.",
+      "found_by": "comparing the score with what the client actually asked for",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ],
+      "status": "candidate",
+      "api_terms": [],
+      "revit_versions": "any",
+      "intake": "IN-0017"
+    },
+    {
+      "id": "FP50",
+      "name": "Batch report describes links as the batch opened them",
+      "meaning": "A batch tool opens each model with link worksets closed for speed; its health and placement reports then show every link as unloaded or in a closed workset, placement 'not checked', and instance names without the shared site. Read as project state, these would be false findings. Defence: treat link status and placement from such a batch as unknown; verify placement by link transform with links loaded, or run the report with links loaded.",
+      "found_by": "comparing the batch report with the same links loaded in one model",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ],
+      "status": "candidate",
+      "api_terms": [
+        "RevitLinkType.IsLoaded",
+        "RevitLinkInstance.GetTotalTransform",
+        "WorksetConfigurationOption.CloseAllWorksets"
+      ],
+      "revit_versions": "any",
+      "intake": "IN-0017"
+    },
+    {
+      "id": "FP51",
+      "name": "Dialog remembers another project's folder",
+      "meaning": "A batch dialog pre-fills the output folder last used, which belonged to another project; accepted, this week's outputs land in the wrong project's report folder and the report reads stale data. Defence: type the output folder (project and date) on every run and check where files were written.",
+      "found_by": "checking the output folder after the run",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ],
+      "status": "candidate",
+      "api_terms": [],
+      "revit_versions": "any; tool dialog",
+      "intake": "IN-0017"
     }
   ]
 }

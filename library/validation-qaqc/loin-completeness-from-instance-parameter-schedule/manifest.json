@@ -1,0 +1,70 @@
+{
+  "id": "ARPL-QA-0002",
+  "revision": 1,
+  "title": "LOIN completeness snapshot from an exported instance-parameter schedule: fill rate per model, field and category, family elements only",
+  "use_when": [
+    "The client asks where the project stands on information requirements (LOIN) and every model carries the same instance-parameter schedule",
+    "A weekly report needs a completeness number and a ranked list of gaps"
+  ],
+  "not_for": [
+    "Checking values for correctness: this counts filled, not right",
+    "Type parameters that the schedule does not show per instance"
+  ],
+  "api_terms": [
+    "ViewSchedule",
+    "ScheduleDefinition",
+    "ViewSchedule.Export",
+    "Element.LookupParameter"
+  ],
+  "level": 2,
+  "work_class": "W7",
+  "workflows": [
+    "validation-qaqc",
+    "parameters-data",
+    "schedules-quantities"
+  ],
+  "disciplines": [
+    "bim-vdc",
+    "generic"
+  ],
+  "roles": [
+    "coordinator",
+    "bim-manager"
+  ],
+  "project_types": [
+    "generic"
+  ],
+  "phases": [
+    "design-development",
+    "construction-documents"
+  ],
+  "revit_versions_tested": [
+    "2024"
+  ],
+  "environment": {
+    "revit_version": "2024.3 (24.3.60.12)",
+    "tool": "RevitBridge MCP with run_csharp",
+    "compiler": "Roslyn 4.8 (C# 12)",
+    "agent": "Claude (Anthropic)",
+    "batch_tool": "ZEN ACC Gate 'Export Schedules' (one CSV per schedule and model)",
+    "model": "Autodesk sample Snowdon Towers, 6 cloud discipline models, 20,327 instances"
+  },
+  "failure_patterns": [
+    "FP49"
+  ],
+  "status": "candidate",
+  "contributors": [
+    "Gottfried Schmidtke with Claude"
+  ],
+  "recorded": "2026-10-27",
+  "changelog": [
+    {
+      "revision": 1,
+      "date": "2026-10-27",
+      "change": "First recorded (IN-0017, curator session with the owner)",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ]
+    }
+  ]
+}

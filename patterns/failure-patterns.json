@@ -714,6 +714,78 @@
       ],
       "revit_versions": "any; tool configuration",
       "intake": "IN-0016"
+    },
+    {
+      "id": "FP47",
+      "name": "Planned penetrations counted as clashes",
+      "meaning": "A geometric clash run reports every crossing, including services that are meant to pass through an element (a pipe dropping through a ceiling to a fixture, a duct through a wall with an opening still to come). Counted as clashes they bury the real conflicts and make the number meaningless. Defence: classify before reporting (direction of the run, modelled opening, category rule) and report penetrations separately; check fittings at those points by hand until they can be classified.",
+      "found_by": "reading the clash list by orientation of the running element",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ],
+      "status": "candidate",
+      "api_terms": [
+        "BooleanOperationsUtils.ExecuteBooleanOperation",
+        "LocationCurve"
+      ],
+      "revit_versions": "any",
+      "intake": "IN-0017"
+    },
+    {
+      "id": "FP48",
+      "name": "Expected cloud service missing from the project",
+      "meaning": "A workflow was planned around a cloud service (clash detection in ACC Model Coordination) that the project's subscription does not include; the project menu showed Data Management, Build, Design and admin modules only, and the product had been renamed (Autodesk Forma), so the expected entry was not where the instructions said. Defence: before planning on a cloud service, open the project's module list and confirm it; keep a bridge-based fallback (ARPL-CRD-0001).",
+      "found_by": "user screenshots of the project module menu",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ],
+      "status": "candidate",
+      "api_terms": [],
+      "revit_versions": "any; cloud platform",
+      "intake": "IN-0017"
+    },
+    {
+      "id": "FP49",
+      "name": "Completeness scored against an assumed requirement",
+      "meaning": "A fill-rate score is reported before the client's information requirement exists, with every schedule column assumed required. The number looks precise but measures the assumption: one optional field (Description) halved the score. Defence: print the assumption next to the number, and replace it with the client's LOIN table per category and stage as soon as it exists.",
+      "found_by": "comparing the score with what the client actually asked for",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ],
+      "status": "candidate",
+      "api_terms": [],
+      "revit_versions": "any",
+      "intake": "IN-0017"
+    },
+    {
+      "id": "FP50",
+      "name": "Batch report describes links as the batch opened them",
+      "meaning": "A batch tool opens each model with link worksets closed for speed; its health and placement reports then show every link as unloaded or in a closed workset, placement 'not checked', and instance names without the shared site. Read as project state, these would be false findings. Defence: treat link status and placement from such a batch as unknown; verify placement by link transform with links loaded, or run the report with links loaded.",
+      "found_by": "comparing the batch report with the same links loaded in one model",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ],
+      "status": "candidate",
+      "api_terms": [
+        "RevitLinkType.IsLoaded",
+        "RevitLinkInstance.GetTotalTransform",
+        "WorksetConfigurationOption.CloseAllWorksets"
+      ],
+      "revit_versions": "any",
+      "intake": "IN-0017"
+    },
+    {
+      "id": "FP51",
+      "name": "Dialog remembers another project's folder",
+      "meaning": "A batch dialog pre-fills the output folder last used, which belonged to another project; accepted, this week's outputs land in the wrong project's report folder and the report reads stale data. Defence: type the output folder (project and date) on every run and check where files were written.",
+      "found_by": "checking the output folder after the run",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ],
+      "status": "candidate",
+      "api_terms": [],
+      "revit_versions": "any; tool dialog",
+      "intake": "IN-0017"
     }
   ]
 }
