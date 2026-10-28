@@ -1,6 +1,6 @@
 {
-  "version": "1.1",
-  "date": "2026-10-20",
+  "version": "1.2",
+  "date": "2026-10-28",
   "note": "Controlled vocabularies for manifest facets. New values are proposed by the curator and approved by the owner; 'generic' means applicable regardless of the facet. The status definitions here are authoritative; other documents refer to them.",
   "workflows": {
     "model-context": "Inspect model, levels, categories, units, existing content",
@@ -106,5 +106,9 @@
     "2025": "2024-04",
     "2026": "2025-04",
     "2027": "2026-04"
+  },
+  "evidence_kinds": {
+    "observed": "Seen in a recorded session in Revit (bridge, add-in or desktop)",
+    "mined": "Taken from documentation or other sources; not yet reproduced by an agent in Revit"
   }
 }

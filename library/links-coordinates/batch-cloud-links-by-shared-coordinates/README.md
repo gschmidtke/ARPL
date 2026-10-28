@@ -1,4 +1,4 @@
-# ARPL-LNK-0002 rev 1: Batch-link cloud models from a registry and link matrix, placed by shared coordinates; verify by link transform
+# ARPL-LNK-0002 rev 2: Batch-link cloud models from a registry and link matrix, placed by shared coordinates; verify by link transform
 
 _Generated from this pack's files by tools/build_catalogs.py. Edit manifest.json, intent.md, vNN/ or final/rule.json instead._
 
@@ -33,7 +33,7 @@ Measured: 13/13 hosts OK, 0 dialogs, 21 min; model opens 7-11 s each in the batc
 A generated link configuration must be read before a batch run: defaults can contradict the project's coordinate setup. After the run, placement is proven by the link transform, not by looking.
 
 ## Rule
-1. Before the run, read the generated matrix: placement by shared coordinates on every row; link type, workset, load-on-open and room bounding as the project wants. Change it on a backup copy only (FP46).
+1. Before the run (ZEN > Federation > Link Matrix and Link from Registry, or ACC Gate in batch), read the generated matrix: placement by shared coordinates on every row; link type, workset, load-on-open and room bounding as the project wants. Change it on a backup copy only (FP46).
 2. Close every model the batch will open; set the batch output folder explicitly.
 3. After the run: every host has as many link instances as its matrix rows; when all models share one coordinate system and internal origin, every link instance's total transform is identity; otherwise compare it with the transform implied by the shared coordinates.
 4. For later read-only checks, open hosts with all worksets closed so links on their own worksets stay unloaded.

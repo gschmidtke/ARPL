@@ -1,6 +1,6 @@
 {
   "id": "ARPL-ADM-0003",
-  "revision": 1,
+  "revision": 2,
   "title": "Batch-onboard local models to the cloud and register each one: verify by document state, handle posted-command dialogs",
   "use_when": [
     "An agent uploads or registers a series of local models to one cloud project folder",
@@ -66,7 +66,8 @@
     "compiler": "Roslyn 4.8 (C# 12)",
     "agent": "Claude (Anthropic)",
     "desktop": "screenshots, mouse and keyboard for add-in dialogs",
-    "model": "13 per-building models of one campus, cloud project folder"
+    "model": "13 per-building models of one campus, cloud project folder",
+    "batch_tool": "ZEN 1.2 (Federation > Cloud GUIDs, Model Registry CSV)"
   },
   "failure_patterns": [
     "FP22",
@@ -85,6 +86,14 @@
       "revision": 1,
       "date": "2026-10-27",
       "change": "First recorded (IN-0015, PR #6; onboarding iteration of IN-0014, PR #5)",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ]
+    },
+    {
+      "revision": 2,
+      "date": "2026-10-28",
+      "change": "Batch tool named: ZEN 1.2 (Cloud GUIDs writes the registry row; owner decision IN-0023)",
       "contributors": [
         "Gottfried Schmidtke with Claude"
       ]

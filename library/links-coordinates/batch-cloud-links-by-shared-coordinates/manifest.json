@@ -1,6 +1,6 @@
 {
   "id": "ARPL-LNK-0002",
-  "revision": 1,
+  "revision": 2,
   "title": "Batch-link cloud models from a registry and link matrix, placed by shared coordinates; verify by link transform",
   "use_when": [
     "Every model of a federated cloud project must link the others, driven by a registry and a host-by-link matrix",
@@ -52,7 +52,7 @@
     "tool": "RevitBridge MCP with run_csharp",
     "compiler": "Roslyn 4.8 (C# 12)",
     "agent": "Claude (Anthropic)",
-    "batch_tool": "registry-driven batch tool that opens each cloud model, creates the links in its matrix rows, syncs and closes",
+    "batch_tool": "ZEN 1.2 (Federation > Link Matrix / Link from Registry / ACC Gate)",
     "model": "13 cloud models, 156 links"
   },
   "failure_patterns": [
@@ -69,6 +69,14 @@
       "revision": 1,
       "date": "2026-10-27",
       "change": "First recorded (IN-0016, PR #7)",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ]
+    },
+    {
+      "revision": 2,
+      "date": "2026-10-28",
+      "change": "Batch tool named: ZEN 1.2 (Link Matrix, Link from Registry, ACC Gate; owner decision IN-0023)",
       "contributors": [
         "Gottfried Schmidtke with Claude"
       ]

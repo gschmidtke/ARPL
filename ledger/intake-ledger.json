@@ -228,7 +228,7 @@
         "inbox/STRATA_LOGIC_MANIFEST_v0.2 (1).md"
       ],
       "status": "closed",
-      "decision": "No pack: system architecture beyond ARPL's library, not a recorded Revit run. Its HARVEST rule (sanitize, user review, explicit consent before submission) agrees with AGENTS.md section 3. Archived; owner decides whether it becomes a docs/ page.",
+      "decision": "No pack: system architecture beyond ARPL's library, not a recorded Revit run. Its HARVEST rule (sanitize, user review, explicit consent before submission) agrees with AGENTS.md section 3. Archived; owner decides whether it becomes a docs/ page. Owner decision 2026-10-28 (IN-0023): archive only.",
       "resulting_ids": [],
       "reviewed_by": "Claude (curator)",
       "closed": "2026-10-27"
@@ -247,7 +247,7 @@
         "inbox/ARPL_Electrical_Revit_Thought_Experiment_v3.docx"
       ],
       "status": "closed",
-      "decision": "No pack: a research plan, nothing ran in Revit yet. No personal data in the document metadata. Archived; the Phase 0/1 results, once run, can come back as packs. Owner decides whether the baseline goes into domains/electrical or docs/.",
+      "decision": "No pack: a research plan, nothing ran in Revit yet. No personal data in the document metadata. Archived; the Phase 0/1 results, once run, can come back as packs. Owner decides whether the baseline goes into domains/electrical or docs/. Owner decision 2026-10-28 (IN-0023): archive only.",
       "resulting_ids": [],
       "reviewed_by": "Claude (curator)",
       "closed": "2026-10-27"
@@ -521,6 +521,28 @@
       "decision": "Filed as docs/roles/bim-coordinator.md (ARPL-ROLE-0001 v1.0) with an industry alignment review (ISO 19650, UK BIM Framework, literature review, two owner BIM requirements); AGENTS.md points to it. ROLE is a new id prefix: question for the owner in the report.",
       "resulting_ids": [
         "ARPL-ROLE-0001"
+      ],
+      "reviewed_by": "Claude (curator)",
+      "closed": "2026-10-28"
+    },
+    {
+      "entry_id": "IN-0023",
+      "received": "2026-10-28",
+      "contributor": {
+        "name": "Gottfried Schmidtke",
+        "github": "gschmidtke",
+        "with": "Claude"
+      },
+      "source": "owner answers to the open questions in the 2026-10-28 report (no inbox file)",
+      "submitted": "1 no USG copy of the report form; 2 name ZEN in ADM-0003/LNK-0002; 3 GEO-0004 rule 8 is the USG handoff; 4 evidence_kind formal; 5 STRATA v0.2 and electrical baseline archive only; 6 update the index size sentence; 7 clarify; 8 keep RPT and ROLE prefixes",
+      "files": [],
+      "status": "filed",
+      "decision": "ARPL-ADM-0003 rev 2 and ARPL-LNK-0002 rev 2 name ZEN; ARPL-GEO-0004 rev 2 marks rule 8 as the USG handoff; vocabularies 1.2 add evidence_kinds (observed, mined), every failure pattern tagged and validate.py checks it; IN-0009/IN-0010 stay archive-only; AGENTS.md index size updated; RPT and ROLE prefixes kept. Question 7 explained to the owner in the session.",
+      "resulting_ids": [
+        "ARPL-ADM-0003",
+        "ARPL-LNK-0002",
+        "ARPL-GEO-0004",
+        "FP26-FP39"
       ],
       "reviewed_by": "Claude (curator)",
       "closed": "2026-10-28"
