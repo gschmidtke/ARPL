@@ -1,7 +1,7 @@
 {
   "id": "ARPL-RPT-0001",
   "title": "Weekly BIM coordination report: structure and data contract",
-  "version": "1.0",
+  "version": "1.1",
   "status": "candidate",
   "recorded": "2026-10-28",
   "applies_to": "ARPL-PW-0003 step 8 (Report)",
@@ -22,7 +22,9 @@
     "TOL_FT": 0.01,
     "ANGLE_TOL_DEG": 0.001,
     "LOIN_TARGET": 0.95,
-    "MODEL_KEY_PREFIX": "common ModelKey prefix shortened in charts (optional)"
+    "MODEL_KEY_PREFIX": "common ModelKey prefix shortened in charts (optional)",
+    "PROJECT_STATUS": "the one project status for the whole federation (the BIM manager decides)",
+    "PHASES": "the agreed phase list, e.g. 'Existing; New Construction' (optional; default: the authority model's phases)"
   },
   "datasets": {
     "models": {
@@ -135,6 +137,16 @@
           "name": "building_name",
           "type": "string",
           "meaning": "Project Information > Building Name as read"
+        },
+        {
+          "name": "project_status",
+          "type": "string",
+          "meaning": "Project Information > Project Status as read"
+        },
+        {
+          "name": "phases",
+          "type": "string",
+          "meaning": "the model's phase names in order, separated by '; '"
         },
         {
           "name": "site",
@@ -515,6 +527,16 @@
       "pass_when": "building_name = model (ModelKey)"
     },
     {
+      "id": "status",
+      "label": "Project status",
+      "pass_when": "project_status = PROJECT_STATUS; until the BIM manager sets it, = the status most models carry (a split federation fails the minority)"
+    },
+    {
+      "id": "phases",
+      "label": "Phases",
+      "pass_when": "phases = the phase list of the authority model (or PHASES when set): same names, same order, so linked-model phase mapping works"
+    },
+    {
       "id": "standards",
       "label": "Standard schedules",
       "pass_when": "has_instance_parameters = yes and has_sheet_list = yes"
@@ -658,5 +680,12 @@
       "{{OWNING_TEAM}}",
       "{{ACTION}}"
     ]
-  }
+  },
+  "changelog": [
+    {
+      "version": "1.1",
+      "date": "2026-10-28",
+      "change": "Rule checks 'Project status' and 'Phases' added; models dataset gains project_status and phases (owner: mixed status/phase is a common multi-discipline problem the coordinator raises every week)"
+    }
+  ]
 }

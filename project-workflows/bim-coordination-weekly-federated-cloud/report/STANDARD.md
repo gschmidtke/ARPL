@@ -67,6 +67,8 @@ Key: `model`. Collected by: step 2 ZEN ACC Gate Model Health Check (counts) + st
 | `raster_images` | integer |  |
 | `design_options` | integer |  |
 | `building_name` | string | Project Information > Building Name as read |
+| `project_status` | string | Project Information > Project Status as read |
+| `phases` | string | the model's phase names in order, separated by '; ' |
 | `site` | string | active project location (site) name |
 | `shared_ew_ft` | number | shared position of the internal origin, east-west, feet |
 | `shared_ns_ft` | number | north-south, feet |
@@ -170,6 +172,8 @@ One row per model, one column per rule. Values: `pass`, `fail`, `baseline` (firs
 | Links in place | `links_in_place` | links_in_place = revit_links |
 | Coordinates | `coordinates` | |shared_ew_ft - authority| <= TOL_FT and |shared_ns_ft - authority| <= TOL_FT and |angle_deg - authority| < ANGLE_TOL_DEG |
 | Model identity | `identity` | building_name = model (ModelKey) |
+| Project status | `status` | project_status = PROJECT_STATUS; until the BIM manager sets it, = the status most models carry (a split federation fails the minority) |
+| Phases | `phases` | phases = the authority model's phase list (or PHASES): same names, same order, so linked-model phase mapping works |
 | Standard schedules | `standards` | has_instance_parameters = yes and has_sheet_list = yes |
 | LOIN ≥ target | `loin` | model completeness >= LOIN_TARGET; n/c when the model has no LOIN rows |
 | Warnings trend | `warnings` | warnings <= last week's warnings; 'baseline' in the first week |
@@ -183,6 +187,8 @@ Constants (the user decides; state them on the page):
 | `TOL_FT` | 0.01 | position tolerance, feet |
 | `ANGLE_TOL_DEG` | 0.001 | angle tolerance, degrees |
 | `LOIN_TARGET` | 0.95 | completeness target |
+| `PROJECT_STATUS` | none | the one project status for the federation (the BIM manager decides) |
+| `PHASES` | authority model's phases | agreed phase list (optional) |
 
 ## Using the template
 
@@ -192,3 +198,9 @@ Constants (the user decides; state them on the page):
 4. From week 2: add last week's datasets and switch the `warnings` rule from `baseline` to the comparison; clashes new and resolved are matched by `uid_a, uid_b`.
 
 Without the Dashboard type, any BI tool reading the same CSVs can follow the sections, calculations and rules; the page is the reference, not a requirement.
+
+## Change log
+
+| Version | Date | Change |
+|---|---|---|
+| 1.1 | 2026-10-28 | Rule checks `status` and `phases` added; `models` gains `project_status` and `phases`. Mixed project status or phases across discipline models is a common multi-discipline problem; the coordinator raises it every week. |
