@@ -1,7 +1,7 @@
 {
   "id": "ARPL-BOM-0001",
   "title": "Bill of Materials from federated Revit models",
-  "version": "1.1",
+  "version": "1.2",
   "status": "candidate",
   "recorded": "2026-10-28",
   "source": "IN-0025",
@@ -28,7 +28,7 @@
     "Quantity basis comes only from category-rules.csv",
     "Each category counted from one source discipline",
     "Only purchase phases count (default New Construction)",
-    "A part of a family is bought with its family: nested parts (instance key, no own unique id) are exceptions 'part of <parent key>'; standalone curtain wall mullions are their own items by length"
+    "Nested parts follow the rule column nested_parts: with_parent (default; exception 'part of <parent key>') or own_item (own ids, counted; e.g. chairs in a table family)"
   ],
   "pipeline": [
     "read exports",
@@ -58,6 +58,7 @@
     "quantity_field",
     "grouping_fields",
     "required_fields",
+    "nested_parts",
     "code",
     "status",
     "note"
@@ -128,6 +129,11 @@
       "version": "1.1",
       "date": "2026-10-28",
       "change": "Mullions and nested parts (IN-0026)"
+    },
+    {
+      "version": "1.2",
+      "date": "2026-10-28",
+      "change": "nested_parts column; Furniture own_item (IN-0027)"
     }
   ]
 }

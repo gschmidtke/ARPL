@@ -1,6 +1,6 @@
 # ARPL-BOM-0001: Bill of Materials from federated Revit models
 
-**Version:** 1.1 · **Status:** candidate (category rules: *proposed*, to be confirmed by the BIM manager and the GC) · **Recorded:** 2026-10-28 (IN-0025)
+**Version:** 1.2 · **Status:** candidate (category rules: *proposed*, to be confirmed by the BIM manager and the GC) · **Recorded:** 2026-10-28 (IN-0025)
 **Machine-readable:** [bom-standard.json](bom-standard.json) · **Rules:** [category-rules.csv](category-rules.csv) · **Reference builder:** [build_bom.py](build_bom.py) · **Procedure pack:** ARPL-SCH-0003
 
 ## Purpose
@@ -24,7 +24,7 @@ ARPL defines the first two levels. The third needs GC decisions (waste factors, 
 3. **The governed core is one rule table** (`category-rules.csv`). Per category and source discipline it sets the quantity basis (count, length, area, volume), the unit (EA, LF, SF, CY), the quantity field, the grouping fields that define one BOM item, and the required fields. A material condition separates, for example, concrete beams (CY) from steel framing (LF). The agent never infers a quantity basis.
 4. **Each category is counted from one discipline.** Where a category is modelled twice (plumbing fixtures in Architecture and Plumbing, lighting fixtures in Architecture and Electrical), the rule table names the source discipline. Rows from the other model become exceptions, not double counts.
 5. **Only the phases that are bought count** (default: New Construction). Existing elements are listed as exceptions.
-6. **A part of a family is bought with its family.** Mullions inside a window family belong to the window. Nested parts carry their parent's instance key and no unique id of their own (ARPL-PAR-0003). They are listed as exceptions "part of <parent key>" and never silently dropped. Standalone elements such as curtain wall mullions are their own BOM items, bought by length per profile.
+6. **A part of a family is bought with its family, unless the rule table says the nested part is its own item.** Column `nested_parts`: `with_parent` (default; for example mullions inside a window family belong to the window) or `own_item` (Furniture: tables and chairs are separate entities, so chairs nested in a table family are their own BOM items). Nested parts keep their parent's instance key, so site staff find them under the parent. `with_parent` parts have no unique id of their own and are listed as exceptions "part of <parent key>", never silently dropped. `own_item` parts get their own unique id and element id (ARPL-PAR-0003) and are counted like any element. Standalone elements such as curtain wall mullions are their own BOM items, bought by length per profile.
 
 ## Pipeline
 
@@ -71,4 +71,5 @@ The project prefix (`SNOW_` on Snowdon) is a parameter of the builder (`--prefix
 | Version | Date | Change |
 |---|---|---|
 | 1.0 | 2026-10-28 | First recorded (IN-0025) |
+| 1.2 | 2026-10-28 | Owner: tables and chairs are separate entities. Rule column `nested_parts` (with_parent / own_item); Furniture own_item; nested chairs get their own ids (IN-0027) |
 | 1.1 | 2026-10-28 | Owner: window mullions are part of the window; curtain wall mullions are standalone. Curtain wall mullions bought by length (SNOW_Length bound and filled); nested parts listed as "part of <parent key>" instead of silently dropped; Flex Ducts code FX (IN-0026) |
