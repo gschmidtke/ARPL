@@ -57,7 +57,7 @@ def read_export(path, prefix):
     model = os.path.basename(path).rsplit("_", 1)[0]
     for r in rows[head_at + 1:]:
         row = dict(zip(header, r))
-        if row.get(f"{prefix}UniqueId", "").strip():
+        if row.get(f"{prefix}UniqueId", "").strip() or row.get(f"{prefix}InstElemId", "").strip():
             yield model, row
 
 
@@ -82,13 +82,16 @@ def main():
     rows_in = 0
     for path in a.exports:
         for model, row in read_export(path, P):
-            uid = row[f"{P}UniqueId"].strip()
+            uid = row.get(f"{P}UniqueId", "").strip()
+            key_id = row.get(f"{P}InstElemId", "").strip()
+            cat = row.get("Category", "")
+            if not uid:              # nested part: carries its parent's key, no id of its own (ARPL-PAR-0003)
+                rows_in += 1
+                exceptions.append([model, "", cat, f"part of {key_id}: bought with its parent"]); continue
             if uid in seen:          # one element can be exported on several rows (FP55)
                 continue
             seen.add(uid); rows_in += 1
-            key_id = row.get(f"{P}InstElemId", "").strip()
             disc = key_id[:1]
-            cat = row.get("Category", "")
             phase = row.get(f"{P}PhaseCreated", "").strip()
             if phase and phase not in buy_phases:
                 exceptions.append([model, uid, cat, f"phase {phase}: not bought"]); continue

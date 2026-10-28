@@ -1,0 +1,4 @@
+{
+  "version": "v03",
+  "instruction": "Owner: mullions inside a window family are part of the window; curtain wall mullions are standalone. Bind SNOW_Length to Curtain Wall Mullions in the Architectural model, fill it from the element length, add it to INSTANCE PARAMETERS, set the mullion rule to LF; list nested parts instead of skipping them."
+}

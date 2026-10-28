@@ -586,6 +586,27 @@
       ],
       "reviewed_by": "Claude (curator)",
       "closed": "2026-10-28"
+    },
+    {
+      "entry_id": "IN-0026",
+      "received": "2026-10-28",
+      "contributor": {
+        "name": "Gottfried Schmidtke",
+        "github": "gschmidtke",
+        "with": "Claude"
+      },
+      "source": "owner: mullions in a window are part of the window; curtain wall mullions are standalone elements",
+      "submitted": "Correction to the mullion rule of ARPL-BOM-0001",
+      "files": [],
+      "status": "filed",
+      "decision": "ARPL-BOM-0001 v1.1 (curtain wall mullions by length, nested parts as named exceptions, FX code); ARPL-SCH-0003 rev 2 (v03); FP60 new. Snowdon Architectural: SNOW_Length bound to curtain wall mullions, filled and added to INSTANCE PARAMETERS, synced.",
+      "resulting_ids": [
+        "ARPL-BOM-0001",
+        "ARPL-SCH-0003",
+        "FP60"
+      ],
+      "reviewed_by": "Claude (curator)",
+      "closed": "2026-10-28"
     }
   ]
 }

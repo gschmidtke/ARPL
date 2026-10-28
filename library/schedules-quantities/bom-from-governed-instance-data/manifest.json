@@ -1,6 +1,6 @@
 {
   "id": "ARPL-SCH-0003",
-  "revision": 1,
+  "revision": 2,
   "title": "BOM from governed instance data: deduplicated QTO grouped by a category rule table, every line traced to its model elements (implements ARPL-BOM-0001)",
   "use_when": [
     "A GC or estimator needs quantities to buy against from a federation that exports a standard instance-parameter schedule with instance keys",
@@ -50,7 +50,8 @@
   "failure_patterns": [
     "FP55",
     "FP06",
-    "FP49"
+    "FP49",
+    "FP60"
   ],
   "status": "candidate",
   "contributors": [
@@ -62,6 +63,14 @@
       "revision": 1,
       "date": "2026-10-28",
       "change": "First recorded with the BOM standard ARPL-BOM-0001 (IN-0025)",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ]
+    },
+    {
+      "revision": 2,
+      "date": "2026-10-28",
+      "change": "v03: curtain wall mullions by length; nested parts as named exceptions; rule codes must equal instance-key codes (IN-0026)",
       "contributors": [
         "Gottfried Schmidtke with Claude"
       ]

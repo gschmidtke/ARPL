@@ -1,7 +1,7 @@
 {
   "id": "ARPL-BOM-0001",
   "title": "Bill of Materials from federated Revit models",
-  "version": "1.0",
+  "version": "1.1",
   "status": "candidate",
   "recorded": "2026-10-28",
   "source": "IN-0025",
@@ -27,11 +27,12 @@
     "Commercial data stays in the GC item table keyed by bom_item_key",
     "Quantity basis comes only from category-rules.csv",
     "Each category counted from one source discipline",
-    "Only purchase phases count (default New Construction)"
+    "Only purchase phases count (default New Construction)",
+    "A part of a family is bought with its family: nested parts (instance key, no own unique id) are exceptions 'part of <parent key>'; standalone curtain wall mullions are their own items by length"
   ],
   "pipeline": [
     "read exports",
-    "deduplicate by unique id",
+    "nested parts (key, no unique id) -> exception 'part of <parent key>'; deduplicate the rest by unique id",
     "filter purchase phases",
     "match rule: category + source discipline + material condition",
     "quantity in fixed units (ft, SF, CY)",
@@ -116,5 +117,17 @@
     "every exported category has a rule or a deliberate exception reason",
     "rules marked proposed are not used for buyout until confirmed"
   ],
-  "reference_builder": "build_bom.py"
+  "reference_builder": "build_bom.py",
+  "changelog": [
+    {
+      "version": "1.0",
+      "date": "2026-10-28",
+      "change": "First recorded (IN-0025)"
+    },
+    {
+      "version": "1.1",
+      "date": "2026-10-28",
+      "change": "Mullions and nested parts (IN-0026)"
+    }
+  ]
 }
