@@ -1,0 +1,108 @@
+{
+  "id": "ARPL-DOC-0003",
+  "revision": 1,
+  "title": "Weekly print-set booklets with ZEN: one Revit print set per model, Print Intel workbook, ACC Gate Print PDFs",
+  "use_when": [
+    "A federated project needs one PDF booklet per model every week without opening the models by hand",
+    "The ZEN add-in (Tiverit LLC) is installed and the project has a ZEN model registry of ACC cloud models",
+    "An agent prepares print sets in Revit and drives ZEN Print Intel and ACC Gate from a bridge with screen access"
+  ],
+  "not_for": [
+    "Projects without ZEN: export PDFs per model from the bridge with PDFExportOptions instead (same content rule, same read-back)",
+    "Sets that must follow the sheet list automatically: a Revit print set is a fixed list (see rule 9)"
+  ],
+  "api_terms": [
+    "ViewSheetSet",
+    "PrintManager.ViewSheetSetting",
+    "ViewSheet.GetAllViewports",
+    "ScheduleSheetInstance",
+    "PanelScheduleSheetInstance",
+    "UIApplication.PostCommand",
+    "UIApplication.OpenAndActivateDocument",
+    "ModelPathUtils.ConvertCloudGUIDsToCloudPath",
+    "Document.SynchronizeWithCentral"
+  ],
+  "level": 2,
+  "work_class": "W6",
+  "workflows": [
+    "documentation",
+    "model-administration"
+  ],
+  "disciplines": [
+    "bim-vdc",
+    "generic"
+  ],
+  "roles": [
+    "coordinator",
+    "bim-manager"
+  ],
+  "project_types": [
+    "generic"
+  ],
+  "phases": [
+    "design-development",
+    "construction-documents"
+  ],
+  "revit_versions_tested": [
+    "2024"
+  ],
+  "environment": {
+    "revit_version": "2024.3 (24.3.60.12)",
+    "tool": "RevitBridge MCP with run_csharp, plus desktop control for Revit and ZEN dialogs",
+    "compiler": "Roslyn 4.8 (C# 12)",
+    "agent": "Claude (Anthropic)",
+    "batch_tool": "ZEN 1.2 (Revit add-in by Tiverit LLC): Export Print Intel, Print PDF, ACC Gate",
+    "model": "6-model Snowdon Towers sample (Autodesk), workshared ACC cloud models"
+  },
+  "failure_patterns": [
+    "FP32",
+    "FP51",
+    "FP52",
+    "FP53",
+    "FP54"
+  ],
+  "validation_checks": [
+    {
+      "file": "final/checks/printset_readback.cs",
+      "runs_in": "RevitBridge run_csharp, transaction none",
+      "mode": "read-only",
+      "returns": "{check, model, pass, set_existed, count, expected, would_add, would_remove, non_sheet_views, schedule_only, skipped}",
+      "inputs": {
+        "SET": "print set name, the same in every model",
+        "SCHEDULES_COUNT": "true when schedule-only and panel-schedule sheets belong in the set (the user decides)"
+      },
+      "test_runs": [
+        {
+          "date": "2026-10-28",
+          "model": "Snowdon Towers sample, 6 models (55, 12, 27, 26, 17 and 2 sheets)",
+          "revit_version": "2024.3",
+          "result": "pass",
+          "note": "run before creation (set_existed false, lists the content) and after creation (would_add 0, would_remove 0, non_sheet_views 0) in every model"
+        }
+      ],
+      "model_assumptions": [
+        "Runs on the active document",
+        "Placeholder sheets are never in the set",
+        "Title-block revision schedules do not count as content"
+      ],
+      "not_for": [
+        "Proving that linked content appears on the sheets: check the PDF"
+      ]
+    }
+  ],
+  "status": "candidate",
+  "contributors": [
+    "Gottfried Schmidtke with Claude"
+  ],
+  "recorded": "2026-10-28",
+  "changelog": [
+    {
+      "revision": 1,
+      "date": "2026-10-28",
+      "change": "First recorded (IN-0018, owner session)",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ]
+    }
+  ]
+}

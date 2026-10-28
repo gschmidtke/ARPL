@@ -1,0 +1,4 @@
+{
+  "version": "v02",
+  "instruction": "Decide the content with a read-only script: a sheet belongs in the set when it carries a viewport or a schedule (ScheduleSheetInstance, not the title-block revision schedule)."
+}

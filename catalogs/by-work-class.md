@@ -62,6 +62,7 @@ Work class = what drives the result; it decides the preview and the proof of 'do
 |---|---|---|---|
 | [ARPL-DOC-0001](../library/documentation/assembly-shop-drawings/) Shop drawings: invalid references and swapped elevations | 2 | W6 | candidate |
 | [ARPL-DOC-0002](../library/documentation/dimension-style-in-trade-units/) Project units round framing dimensions | 1 | W6 | candidate |
+| [ARPL-DOC-0003](../library/documentation/weekly-print-sets-zen-print-intel/) Weekly print-set booklets with ZEN: one Revit print set per model, Print Intel workbook, ACC Gate Print PDFs | 2 | W6 | candidate |
 | [ARPL-VIEW-0001](../library/views-graphics/crop-overridden-by-scope-box/) Crops silently ignored | 1 | W6 | candidate |
 | [ARPL-VIEW-0002](../library/views-graphics/section-view-direction/) Section looking the wrong way | 1 | W6 | candidate |
 

@@ -1,0 +1,5 @@
+{
+  "result": "ZEN Print PDF first asks for a Print Intel workbook; with an empty PrintJobs sheet it stops with 'No print jobs found in the PrintJobs sheet'. ZEN has no command that creates a print set.",
+  "problem": "The plan put a Revit step into the add-in. The print set is a Revit print set; ZEN's Export Print Intel only reads it and Print PDF prints the PrintJobs rows (ZEN 1.2 manual).",
+  "found_by": "running the command, walking the ZEN ribbon for command ids, and reading the manual on the owner's instruction"
+}

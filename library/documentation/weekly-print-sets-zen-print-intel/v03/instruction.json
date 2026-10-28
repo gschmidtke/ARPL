@@ -1,0 +1,4 @@
+{
+  "version": "v03",
+  "instruction": "Per model: open from the registry GUIDs with worksets closed; script lists the content; Revit Print > Selected views/sheets > Select: choose the existing set that matches (or Check none and tick the sheets), Save as the common name, Save current set, Select, Close; read back; sync and relinquish; ZEN Export Print Intel to the workbook folder; one PrintJobs row. Then ACC Gate from no open model: registry, all models, 'Print PDFs from Print Intel workbooks', workbook folder, output folder typed."
+}

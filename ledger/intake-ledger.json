@@ -412,6 +412,30 @@
       ],
       "reviewed_by": "Claude (curator)",
       "closed": "2026-10-27"
+    },
+    {
+      "entry_id": "IN-0018",
+      "received": "2026-10-28",
+      "contributor": {
+        "name": "Gottfried Schmidtke",
+        "github": "gschmidtke",
+        "with": "Claude"
+      },
+      "source": "curator session with the owner, 2026-10-28 (owner instruction: push the lesson learned on weekly print sets with Revit and ZEN into ARPL; no inbox file)",
+      "submitted": "Weekly print-set booklets: Revit print set per model, ZEN Print Intel workbook and PrintJobs row, ACC Gate Print PDFs run, on the 6-model Snowdon Towers sample",
+      "files": [],
+      "status": "filed",
+      "decision": "New pack ARPL-DOC-0003 with read-only check printset_readback.cs (test run recorded). ARPL-ADM-0004 raised to rev 2 (FP53, print action). ARPL-PW-0003 raised to rev 3 (print step). New failure patterns FP52-FP54. Safety: no secrets or client data; public Autodesk sample; no cloud hub, project or folder ids, no user paths. The check script was read line by line: no transaction, writes, file or network access.",
+      "resulting_ids": [
+        "ARPL-DOC-0003",
+        "ARPL-ADM-0004",
+        "ARPL-PW-0003",
+        "FP52",
+        "FP53",
+        "FP54"
+      ],
+      "reviewed_by": "Claude (curator)",
+      "closed": "2026-10-28"
     }
   ]
 }

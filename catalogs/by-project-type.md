@@ -21,6 +21,7 @@ Entry by building type. Project-level workflows are listed in project-workflows/
 | [ARPL-CON-0001](../library/connectors-systems/equipment-power-connector-with-load-data/) Power connector without load parameters | 3 | W1 | candidate |
 | [ARPL-CRD-0001](../library/coordination/clash-run-by-solid-intersection/) Weekly clash run inside Revit by solid intersection across open cloud models; penetrations separated, clashes grouped, owner by routing priority | 2 | W8 | candidate |
 | [ARPL-DOC-0002](../library/documentation/dimension-style-in-trade-units/) Project units round framing dimensions | 1 | W6 | candidate |
+| [ARPL-DOC-0003](../library/documentation/weekly-print-sets-zen-print-intel/) Weekly print-set booklets with ZEN: one Revit print set per model, Print Intel workbook, ACC Gate Print PDFs | 2 | W6 | candidate |
 | [ARPL-FAM-0001](../library/family-authoring/equipment-from-spec-sheet-overall-dimensions/) Coffee brewer from a spec sheet: overall height short | 2 | W1 | candidate |
 | [ARPL-FAM-0002](../library/family-authoring/orientation-from-multiple-source-views/) Faucet on the wrong side: mirrored source view | 2 | W1 | candidate |
 | [ARPL-FAM-0003](../library/family-authoring/family-template-hidden-geometry/) Template with hidden geometry | 1 | W1 | candidate |

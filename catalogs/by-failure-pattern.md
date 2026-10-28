@@ -202,6 +202,7 @@ Learn from what went wrong: each pack is listed under the failure patterns it re
 | Pack | Level | Work class | Status |
 |---|---|---|---|
 | [ARPL-ADM-0003](../library/model-administration/batch-cloud-onboarding-with-registry/) Batch-onboard local models to the cloud and register each one: verify by document state, handle posted-command dialogs | 2 | W7 | candidate |
+| [ARPL-DOC-0003](../library/documentation/weekly-print-sets-zen-print-intel/) Weekly print-set booklets with ZEN: one Revit print set per model, Print Intel workbook, ACC Gate Print PDFs | 2 | W6 | candidate |
 
 ## FP38: Generated code compiled inside the host inherits an invisible environment
 
@@ -284,4 +285,24 @@ Learn from what went wrong: each pack is listed under the failure patterns it re
 | Pack | Level | Work class | Status |
 |---|---|---|---|
 | [ARPL-ADM-0004](../library/model-administration/zen-acc-gate-weekly-collection/) ZEN ACC Gate as the weekly collection batch: health, links and worksets, schedule exports; what each output contains and how to drive it from a bridge | 2 | W8 | candidate |
+| [ARPL-DOC-0003](../library/documentation/weekly-print-sets-zen-print-intel/) Weekly print-set booklets with ZEN: one Revit print set per model, Print Intel workbook, ACC Gate Print PDFs | 2 | W6 | candidate |
+
+## FP52: Panel schedule sheet read as empty
+
+| Pack | Level | Work class | Status |
+|---|---|---|---|
+| [ARPL-DOC-0003](../library/documentation/weekly-print-sets-zen-print-intel/) Weekly print-set booklets with ZEN: one Revit print set per model, Print Intel workbook, ACC Gate Print PDFs | 2 | W6 | candidate |
+
+## FP53: Posted command waits on the Home screen
+
+| Pack | Level | Work class | Status |
+|---|---|---|---|
+| [ARPL-ADM-0004](../library/model-administration/zen-acc-gate-weekly-collection/) ZEN ACC Gate as the weekly collection batch: health, links and worksets, schedule exports; what each output contains and how to drive it from a bridge | 2 | W8 | candidate |
+| [ARPL-DOC-0003](../library/documentation/weekly-print-sets-zen-print-intel/) Weekly print-set booklets with ZEN: one Revit print set per model, Print Intel workbook, ACC Gate Print PDFs | 2 | W6 | candidate |
+
+## FP54: Closing the document the bridge holds
+
+| Pack | Level | Work class | Status |
+|---|---|---|---|
+| [ARPL-DOC-0003](../library/documentation/weekly-print-sets-zen-print-intel/) Weekly print-set booklets with ZEN: one Revit print set per model, Print Intel workbook, ACC Gate Print PDFs | 2 | W6 | candidate |
 
