@@ -1,6 +1,6 @@
 {
   "id": "ARPL-PAR-0003",
-  "revision": 1,
+  "revision": 2,
   "title": "LOIN instance schedule per discipline: mirror category values into project parameters and give every instance a contractor key (discipline, element code, room or level, number)",
   "use_when": [
     "A client or project requires an information delivery per discipline (LOIN, ISO 19650 / ISO 7817-1) and a weekly dataset is read from one standard instance schedule per model",
@@ -79,6 +79,14 @@
       "revision": 1,
       "date": "2026-10-28",
       "change": "First recorded (IN-0020, curator session with the owner)",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ]
+    },
+    {
+      "revision": 2,
+      "date": "2026-10-28",
+      "change": "Owner decision: nested components inherit the top-level parent's key (v05, rule 5); IN-0021",
       "contributors": [
         "Gottfried Schmidtke with Claude"
       ]

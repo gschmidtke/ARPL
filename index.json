@@ -1093,7 +1093,7 @@
     },
     {
       "id": "ARPL-CRD-0002",
-      "revision": 1,
+      "revision": 2,
       "title": "MEP spaces that exist but have no area: set the architectural (and facade) link types to Room Bounding in the MEP model",
       "environment": {
         "revit_version": "2024.3 (24.3.60.12)",
@@ -1144,7 +1144,7 @@
         "FP11"
       ],
       "status": "candidate",
-      "rule": "1. Check spaces for area > 0 before reading Space fields; zero area everywhere points at the links.\n2. Set Room Bounding on the link types that carry walls, floors and curtain walls (architecture, facades), not on MEP or structural links unless the lead asks.\n3. Expect a 'Space volumes overlap' warning on commit; accept it and list the spaces for the lead instead of changing limits.\n4. Read back: spaces enclosed, instances with a space; sync with a comment.",
+      "rule": "1. Check spaces for area > 0 before reading Space fields; zero area everywhere points at the links.\n2. Set Room Bounding on the link types that carry walls, floors and curtain walls (architecture, facades), not on MEP or structural links unless the lead asks.\n3. Expect a 'Space volumes overlap' warning on commit; accept it and list the spaces for the lead instead of changing limits.\n4. Read back: spaces enclosed, instances with a space; sync with a comment.\n5. Apply the setting in every model that schedules Space fields (mechanical, electrical, plumbing); where a model has fewer spaces than the architecture has rooms, list the rooms without a space for the discipline lead instead of placing spaces.",
       "validation": [
         "Every space has area > 0 or is listed with a reason.",
         "Instances with a Space counted before and after."
@@ -2590,7 +2590,7 @@
     },
     {
       "id": "ARPL-PAR-0003",
-      "revision": 1,
+      "revision": 2,
       "title": "LOIN instance schedule per discipline: mirror category values into project parameters and give every instance a contractor key (discipline, element code, room or level, number)",
       "environment": {
         "revit_version": "2024.3 (24.3.60.12)",
@@ -2656,11 +2656,12 @@
         "FP57"
       ],
       "status": "candidate",
-      "rule": "1. Write the assumed LOIN per discipline first (ISO 7817-1 structure), with the stage each field is required at; the client's table replaces it when it exists.\n2. Keep one INSTANCE PARAMETERS schedule per model with the fields of its discipline, Category, Family, Type, the key and the unique id first.\n3. Mirror into project-prefixed instance parameters every value the multi-category schedule cannot show: element id, unique id, phase created, category-specific built-ins; electrical values come from the circuit, not the family.\n4. Instance key: <discipline letter>-<element code>-<location>-<nnn>; location = room number of the first room found (own room, model room at point, architectural link room at transformed point), else the level name as written in the model, else the host level, else the level below.\n5. Number per discipline, code and location from the next free number; never overwrite a key that exists; nested components and sub-elements get none (they belong to their parent).\n6. Run fills in batches (about 2,000 elements, a 25 s budget per call) and check state after any timeout before running again; sync with a comment only after a clean commit, relinquish, close.\n7. When reading the export, count unique ids, not rows; report nested, subcategory and system rows separately.",
+      "rule": "1. Write the assumed LOIN per discipline first (ISO 7817-1 structure), with the stage each field is required at; the client's table replaces it when it exists.\n2. Keep one INSTANCE PARAMETERS schedule per model with the fields of its discipline, Category, Family, Type, the key and the unique id first.\n3. Mirror into project-prefixed instance parameters every value the multi-category schedule cannot show: element id, unique id, phase created, category-specific built-ins; electrical values come from the circuit, not the family.\n4. Instance key: <discipline letter>-<element code>-<location>-<nnn>; location = room number of the first room found (own room, model room at point, architectural link room at transformed point), else the level name as written in the model, else the host level, else the level below.\n5. Number per discipline, code and location from the next free number; never overwrite a key that exists; nested components take the key of their top-level parent (owner decision), so a contractor finds the part under the element it is built into.\n6. Run fills in batches (about 2,000 elements, a 25 s budget per call) and check state after any timeout before running again; sync with a comment only after a clean commit, relinquish, close.\n7. When reading the export, count unique ids, not rows; report nested, subcategory and system rows separately.",
       "validation": [
         "Keys in the model are unique (count by element).",
         "Every keyed row in the export has a unique id; duplicate rows share it.",
-        "Fill rate per field and discipline reported against the LOIN table, with the assumption stated."
+        "Fill rate per field and discipline reported against the LOIN table, with the assumption stated.",
+        "Every nested instance with the key parameter carries its top-level parent's key."
       ],
       "validation_checks": [],
       "path": "library/parameters-data/loin-instance-schedule-mirror-parameters-and-instance-key",
@@ -4173,7 +4174,7 @@
     {
       "id": "FP54",
       "name": "Closing the document the bridge holds",
-      "meaning": "A bridge script passes one document as doc. Closing that document (for example in a loop over Application.Documents after opening the next model) throws InvalidObjectException, and the call reports an error although other documents in the loop did close. Defence: after OpenAndActivateDocument work on uiapp.ActiveUIDocument.Document, close only the previous model by the reference taken before opening, and close the active model with PostableCommand.Close; check the open documents after any error.",
+      "meaning": "A bridge script passes one document as doc. Closing that document (for example in a loop over Application.Documents after opening the next model) throws InvalidObjectException, and the call reports an error although other documents in the loop did close. Defence: after OpenAndActivateDocument work on uiapp.ActiveUIDocument.Document, close only the previous model by the reference taken before opening, and close the active model with PostableCommand.Close; check the open documents after any error. Seen again 2026-10-28 with a background document: SynchronizeWithCentral followed by Close in the same call returned InvalidObjectException although sync and close had both happened; reopening confirmed the central model. Close in a separate call and check state after any error.",
       "found_by": "state check after the error",
       "contributors": [
         "Gottfried Schmidtke with Claude"

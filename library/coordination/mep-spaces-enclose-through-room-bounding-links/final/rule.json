@@ -1,6 +1,6 @@
 {
   "lesson": "A placed space with no area is usually a link that is not room bounding; fix the link type, not the spaces.",
-  "rule": "1. Check spaces for area > 0 before reading Space fields; zero area everywhere points at the links.\n2. Set Room Bounding on the link types that carry walls, floors and curtain walls (architecture, facades), not on MEP or structural links unless the lead asks.\n3. Expect a 'Space volumes overlap' warning on commit; accept it and list the spaces for the lead instead of changing limits.\n4. Read back: spaces enclosed, instances with a space; sync with a comment.",
+  "rule": "1. Check spaces for area > 0 before reading Space fields; zero area everywhere points at the links.\n2. Set Room Bounding on the link types that carry walls, floors and curtain walls (architecture, facades), not on MEP or structural links unless the lead asks.\n3. Expect a 'Space volumes overlap' warning on commit; accept it and list the spaces for the lead instead of changing limits.\n4. Read back: spaces enclosed, instances with a space; sync with a comment.\n5. Apply the setting in every model that schedules Space fields (mechanical, electrical, plumbing); where a model has fewer spaces than the architecture has rooms, list the rooms without a space for the discipline lead instead of placing spaces.",
   "validation": [
     "Every space has area > 0 or is listed with a reason.",
     "Instances with a Space counted before and after."

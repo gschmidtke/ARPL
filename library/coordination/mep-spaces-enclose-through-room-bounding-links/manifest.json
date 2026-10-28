@@ -1,6 +1,6 @@
 {
   "id": "ARPL-CRD-0002",
-  "revision": 1,
+  "revision": 2,
   "title": "MEP spaces that exist but have no area: set the architectural (and facade) link types to Room Bounding in the MEP model",
   "use_when": [
     "Space: Number / Space: Name are empty in MEP schedules although spaces are placed",
@@ -63,6 +63,14 @@
       "revision": 1,
       "date": "2026-10-28",
       "change": "First recorded (IN-0020, curator session with the owner)",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ]
+    },
+    {
+      "revision": 2,
+      "date": "2026-10-28",
+      "change": "v03: applied to Electrical and Plumbing on the owner's decision; rule 5 on missing spaces (IN-0021)",
       "contributors": [
         "Gottfried Schmidtke with Claude"
       ]

@@ -1,0 +1,4 @@
+{
+  "result": "Architecture 478, Structure 73, Facades 112, Electrical 16 nested instances keyed with the parent's key; HVAC and Plumbing have none; no parent without a key. 20 nested instances in Architecture belong to categories without the key parameter.",
+  "found_by": "read-back per model before sync"
+}

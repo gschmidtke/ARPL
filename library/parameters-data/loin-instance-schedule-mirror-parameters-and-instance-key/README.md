@@ -1,4 +1,4 @@
-# ARPL-PAR-0003 rev 1: LOIN instance schedule per discipline: mirror category values into project parameters and give every instance a contractor key (discipline, element code, room or level, number)
+# ARPL-PAR-0003 rev 2: LOIN instance schedule per discipline: mirror category values into project parameters and give every instance a contractor key (discipline, element code, room or level, number)
 
 _Generated from this pack's files by tools/build_catalogs.py. Edit manifest.json, intent.md, vNN/ or final/rule.json instead._
 
@@ -27,6 +27,7 @@ _Generated from this pack's files by tools/build_catalogs.py. Edit manifest.json
 | v02 | Bind the project parameters as instance parameters to the categories of each discipline; rebuild each model's INSTANCE PARAMETERS schedule from the field list; fill mirrors and the key SNOW_InstElemId = <discipline>-<element code>-<room number or level>-<nnn>; location: the element's own room (FamilyInstance room / to-room / from-room), then a room of the model at the element point, then a room of the architectural link at the transformed point, then its level; first room found wins; skip any element that already has a key. | 17,928 instances keyed across six models, synced and closed. Facades first produced NOLEVEL keys on face-hosted generic models; fixed before sync by taking the host's level, then the level below the element. | Face-hosted families report no level of their own. The Architectural fill commit ran about 3 minutes and outlived the 60 s call (FP22). | reading keys back before sync; screenshot of 'Committing Transaction' |
 | v03 | Export the schedules with ZEN ACC Gate and check the CSVs: headers, keyed rows, duplicate keys, fill rate per field. | Headers correct in all six. Architectural showed 3 duplicate keys: each a multi-level stair exported twice with the same element id (FP55), not a real duplicate. Electrical voltage 0% (the value lives on the circuit, FP57); HVAC space number 0% (spaces not enclosed, see ARPL-CRD-0002). Unkeyed rows: nested components, sub-elements and systems. | Counting rows instead of unique ids overstates duplicates. | grouping duplicate keys by element id |
 | v04 | Fill voltage from the element's power circuit (ElectricalSystem voltage), load from the family's own Apparent Load / Load or the sum of the panel phase loads. | Electrical voltage filled on 1,404 of 1,558 instances (circuit 1,389, family 15), load on 1,329; the rest are data devices and uncircuited elements. |  |  |
+| v05 | Owner decision: nested components inherit the key of their top-level parent. For every nested family instance with a blank key, walk up SuperComponent to the top-level instance and copy its key; never overwrite an existing key; sync each model. | Architecture 478, Structure 73, Facades 112, Electrical 16 nested instances keyed with the parent's key; HVAC and Plumbing have none; no parent without a key. 20 nested instances in Architecture belong to categories without the key parameter. |  | read-back per model before sync |
 
 ## Lesson
 The schedule shows only what the instance itself holds: mirror the values the data needs into project parameters, key every instance once, and count the export by unique id.
@@ -36,7 +37,7 @@ The schedule shows only what the instance itself holds: mirror the values the da
 2. Keep one INSTANCE PARAMETERS schedule per model with the fields of its discipline, Category, Family, Type, the key and the unique id first.
 3. Mirror into project-prefixed instance parameters every value the multi-category schedule cannot show: element id, unique id, phase created, category-specific built-ins; electrical values come from the circuit, not the family.
 4. Instance key: <discipline letter>-<element code>-<location>-<nnn>; location = room number of the first room found (own room, model room at point, architectural link room at transformed point), else the level name as written in the model, else the host level, else the level below.
-5. Number per discipline, code and location from the next free number; never overwrite a key that exists; nested components and sub-elements get none (they belong to their parent).
+5. Number per discipline, code and location from the next free number; never overwrite a key that exists; nested components take the key of their top-level parent (owner decision), so a contractor finds the part under the element it is built into.
 6. Run fills in batches (about 2,000 elements, a 25 s budget per call) and check state after any timeout before running again; sync with a comment only after a clean commit, relinquish, close.
 7. When reading the export, count unique ids, not rows; report nested, subcategory and system rows separately.
 
@@ -44,3 +45,4 @@ The schedule shows only what the instance itself holds: mirror the values the da
 - Keys in the model are unique (count by element).
 - Every keyed row in the export has a unique id; duplicate rows share it.
 - Fill rate per field and discipline reported against the LOIN table, with the assumption stated.
+- Every nested instance with the key parameter carries its top-level parent's key.
