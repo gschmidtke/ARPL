@@ -1,0 +1,4 @@
+{
+  "version": "v06",
+  "instruction": "For the BOM (ARPL-BOM-0001): bind SNOW_Length to Curtain Wall Mullions and Railings (from CURVE_ELEM_LENGTH), new SNOW_StairRisers (STAIRS_ACTUAL_NUM_RISERS) and SNOW_StairWidth (widest StairsRun.ActualRunWidth) to Stairs, created in the shared parameter file through ExternalDefinitionCreationOptions; give nested chairs their own ids."
+}

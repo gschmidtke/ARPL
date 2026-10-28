@@ -57,7 +57,7 @@ def read_export(path, prefix):
     model = os.path.basename(path).rsplit("_", 1)[0]
     for r in rows[head_at + 1:]:
         row = dict(zip(header, r))
-        if row.get(f"{prefix}UniqueId", "").strip() or row.get(f"{prefix}InstElemId", "").strip():
+        if any(v.strip() for v in r):      # every non-blank row is read, so none leaves the reconciliation (FP60)
             yield model, row
 
 
@@ -86,6 +86,9 @@ def main():
             uid = row.get(f"{P}UniqueId", "").strip()
             key_id = row.get(f"{P}InstElemId", "").strip()
             cat = row.get("Category", "")
+            if not uid and not key_id:   # system rows and system sub-elements (stair runs, wall sweeps, circuits)
+                rows_in += 1
+                exceptions.append([model, "", cat, "system row or sub-element: no instance key, not a separate item"]); continue
             if not uid:              # nested part: carries its parent's key, no id of its own (ARPL-PAR-0003)
                 rows_in += 1
                 own = any(r["nested_parts"] == "own_item" for r in by_cat.get(cat, []))

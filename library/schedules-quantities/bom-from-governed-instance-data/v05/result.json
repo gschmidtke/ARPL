@@ -1,0 +1,5 @@
+{
+  "result": "131 railings by length (for example _IBC-Pipe-Plate Stringer 349.8 LF, Pipe-Wall Mount 289.7 LF); 26 stairs grouped by type, risers and width; 1,862 system rows and sub-elements now listed (circuits, wall sweeps, duct systems, stair supports); 497 lines (312 EA, 86 SF, 78 LF, 21 CY), every input row reconciled.",
+  "problem": "A railing type 'Road Striping' (20 elements) came out as 625 LF of railing: a category used for something else (FP01). Stair runs, landings and supports had been skipped silently (FP60, second observation).",
+  "found_by": "reading the railing lines; counting rows read against rows in the export"
+}

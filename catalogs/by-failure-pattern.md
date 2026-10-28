@@ -9,6 +9,7 @@ Learn from what went wrong: each pack is listed under the failure patterns it re
 | Pack | Level | Work class | Status |
 |---|---|---|---|
 | [ARPL-GEO-0004](../library/geometry/concept-model-from-neutral-spec-staged-build/) Concept model from a neutral spec: staged, idempotent build with visual gates | 2 | W4 | candidate |
+| [ARPL-SCH-0003](../library/schedules-quantities/bom-from-governed-instance-data/) BOM from governed instance data: deduplicated QTO grouped by a category rule table, every line traced to its model elements (implements ARPL-BOM-0001) | 2 | W7 | candidate |
 
 ## FP02: Wrong coordinate frame or orientation
 

@@ -1,0 +1,4 @@
+{
+  "version": "v05",
+  "instruction": "Railings by length per type and stairs per stair with risers and run width: new shared parameters SNOW_StairRisers / SNOW_StairWidth (created through the Revit API so Revit writes the file), SNOW_Length bound to Railings; filled in the Architectural model; schedule fields added; builder lists every row it does not use."
+}
