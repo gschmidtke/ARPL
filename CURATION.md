@@ -35,6 +35,10 @@ The curator therefore never pushes to `main`. Each curation run works on a branc
 8. **Validate.** Run `python tools/validate.py`, then `python tools/build_catalogs.py` (regenerates the catalogs and `index.json`), and commit the result: `canonical-validation` fails on catalogs that were not regenerated.
 9. **Close.** Update the ledger entry (decision, resulting pack ids), credit the contributor in CONTRIBUTORS.md, reply in the pull request with thanks and links, and move the raw submission to `ledger/archive/<entry-id>/`.
 
+## Reviews by other AIs
+
+Independent reviews of ARPL output by another AI (for example a second model reviewing a weekly dataset) are a development tool for improving ARPL, decided by the owner on 2026-10-28. They are not a step in the BIM coordinator's routine. Their findings enter ARPL through the normal process, as lessons, iterations or failure patterns.
+
 ## Filing policy: publish first, let use falsify
 
 Decided by the owner on 2026-10-27. Every accepted submission goes straight into the library as `candidate`, including designs and workflows that have not yet run end to end; the curator does not hold them back for a pilot. The manifest and README say plainly what was run and what was not. Correction comes from use: user or AI reports in the inbox that confirm, contradict or falsify a pack are filed as iterations, reproductions or deprecations by the normal process. Desktop-control failure patterns (the layer around Revit, such as window focus) stay in the same failure-pattern list as API patterns.

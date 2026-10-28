@@ -1,6 +1,6 @@
 {
   "id": "ARPL-PW-0003",
-  "revision": 6,
+  "revision": 7,
   "title": "Weekly BIM coordination of a federated cloud project: collect, check, correct, report, archive",
   "level": 4,
   "context": {
@@ -28,7 +28,7 @@
     {
       "step": 2,
       "work_class": "W8",
-      "do": "Collect in batch (unattended): Model Health Check and PBP + Worksets report over all registry models, then Export Schedules (instance parameters, project information, sheet list); output folder typed explicitly",
+      "do": "Collect in batch (unattended): Model Health Check and PBP + Worksets report over all registry models, then Export Schedules (instance parameters, project information, sheet list); output folder typed explicitly. Before any report step, check that every expected export (one INSTANCE PARAMETERS, PROJECT-INFO and SHEET LIST per registry model) is present and readable; a missing file stops the report, it is never silently left out",
       "packs": [
         "ARPL-ADM-0004"
       ],
@@ -49,12 +49,13 @@
     {
       "step": 4,
       "work_class": "W7",
-      "do": "LOIN snapshot: from the exported instance-parameter schedules count filled values per model, category and field (family elements only); score against the client's LOIN table, or state the assumption. Count by unique id; before reporting a field at 0% as a team task, trace it to its source (circuit values, unenclosed spaces). Data alignment between runs (mirror parameters, instance key, Type Marks, room-bounding links) is coordinator work under docs/roles/bim-coordinator.md",
+      "do": "LOIN snapshot: from the exported instance-parameter schedules count filled values per model, category and field (family elements only); score against the client's LOIN table, or state the assumption. Count by unique id; before reporting a field at 0% as a team task, trace it to its source (circuit values, unenclosed spaces). Data alignment between runs (mirror parameters, instance key, Type Marks, room-bounding links) is coordinator work under docs/roles/bim-coordinator.md. Where the report is produced inside a GC team, also build the BOM (ARPL-BOM-0001, ARPL-SCH-0003) and report the week-over-week quantity change",
       "packs": [
         "ARPL-QA-0002",
         "ARPL-PAR-0003",
         "ARPL-PAR-0004",
-        "ARPL-CRD-0002"
+        "ARPL-CRD-0002",
+        "ARPL-SCH-0003"
       ],
       "tools": "schedule CSVs from step 2",
       "without_tool": "schedule export by ViewSchedule.Export from the bridge"
@@ -299,6 +300,14 @@
       "revision": 6,
       "date": "2026-10-28",
       "change": "Step 3 also reads Project Status and the phase list; report standard ARPL-RPT-0001 v1.1 checks both every week (owner: mixed status/phases is a common multi-discipline problem the coordinator raises; IN-0024)",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ]
+    },
+    {
+      "revision": 7,
+      "date": "2026-10-28",
+      "change": "Expected-file check before reporting; BOM as an optional step for GC teams (owner, IN-0029)",
       "contributors": [
         "Gottfried Schmidtke with Claude"
       ]
