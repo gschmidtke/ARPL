@@ -1,4 +1,4 @@
-# ARPL-PAR-0003 rev 2: LOIN instance schedule per discipline: mirror category values into project parameters and give every instance a contractor key (discipline, element code, room or level, number)
+# ARPL-PAR-0003 rev 3: LOIN instance schedule per discipline: mirror category values into project parameters and give every instance a contractor key (discipline, element code, room or level, number)
 
 _Generated from this pack's files by tools/build_catalogs.py. Edit manifest.json, intent.md, vNN/ or final/rule.json instead._
 
@@ -37,7 +37,7 @@ The schedule shows only what the instance itself holds: mirror the values the da
 2. Keep one INSTANCE PARAMETERS schedule per model with the fields of its discipline, Category, Family, Type, the key and the unique id first.
 3. Mirror into project-prefixed instance parameters every value the multi-category schedule cannot show: element id, unique id, phase created, category-specific built-ins; electrical values come from the circuit, not the family.
 4. Instance key: <discipline letter>-<element code>-<location>-<nnn>; location = room number of the first room found (own room, model room at point, architectural link room at transformed point), else the level name as written in the model, else the host level, else the level below.
-5. Number per discipline, code and location from the next free number; never overwrite a key that exists; nested components take the key of their top-level parent (owner decision), so a contractor finds the part under the element it is built into.
+5. Number per discipline, code and location from the next free number; never overwrite a key that exists; nested components take the key of their top-level parent (owner decision), so a contractor finds the part under the element it is built into; nested components that are bought as separate items (for example chairs in a table family; rule table of ARPL-BOM-0001, nested_parts = own_item) also get their own unique id and element id.
 6. Run fills in batches (about 2,000 elements, a 25 s budget per call) and check state after any timeout before running again; sync with a comment only after a clean commit, relinquish, close.
 7. When reading the export, count unique ids, not rows; report nested, subcategory and system rows separately.
 

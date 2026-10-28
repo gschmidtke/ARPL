@@ -607,6 +607,27 @@
       ],
       "reviewed_by": "Claude (curator)",
       "closed": "2026-10-28"
+    },
+    {
+      "entry_id": "IN-0027",
+      "received": "2026-10-28",
+      "contributor": {
+        "name": "Gottfried Schmidtke",
+        "github": "gschmidtke",
+        "with": "Claude"
+      },
+      "source": "owner: tables and chairs are separate entities and are itemized in the BOM",
+      "submitted": "Correction to nested parts in ARPL-BOM-0001",
+      "files": [],
+      "status": "filed",
+      "decision": "ARPL-BOM-0001 v1.2 (nested_parts column, Furniture own_item), ARPL-SCH-0003 rev 3 (v04), ARPL-PAR-0003 rev 3 (own ids for nested own items). Snowdon Architectural: 102 nested chairs filled with own ids, synced.",
+      "resulting_ids": [
+        "ARPL-BOM-0001",
+        "ARPL-SCH-0003",
+        "ARPL-PAR-0003"
+      ],
+      "reviewed_by": "Claude (curator)",
+      "closed": "2026-10-28"
     }
   ]
 }

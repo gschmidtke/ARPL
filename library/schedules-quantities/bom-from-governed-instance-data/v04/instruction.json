@@ -1,0 +1,4 @@
+{
+  "version": "v04",
+  "instruction": "Owner: tables and chairs are separate entities. Rule column nested_parts (with_parent / own_item), Furniture own_item; fill SNOW_UniqueId and SNOW_ElementId on the 102 nested chairs in the Architectural model (key stays the table's); export; rebuild."
+}

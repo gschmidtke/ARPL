@@ -1,6 +1,6 @@
 {
   "id": "ARPL-SCH-0003",
-  "revision": 2,
+  "revision": 3,
   "title": "BOM from governed instance data: deduplicated QTO grouped by a category rule table, every line traced to its model elements (implements ARPL-BOM-0001)",
   "use_when": [
     "A GC or estimator needs quantities to buy against from a federation that exports a standard instance-parameter schedule with instance keys",
@@ -71,6 +71,14 @@
       "revision": 2,
       "date": "2026-10-28",
       "change": "v03: curtain wall mullions by length; nested parts as named exceptions; rule codes must equal instance-key codes (IN-0026)",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ]
+    },
+    {
+      "revision": 3,
+      "date": "2026-10-28",
+      "change": "v04: nested parts own_item for Furniture (IN-0027)",
       "contributors": [
         "Gottfried Schmidtke with Claude"
       ]
