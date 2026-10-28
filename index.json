@@ -229,7 +229,7 @@
     },
     {
       "id": "ARPL-PW-0003",
-      "revision": 3,
+      "revision": 4,
       "title": "Weekly BIM coordination of a federated cloud project: collect, check, correct, report, archive",
       "level": 4,
       "context": {
@@ -303,7 +303,7 @@
         {
           "step": 8,
           "work_class": "W7",
-          "do": "Report: one dashboard page in the fixed report form (headline, tiles, recommendations, clashes, LOIN, warnings, checks, link matrix, model contents, not collected); every number drawn from the datasets, none typed",
+          "do": "Report: one dashboard page in the standard report form ARPL-RPT-0001 (report/STANDARD.md: headline, tiles, recommendations, clashes, LOIN, warnings, checks, link matrix, model contents, not collected) over its five datasets; every number drawn from the datasets, none typed",
           "packs": []
         },
         {

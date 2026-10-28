@@ -1,6 +1,6 @@
 {
   "id": "ARPL-PW-0003",
-  "revision": 3,
+  "revision": 4,
   "title": "Weekly BIM coordination of a federated cloud project: collect, check, correct, report, archive",
   "level": 4,
   "context": {
@@ -88,9 +88,9 @@
     {
       "step": 8,
       "work_class": "W7",
-      "do": "Report: one dashboard page in the fixed report form (headline, tiles, recommendations, clashes, LOIN, warnings, checks, link matrix, model contents, not collected); every number drawn from the datasets, none typed",
+      "do": "Report: one dashboard page in the standard report form ARPL-RPT-0001 (report/STANDARD.md: headline, tiles, recommendations, clashes, LOIN, warnings, checks, link matrix, model contents, not collected) over its five datasets; every number drawn from the datasets, none typed",
       "packs": [],
-      "tools": "dashboard artifact with datasets",
+      "tools": "dashboard artifact from report/template/index.html over the report/datasets/ files (standard ARPL-RPT-0001)",
       "without_tool": "any BI tool reading the same CSVs"
     },
     {
@@ -222,7 +222,7 @@
   ],
   "recorded": "2026-10-27",
   "report_form": {
-    "note": "One page, top to bottom. Every figure comes from a dataset or a calculation, never typed into the text; recommendations name owners but no numbers.",
+    "note": "One page, top to bottom. Every figure comes from a dataset or a calculation, never typed into the text; recommendations name owners but no numbers. Structure and data contract fixed as standard ARPL-RPT-0001 (report/STANDARD.md).",
     "sections": [
       "Header: project, week, baseline or trend week; one sentence with checks passed, warnings and top warning type, LOIN completeness against target, hard clashes and groups",
       "Tiles: LOIN completeness, hard clashes (with groups), warnings, checks passing, Revit links, views not on sheets, model groups",
@@ -241,6 +241,14 @@
       "warnings": "model, rank, count, message",
       "loin": "model, category, element_kind, field, instances, filled",
       "clashes": "one row per element pair: pair, disciplines, kind, group, owner, categories, family and type, levels, ids and unique ids, volume, centroid"
+    },
+    "standard": {
+      "id": "ARPL-RPT-0001",
+      "version": "1.0",
+      "spec": "report/STANDARD.md",
+      "contract": "report/report-standard.json",
+      "template": "report/template/index.html",
+      "datasets": "report/datasets/"
     }
   },
   "changelog": [
@@ -264,6 +272,14 @@
       "revision": 3,
       "date": "2026-10-28",
       "change": "Step 9 added: weekly PDF booklets via print sets, Print Intel and ACC Gate (ARPL-DOC-0003); archive becomes step 10 (IN-0018)",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ]
+    },
+    {
+      "revision": 4,
+      "date": "2026-10-28",
+      "change": "Report form fixed as standard ARPL-RPT-0001: page structure, five dataset contracts, calculations, rule checks, constants and a reference page template, from the 2026-10-27 Snowdon Towers report (IN-0019)",
       "contributors": [
         "Gottfried Schmidtke with Claude"
       ]

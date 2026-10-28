@@ -1,4 +1,4 @@
-# ARPL-PW-0003 rev 2: Weekly BIM coordination of a federated cloud project
+# ARPL-PW-0003 rev 4: Weekly BIM coordination of a federated cloud project
 
 Level 4 project workflow for the coordinator role: a sequence of packs, each step tagged with its work class and the tool used in the recorded runs. **Status: candidate, run end to end once on two projects (2026-10-27).** First runs are baselines; trend rules start with the second run.
 
@@ -13,8 +13,9 @@ Level 4 project workflow for the coordinator role: a sequence of packs, each ste
 | 5 | W8 | Clash run: open the discipline models in one session (link worksets closed), intersect the agreed category pairs, separate penetrations, group clashes, owner by routing priority; close the models unsaved. Use the cloud clash service instead where the project has one | RevitBridge run_csharp | cloud coordination service export (tracked clash groups) | ARPL-CRD-0001 |
 | 6 | W8 | Check: one dataset per source (models, links, warnings, LOIN, clashes) keyed by model or pair and week; findings per model and rule; week-over-week deltas from the second week on | report calculations | - | - |
 | 7 | W5 | Correct: safe fixes automatically (repair links to the matrix, missing building name, missing standard schedules, then sync); anything that moves geometry, changes coordinates or deletes waits for the coordinator's approval | ZEN ACC Gate (Create Cloud Links, Import Standard Schedules) or bridge | bridge scripts | ARPL-LNK-0002, ARPL-ADM-0003 |
-| 8 | W7 | Report: one dashboard page in the fixed report form (headline, tiles, recommendations, clashes, LOIN, warnings, checks, link matrix, model contents, not collected); every number drawn from the datasets, none typed | dashboard artifact with datasets | any BI tool reading the same CSVs | - |
-| 9 | W7 | Archive: keep raw outputs in REPORTS/<date>; append the week's datasets to history; submit new lessons to the ARPL inbox (Revit and ZEN alike) | - | - | - |
+| 8 | W7 | Report: one dashboard page in the standard report form ARPL-RPT-0001 (report/STANDARD.md: headline, tiles, recommendations, clashes, LOIN, warnings, checks, link matrix, model contents, not collected) over its five datasets; every number drawn from the datasets, none typed | dashboard artifact from [report/template/index.html](report/template/index.html) | any BI tool reading the same CSVs | - |
+| 9 | W6 | Print: one PDF booklet per model in the same unattended batch (ACC Gate 'Print PDFs from Print Intel workbooks'); set-up once per model: fixed print set, Print Intel workbook, PrintJobs row; check page counts against the sets and run the drift check when sheets change | Revit print dialog, ZEN Export Print Intel and ACC Gate | bridge PDF export per model with PDFExportOptions over the same print sets | ARPL-DOC-0003, ARPL-ADM-0004 |
+| 10 | W7 | Archive: keep raw outputs in REPORTS/<date>; append the week's datasets to history; submit new lessons to the ARPL inbox (Revit and ZEN alike) | - | - | - |
 
 ZEN is a custom Revit add-in (Tiverit LLC), not part of Revit. Its lessons are recorded in ARPL like Revit's (ARPL-ADM-0004) so a session can use it without relearning; every ZEN step has a bridge alternative.
 
@@ -37,6 +38,8 @@ ZEN is a custom Revit add-in (Tiverit LLC), not part of Revit. Its lessons are r
 | Registry | Every model in the cloud folder has a registry row, and the reverse | approval |
 
 ## Report form
+
+**Standard:** [ARPL-RPT-0001 v1.0](report/STANDARD.md): page structure, the five dataset contracts ([empty CSVs](report/datasets/)), calculations, rule checks and constants, machine-readable in [report-standard.json](report/report-standard.json), with a [page template](report/template/index.html) for the Dashboard artifact type. The summary below is its outline.
 
 One page, top to bottom. Every figure comes from a dataset or a calculation, never typed into the text; recommendations name owners but no numbers.
 
@@ -67,6 +70,7 @@ One page, top to bottom. Every figure comes from a dataset or a calculation, nev
 - LOIN: 6 models, 20,327 instances, 30.9% against 95%
 - Batch cloud links: 156 links in 21 min (setup week)
 - Estimate per week: 45-75 min with agent and batch tool, against 6-8 h by hand.
+- Print sets and Print Intel set-up: 6 models, 139 sheets, about 20 min once; booklets checked page for page against the sets (2026-10-28, ARPL-DOC-0003).
 
 **Guardrails:** collection is read-only; models opened for checks are closed without saving. The agent alone: collection, analysis, reporting, link repair to the matrix, missing building name, missing standard schedules, sync after a successful fix. Coordinator approval: re-placing links, applying coordinates, moving elements between worksets, purge, registering new models, any delete, closing a model the user has open. Never automated: matrix or registry rules, the authority model, anything another user has borrowed.
 

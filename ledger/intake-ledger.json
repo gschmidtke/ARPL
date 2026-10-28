@@ -436,6 +436,26 @@
       ],
       "reviewed_by": "Claude (curator)",
       "closed": "2026-10-28"
+    },
+    {
+      "entry_id": "IN-0019",
+      "received": "2026-10-28",
+      "contributor": {
+        "name": "Gottfried Schmidtke",
+        "github": "gschmidtke",
+        "with": "Claude"
+      },
+      "source": "curator session with the owner, 2026-10-28 (owner instruction: save the structure of the weekly BIM report built in an earlier session to ARPL as a standard; no inbox file)",
+      "submitted": "Weekly BIM report of 2026-10-27 for the Snowdon Towers sample (dashboard page and its five datasets)",
+      "files": [],
+      "status": "filed",
+      "decision": "Report standard ARPL-RPT-0001 v1.0 filed with ARPL-PW-0003 (raised to rev 4): STANDARD.md, report-standard.json, empty dataset CSVs (headers only) and a generalized page template. Safety: no data rows filed; project names, cloud project names and figures removed from the template (placeholders); the template is a dashboard page that reads only its own datasets, no network calls.",
+      "resulting_ids": [
+        "ARPL-RPT-0001",
+        "ARPL-PW-0003"
+      ],
+      "reviewed_by": "Claude (curator)",
+      "closed": "2026-10-28"
     }
   ]
 }

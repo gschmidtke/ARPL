@@ -1,0 +1,583 @@
+<meta name="dash-one-writer">
+<style>
+  .wr { display: grid; gap: var(--cds-gap-xl); font-family: var(--font-anthropic-sans); }
+  .wr-head { display: grid; gap: var(--cds-gap-sm); }
+  .wr-title { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); margin: 0; text-wrap: balance; }
+  .wr-meta { color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); margin: 0; }
+  .wr-take { font-size: var(--cds-font-size-body); margin: 0; max-width: 72ch; }
+  .wr-take b { font-weight: 600; font-variant-numeric: tabular-nums; }
+  .wr-tiles { display: grid; gap: var(--cds-gap-md); grid-template-columns: repeat(auto-fit, minmax(min(100%, 10rem), 1fr)); }
+  .wr-tile, .wr-card { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); min-width: 0; }
+  .wr-tile { display: grid; gap: var(--cds-gap-xs); align-content: start; }
+  .wr-tile-label { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+  .wr-tile-num { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); font-variant-numeric: tabular-nums; line-height: 1.1; }
+  .wr-tile-note { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+  .wr-recs li { margin-bottom: var(--cds-gap-sm, 0.75rem); }
+  .wr-owner { display: inline-block; margin-left: 0.4rem; padding: 0 0.45rem; border: 1px solid var(--cds-border); border-radius: 999px; font-size: var(--cds-font-size-caption); color: var(--cds-text-secondary); }
+  .wr-grid2 { display: grid; gap: var(--cds-gap-md); grid-template-columns: repeat(auto-fit, minmax(min(100%, 24rem), 1fr)); }
+  .wr-card h2 { font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); margin: 0 0 var(--cds-gap-xs); }
+  .wr-note { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); margin: 0 0 var(--cds-gap-md); max-width: 78ch; }
+  .wr-scroll { overflow-x: auto; }
+  .wr-table { border-collapse: collapse; width: 100%; font-size: var(--cds-font-size-caption); font-variant-numeric: tabular-nums; }
+  .wr-table th, .wr-table td { padding: var(--cds-pad-xs) var(--cds-pad-sm); text-align: left; border-bottom: 1px solid var(--color-border-line); white-space: nowrap; }
+  .wr-table th { color: var(--color-fg-muted); font-weight: var(--cds-font-weight-medium); }
+  .wr-table td.num, .wr-table th.num { text-align: right; }
+  .wr-chk td.st { text-align: center; }
+  .wr-pill { display: inline-block; min-width: 3.2rem; padding: 0.1rem 0.4rem; border-radius: var(--cds-radius); font-size: var(--cds-font-size-caption); text-align: center; }
+  .wr-pass { color: var(--color-ok); }
+  .wr-fail { color: var(--color-bad); font-weight: 600; }
+  .wr-nc { color: var(--color-fg-muted); }
+  .wr-chart { position: relative; min-height: 16rem; }
+  .wr-heat { position: relative; min-height: 16rem; }
+  .wr-tip { position: absolute; pointer-events: none; background: var(--cds-surface-popover); border: 1px solid var(--cds-border); border-radius: var(--cds-radius); box-shadow: var(--cds-shadow-popover); padding: var(--cds-pad-xs) var(--cds-pad-sm); font-size: var(--cds-font-size-caption); max-width: 22rem; white-space: normal; }
+  .wr-legend { display: flex; flex-wrap: wrap; gap: var(--cds-gap-md); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); margin-top: var(--cds-gap-sm); }
+  .wr-sw { display: inline-block; width: 0.7rem; height: 0.7rem; border-radius: 2px; vertical-align: -1px; margin-right: 0.3rem; }
+  .wr-list { margin: 0; padding-left: 1.1rem; display: grid; gap: var(--cds-gap-xs); font-size: var(--cds-font-size-body); }
+  .wr-list li { max-width: 78ch; }
+  [data-dash-source-state=empty] { color: transparent; }
+  [data-dash-source-state=refreshing] { opacity: .5; transition: opacity var(--cds-dur-slow); }
+</style>
+
+<div class="wr">
+  <header class="wr-head">
+    <h1 class="wr-title">{{PROJECT}} weekly BIM report</h1>
+    <p class="wr-meta">Week of {{WEEK}} · {{BASELINE_OR_TREND}} · {{SCOPE}}</p>
+    <p class="wr-take"><b data-draw="t-passed" data-source="summary" data-field="checks_passed">—</b> of <b data-draw="t-checks" data-source="summary" data-field="checks_total">—</b> rule checks pass across <b data-draw="t-models" data-source="summary" data-field="models">—</b> models. The models carry <b data-draw="t-warn" data-source="summary" data-field="warnings">—</b> warnings; the largest single type is <b data-draw="t-toptype" data-source="warning_types">—</b> (<b data-draw="t-topcount" data-source="warning_types">—</b> instances). LOIN completeness, measured on the INSTANCE PARAMETERS schedule, stands at <b data-draw="t-loin" data-source="loin_summary" data-field="completeness">—</b> against a <b data-draw="t-target">—</b> target. The clash run finds <b data-draw="t-clash" data-source="clash_summary" data-field="clashes">—</b> hard clashes in <b data-draw="t-groups" data-source="clash_summary" data-field="groups">—</b> groups.</p>
+  </header>
+
+  <section class="wr-tiles" aria-label="Headline figures">
+    <div class="wr-tile"><span class="wr-tile-label">LOIN completeness</span><span class="wr-tile-num" data-draw="k-loin" data-source="loin_summary" data-field="completeness">—</span><span class="wr-tile-note">Filled ÷ required fields, family elements</span></div>
+    <div class="wr-tile"><span class="wr-tile-label">Hard clashes</span><span class="wr-tile-num" data-draw="k-clash" data-source="clash_summary" data-field="clashes">—</span><span class="wr-tile-note">In <span data-draw="k-cgroups" data-source="clash_summary" data-field="groups">—</span> groups; planned ceiling penetrations excluded</span></div>
+    <div class="wr-tile"><span class="wr-tile-label">Warnings</span><span class="wr-tile-num" data-draw="k-warn" data-source="summary" data-field="warnings">—</span><span class="wr-tile-note">Total across all models</span></div>
+    <div class="wr-tile"><span class="wr-tile-label">Checks passing</span><span class="wr-tile-num" data-draw="k-share" data-source="summary" data-field="pass_share">—</span><span class="wr-tile-note">Pass ÷ checks run; warnings rule starts next week</span></div>
+    <div class="wr-tile"><span class="wr-tile-label">Revit links</span><span class="wr-tile-num" data-draw="k-links" data-source="summary" data-field="links">—</span><span class="wr-tile-note">Link instances across all hosts</span></div>
+    <div class="wr-tile"><span class="wr-tile-label">Views not on sheets</span><span class="wr-tile-num" data-draw="k-vnos" data-source="summary" data-field="views_not_on_sheets">—</span><span class="wr-tile-note">Total across all models</span></div>
+    <div class="wr-tile"><span class="wr-tile-label">Model groups</span><span class="wr-tile-num" data-draw="k-groups" data-source="summary" data-field="model_groups">—</span><span class="wr-tile-note">Total across all models</span></div>
+  </section>
+
+  <section class="wr-card" id="recommendations">
+    <h2>Recommendations for the team</h2>
+    <p class="wr-note">Ordered by impact on coordination and on the client's LOIN view. Figures behind each item are in the sections below.</p>
+    <ol class="wr-list wr-recs">
+      <!-- One item per recommendation, ordered by impact. Each: bold finding, owning team, one or two sentences of action. No figures in the text: they are in the sections below. Recurring causes first (one decision that clears many items). -->
+      <li><b>{{FINDING}}</b> <span class="wr-owner">{{OWNING_TEAM}}</span><br>{{ACTION}}</li>
+    </ol>
+  </section>
+
+  <div class="wr-grid2">
+    <section class="wr-card" id="clash-pairs">
+      <h2>Hard clashes by discipline pair</h2>
+      <p class="wr-note">Clash run in Revit across the agreed pairs: ducts, pipes and conduits against structural framing and columns, against each other, and against ceilings. Vertical runs through a ceiling count as planned penetrations, not clashes.</p>
+      <div class="wr-chart" data-draw="clashpairs" data-source="clash_pairs"></div>
+    </section>
+    <section class="wr-card" id="clash-owners">
+      <h2>Clashes by team that moves</h2>
+      <p class="wr-note">Routing priority decides who moves: structure and ceilings stay, then gravity drainage, ducts, pressure pipes, and conduits last.</p>
+      <div class="wr-chart" data-draw="clashowners" data-source="clash_owners"></div>
+    </section>
+  </div>
+
+  <section class="wr-card" id="clash-groups">
+    <h2>Largest clash groups</h2>
+    <p class="wr-note">A group joins clashes that share an element, so one ceiling crossed by many conduits counts as one coordination issue. Element ids let each team find the group in Revit.</p>
+    <div class="wr-scroll">
+      <table class="wr-table" data-source="clash_groups" data-row-key="group">
+        <thead><tr>
+          <th data-field="group">Group</th>
+          <th data-field="pair">Pair</th>
+          <th data-field="level">Level</th>
+          <th data-field="owner">Moves</th>
+          <th data-field="element">Main element</th>
+          <th class="num" data-field="clashes">Clashes</th>
+        </tr></thead>
+        <tbody data-draw="clashgroups"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="wr-card" id="loin">
+    <h2>LOIN completeness by model and field</h2>
+    <p class="wr-note">Share of element instances with each information field filled, from the INSTANCE PARAMETERS schedule exported per model. Every information column in the schedule counts as required (Description and Type Mark; Structural also _Height and _Width). Circuits, systems and analytical elements carry no family and are listed separately, not counted.</p>
+    <div class="wr-chart" data-draw="loin-grid" data-source="loin_by_model"></div>
+  </section>
+
+  <section class="wr-card" id="loin-gaps">
+    <h2>Largest LOIN gaps by category</h2>
+    <p class="wr-note">Family-element categories ranked by missing values (instances × unfilled fields). These are where filling information moves completeness most.</p>
+    <div class="wr-scroll">
+      <table class="wr-table" data-source="loin_by_category" data-row-key="model,category">
+        <thead><tr>
+          <th data-field="model">Model</th>
+          <th data-field="category">Category</th>
+          <th class="num" data-field="instances">Instances</th>
+          <th class="num" data-field="description_fill">Description</th>
+          <th class="num" data-field="type_mark_fill">Type Mark</th>
+          <th class="num" data-field="missing">Missing values</th>
+        </tr></thead>
+        <tbody data-draw="loin-cats"></tbody>
+      </table>
+    </div>
+    <p class="wr-note">Not counted as LOIN: <b data-draw="t-sys" data-source="loin_summary" data-field="system_instances">—</b> circuit, system and analytical instances without a family.</p>
+  </section>
+
+  <div class="wr-grid2">
+    <section class="wr-card" id="warning-types">
+      <h2>Warnings by type</h2>
+      <p class="wr-note">The top five warning types per model from the ZEN health check, combined across the project. Hover a bar for the full message and the models it comes from.</p>
+      <div class="wr-chart" data-draw="types" data-source="warning_types"></div>
+    </section>
+    <section class="wr-card" id="warnings-by-model">
+      <h2>Warnings by model</h2>
+      <p class="wr-note">Total warnings per discipline model. Next week this becomes the week-over-week comparison.</p>
+      <div class="wr-chart" data-draw="bymodel" data-source="models"></div>
+    </section>
+  </div>
+
+  <section class="wr-card" id="checks">
+    <h2>Rule checks by model</h2>
+    <p class="wr-note">One row per model, one column per rule from the coordination routine. Coordinates are compared with <span data-draw="auth">—</span> (assumed authority: no coordinate authority is recorded for this project; tolerance <span data-draw="tol">—</span> ft). The warnings rule compares with the previous week, so it starts next week.</p>
+    <div class="wr-scroll">
+      <table class="wr-table wr-chk" data-source="findings" data-row-key="model">
+        <thead><tr>
+          <th data-field="model">Model</th>
+          <th data-field="links_complete">Links complete</th>
+          <th data-field="links_workset">Link worksets</th>
+          <th data-field="links_in_place">Links in place</th>
+          <th data-field="coordinates">Coordinates</th>
+          <th data-field="identity">Model identity</th>
+          <th data-field="standards">Standard schedules</th>
+          <th data-field="loin">LOIN ≥ target</th>
+          <th data-field="warnings">Warnings trend</th>
+          <th data-field="health">Health data</th>
+        </tr></thead>
+        <tbody data-draw="checks"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <div class="wr-grid2">
+    <section class="wr-card" id="links">
+      <h2>Link matrix, host by linked model</h2>
+      <p class="wr-note">Each cell is one link instance, colored by its workset; every link was read with an identity transform. The link matrix places these links origin to origin (shared coordinates off), which holds only while all models keep one shared position.</p>
+      <div class="wr-heat" data-draw="heat" data-source="links"></div>
+      <div class="wr-legend">
+        <span><span class="wr-sw" data-draw="sw-ok"></span>On own workset, in place</span>
+        <span><span class="wr-sw" data-draw="sw-bad"></span>Wrong workset or moved</span>
+      </div>
+    </section>
+
+    <section class="wr-card" id="models">
+      <h2>Model contents</h2>
+      <p class="wr-note">From the ZEN health check of each model.</p>
+      <div class="wr-scroll">
+        <table class="wr-table" data-source="models" data-row-key="model">
+          <thead><tr>
+            <th data-field="model">Model</th>
+            <th class="num" data-field="views">Views</th>
+            <th class="num" data-field="views_not_on_sheets">Not on sheets</th>
+            <th class="num" data-field="sheets">Sheets</th>
+            <th class="num" data-field="model_groups">Model groups</th>
+            <th class="num" data-field="detail_groups">Detail groups</th>
+            <th class="num" data-field="in_place_families">In-place</th>
+            <th class="num" data-field="design_options">Design options</th>
+            <th class="num" data-field="raster_images">Images</th>
+          </tr></thead>
+          <tbody data-draw="models"></tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+
+  <section class="wr-card" id="gaps">
+    <h2>Not collected this week</h2>
+    <ul class="wr-list">
+      <!-- One item per source or rule that did not run this week, and why. Typical standing items below; delete what does not apply. -->
+      <li>Cloud file size and version: needs APS credentials in ZEN for Refresh Sizes; the health check reports n/a for cloud models.</li>
+      <li>Warnings beyond each model's top five types: the health check lists five types per model.</li>
+      <li>LOIN requirements per category: {{LOIN_BASIS}}.</li>
+      <li>Clashes: {{CLASH_SCOPE}}.</li>
+      <li>Coordinate authority: {{AUTHORITY_MODEL_KEY}}{{AUTHORITY_NOTE}}.</li>
+    </ul>
+  </section>
+</div>
+
+<script>
+  const AUTHORITY = '{{AUTHORITY_MODEL_KEY}}';
+  const TOL_FT = 0.01;
+  const LOIN_TARGET = 0.95;
+  dash.draw('t-target', (el) => { el.textContent = d3.format('.0%')(LOIN_TARGET); });
+  dash.draw('auth', (el) => { el.textContent = AUTHORITY; });
+  dash.draw('tol', (el) => { el.textContent = String(TOL_FT); });
+
+  dash.calc('loin_by_model', {
+    inputs: ['loin'],
+    title: 'LOIN fill by model and field',
+    description: 'Filled ÷ instances per model and information field, family elements only.',
+    fn: (loin) => {
+      const by = new Map();
+      loin.filter((r) => r.element_kind === 'family element').forEach((r) => {
+        const k = r.model + '|' + r.field; const e = by.get(k) || { model: r.model, field: r.field, instances: 0, filled: 0 };
+        e.instances += Number(r.instances); e.filled += Number(r.filled); by.set(k, e);
+      });
+      return Array.from(by.values()).map((e) => ({ ...e, fill: e.instances ? e.filled / e.instances : null }));
+    }
+  });
+
+  dash.calc('loin_by_category', {
+    inputs: ['loin'],
+    title: 'LOIN gaps by category',
+    description: 'Per model and category: fill of Description and Type Mark and the count of missing values, family elements only, largest gaps first.',
+    fn: (loin) => {
+      const by = new Map();
+      loin.filter((r) => r.element_kind === 'family element').forEach((r) => {
+        const k = r.model + '|' + r.category; const e = by.get(k) || { model: r.model, category: r.category, instances: Number(r.instances), description_fill: null, type_mark_fill: null, missing: 0 };
+        const fill = Number(r.filled) / Number(r.instances);
+        if (r.field === 'Description') e.description_fill = fill; if (r.field === 'Type Mark') e.type_mark_fill = fill;
+        e.missing += Number(r.instances) - Number(r.filled); by.set(k, e);
+      });
+      return Array.from(by.values()).sort((a, b) => b.missing - a.missing).slice(0, 15);
+    }
+  });
+
+  dash.calc('loin_summary', {
+    inputs: ['loin'],
+    title: 'LOIN completeness',
+    description: 'Filled ÷ required field values over all family-element instances; system and analytical instances counted separately.',
+    fn: (loin) => {
+      let req = 0, filled = 0; const sys = new Set(); let sysInst = 0;
+      loin.forEach((r) => {
+        if (r.element_kind === 'family element') { req += Number(r.instances); filled += Number(r.filled); }
+        else if (r.field === 'Description') { sysInst += Number(r.instances); }
+      });
+      return [{ completeness: req ? filled / req : null, required_values: req, filled_values: filled, system_instances: sysInst }];
+    }
+  });
+
+  dash.calc('clash_summary', {
+    inputs: ['clashes'],
+    title: 'Clash totals',
+    description: 'Hard clashes and clash groups (kind clash), and planned penetrations (vertical runs through ceilings) counted separately.',
+    fn: (clashes) => {
+      const hard = clashes.filter((r) => r.kind === 'clash');
+      return [{ clashes: hard.length, groups: new Set(hard.map((r) => r.group)).size, penetrations: clashes.length - hard.length }];
+    }
+  });
+
+  dash.calc('clash_pairs', {
+    inputs: ['clashes'],
+    title: 'Clashes by discipline pair',
+    description: 'Hard clashes and groups per discipline pair, largest first.',
+    fn: (clashes) => {
+      const by = new Map();
+      clashes.filter((r) => r.kind === 'clash').forEach((r) => {
+        const k = r.discipline_a + ' × ' + r.discipline_b; const e = by.get(k) || { pair: k, clashes: 0, groups: new Set() };
+        e.clashes += 1; e.groups.add(r.group); by.set(k, e);
+      });
+      return Array.from(by.values()).map((e) => ({ pair: e.pair, clashes: e.clashes, groups: e.groups.size })).sort((a, b) => b.clashes - a.clashes);
+    }
+  });
+
+  dash.calc('clash_owners', {
+    inputs: ['clashes'],
+    title: 'Clashes by team that moves',
+    description: 'Hard clashes and groups per owning discipline (the lower routing priority moves).',
+    fn: (clashes) => {
+      const by = new Map();
+      clashes.filter((r) => r.kind === 'clash').forEach((r) => {
+        const e = by.get(r.owner) || { owner: r.owner, clashes: 0, groups: new Set() };
+        e.clashes += 1; e.groups.add(r.group); by.set(r.owner, e);
+      });
+      return Array.from(by.values()).map((e) => ({ owner: e.owner, clashes: e.clashes, groups: e.groups.size })).sort((a, b) => b.clashes - a.clashes);
+    }
+  });
+
+  dash.calc('clash_groups', {
+    inputs: ['clashes'],
+    title: 'Largest clash groups',
+    description: 'Clash groups ranked by number of clashes; level, owner and most frequent element per group.',
+    fn: (clashes) => {
+      const by = new Map();
+      clashes.filter((r) => r.kind === 'clash').forEach((r) => {
+        const e = by.get(r.group) || { group: r.group, pairs: new Set(), levels: new Map(), owners: new Map(), els: new Map(), clashes: 0 };
+        e.clashes += 1; e.pairs.add(r.discipline_a + ' × ' + r.discipline_b);
+        const inc = (m, k) => m.set(k, (m.get(k) || 0) + 1);
+        inc(e.levels, r.level_a || r.level_b); inc(e.owners, r.owner);
+        inc(e.els, r.category_b + ' ' + r.family_type_b + ' (id ' + r.id_b + ')');
+        by.set(r.group, e);
+      });
+      const top = (m) => Array.from(m.entries()).sort((a, b) => b[1] - a[1])[0][0];
+      return Array.from(by.values()).sort((a, b) => b.clashes - a.clashes).slice(0, 12)
+        .map((e) => ({ group: e.group, pair: Array.from(e.pairs).join(', '), level: top(e.levels), owner: top(e.owners), element: top(e.els), clashes: e.clashes }));
+    }
+  });
+
+  dash.calc('findings', {
+    inputs: ['models', 'loin_by_model'],
+    title: 'Rule checks per model',
+    description: 'Pass or fail per model for each coordination rule, from the weekly model snapshot; coordinates against the assumed authority (architecture).',
+    fn: (models, loin_by_model) => {
+      const AUTH = '{{AUTHORITY_MODEL_KEY}}', TOL = 0.01, TARGET = 0.95;
+      const loinOf = (key) => { const rs = loin_by_model.filter((r) => r.model === key); const i = rs.reduce((s, r) => s + r.instances, 0); return i ? rs.reduce((s, r) => s + r.filled, 0) / i : null; };
+      const num = (v) => (v === '' || v == null ? null : Number(v));
+      const auth = models.find((m) => m.model === AUTH);
+      const n = models.length;
+      const pf = (ok) => (ok ? 'pass' : 'fail');
+      return models.map((m) => {
+        const links = num(m.revit_links);
+        return {
+          model: m.model,
+          links_complete: pf(links === n - 1),
+          links_workset: pf(num(m.links_on_own_workset) === links),
+          links_in_place: pf(num(m.links_in_place) === links),
+          coordinates: pf(!!auth && Math.abs(num(m.shared_ew_ft) - num(auth.shared_ew_ft)) <= TOL && Math.abs(num(m.shared_ns_ft) - num(auth.shared_ns_ft)) <= TOL && Math.abs(num(m.angle_deg) - num(auth.angle_deg)) < 0.001),
+          identity: pf(m.building_name === m.model),
+          standards: pf(m.has_instance_parameters === 'yes' && m.has_sheet_list === 'yes'),
+          loin: loinOf(m.model) == null ? 'n/c' : pf(loinOf(m.model) >= TARGET),
+          warnings: 'baseline',
+          health: m.in_health_run === 'yes' ? 'pass' : 'n/c'
+        };
+      });
+    }
+  });
+
+  dash.calc('summary', {
+    inputs: ['models', 'findings'],
+    title: 'Weekly summary',
+    description: 'Totals for the headline figures and checks passed of checks run (baseline entries are not counted).',
+    fn: (models, findings) => {
+      const rules = ['links_complete', 'links_workset', 'links_in_place', 'coordinates', 'identity', 'standards', 'loin', 'warnings', 'health'];
+      let passed = 0, failed = 0;
+      findings.forEach((f) => rules.forEach((r) => { if (f[r] === 'pass') passed++; else if (f[r] === 'fail') failed++; }));
+      const sum = (col) => models.reduce((s, m) => s + (m[col] === '' ? 0 : Number(m[col])), 0);
+      return [{ models: models.length, links: sum('revit_links'), warnings: sum('warnings'), views_not_on_sheets: sum('views_not_on_sheets'), model_groups: sum('model_groups'),
+        checks_passed: passed, checks_failed: failed, checks_total: passed + failed, pass_share: passed + failed ? passed / (passed + failed) : null }];
+    }
+  });
+
+  dash.calc('warning_types', {
+    inputs: ['warnings'],
+    title: 'Warnings by type',
+    description: 'Top-five warning rows of every model, combined by message text and sorted by count.',
+    fn: (warnings) => {
+      const by = new Map();
+      warnings.forEach((w) => {
+        const key = w.message.replace(/^(.+?) \d+: /, '$1 <n>: ');
+        const e = by.get(key) || { message: key, count: 0, models: [] };
+        e.count += Number(w.count); e.models.push(w.model.replace('{{MODEL_KEY_PREFIX}}', '').trim() + ' ' + w.count);
+        by.set(key, e);
+      });
+      return Array.from(by.values()).map((e) => ({ message: e.message, count: e.count, models: e.models.join(', ') })).sort((a, b) => b.count - a.count);
+    }
+  });
+
+  const fmt = d3.format(',');
+  const shortMsg = (s, n) => (s.length > n ? s.slice(0, n - 1).trimEnd() + '…' : s);
+  const sumField = (field, f) => (el) => {
+    const s = dash.data('summary');
+    if (s.status !== 'ok' || !s.data.length) { el.textContent = '—'; el.classList.add('dash-skeleton'); return; }
+    el.classList.remove('dash-skeleton'); el.textContent = f(s.data[0][field]);
+  };
+  dash.draw('t-passed', sumField('checks_passed', fmt));
+  dash.draw('t-checks', sumField('checks_total', fmt));
+  dash.draw('t-models', sumField('models', fmt));
+  dash.draw('t-warn', sumField('warnings', fmt));
+  dash.draw('k-warn', sumField('warnings', fmt));
+  dash.draw('k-share', sumField('pass_share', d3.format('.0%')));
+  dash.draw('k-links', sumField('links', fmt));
+  dash.draw('k-vnos', sumField('views_not_on_sheets', fmt));
+  dash.draw('k-groups', sumField('model_groups', fmt));
+  const topType = (f) => (el) => {
+    const t = dash.data('warning_types');
+    if (t.status !== 'ok' || !t.data.length) { el.textContent = '—'; return; }
+    el.textContent = f(t.data[0]);
+  };
+  dash.draw('t-toptype', topType((r) => shortMsg(r.message, 70)));
+  dash.draw('t-topcount', topType((r) => fmt(r.count)));
+
+  const RULES = ['links_complete', 'links_workset', 'links_in_place', 'coordinates', 'identity', 'standards', 'loin', 'warnings', 'health'];
+  dash.draw('checks', (tb) => {
+    const f = dash.data('findings');
+    tb.replaceChildren();
+    if (f.status !== 'ok') return;
+    f.data.forEach((r) => {
+      const tr = document.createElement('tr');
+      const k = document.createElement('td'); k.textContent = r.model; tr.appendChild(k);
+      RULES.forEach((c) => {
+        const td = document.createElement('td'); td.className = 'st';
+        const sp = document.createElement('span');
+        sp.className = 'wr-pill ' + (r[c] === 'pass' ? 'wr-pass' : r[c] === 'fail' ? 'wr-fail' : 'wr-nc');
+        sp.textContent = r[c];
+        td.appendChild(sp); tr.appendChild(td);
+      });
+      tb.appendChild(tr);
+    });
+  });
+
+  const MCOLS = ['views', 'views_not_on_sheets', 'sheets', 'model_groups', 'detail_groups', 'in_place_families', 'design_options', 'raster_images'];
+  dash.draw('models', (tb) => {
+    const m = dash.data('models');
+    tb.replaceChildren();
+    if (m.status !== 'ok') return;
+    m.data.forEach((r) => {
+      const tr = document.createElement('tr');
+      const k = document.createElement('td'); k.textContent = r.model; tr.appendChild(k);
+      MCOLS.forEach((c) => { const td = document.createElement('td'); td.className = 'num'; td.textContent = r[c] === '' ? '' : fmt(Number(r[c])); tr.appendChild(td); });
+      tb.appendChild(tr);
+    });
+  });
+
+  const css = (name) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+  const short = (s) => s.replace('{{MODEL_KEY_PREFIX}}', '').trim();
+  dash.draw('sw-ok', (el) => { el.style.background = dash.colors[0]; });
+  dash.draw('sw-bad', (el) => { el.style.background = css('--cds-chart-status-critical') || 'currentColor'; });
+
+  function tipAt(box, tip, ev) {
+    const bb = box.getBoundingClientRect();
+    let left = ev.clientX - bb.left + 12; const top = ev.clientY - bb.top + 12;
+    if (left + tip.offsetWidth > bb.width) left = ev.clientX - bb.left - tip.offsetWidth - 12;
+    tip.style.left = Math.max(0, left) + 'px'; tip.style.top = top + 'px';
+  }
+
+  function hbars(box, rows, label, value, accentFirst, hoverLines) {
+    const W = Math.max(280, box.clientWidth);
+    const rowH = 26, m = { t: 4, r: 44, b: 4, l: 8 };
+    const H = rows.length * rowH + m.t + m.b;
+    const svg = d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img');
+    const muted = css('--color-fg-muted'), fg = css('--color-fg');
+    const labelW = Math.min(W * 0.55, 300);
+    const x = d3.scaleLinear([0, d3.max(rows, value) || 1], [0, W - m.l - labelW - m.r]);
+    const g = svg.append('g').attr('transform', `translate(${m.l},${m.t})`);
+    const tip = document.createElement('div'); tip.className = 'wr-tip'; tip.hidden = true; box.appendChild(tip);
+    const row = g.selectAll('g.r').data(rows).join('g').attr('class', 'r').attr('transform', (d, i) => `translate(0,${i * rowH})`);
+    row.append('text').attr('x', 0).attr('y', rowH / 2).attr('dy', '0.35em').attr('font-size', 11).attr('fill', fg).text((d) => shortMsg(label(d), Math.floor(labelW / 6.2)));
+    row.append('rect').attr('x', labelW).attr('y', 5).attr('height', rowH - 10).attr('rx', 2)
+      .attr('width', (d) => Math.max(1, x(value(d))))
+      .attr('fill', (d, i) => (accentFirst && i === 0 ? dash.colors[0] : css('--cds-chart-muted') || muted));
+    row.append('text').attr('x', (d) => labelW + x(value(d)) + 4).attr('y', rowH / 2).attr('dy', '0.35em').attr('font-size', 11).attr('fill', muted).text((d) => fmt(value(d)));
+    row.on('mousemove', (ev, d) => {
+      tip.hidden = false; tip.replaceChildren();
+      hoverLines(d).forEach((t, i) => { const div = document.createElement('div'); if (i === 0) div.style.color = 'var(--cds-text-secondary)'; div.textContent = t; tip.appendChild(div); });
+      tipAt(box, tip, ev);
+    }).on('mouseleave', () => { tip.hidden = true; });
+  }
+
+  dash.draw('types', (box) => {
+    const t = dash.data('warning_types');
+    box.replaceChildren();
+    if (t.status !== 'ok') return;
+    hbars(box, t.data, (d) => d.message, (d) => d.count, true, (d) => [d.message, `${fmt(d.count)} instances · ${d.models}`]);
+  });
+
+  dash.draw('bymodel', (box) => {
+    const m = dash.data('models');
+    box.replaceChildren();
+    if (m.status !== 'ok') return;
+    const rows = m.data.map((r) => ({ model: r.model, discipline: r.discipline, w: Number(r.warnings) })).sort((a, b) => b.w - a.w);
+    hbars(box, rows, (d) => d.discipline, (d) => d.w, true, (d) => [d.model, `${fmt(d.w)} warnings`]);
+  });
+
+  dash.draw('heat', (box) => {
+    const L = dash.data('links');
+    box.replaceChildren();
+    if (L.status !== 'ok') return;
+    const rows = L.data;
+    const names = Array.from(new Set(rows.flatMap((r) => [r.host, r.link]))).sort();
+    const W = Math.max(280, box.clientWidth);
+    const m = { l: 92, t: 30, r: 4, b: 4 };
+    const size = Math.min(W - m.l - m.r, 360);
+    const x = d3.scaleBand(names, [0, size]).padding(0.1);
+    const y = d3.scaleBand(names, [0, size]).padding(0.1);
+    const svg = d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${size + m.l + m.r} ${size + m.t + m.b}`).attr('role', 'img').attr('aria-label', 'Link matrix, host by linked model');
+    const g = svg.append('g').attr('transform', `translate(${m.l},${m.t})`);
+    const muted = css('--color-fg-muted');
+    const abbr = (s) => short(s).slice(0, 4);
+    g.selectAll('text.cx').data(names).join('text').attr('class', 'cx').attr('x', (d) => x(d) + x.bandwidth() / 2).attr('y', -8).attr('text-anchor', 'middle').attr('font-size', 10).attr('fill', muted).text(abbr);
+    g.selectAll('text.ry').data(names).join('text').attr('class', 'ry').attr('x', -6).attr('y', (d) => y(d) + y.bandwidth() / 2).attr('dy', '0.35em').attr('text-anchor', 'end').attr('font-size', 10).attr('fill', muted).text(short);
+    g.selectAll('rect.diag').data(names).join('rect').attr('class', 'diag').attr('x', (d) => x(d)).attr('y', (d) => y(d)).attr('width', x.bandwidth()).attr('height', y.bandwidth()).attr('rx', 2).attr('fill', 'none').attr('stroke', css('--cds-chart-grid') || muted).attr('stroke-dasharray', '2 2');
+    const bad = css('--cds-chart-status-critical');
+    const tip = document.createElement('div'); tip.className = 'wr-tip'; tip.hidden = true; box.appendChild(tip);
+    g.selectAll('rect.cell').data(rows).join('rect').attr('class', 'cell')
+      .attr('x', (r) => x(r.link)).attr('y', (r) => y(r.host)).attr('width', x.bandwidth()).attr('height', y.bandwidth()).attr('rx', 2)
+      .attr('fill', (r) => (r.workset_ok === 'yes' && r.placement === 'identity transform' ? dash.colors[0] : bad))
+      .on('mousemove', (ev, r) => {
+        tip.hidden = false; tip.replaceChildren();
+        const a = document.createElement('div'); a.style.color = 'var(--cds-text-secondary)'; a.textContent = `${short(r.host)} → ${short(r.link)}`;
+        const b = document.createElement('div'); b.textContent = `${r.workset} · ${r.placement}`;
+        tip.append(a, b); tipAt(box, tip, ev);
+      })
+      .on('mouseleave', () => { tip.hidden = true; });
+  });
+
+  const loinField = (field, f) => (el) => {
+    const s = dash.data('loin_summary');
+    if (s.status !== 'ok' || !s.data.length) { el.textContent = '—'; el.classList.add('dash-skeleton'); return; }
+    el.classList.remove('dash-skeleton'); el.textContent = f(s.data[0][field]);
+  };
+  const pct = d3.format('.1%');
+  dash.draw('t-loin', loinField('completeness', pct));
+  dash.draw('k-loin', loinField('completeness', pct));
+  dash.draw('t-sys', loinField('system_instances', fmt));
+
+  dash.draw('loin-cats', (tb) => {
+    const c = dash.data('loin_by_category');
+    tb.replaceChildren();
+    if (c.status !== 'ok') return;
+    c.data.forEach((r) => {
+      const tr = document.createElement('tr');
+      [r.model, r.category].forEach((v) => { const td = document.createElement('td'); td.textContent = v; tr.appendChild(td); });
+      [fmt(r.instances), r.description_fill == null ? '' : pct(r.description_fill), r.type_mark_fill == null ? '' : pct(r.type_mark_fill), fmt(r.missing)].forEach((v) => { const td = document.createElement('td'); td.className = 'num'; td.textContent = v; tr.appendChild(td); });
+      tb.appendChild(tr);
+    });
+  });
+
+  dash.draw('loin-grid', (box) => {
+    const L = dash.data('loin_by_model');
+    box.replaceChildren();
+    if (L.status !== 'ok') return;
+    const rows = L.data;
+    const models = Array.from(new Set(rows.map((r) => r.model)));
+    const fields = Array.from(new Set(rows.map((r) => r.field)));
+    const W = Math.max(280, box.clientWidth);
+    const m = { l: 96, t: 24, r: 8, b: 4 };
+    const cw = Math.min(140, (W - m.l - m.r) / fields.length), ch = 30;
+    const svg = d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${m.l + cw * fields.length + m.r} ${m.t + ch * models.length + m.b}`).attr('role', 'img').attr('aria-label', 'LOIN completeness by model and field');
+    const g = svg.append('g').attr('transform', `translate(${m.l},${m.t})`);
+    const muted = css('--color-fg-muted'), fg = css('--color-fg');
+    const bad = css('--cds-chart-status-critical'), good = css('--cds-chart-status-good');
+    const col = d3.interpolateRgb(bad || '#c33', good || '#3a3');
+    g.selectAll('text.f').data(fields).join('text').attr('class', 'f').attr('x', (d, i) => i * cw + cw / 2).attr('y', -8).attr('text-anchor', 'middle').attr('font-size', 11).attr('fill', muted).text((d) => d);
+    g.selectAll('text.m').data(models).join('text').attr('class', 'm').attr('x', -6).attr('y', (d, i) => i * ch + ch / 2).attr('dy', '0.35em').attr('text-anchor', 'end').attr('font-size', 11).attr('fill', muted).text(short);
+    const tip = document.createElement('div'); tip.className = 'wr-tip'; tip.hidden = true; box.appendChild(tip);
+    const cell = g.selectAll('g.c').data(rows).join('g').attr('class', 'c').attr('transform', (r) => `translate(${fields.indexOf(r.field) * cw},${models.indexOf(r.model) * ch})`);
+    cell.append('rect').attr('x', 2).attr('y', 2).attr('width', cw - 4).attr('height', ch - 4).attr('rx', 3).attr('fill', (r) => col(r.fill)).attr('fill-opacity', 0.35);
+    cell.append('text').attr('x', cw / 2).attr('y', ch / 2).attr('dy', '0.35em').attr('text-anchor', 'middle').attr('font-size', 11).attr('fill', fg).text((r) => pct(r.fill));
+    cell.on('mousemove', (ev, r) => { tip.hidden = false; tip.replaceChildren(); const a = document.createElement('div'); a.style.color = 'var(--cds-text-secondary)'; a.textContent = `${r.model} · ${r.field}`; const b = document.createElement('div'); b.textContent = `${fmt(r.filled)} of ${fmt(r.instances)} filled`; tip.append(a, b); tipAt(box, tip, ev); }).on('mouseleave', () => { tip.hidden = true; });
+  });
+
+  const srcField = (src, field, f) => (el) => {
+    const s = dash.data(src);
+    if (s.status !== 'ok' || !s.data.length) { el.textContent = '—'; el.classList.add('dash-skeleton'); return; }
+    el.classList.remove('dash-skeleton'); el.textContent = f(s.data[0][field]);
+  };
+  dash.draw('t-clash', srcField('clash_summary', 'clashes', fmt));
+  dash.draw('t-groups', srcField('clash_summary', 'groups', fmt));
+  dash.draw('k-clash', srcField('clash_summary', 'clashes', fmt));
+  dash.draw('k-cgroups', srcField('clash_summary', 'groups', fmt));
+  dash.draw('clashpairs', (box) => {
+    const c = dash.data('clash_pairs'); box.replaceChildren(); if (c.status !== 'ok') return;
+    hbars(box, c.data, (d) => d.pair, (d) => d.clashes, true, (d) => [d.pair, `${fmt(d.clashes)} clashes in ${fmt(d.groups)} groups`]);
+  });
+  dash.draw('clashowners', (box) => {
+    const c = dash.data('clash_owners'); box.replaceChildren(); if (c.status !== 'ok') return;
+    hbars(box, c.data, (d) => d.owner, (d) => d.clashes, true, (d) => [d.owner, `${fmt(d.clashes)} clashes in ${fmt(d.groups)} groups`]);
+  });
+  dash.draw('clashgroups', (tb) => {
+    const c = dash.data('clash_groups'); tb.replaceChildren(); if (c.status !== 'ok') return;
+    c.data.forEach((r) => {
+      const tr = document.createElement('tr');
+      [r.group, r.pair, r.level, r.owner, r.element].forEach((v) => { const td = document.createElement('td'); td.textContent = v; tr.appendChild(td); });
+      const td = document.createElement('td'); td.className = 'num'; td.textContent = fmt(r.clashes); tr.appendChild(td);
+      tb.appendChild(tr);
+    });
+  });
+</script>
