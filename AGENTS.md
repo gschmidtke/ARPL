@@ -19,7 +19,7 @@ If the evidence leaves the frame open (is this connector power, data or audio?),
 
 ## 1. Before you act: look it up
 
-1. Fetch the index (one file, about 200 KB):
+1. Fetch the index (one file, about 75 KB: one line per pack, workflow and failure pattern; rules and full texts stay in the pack files):
    `https://raw.githubusercontent.com/gschmidtke/ARPL/main/index.json`
 2. Describe the task in ARPL terms, using the frame you established in step 0:
    - **work class** W1–W8 (what drives the result; listed in the index);
@@ -28,7 +28,7 @@ If the evidence leaves the frame open (is this connector power, data or audio?),
 3. Search in this order:
    1. `project_workflows`: a complete sequence for this deliverable? Follow its steps and the packs they name.
    2. `packs`: match the task against `use_when` (and exclude by `not_for`), then facets, then `api_terms` if you already know which API calls you will make.
-   3. `failure_patterns`: the recurring ways agents fail; check the ones your work class is prone to.
+   3. `failure_patterns`: the recurring ways agents fail (id, name, evidence kind); check the ones your work class is prone to and read their full text in `failure_patterns_file`.
 4. For each pack that applies, read in this order (paths are relative to `raw_base` + the pack's `path`):
    1. `final/rule.json`: the rule and how to validate it;
    2. `v01/`, `v02/`…: the failed attempts, so you don't repeat them;
