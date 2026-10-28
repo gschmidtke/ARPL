@@ -1,6 +1,6 @@
 {
   "id": "ARPL-PW-0003",
-  "revision": 5,
+  "revision": 6,
   "title": "Weekly BIM coordination of a federated cloud project: collect, check, correct, report, archive",
   "level": 4,
   "context": {
@@ -38,7 +38,7 @@
     {
       "step": 3,
       "work_class": "W8",
-      "do": "Collect deep, read-only: shared position at the internal origin per model against the authority, link instances per host with workset and total transform (links loaded, not from the batch report), Project Information keys, standard schedules present",
+      "do": "Collect deep, read-only: shared position at the internal origin per model against the authority, link instances per host with workset and total transform (links loaded, not from the batch report), Project Information keys, standard schedules present; Project Status (also in the PROJECT-INFO export) and the model's phase list (Document.Phases, names in order) for the status and phase checks",
       "packs": [
         "ARPL-LNK-0002",
         "ARPL-LNK-0001"
@@ -291,6 +291,14 @@
       "revision": 5,
       "date": "2026-10-28",
       "change": "Step 4 points to the LOIN instance schedule and key (ARPL-PAR-0003), Type Marks (ARPL-PAR-0004) and room-bounding links (ARPL-CRD-0002), counts by unique id, and names the coordinator role (curator round)",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ]
+    },
+    {
+      "revision": 6,
+      "date": "2026-10-28",
+      "change": "Step 3 also reads Project Status and the phase list; report standard ARPL-RPT-0001 v1.1 checks both every week (owner: mixed status/phases is a common multi-discipline problem the coordinator raises; IN-0024)",
       "contributors": [
         "Gottfried Schmidtke with Claude"
       ]

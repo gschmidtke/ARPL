@@ -145,6 +145,8 @@
           <th data-field="links_in_place">Links in place</th>
           <th data-field="coordinates">Coordinates</th>
           <th data-field="identity">Model identity</th>
+          <th data-field="status">Project status</th>
+          <th data-field="phases">Phases</th>
           <th data-field="standards">Standard schedules</th>
           <th data-field="loin">LOIN ≥ target</th>
           <th data-field="warnings">Warnings trend</th>
@@ -317,11 +319,15 @@
     description: 'Pass or fail per model for each coordination rule, from the weekly model snapshot; coordinates against the assumed authority (architecture).',
     fn: (models, loin_by_model) => {
       const AUTH = '{{AUTHORITY_MODEL_KEY}}', TOL = 0.01, TARGET = 0.95;
+      const PROJECT_STATUS = '{{PROJECT_STATUS}}', PHASES = '{{PHASES}}'; // leave '' for the defaults
       const loinOf = (key) => { const rs = loin_by_model.filter((r) => r.model === key); const i = rs.reduce((s, r) => s + r.instances, 0); return i ? rs.reduce((s, r) => s + r.filled, 0) / i : null; };
       const num = (v) => (v === '' || v == null ? null : Number(v));
       const auth = models.find((m) => m.model === AUTH);
       const n = models.length;
       const pf = (ok) => (ok ? 'pass' : 'fail');
+      const counts = {}; models.forEach((m) => { if (m.project_status) counts[m.project_status] = (counts[m.project_status] || 0) + 1; });
+      const STATUS = PROJECT_STATUS || Object.keys(counts).sort((a, b) => counts[b] - counts[a])[0];
+      const PH = PHASES || (auth ? auth.phases : null);
       return models.map((m) => {
         const links = num(m.revit_links);
         return {
@@ -331,6 +337,8 @@
           links_in_place: pf(num(m.links_in_place) === links),
           coordinates: pf(!!auth && Math.abs(num(m.shared_ew_ft) - num(auth.shared_ew_ft)) <= TOL && Math.abs(num(m.shared_ns_ft) - num(auth.shared_ns_ft)) <= TOL && Math.abs(num(m.angle_deg) - num(auth.angle_deg)) < 0.001),
           identity: pf(m.building_name === m.model),
+          status: m.project_status ? pf(m.project_status === STATUS) : 'n/c',
+          phases: m.phases && PH ? pf(m.phases === PH) : 'n/c',
           standards: pf(m.has_instance_parameters === 'yes' && m.has_sheet_list === 'yes'),
           loin: loinOf(m.model) == null ? 'n/c' : pf(loinOf(m.model) >= TARGET),
           warnings: 'baseline',
@@ -345,7 +353,7 @@
     title: 'Weekly summary',
     description: 'Totals for the headline figures and checks passed of checks run (baseline entries are not counted).',
     fn: (models, findings) => {
-      const rules = ['links_complete', 'links_workset', 'links_in_place', 'coordinates', 'identity', 'standards', 'loin', 'warnings', 'health'];
+      const rules = ['links_complete', 'links_workset', 'links_in_place', 'coordinates', 'identity', 'status', 'phases', 'standards', 'loin', 'warnings', 'health'];
       let passed = 0, failed = 0;
       findings.forEach((f) => rules.forEach((r) => { if (f[r] === 'pass') passed++; else if (f[r] === 'fail') failed++; }));
       const sum = (col) => models.reduce((s, m) => s + (m[col] === '' ? 0 : Number(m[col])), 0);
@@ -394,7 +402,7 @@
   dash.draw('t-toptype', topType((r) => shortMsg(r.message, 70)));
   dash.draw('t-topcount', topType((r) => fmt(r.count)));
 
-  const RULES = ['links_complete', 'links_workset', 'links_in_place', 'coordinates', 'identity', 'standards', 'loin', 'warnings', 'health'];
+  const RULES = ['links_complete', 'links_workset', 'links_in_place', 'coordinates', 'identity', 'status', 'phases', 'standards', 'loin', 'warnings', 'health'];
   dash.draw('checks', (tb) => {
     const f = dash.data('findings');
     tb.replaceChildren();

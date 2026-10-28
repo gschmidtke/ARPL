@@ -546,6 +546,26 @@
       ],
       "reviewed_by": "Claude (curator)",
       "closed": "2026-10-28"
+    },
+    {
+      "entry_id": "IN-0024",
+      "received": "2026-10-28",
+      "contributor": {
+        "name": "Gottfried Schmidtke",
+        "github": "gschmidtke",
+        "with": "Claude"
+      },
+      "source": "owner instruction after an independent AI review (Grok) of the 2026-10-28 Snowdon exports found mixed Project Status across the federation",
+      "submitted": "Mixed project status / phases across discipline models is a common multi-discipline problem; the BIM Coordinator raises it in the weekly BIM report",
+      "files": [],
+      "status": "filed",
+      "decision": "ARPL-RPT-0001 v1.1: rule checks 'Project status' and 'Phases', models dataset gains project_status and phases, constants PROJECT_STATUS and PHASES, template updated; ARPL-PW-0003 rev 6 step 3 collects both.",
+      "resulting_ids": [
+        "ARPL-RPT-0001",
+        "ARPL-PW-0003"
+      ],
+      "reviewed_by": "Claude (curator)",
+      "closed": "2026-10-28"
     }
   ]
 }
