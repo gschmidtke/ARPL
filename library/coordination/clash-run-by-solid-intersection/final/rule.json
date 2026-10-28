@@ -1,0 +1,10 @@
+{
+  "lesson": "A clash number is only useful per discipline pair, grouped, with owners and stable element ids; a raw intersection count mixes planned penetrations with real conflicts and jumps whenever one run is rerouted.",
+  "rule": "1. Agree the clash matrix with the team first: category pairs, hard or clearance, routing priority (who moves).\n2. Open every model in one session with link worksets closed; check that all report the same shared position (ProjectLocation.GetProjectPosition at the origin) and that link transforms are identity. Otherwise transform the second model's solids by the link transform.\n3. Per pair: bounding-box prefilter, then BooleanOperationsUtils intersection; count a clash when the intersection volume exceeds a small threshold (0.0001 cf used). Cache solids; walk GeometryInstance with GetInstanceGeometry.\n4. Write one row per element pair: both unique ids and element ids, categories, family and type, levels, volume, centroid. Keep it under the bridge's reply limit by splitting pairs across calls and appending to a run log; on a timeout read the log, never rerun blindly.\n5. Classify: vertical runs through ceilings (and later through walls or floors with modelled openings) are penetrations, reported separately.\n6. Group clashes that share an element (union-find); report groups, not only clashes. Owner by routing priority.\n7. Close the opened models without saving (Document.Close(false)); they were only read.\n8. Next week: match by the pair of unique ids to report new, resolved and still open.",
+  "validation": [
+    "Every model reports the same shared position; every link transform is identity (or the transform was applied).",
+    "Run log lists every pair of the agreed matrix with a count and duration.",
+    "Penetrations + clashes = raw intersections; each clash has a group and an owner.",
+    "Opened models closed unchanged (no sync)."
+  ]
+}

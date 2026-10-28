@@ -1,0 +1,5 @@
+{
+  "result": "9 pairs in about 3 minutes (longest pair 53 s, plumbing against ceilings); 365 raw intersections. The second call outran the bridge's 60 s reply wait but completed; progress was read from the run log.",
+  "problem": "About a quarter of the ceiling hits were vertical pipes, ducts and conduits dropping through the ceiling to fixtures and outlets: planned penetrations, not clashes (FP47). The long call returned a timeout although it finished (FP38 family: reply wait shorter than the work).",
+  "found_by": "reading the clash list by orientation of the running element"
+}

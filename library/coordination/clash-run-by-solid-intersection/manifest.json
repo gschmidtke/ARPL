@@ -1,0 +1,87 @@
+{
+  "id": "ARPL-CRD-0001",
+  "revision": 1,
+  "title": "Weekly clash run inside Revit by solid intersection across open cloud models; penetrations separated, clashes grouped, owner by routing priority",
+  "use_when": [
+    "A federated project needs a weekly clash number per discipline pair and the cloud project has no clash service (no Model Coordination module)",
+    "Clash results must carry element unique ids so next week's run can report new and resolved clashes",
+    "A quick hard-clash check before publishing models for formal coordination"
+  ],
+  "not_for": [
+    "Clearance (soft) clashes: needs inflated solids, not recorded yet",
+    "Walls and floors against services when the service openings are not modelled: every crossing would count",
+    "Models that do not share one internal origin and shared position: transform one side by the link transform first",
+    "Replacing a coordination service where one is available: use its tracked clash groups instead"
+  ],
+  "api_terms": [
+    "BooleanOperationsUtils.ExecuteBooleanOperation",
+    "BooleanOperationsType.Intersect",
+    "BoundingBoxIntersectsFilter",
+    "ElementMulticategoryFilter",
+    "Options.DetailLevel",
+    "GeometryInstance.GetInstanceGeometry",
+    "Solid.ComputeCentroid",
+    "WorksharingUtils.GetUserWorksetInfo",
+    "WorksetConfiguration.Open",
+    "OpenOptions.SetOpenWorksetsConfiguration",
+    "ModelPathUtils.ConvertCloudGUIDsToCloudPath",
+    "ProjectLocation.GetProjectPosition",
+    "Document.Close"
+  ],
+  "level": 2,
+  "work_class": "W8",
+  "workflows": [
+    "coordination",
+    "validation-qaqc",
+    "links-coordinates"
+  ],
+  "disciplines": [
+    "bim-vdc",
+    "mechanical",
+    "plumbing",
+    "electrical",
+    "structural",
+    "architecture"
+  ],
+  "roles": [
+    "coordinator",
+    "bim-manager"
+  ],
+  "project_types": [
+    "generic"
+  ],
+  "phases": [
+    "design-development",
+    "construction-documents"
+  ],
+  "revit_versions_tested": [
+    "2024"
+  ],
+  "environment": {
+    "revit_version": "2024.3 (24.3.60.12)",
+    "tool": "RevitBridge MCP with run_csharp",
+    "compiler": "Roslyn 4.8 (C# 12)",
+    "agent": "Claude (Anthropic)",
+    "model": "Autodesk sample Snowdon Towers, 6 cloud discipline models; 9 pairs"
+  },
+  "failure_patterns": [
+    "FP47",
+    "FP48",
+    "FP38"
+  ],
+  "status": "candidate",
+  "contributors": [
+    "Gottfried Schmidtke with Claude"
+  ],
+  "recorded": "2026-10-27",
+  "changelog": [
+    {
+      "revision": 1,
+      "date": "2026-10-27",
+      "change": "First recorded (IN-0017, curator session with the owner)",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ]
+    }
+  ]
+}

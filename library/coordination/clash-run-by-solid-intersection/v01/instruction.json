@@ -1,0 +1,4 @@
+{
+  "version": "v01",
+  "instruction": "Open HVAC and Structural cloud models with link worksets closed; confirm both report the same shared position and the link transform is identity; intersect every duct and duct fitting with structural framing and columns (bounding-box prefilter, then solid intersection, volume > 0.0001 cf)."
+}

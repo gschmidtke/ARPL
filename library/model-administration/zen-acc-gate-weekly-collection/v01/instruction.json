@@ -1,0 +1,4 @@
+{
+  "version": "v01",
+  "instruction": "From Revit Home with no model open, start ACC Gate by PostCommand; choose the registry CSV, select the models, tick Model Health Check and PBP + Worksets report; set the output folder explicitly."
+}

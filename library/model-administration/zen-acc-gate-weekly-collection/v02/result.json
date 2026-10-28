@@ -1,0 +1,5 @@
+{
+  "result": "6 of 6 models OK; 435 warnings with top five types per model; schedule CSVs per model fed the LOIN snapshot (ARPL-QA-0002).",
+  "problem": "Health CSVs carry no ModelKey or GUID; the join goes by Model Name (= registry ModelName) or through the batch log (title to project and model id).",
+  "found_by": "building the report dataset"
+}

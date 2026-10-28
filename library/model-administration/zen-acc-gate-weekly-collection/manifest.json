@@ -1,0 +1,73 @@
+{
+  "id": "ARPL-ADM-0004",
+  "revision": 1,
+  "title": "ZEN ACC Gate as the weekly collection batch: health, links and worksets, schedule exports; what each output contains and how to drive it from a bridge",
+  "use_when": [
+    "The ZEN add-in (Tiverit LLC) is installed and a project has a ZEN model registry",
+    "A weekly coordination run needs per-model health, link placement and schedule data without opening each model by hand",
+    "An agent drives ZEN commands from a Revit bridge"
+  ],
+  "not_for": [
+    "Projects without ZEN: collect the same data with read-only bridge scripts (ARPL-PW-0003 lists the fields)",
+    "Cloud file sizes: they need ZEN's Refresh Sizes with APS credentials"
+  ],
+  "api_terms": [
+    "UIApplication.PostCommand",
+    "RevitCommandId.LookupCommandId",
+    "ModelPathUtils.ConvertCloudGUIDsToCloudPath"
+  ],
+  "level": 2,
+  "work_class": "W8",
+  "workflows": [
+    "model-administration",
+    "validation-qaqc",
+    "links-coordinates"
+  ],
+  "disciplines": [
+    "bim-vdc",
+    "generic"
+  ],
+  "roles": [
+    "coordinator",
+    "bim-manager"
+  ],
+  "project_types": [
+    "generic"
+  ],
+  "phases": [
+    "design-development",
+    "construction-documents"
+  ],
+  "revit_versions_tested": [
+    "2024"
+  ],
+  "environment": {
+    "revit_version": "2024.3 (24.3.60.12)",
+    "tool": "RevitBridge MCP with run_csharp",
+    "compiler": "Roslyn 4.8 (C# 12)",
+    "agent": "Claude (Anthropic)",
+    "batch_tool": "ZEN 1.2 (Revit add-in by Tiverit LLC), ACC Gate",
+    "model": "13-model campus and 6-model Snowdon Towers sample, both in ACC cloud"
+  },
+  "failure_patterns": [
+    "FP43",
+    "FP46",
+    "FP50",
+    "FP51"
+  ],
+  "status": "candidate",
+  "contributors": [
+    "Gottfried Schmidtke with Claude"
+  ],
+  "recorded": "2026-10-27",
+  "changelog": [
+    {
+      "revision": 1,
+      "date": "2026-10-27",
+      "change": "First recorded (IN-0017, curator session with the owner)",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ]
+    }
+  ]
+}

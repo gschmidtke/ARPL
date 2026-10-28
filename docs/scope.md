@@ -4,6 +4,8 @@
 
 Production knowledge for AI agents working in Autodesk Revit: how to turn a professional intent into correct model content, documentation and data, what goes wrong, how it is detected, and the rule that works.
 
+ARPL is Revit-specific: packs name Revit, its API and the cloud platform the models live on. Lessons from custom Revit add-ins used in a run (for example ZEN by Tiverit LLC) are recorded too, under the add-in's name and marked as not part of Revit, so later sessions can shortcut them; every such step names a bridge alternative. Tool-agnostic principles (what to deliver, independent of software) belong upstream in USG.
+
 ## Non-goals
 
 - **Not a replacement for firm standards.** A firm's own standards, content libraries and naming conventions take precedence over any pack. Packs describe methods; your standards decide names, parameters and graphics.

@@ -1,0 +1,4 @@
+{
+  "version": "v01",
+  "instruction": "Export the INSTANCE PARAMETERS schedule (Family, Category and the information columns Description and Type Mark; Structural also _Height and _Width) from all six models; count instances and filled values per model, category and field; rows with an empty Family are circuits, systems and analytical elements."
+}

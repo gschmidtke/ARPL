@@ -1,0 +1,5 @@
+{
+  "result": "12 of 12 models OK, 0 failures; opens 8 to 11 s per model; health part about 2 minutes. Health uses the full single-model Field/Value schema, one CSV per model at <output>\\ModelHealth\\<Model>_HEALTH CHECK.csv, with 'Top Warning' lines when warnings exist and one 'Revit Link Status – <status>' line per status present. PBP workbook: one sheet per host, with host and link project and model GUIDs.",
+  "problem": "Health and PBP read links as opened by the batch (unloaded, in closed worksets): status 'InClosedWorkset', placement 'Not checked (unloaded)', instance names 'location <Not Shared>' (FP50). The output folder dialog offered another project's folder (FP51).",
+  "found_by": "comparing the batch report with the same links loaded in one model"
+}
