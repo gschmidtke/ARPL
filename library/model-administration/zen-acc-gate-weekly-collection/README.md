@@ -1,4 +1,4 @@
-# ARPL-ADM-0004 rev 2: ZEN ACC Gate as the weekly collection batch: health, links and worksets, schedule exports; what each output contains and how to drive it from a bridge
+# ARPL-ADM-0004 rev 3: ZEN ACC Gate as the weekly collection batch: health, links and worksets, schedule exports; what each output contains and how to drive it from a bridge
 
 _Generated from this pack's files by tools/build_catalogs.py. Edit manifest.json, intent.md, vNN/ or final/rule.json instead._
 
@@ -14,7 +14,7 @@ _Generated from this pack's files by tools/build_catalogs.py. Edit manifest.json
 | Project types | generic |
 | Revit tested | 2024 |
 | API | UIApplication.PostCommand, RevitCommandId.LookupCommandId, ModelPathUtils.ConvertCloudGUIDsToCloudPath |
-| Failure patterns | FP43, FP46, FP50, FP51, FP53 |
+| Failure patterns | FP43, FP46, FP50, FP51, FP53, FP59 |
 | Contributors | Gottfried Schmidtke with Claude |
 
 **Intent:** Use ZEN's ACC Gate as the unattended collection batch of the weekly coordination run (ARPL-PW-0003): Model Health Check, PBP + Worksets report and Export Schedules over all registry models, with outputs the report can join reliably. ZEN is a custom Revit add-in, not part of Revit; these lessons are recorded here so later sessions do not relearn them.
