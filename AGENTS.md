@@ -84,3 +84,4 @@ The curator reviews every submission, files it into the library and credits the 
 | `patterns/failure-patterns.json` | Failure patterns |
 | `vocabularies/vocabularies.json` | Allowed facet values |
 | `docs/model.md`, `docs/work-classes.md` | How ARPL is organized |
+| `docs/roles/bim-coordinator.md` | Scope of the BIM Coordinator agent ("please switch to BIM coordinator") |

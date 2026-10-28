@@ -505,6 +505,25 @@
       ],
       "reviewed_by": "Claude (curator)",
       "closed": "2026-10-28"
+    },
+    {
+      "entry_id": "IN-0022",
+      "received": "2026-10-28",
+      "contributor": {
+        "name": "Gottfried Schmidtke",
+        "github": "gschmidtke",
+        "with": "Claude"
+      },
+      "source": "owner confirmation of the BIM Coordinator scope, 2026-10-28 (no inbox file)",
+      "submitted": "BIM Coordinator agent scope (what it does alone, what needs the discipline lead, what needs the BIM manager, what it does not do) and a request to compare it with industry standards",
+      "files": [],
+      "status": "filed",
+      "decision": "Filed as docs/roles/bim-coordinator.md (ARPL-ROLE-0001 v1.0) with an industry alignment review (ISO 19650, UK BIM Framework, literature review, two owner BIM requirements); AGENTS.md points to it. ROLE is a new id prefix: question for the owner in the report.",
+      "resulting_ids": [
+        "ARPL-ROLE-0001"
+      ],
+      "reviewed_by": "Claude (curator)",
+      "closed": "2026-10-28"
     }
   ]
 }
