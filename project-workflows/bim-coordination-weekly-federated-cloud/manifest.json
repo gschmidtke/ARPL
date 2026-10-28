@@ -1,6 +1,6 @@
 {
   "id": "ARPL-PW-0003",
-  "revision": 4,
+  "revision": 5,
   "title": "Weekly BIM coordination of a federated cloud project: collect, check, correct, report, archive",
   "level": 4,
   "context": {
@@ -49,9 +49,12 @@
     {
       "step": 4,
       "work_class": "W7",
-      "do": "LOIN snapshot: from the exported instance-parameter schedules count filled values per model, category and field (family elements only); score against the client's LOIN table, or state the assumption",
+      "do": "LOIN snapshot: from the exported instance-parameter schedules count filled values per model, category and field (family elements only); score against the client's LOIN table, or state the assumption. Count by unique id; before reporting a field at 0% as a team task, trace it to its source (circuit values, unenclosed spaces). Data alignment between runs (mirror parameters, instance key, Type Marks, room-bounding links) is coordinator work under docs/roles/bim-coordinator.md",
       "packs": [
-        "ARPL-QA-0002"
+        "ARPL-QA-0002",
+        "ARPL-PAR-0003",
+        "ARPL-PAR-0004",
+        "ARPL-CRD-0002"
       ],
       "tools": "schedule CSVs from step 2",
       "without_tool": "schedule export by ViewSchedule.Export from the bridge"
@@ -280,6 +283,14 @@
       "revision": 4,
       "date": "2026-10-28",
       "change": "Report form fixed as standard ARPL-RPT-0001: page structure, five dataset contracts, calculations, rule checks, constants and a reference page template, from the 2026-10-27 Snowdon Towers report (IN-0019)",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ]
+    },
+    {
+      "revision": 5,
+      "date": "2026-10-28",
+      "change": "Step 4 points to the LOIN instance schedule and key (ARPL-PAR-0003), Type Marks (ARPL-PAR-0004) and room-bounding links (ARPL-CRD-0002), counts by unique id, and names the coordinator role (curator round)",
       "contributors": [
         "Gottfried Schmidtke with Claude"
       ]

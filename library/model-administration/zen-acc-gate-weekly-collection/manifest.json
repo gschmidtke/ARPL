@@ -1,6 +1,6 @@
 {
   "id": "ARPL-ADM-0004",
-  "revision": 2,
+  "revision": 3,
   "title": "ZEN ACC Gate as the weekly collection batch: health, links and worksets, schedule exports; what each output contains and how to drive it from a bridge",
   "use_when": [
     "The ZEN add-in (Tiverit LLC) is installed and a project has a ZEN model registry",
@@ -54,7 +54,8 @@
     "FP46",
     "FP50",
     "FP51",
-    "FP53"
+    "FP53",
+    "FP59"
   ],
   "status": "candidate",
   "contributors": [
@@ -74,6 +75,14 @@
       "revision": 2,
       "date": "2026-10-28",
       "change": "Rule 3: a command posted while Revit Home shows waits until Home is left (FP53). Rule 10 and v03: the 'Print PDFs from Print Intel workbooks' action, detailed in ARPL-DOC-0003 (IN-0018)",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ]
+    },
+    {
+      "revision": 3,
+      "date": "2026-10-28",
+      "change": "FP59 linked: the 'Batch actions completed' dialog stays open after a run and blocks the next bridge call; take a screenshot before the next call (curator round)",
       "contributors": [
         "Gottfried Schmidtke with Claude"
       ]

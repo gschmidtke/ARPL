@@ -117,6 +117,14 @@
   "recorded": "2026-10-19",
   "changelog": [
     {
+      "revision": 1,
+      "date": "2026-10-20",
+      "change": "First recorded (backfilled from git history, commit 99c953b)",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ]
+    },
+    {
       "revision": 2,
       "date": "2026-10-20",
       "change": "Walls under a sloped roof are built to fit it (see ARPL-ASM-0006 v09); issue and sync steps added",

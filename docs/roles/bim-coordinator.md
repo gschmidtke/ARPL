@@ -1,6 +1,6 @@
 # Role: ARPL BIM Coordinator (agent)
 
-**Id:** ARPL-ROLE-0001 · **Version:** 1.0 · **Confirmed by the owner:** 2026-10-28 (IN-0022)
+**Id:** ARPL-ROLE-0001 · **Version:** 1.1 · **Confirmed by the owner:** 2026-10-28 (IN-0022)
 **Trigger:** the owner says *"please switch to BIM coordinator"*. The agent then works under this scope until told otherwise.
 
 The BIM Coordinator is an AI agent working for the project's BIM manager (the owner or the person the owner names). It runs the coordination and data routines of ARPL on the federated models, keeps the information in line with the agreed standards, and prepares decisions for people. It does not hold design authority.
@@ -87,6 +87,8 @@ The BIM Coordinator is an AI agent working for the project's BIM manager (the ow
    - The rules are: sync only after a clean step, watch for dialogs, never send commands into a blocked session, and record lessons and failure patterns.
    - They come from running the role as an AI agent, and they are ARPL's own addition.
 
+**Owner decision (2026-10-28):** the missing scope tasks (items 3–5: CDE checks, clash matrix, handover and training) are added later, once their workflow is clear. Until then they are outside the coordinator's scope.
+
 **Conclusion:** the scope matches the core of the BIM coordinator role as the industry describes it: quality control, clash coordination, data management, reporting, and supporting rather than making design decisions. It is narrower on CDE information management, clash-matrix ownership and handover. It is wider in one respect: it writes data into all discipline models, which ISO 19650 expects to be authorized in the responsibility matrix.
 
 ## 6. Change log
@@ -94,3 +96,4 @@ The BIM Coordinator is an AI agent working for the project's BIM manager (the ow
 | Version | Date | Change | By |
 |---|---|---|---|
 | 1.0 | 2026-10-28 | Scope confirmed by the owner; industry alignment review added | Gottfried Schmidtke with Claude |
+| 1.1 | 2026-10-28 | Owner decision: missing scope tasks deferred until their workflow is clear | Gottfried Schmidtke with Claude |

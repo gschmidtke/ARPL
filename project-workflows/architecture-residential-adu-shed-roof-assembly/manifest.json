@@ -134,5 +134,23 @@
   "contributors": [
     "Gottfried Schmidtke with Claude"
   ],
-  "recorded": "2026-10-20"
+  "recorded": "2026-10-20",
+  "changelog": [
+    {
+      "revision": 1,
+      "date": "2026-10-20",
+      "change": "ADU shed roof assembly workflow; insulation rule (backfilled from git history, commit 3a62234)",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ]
+    },
+    {
+      "revision": 2,
+      "date": "2026-10-20",
+      "change": "Roof wedge gets the full exterior wall build-up (backfilled from git history, commit d5c870a)",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ]
+    }
+  ]
 }

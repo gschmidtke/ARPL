@@ -339,3 +339,9 @@ Learn from what went wrong: each pack is listed under the failure patterns it re
 |---|---|---|---|
 | [ARPL-PAR-0004](../library/parameters-data/type-marks-zen-by-family-one-run-per-group/) Type Marks with ZEN Type Marks by Family: one run per family group, the search string becomes the prefix, Overwrite on for a clean re-run | 2 | W7 | candidate |
 
+## FP59: A finished batch's completion dialog blocks the next call
+
+| Pack | Level | Work class | Status |
+|---|---|---|---|
+| [ARPL-ADM-0004](../library/model-administration/zen-acc-gate-weekly-collection/) ZEN ACC Gate as the weekly collection batch: health, links and worksets, schedule exports; what each output contains and how to drive it from a bridge | 2 | W8 | candidate |
+

@@ -229,7 +229,7 @@
     },
     {
       "id": "ARPL-PW-0003",
-      "revision": 4,
+      "revision": 5,
       "title": "Weekly BIM coordination of a federated cloud project: collect, check, correct, report, archive",
       "level": 4,
       "context": {
@@ -272,9 +272,12 @@
         {
           "step": 4,
           "work_class": "W7",
-          "do": "LOIN snapshot: from the exported instance-parameter schedules count filled values per model, category and field (family elements only); score against the client's LOIN table, or state the assumption",
+          "do": "LOIN snapshot: from the exported instance-parameter schedules count filled values per model, category and field (family elements only); score against the client's LOIN table, or state the assumption. Count by unique id; before reporting a field at 0% as a team task, trace it to its source (circuit values, unenclosed spaces). Data alignment between runs (mirror parameters, instance key, Type Marks, room-bounding links) is coordinator work under docs/roles/bim-coordinator.md",
           "packs": [
-            "ARPL-QA-0002"
+            "ARPL-QA-0002",
+            "ARPL-PAR-0003",
+            "ARPL-PAR-0004",
+            "ARPL-CRD-0002"
           ]
         },
         {
@@ -2346,7 +2349,7 @@
     },
     {
       "id": "ARPL-ADM-0004",
-      "revision": 2,
+      "revision": 3,
       "title": "ZEN ACC Gate as the weekly collection batch: health, links and worksets, schedule exports; what each output contains and how to drive it from a bridge",
       "environment": {
         "revit_version": "2024.3 (24.3.60.12)",
@@ -2396,7 +2399,8 @@
         "FP46",
         "FP50",
         "FP51",
-        "FP53"
+        "FP53",
+        "FP59"
       ],
       "status": "candidate",
       "rule": "1. Start ZEN commands from the bridge with UIApplication.PostCommand(RevitCommandId.LookupCommandId(id)); the command runs after the bridge call returns, and only once Revit is idle (move the mouse over Revit if it waits). Ids: ACC Gate CustomCtrl_%CustomCtrl_%ZEN%Federation%CmdAccGate; Cloud GUIDs CustomCtrl_%CustomCtrl_%CustomCtrl_%ZEN%Federation%ZenRegistry%CmdDumpCloudModelGuids; Export Cloud Link Matrix CustomCtrl_%CustomCtrl_%CustomCtrl_%ZEN%Federation%ZenLinkMatrix%CmdGenerateCloudLinkMatrixFromRegistry; Import Schedule Definitions CustomCtrl_%CustomCtrl_%CustomCtrl_%ZEN%Project Standards%ZenSchedules%CmdImportStandardScheduleDefinitions.\n2. While a ZEN dialog is open the bridge does not answer: take a screenshot, finish the dialog, then continue.\n3. Run ACC Gate with no model open; close or ask about models the user has open. A command posted while Revit Home is showing does not run until Home is left (FP53): leave Home with the back arrow or click the ribbon button, and screenshot after posting.\n4. Type the output folder every time (REPORTS/<date>); the dialog remembers other projects' folders.\n5. Model Health via ACC Gate = full Field/Value schema per model (ModelHealth/<Model>_HEALTH CHECK.csv); pivot the dynamic 'Revit Link Status – <status>' lines; read 'Top Warning' lines for warning types; join by Model Name.\n6. Do not judge link placement from the batch health or PBP report: links are unloaded there. Check placement by link transform with links loaded (ARPL-LNK-0002).\n7. Export Schedules writes one CSV per schedule and model; the instance-parameter schedule feeds the LOIN snapshot (ARPL-QA-0002). Import Standard Schedules asks for a SOURCE .rvt that already holds the schedules, not the definitions workbook.\n8. Export Cloud Link Matrix defaults UseSharedCoordinates, LoadOnOpen and RoomBounding to FALSE: edit a backup copy before linking (FP46). Cloud GUIDs takes Project Information > Building Name as model key: set it first; the template placeholder text counts as a value (FP43).\n9. Cloud file size reads 'n/a' unless Refresh Sizes (APS credentials) ran first.\n10. Print PDFs from Print Intel workbooks prints every PrintJobs row of each model's <Model>_PrintIntel.xlsx (matched by cloud GUID), opening each model with all worksets open; output PDF/<Model>_<Set>.pdf plus ZEN_Batch_PrintPdf.xlsx. The print sets themselves are Revit print sets made once per model: ARPL-DOC-0003.",
