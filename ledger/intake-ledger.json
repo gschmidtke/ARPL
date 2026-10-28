@@ -650,6 +650,29 @@
       ],
       "reviewed_by": "Claude (curator)",
       "closed": "2026-10-28"
+    },
+    {
+      "entry_id": "IN-0029",
+      "received": "2026-10-28",
+      "contributor": {
+        "name": "Gottfried Schmidtke",
+        "github": "gschmidtke",
+        "with": "Claude"
+      },
+      "source": "owner decisions in the Snowdon open-questions review register",
+      "submitted": "Decisions on 43 open questions (BOM, federation, leads, ZEN, ARPL, USG)",
+      "files": [],
+      "status": "filed",
+      "decision": "ARPL-BOM-0001 v1.4 (requirements not products, MasterFormat, site out, steel columns by length, nested parts with host, BOM only for GC teams); ARPL-PW-0003 rev 7 (expected-file check, optional BOM step); FP61 (CSV parsing); ARPL-ROLE-0001 v1.2 and new ARPL-ROLE-0002 project manager; CURATION.md: reviews by other AIs are a development tool. Conventions for levels, grids and worksets recorded in the report for the owner's BIM Standards repository.",
+      "resulting_ids": [
+        "ARPL-BOM-0001",
+        "ARPL-PW-0003",
+        "FP61",
+        "ARPL-ROLE-0001",
+        "ARPL-ROLE-0002"
+      ],
+      "reviewed_by": "Claude (curator)",
+      "closed": "2026-10-28"
     }
   ]
 }

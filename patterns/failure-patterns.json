@@ -978,6 +978,23 @@
       "revit_versions": "2024",
       "intake": "IN-0026",
       "evidence_kind": "observed"
+    },
+    {
+      "id": "FP61",
+      "name": "Export parsed by splitting on commas",
+      "meaning": "Revit type names contain commas and doubled quotes inside quoted fields (for example a roof type 'TPO Roof, 5\"\" Min. Rigid Insulation'). A reader that splits lines on commas shifts every later column on those rows, and the counts look plausible. Seen in an independent AI review of the Snowdon exports. Defence: read exports with a real CSV parser (quote-aware, doubled-quote escapes), and check that every row has the header's column count.",
+      "found_by": "independent review of the same exports by another AI",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ],
+      "status": "candidate",
+      "api_terms": [
+        "ViewSchedule.Export",
+        "ViewScheduleExportOptions"
+      ],
+      "revit_versions": "2024",
+      "intake": "IN-0029",
+      "evidence_kind": "observed"
     }
   ]
 }

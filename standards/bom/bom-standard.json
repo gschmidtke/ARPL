@@ -1,7 +1,7 @@
 {
   "id": "ARPL-BOM-0001",
   "title": "Bill of Materials from federated Revit models",
-  "version": "1.3",
+  "version": "1.4",
   "status": "candidate",
   "recorded": "2026-10-28",
   "source": "IN-0025",
@@ -28,7 +28,12 @@
     "Quantity basis comes only from category-rules.csv",
     "Each category counted from one source discipline",
     "Only purchase phases count (default New Construction)",
-    "Nested parts follow the rule column nested_parts: with_parent (default; exception 'part of <parent key>') or own_item (own ids, counted; e.g. chairs in a table family)"
+    "Nested parts follow the rule column nested_parts: with_parent (default; exception 'part of <parent key>') or own_item (own ids, counted; e.g. chairs in a table family)",
+    "The BOM states technical requirements; the GC bids products. Manufacturer, model and product link only for specified products (basis of design)",
+    "Procurement packages by MasterFormat (spec section), beside Uniformat and OmniClass",
+    "Site, planting and parking outside the building BOM",
+    "Steel columns by length",
+    "BOM in the weekly workflow only where the report is produced inside a GC team"
   ],
   "pipeline": [
     "read exports",
@@ -94,10 +99,12 @@
     "gc_items.csv": [
       "bom_item_key",
       "bom_description",
-      "spec_section",
+      "masterformat",
+      "technical_requirements",
+      "specified_product",
       "manufacturer",
       "model",
-      "catalog_no",
+      "product_url",
       "purchase_unit",
       "purchase_size",
       "waste_factor",
@@ -139,6 +146,11 @@
       "version": "1.3",
       "date": "2026-10-28",
       "change": "Railings LF, stairs EA with risers/width, system rows listed (IN-0028)"
+    },
+    {
+      "version": "1.4",
+      "date": "2026-10-28",
+      "change": "Owner decisions from the review register (IN-0029)"
     }
   ]
 }

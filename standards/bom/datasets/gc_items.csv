@@ -1,1 +1,1 @@
-bom_item_key,bom_description,spec_section,manufacturer,model,catalog_no,purchase_unit,purchase_size,waste_factor,supplier,procurement_package,subcontractor,unit_cost,lead_time_days,buyout_status
+bom_item_key,bom_description,masterformat,technical_requirements,specified_product,manufacturer,model,product_url,purchase_unit,purchase_size,waste_factor,supplier,procurement_package,subcontractor,unit_cost,lead_time_days,buyout_status
