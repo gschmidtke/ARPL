@@ -11,7 +11,7 @@ R09,Roofs,A,,area,SF,SNOW_Area,Family|Type,SNOW_Area,RF,proposed,
 R10,Roofs,F,,area,SF,SNOW_Area,Family|Type,SNOW_Area,RF,proposed,
 R11,Ceilings,A,,area,SF,SNOW_Area,Family|Type,SNOW_Area,CG,proposed,
 R12,Curtain Panels,A,,area,SF,SNOW_Area,Family|Type,SNOW_Area,CP,proposed,
-R13,Curtain Wall Mullions,A,,count,EA,,Family|Type,,MU,proposed,length not exported: bind SNOW_Length to mullions to buy by LF
+R13,Curtain Wall Mullions,A,,length,LF,SNOW_Length,Family|Type,SNOW_Length,MU,proposed,curtain wall mullions are standalone elements bought by length per profile; mullions inside a window family are part of the window
 R14,Stairs,A,,count,EA,,Family|Type,,ST,proposed,
 R15,Railings,A,,count,EA,,Family|Type,,RL,proposed,length not exported: bind SNOW_Length to railings to buy by LF
 R16,Casework,A,,count,EA,,Type Mark|Family|Type,,CW,proposed,
@@ -35,7 +35,7 @@ R33,Pipe Accessories,P,,count,EA,,Type Mark|Family|Type|SNOW_Size,Type Mark,PA,p
 R34,Plumbing Fixtures,P,,count,EA,,Type Mark|Family|Type,Type Mark,PF,proposed,also modelled in Architecture: counted from Plumbing only
 R35,Plumbing Equipment,P,,count,EA,,Type Mark|Family|Type,Type Mark,PE,proposed,
 R36,Ducts,M,,length,LF,SNOW_Length,SNOW_SystemClass|Type|SNOW_Size|SNOW_Insulation,SNOW_Size|SNOW_Length,DU,proposed,
-R37,Flex Ducts,M,,length,LF,SNOW_Length,SNOW_SystemClass|Type|SNOW_Size,SNOW_Length,DU,proposed,
+R37,Flex Ducts,M,,length,LF,SNOW_Length,SNOW_SystemClass|Type|SNOW_Size,SNOW_Length,FX,proposed,
 R38,Duct Fittings,M,,count,EA,,Family|Type|SNOW_Size,,DF,proposed,
 R39,Air Terminals,M,,count,EA,,Type Mark|Family|Type,,AT,proposed,
 R40,Mechanical Equipment,M,,count,EA,,Type Mark|Family|Type,Type Mark,ME,proposed,

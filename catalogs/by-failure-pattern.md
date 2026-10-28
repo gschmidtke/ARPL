@@ -348,3 +348,9 @@ Learn from what went wrong: each pack is listed under the failure patterns it re
 |---|---|---|---|
 | [ARPL-ADM-0004](../library/model-administration/zen-acc-gate-weekly-collection/) ZEN ACC Gate as the weekly collection batch: health, links and worksets, schedule exports; what each output contains and how to drive it from a bridge | 2 | W8 | candidate |
 
+## FP60: A filter outside the reconciliation drops rows silently
+
+| Pack | Level | Work class | Status |
+|---|---|---|---|
+| [ARPL-SCH-0003](../library/schedules-quantities/bom-from-governed-instance-data/) BOM from governed instance data: deduplicated QTO grouped by a category rule table, every line traced to its model elements (implements ARPL-BOM-0001) | 2 | W7 | candidate |
+

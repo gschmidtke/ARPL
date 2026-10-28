@@ -1,0 +1,5 @@
+{
+  "result": "1,425 curtain wall mullions filled (5,110 LF, 13 profile lines). 679 nested part rows now listed as 'part of <parent key>' (generic models in Architectural and Facades families, chairs in table families, structural connections). 486 BOM lines (321 EA, 86 SF, 58 LF, 21 CY), reconciled.",
+  "problem": "v02 dropped nested parts silently: the builder read only rows with a unique id, and nested parts have none, so they were outside the reconciliation. A first fix by element code flagged the 31 flex ducts wrongly, because the rule code DU did not match their key code FX.",
+  "found_by": "comparing keys shared in the export (rows) with keys shared among unique elements (zero); code-versus-key check per category"
+}

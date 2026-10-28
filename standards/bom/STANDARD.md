@@ -1,6 +1,6 @@
 # ARPL-BOM-0001: Bill of Materials from federated Revit models
 
-**Version:** 1.0 · **Status:** candidate (category rules: *proposed*, to be confirmed by the BIM manager and the GC) · **Recorded:** 2026-10-28 (IN-0025)
+**Version:** 1.1 · **Status:** candidate (category rules: *proposed*, to be confirmed by the BIM manager and the GC) · **Recorded:** 2026-10-28 (IN-0025)
 **Machine-readable:** [bom-standard.json](bom-standard.json) · **Rules:** [category-rules.csv](category-rules.csv) · **Reference builder:** [build_bom.py](build_bom.py) · **Procedure pack:** ARPL-SCH-0003
 
 ## Purpose
@@ -24,11 +24,12 @@ ARPL defines the first two levels. The third needs GC decisions (waste factors, 
 3. **The governed core is one rule table** (`category-rules.csv`). Per category and source discipline it sets the quantity basis (count, length, area, volume), the unit (EA, LF, SF, CY), the quantity field, the grouping fields that define one BOM item, and the required fields. A material condition separates, for example, concrete beams (CY) from steel framing (LF). The agent never infers a quantity basis.
 4. **Each category is counted from one discipline.** Where a category is modelled twice (plumbing fixtures in Architecture and Plumbing, lighting fixtures in Architecture and Electrical), the rule table names the source discipline. Rows from the other model become exceptions, not double counts.
 5. **Only the phases that are bought count** (default: New Construction). Existing elements are listed as exceptions.
+6. **A part of a family is bought with its family.** Mullions inside a window family belong to the window. Nested parts carry their parent's instance key and no unique id of their own (ARPL-PAR-0003). They are listed as exceptions "part of <parent key>" and never silently dropped. Standalone elements such as curtain wall mullions are their own BOM items, bought by length per profile.
 
 ## Pipeline
 
 1. Read the INSTANCE PARAMETERS exports of all models (rows with a unique id).
-2. Deduplicate by unique id: one element can appear on several rows (FP55).
+2. Rows with an instance key but no unique id are nested parts: exception "part of <parent key>". Deduplicate the rest by unique id: one element can appear on several rows (FP55).
 3. Drop elements outside the purchase phases.
 4. Find the rule: category + source discipline (first letter of the instance key) + material condition. No rule → exception.
 5. Quantity from the rule's field, in fixed units: lengths in feet (Revit's feet-inch text is parsed), areas in SF, volumes converted to CY. Unreadable → exception.
@@ -64,3 +65,10 @@ The project prefix (`SNOW_` on Snowdon) is a parameter of the builder (`--prefix
 - Confirm or change the category rules, in particular: quantity basis for mullions, railings and steel columns (length is not exported today, so they are counted); concrete in CY; site, planting and parking (no rule yet).
 - Which classification groups the procurement packages (Uniformat, OmniClass, MasterFormat / spec sections).
 - Which product fields become required at type level (manufacturer, model, catalog number).
+
+## Change log
+
+| Version | Date | Change |
+|---|---|---|
+| 1.0 | 2026-10-28 | First recorded (IN-0025) |
+| 1.1 | 2026-10-28 | Owner: window mullions are part of the window; curtain wall mullions are standalone. Curtain wall mullions bought by length (SNOW_Length bound and filled); nested parts listed as "part of <parent key>" instead of silently dropped; Flex Ducts code FX (IN-0026) |
