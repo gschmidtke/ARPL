@@ -24,6 +24,7 @@ Entry for engineers and designers. 'generic' packs apply to every discipline.
 | [ARPL-PAR-0003](../library/parameters-data/loin-instance-schedule-mirror-parameters-and-instance-key/) LOIN instance schedule per discipline: mirror category values into project parameters and give every instance a contractor key (discipline, element code, room or level, number) | 2 | W7 | candidate |
 | [ARPL-PAR-0004](../library/parameters-data/type-marks-zen-by-family-one-run-per-group/) Type Marks with ZEN Type Marks by Family: one run per family group, the search string becomes the prefix, Overwrite on for a clean re-run | 2 | W7 | candidate |
 | [ARPL-QA-0002](../library/validation-qaqc/loin-completeness-from-instance-parameter-schedule/) LOIN completeness snapshot from an exported instance-parameter schedule: fill rate per model, field and category, family elements only | 2 | W7 | candidate |
+| [ARPL-SCH-0003](../library/schedules-quantities/bom-from-governed-instance-data/) BOM from governed instance data: deduplicated QTO grouped by a category rule table, every line traced to its model elements (implements ARPL-BOM-0001) | 2 | W7 | candidate |
 | [ARPL-VIEW-0001](../library/views-graphics/crop-overridden-by-scope-box/) Crops silently ignored | 1 | W6 | candidate |
 | [ARPL-VIEW-0002](../library/views-graphics/section-view-direction/) Section looking the wrong way | 1 | W6 | candidate |
 
@@ -147,6 +148,7 @@ Entry for engineers and designers. 'generic' packs apply to every discipline.
 | [ARPL-PAR-0004](../library/parameters-data/type-marks-zen-by-family-one-run-per-group/) Type Marks with ZEN Type Marks by Family: one run per family group, the search string becomes the prefix, Overwrite on for a clean re-run | 2 | W7 | candidate |
 | [ARPL-QA-0002](../library/validation-qaqc/loin-completeness-from-instance-parameter-schedule/) LOIN completeness snapshot from an exported instance-parameter schedule: fill rate per model, field and category, family elements only | 2 | W7 | candidate |
 | [ARPL-SCH-0002](../library/schedules-quantities/bom-needs-governed-parameters/) Cost per type can't carry a BOM | 2 | W7 | candidate |
+| [ARPL-SCH-0003](../library/schedules-quantities/bom-from-governed-instance-data/) BOM from governed instance data: deduplicated QTO grouped by a category rule table, every line traced to its model elements (implements ARPL-BOM-0001) | 2 | W7 | candidate |
 
 ## construction
 
@@ -164,4 +166,5 @@ Entry for engineers and designers. 'generic' packs apply to every discipline.
 | [ARPL-QA-0001](../library/validation-qaqc/layout-preview-as-review-step/) Layout preview as a review step | 2 | W8 | candidate |
 | [ARPL-SCH-0001](../library/schedules-quantities/cost-estimate-construction-method-first/) Cost estimate priced the wrong construction | 2 | W7 | candidate |
 | [ARPL-SCH-0002](../library/schedules-quantities/bom-needs-governed-parameters/) Cost per type can't carry a BOM | 2 | W7 | candidate |
+| [ARPL-SCH-0003](../library/schedules-quantities/bom-from-governed-instance-data/) BOM from governed instance data: deduplicated QTO grouped by a category rule table, every line traced to its model elements (implements ARPL-BOM-0001) | 2 | W7 | candidate |
 

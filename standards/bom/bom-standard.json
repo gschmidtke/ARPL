@@ -1,0 +1,120 @@
+{
+  "id": "ARPL-BOM-0001",
+  "title": "Bill of Materials from federated Revit models",
+  "version": "1.0",
+  "status": "candidate",
+  "recorded": "2026-10-28",
+  "source": "IN-0025",
+  "contributors": [
+    "Gottfried Schmidtke with Claude"
+  ],
+  "levels": {
+    "QTO": "what is modelled (model)",
+    "BOM": "required material and product quantities (this standard)",
+    "procurement_BOM": "what is ordered (GC rules and GC item table)"
+  },
+  "input": {
+    "dataset": "INSTANCE PARAMETERS export per model (ARPL-PAR-0003)",
+    "identity": [
+      "<prefix>UniqueId",
+      "<prefix>InstElemId"
+    ],
+    "discipline_from": "first letter of <prefix>InstElemId",
+    "prefix_default": "SNOW_"
+  },
+  "decisions": [
+    "One source: no second Revit BOM schedule",
+    "Commercial data stays in the GC item table keyed by bom_item_key",
+    "Quantity basis comes only from category-rules.csv",
+    "Each category counted from one source discipline",
+    "Only purchase phases count (default New Construction)"
+  ],
+  "pipeline": [
+    "read exports",
+    "deduplicate by unique id",
+    "filter purchase phases",
+    "match rule: category + source discipline + material condition",
+    "quantity in fixed units (ft, SF, CY)",
+    "bom_item_key = <discipline>-<code>-<hash6(rule_id|signature)>",
+    "aggregate per item with level breakdown",
+    "write trace per element",
+    "reconcile"
+  ],
+  "units": {
+    "length": "LF (feet; Revit feet-inch text parsed)",
+    "area": "SF",
+    "volume": "CY (CF / 27)",
+    "count": "EA"
+  },
+  "category_rules_file": "category-rules.csv",
+  "category_rules_columns": [
+    "rule_id",
+    "category",
+    "source_discipline",
+    "when_material_contains",
+    "quantity_basis",
+    "unit",
+    "quantity_field",
+    "grouping_fields",
+    "required_fields",
+    "code",
+    "status",
+    "note"
+  ],
+  "datasets": {
+    "bom.csv": [
+      "bom_item_key",
+      "discipline",
+      "category",
+      "rule_id",
+      "item_signature",
+      "unit",
+      "model_quantity",
+      "instance_count",
+      "missing_required",
+      "by_level"
+    ],
+    "bom_trace.csv": [
+      "bom_item_key",
+      "source_model",
+      "snow_uniqueid",
+      "snow_instelemid",
+      "level",
+      "room_or_space",
+      "quantity"
+    ],
+    "bom_exceptions.csv": [
+      "source_model",
+      "snow_uniqueid",
+      "category",
+      "reason"
+    ],
+    "gc_items.csv": [
+      "bom_item_key",
+      "bom_description",
+      "spec_section",
+      "manufacturer",
+      "model",
+      "catalog_no",
+      "purchase_unit",
+      "purchase_size",
+      "waste_factor",
+      "supplier",
+      "procurement_package",
+      "subcontractor",
+      "unit_cost",
+      "lead_time_days",
+      "buyout_status"
+    ]
+  },
+  "procurement_quantity": "model_quantity * (1 + waste_factor), rounded up to purchase_size in purchase_unit; computed only from a filled gc_items.csv",
+  "validation": [
+    "no unique id twice in the trace",
+    "elements read = traced + exceptions; every exception has a reason",
+    "line quantity = sum of its trace",
+    "lines with missing_required > 0 listed for the owning discipline",
+    "every exported category has a rule or a deliberate exception reason",
+    "rules marked proposed are not used for buyout until confirmed"
+  ],
+  "reference_builder": "build_bom.py"
+}

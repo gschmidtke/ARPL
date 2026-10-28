@@ -1,0 +1,4 @@
+{
+  "version": "v02",
+  "instruction": "Category rule table (47 rules: category, source discipline, material condition, quantity basis, unit, field, grouping, required fields), purchase-phase filter, reference builder standards/bom/build_bom.py with reconciliation."
+}

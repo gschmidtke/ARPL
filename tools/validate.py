@@ -34,7 +34,7 @@ for fp in fpdoc["patterns"]:
     if fp.get("evidence_kind") not in voc.get("evidence_kinds", {}): errors.append(f"patterns/failure-patterns.json: {fp['id']} evidence_kind '{fp.get('evidence_kind')}' is not in vocabularies.evidence_kinds")
 # Hidden characters can carry instructions humans can't see (context poisoning)
 HIDDEN = re.compile("[\U000E0000-\U000E007F\u200B-\u200F\u202A-\u202E\u2060-\u2064\uFEFF]")
-for folder in ["library", "domains", "patterns", "project-workflows", "vocabularies", "inbox", "templates"]:
+for folder in ["library", "domains", "patterns", "project-workflows", "vocabularies", "inbox", "templates", "standards", "docs"]:
     for path in glob.glob(os.path.join(root, folder, "**", "*"), recursive=True):
         if os.path.isfile(path) and path.endswith((".json", ".md", ".txt", ".cs", ".py")):
             text = open(path, encoding="utf-8", errors="replace").read()

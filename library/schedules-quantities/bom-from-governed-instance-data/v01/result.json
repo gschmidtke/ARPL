@@ -1,0 +1,5 @@
+{
+  "result": "Plumbing pipe: Domestic Cold Water copper 1\" 5,348 LF, 1/2\" 1,288 LF; framing 16K6 5,758 LF, W18x55 3,554 LF; WATERCLOSET-001 36 EA; DOOR-027 25 EA. All 3,056 pipe lengths parse from Revit's feet-inch text.",
+  "problem": "Structural framing holds steel (LF) and concrete beams (CY); plumbing and lighting fixtures are modelled in two models; Facades is phase Existing. Grouping by category alone would mix units, double count and buy existing work.",
+  "found_by": "inspecting quantities per category and model"
+}

@@ -1,0 +1,4 @@
+{
+  "version": "v01",
+  "instruction": "Prototype on the six Snowdon exports of 2026-10-28 14:50: deduplicate by SNOW_UniqueId, group pipes by system class, material and size, framing by section and material, doors and fixtures by Type Mark."
+}

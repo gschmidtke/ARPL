@@ -68,6 +68,7 @@ Learn from what went wrong: each pack is listed under the failure patterns it re
 | [ARPL-PAR-0001](../library/parameters-data/material-description-keynote-governance/) Governed material Descriptions and Keynotes | 2 | W7 | candidate |
 | [ARPL-PAR-0003](../library/parameters-data/loin-instance-schedule-mirror-parameters-and-instance-key/) LOIN instance schedule per discipline: mirror category values into project parameters and give every instance a contractor key (discipline, element code, room or level, number) | 2 | W7 | candidate |
 | [ARPL-SCH-0002](../library/schedules-quantities/bom-needs-governed-parameters/) Cost per type can't carry a BOM | 2 | W7 | candidate |
+| [ARPL-SCH-0003](../library/schedules-quantities/bom-from-governed-instance-data/) BOM from governed instance data: deduplicated QTO grouped by a category rule table, every line traced to its model elements (implements ARPL-BOM-0001) | 2 | W7 | candidate |
 
 ## FP07: Correct element, wrong authority
 
@@ -279,6 +280,7 @@ Learn from what went wrong: each pack is listed under the failure patterns it re
 | Pack | Level | Work class | Status |
 |---|---|---|---|
 | [ARPL-QA-0002](../library/validation-qaqc/loin-completeness-from-instance-parameter-schedule/) LOIN completeness snapshot from an exported instance-parameter schedule: fill rate per model, field and category, family elements only | 2 | W7 | candidate |
+| [ARPL-SCH-0003](../library/schedules-quantities/bom-from-governed-instance-data/) BOM from governed instance data: deduplicated QTO grouped by a category rule table, every line traced to its model elements (implements ARPL-BOM-0001) | 2 | W7 | candidate |
 
 ## FP50: Batch report describes links as the batch opened them
 
@@ -318,6 +320,7 @@ Learn from what went wrong: each pack is listed under the failure patterns it re
 |---|---|---|---|
 | [ARPL-PAR-0003](../library/parameters-data/loin-instance-schedule-mirror-parameters-and-instance-key/) LOIN instance schedule per discipline: mirror category values into project parameters and give every instance a contractor key (discipline, element code, room or level, number) | 2 | W7 | candidate |
 | [ARPL-QA-0002](../library/validation-qaqc/loin-completeness-from-instance-parameter-schedule/) LOIN completeness snapshot from an exported instance-parameter schedule: fill rate per model, field and category, family elements only | 2 | W7 | candidate |
+| [ARPL-SCH-0003](../library/schedules-quantities/bom-from-governed-instance-data/) BOM from governed instance data: deduplicated QTO grouped by a category rule table, every line traced to its model elements (implements ARPL-BOM-0001) | 2 | W7 | candidate |
 
 ## FP56: Placed spaces with no area because links are not room bounding
 
