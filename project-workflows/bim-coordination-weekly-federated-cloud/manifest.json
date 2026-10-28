@@ -1,6 +1,6 @@
 {
   "id": "ARPL-PW-0003",
-  "revision": 2,
+  "revision": 3,
   "title": "Weekly BIM coordination of a federated cloud project: collect, check, correct, report, archive",
   "level": 4,
   "context": {
@@ -95,6 +95,17 @@
     },
     {
       "step": 9,
+      "work_class": "W6",
+      "do": "Print: one PDF booklet per model in the same unattended batch (ACC Gate 'Print PDFs from Print Intel workbooks'); set-up once per model: fixed print set, Print Intel workbook, PrintJobs row; check page counts against the sets and run the drift check when sheets change",
+      "packs": [
+        "ARPL-DOC-0003",
+        "ARPL-ADM-0004"
+      ],
+      "tools": "Revit print dialog, ZEN Export Print Intel and ACC Gate",
+      "without_tool": "bridge PDF export per model with PDFExportOptions over the same print sets"
+    },
+    {
+      "step": 10,
       "work_class": "W7",
       "do": "Archive: keep raw outputs in REPORTS/<date>; append the week's datasets to history; submit new lessons to the ARPL inbox (Revit and ZEN alike)",
       "packs": [],
@@ -193,7 +204,8 @@
       "ACC Gate Export Schedules: 6 models, 3 schedules each",
       "Clash run: 5 models opened in 33 s; 9 pairs in about 3 min; 365 intersections -> 282 clashes in 74 groups + 83 penetrations",
       "LOIN: 6 models, 20,327 instances, 30.9% against 95%",
-      "Batch cloud links: 156 links in 21 min (setup week)"
+      "Batch cloud links: 156 links in 21 min (setup week)",
+      "Print sets and Print Intel set-up: 6 models, 139 sheets, about 20 min once; booklets checked page for page against the sets (2026-10-28)"
     ],
     "estimate_minutes_per_week": [
       45,
@@ -244,6 +256,14 @@
       "revision": 2,
       "date": "2026-10-27",
       "change": "Run end to end on two projects; LOIN step and clash run added; report form, datasets and tool per step recorded, ZEN named (IN-0017)",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ]
+    },
+    {
+      "revision": 3,
+      "date": "2026-10-28",
+      "change": "Step 9 added: weekly PDF booklets via print sets, Print Intel and ACC Gate (ARPL-DOC-0003); archive becomes step 10 (IN-0018)",
       "contributors": [
         "Gottfried Schmidtke with Claude"
       ]

@@ -1,0 +1,5 @@
+{
+  "result": "Batch opened the models one by one and wrote PDF/<Model>_<Set>.pdf; the first two booklets matched their print sets page for page (27 and 12 pages). The remaining models were not observed before the session paused.",
+  "problem": "Posted from Home, the command did nothing until Home was left (FP53). The output folder came pre-filled with an earlier run's folder (FP51).",
+  "found_by": "screenshots after posting; PDF page count against the workbook"
+}

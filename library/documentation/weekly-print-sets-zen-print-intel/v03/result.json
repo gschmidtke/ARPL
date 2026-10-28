@@ -1,0 +1,5 @@
+{
+  "result": "6 models, 139 sheets: every set read back with would_add 0, would_remove 0 and no non-sheet views; sync 10-14 s; opens 12-15 s; set-up of all six about 20 minutes. Each workbook lists the set with the right sheet count and the model's cloud GUIDs. ACC Gate printed the first two models before the session paused: Plumbing 27 pages, Structural 12 pages, page count equal to the set, every sheet number present, each sheet at its own size (42 x 30 in). The other four were not observed.",
+  "problem": "The posted ACC Gate command did nothing while Revit Home was showing; it ran when Home was left (FP53). Closing the document the bridge holds as doc threw InvalidObjectException (FP54). In Select Views/Sheets the link 'Create a print set' opens online help, not a command. Export Print Intel overwrites the workbook without asking and its folder browser starts at Desktop every time; the ACC Gate output folder came pre-filled with another run's folder (FP51). The PrintSets sheet counts sheets only: a set of 12 views shows 0.",
+  "found_by": "watching the screen after every command, the read-back script, and counting PDF pages against the workbook"
+}

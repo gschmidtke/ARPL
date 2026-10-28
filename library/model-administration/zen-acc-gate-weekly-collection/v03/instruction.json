@@ -1,0 +1,4 @@
+{
+  "version": "v03",
+  "instruction": "Same 6-model project: post ACC Gate from Revit Home with no model open; action 'Print PDFs from Print Intel workbooks'; workbook folder with one Print Intel workbook per model; output folder typed as <workbook folder>/<date>."
+}

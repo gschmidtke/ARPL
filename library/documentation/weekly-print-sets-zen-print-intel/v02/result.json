@@ -1,0 +1,5 @@
+{
+  "result": "Architectural: 55 of 55 sheets, A602 schedule-only. The owner decided schedule-only sheets count.",
+  "problem": "Electrical sheets E300-E307 hold only panel schedules. These are PanelScheduleSheetInstance, not ScheduleSheetInstance, so the rule reported them as 'no views' and would have dropped all eight from the booklet (FP52).",
+  "found_by": "comparing the dry run with the model's exported sheet list before creating the set"
+}
