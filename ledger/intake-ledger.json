@@ -537,7 +537,7 @@
       "submitted": "1 no USG copy of the report form; 2 name ZEN in ADM-0003/LNK-0002; 3 GEO-0004 rule 8 is the USG handoff; 4 evidence_kind formal; 5 STRATA v0.2 and electrical baseline archive only; 6 update the index size sentence; 7 clarify; 8 keep RPT and ROLE prefixes",
       "files": [],
       "status": "filed",
-      "decision": "ARPL-ADM-0003 rev 2 and ARPL-LNK-0002 rev 2 name ZEN; ARPL-GEO-0004 rev 2 marks rule 8 as the USG handoff; vocabularies 1.2 add evidence_kinds (observed, mined), every failure pattern tagged and validate.py checks it; IN-0009/IN-0010 stay archive-only; AGENTS.md index size updated; RPT and ROLE prefixes kept. Question 7 explained to the owner in the session.",
+      "decision": "ARPL-ADM-0003 rev 2 and ARPL-LNK-0002 rev 2 name ZEN; ARPL-GEO-0004 rev 2 marks rule 8 as the USG handoff; vocabularies 1.2 add evidence_kinds (observed, mined), every failure pattern tagged and validate.py checks it; IN-0009/IN-0010 stay archive-only; AGENTS.md index size updated; RPT and ROLE prefixes kept. Question 7 explained to the owner in the session. Question 7 left to the curator by the owner: vocabularies accepted as they stand, status levels unchanged, index.json made a lean lookup file (schema 1.1, about 76 KB).",
       "resulting_ids": [
         "ARPL-ADM-0003",
         "ARPL-LNK-0002",

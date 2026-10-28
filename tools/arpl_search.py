@@ -24,7 +24,7 @@ def words(text):
     return {w for w in re.findall(r"[a-z0-9]+", text.lower()) if w not in STOP and len(w) > 2}
 
 def search(task, index=None, work_class=None, discipline=None, project_type=None, phase=None, revit=None, limit=5):
-    """Return ranked matches: project workflows first, then packs. Each hit carries its rule and path."""
+    """Return ranked matches: project workflows first, then packs. Each hit carries its lesson and path; the rule is in <path>/final/rule.json."""
     index = index or load_index()
     q = words(task)
     def score(fields, weights):
@@ -40,7 +40,7 @@ def search(task, index=None, work_class=None, discipline=None, project_type=None
         s -= 3 * len(q & words(" ".join(p.get("not_for", []))))
         if s > 0:
             hits.append({"kind": "pack", "score": s, "id": p["id"], "revision": p.get("revision"), "title": p["title"],
-                         "status": p["status"], "rule": p["rule"], "validation": p.get("validation"), "path": p["path"],
+                         "status": p["status"], "lesson": p.get("lesson"), "rule_file": p["path"] + "/final/rule.json", "path": p["path"],
                          "tested_in_your_version": (revit in p["revit_versions_tested"]) if revit else None})
     for w in index.get("project_workflows", []):
         s = 2 * len(q & words(w["title"] + " " + w["intent"] + " " + " ".join(st["do"] for st in w["steps"])))
