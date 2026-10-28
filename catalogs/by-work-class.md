@@ -71,8 +71,12 @@ Work class = what drives the result; it decides the preview and the proof of 'do
 | Pack | Level | Work class | Status |
 |---|---|---|---|
 | [ARPL-ADM-0003](../library/model-administration/batch-cloud-onboarding-with-registry/) Batch-onboard local models to the cloud and register each one: verify by document state, handle posted-command dialogs | 2 | W7 | candidate |
+| [ARPL-CRD-0002](../library/coordination/mep-spaces-enclose-through-room-bounding-links/) MEP spaces that exist but have no area: set the architectural (and facade) link types to Room Bounding in the MEP model | 2 | W7 | candidate |
 | [ARPL-LNK-0002](../library/links-coordinates/batch-cloud-links-by-shared-coordinates/) Batch-link cloud models from a registry and link matrix, placed by shared coordinates; verify by link transform | 2 | W7 | candidate |
 | [ARPL-PAR-0001](../library/parameters-data/material-description-keynote-governance/) Governed material Descriptions and Keynotes | 2 | W7 | candidate |
+| [ARPL-PAR-0002](../library/parameters-data/one-shared-parameter-file-per-company/) One shared parameter file per company: find every candidate, choose one master, edit it byte-exact, keep project parameters in a project group | 2 | W7 | candidate |
+| [ARPL-PAR-0003](../library/parameters-data/loin-instance-schedule-mirror-parameters-and-instance-key/) LOIN instance schedule per discipline: mirror category values into project parameters and give every instance a contractor key (discipline, element code, room or level, number) | 2 | W7 | candidate |
+| [ARPL-PAR-0004](../library/parameters-data/type-marks-zen-by-family-one-run-per-group/) Type Marks with ZEN Type Marks by Family: one run per family group, the search string becomes the prefix, Overwrite on for a clean re-run | 2 | W7 | candidate |
 | [ARPL-QA-0002](../library/validation-qaqc/loin-completeness-from-instance-parameter-schedule/) LOIN completeness snapshot from an exported instance-parameter schedule: fill rate per model, field and category, family elements only | 2 | W7 | candidate |
 | [ARPL-SCH-0001](../library/schedules-quantities/cost-estimate-construction-method-first/) Cost estimate priced the wrong construction | 2 | W7 | candidate |
 | [ARPL-SCH-0002](../library/schedules-quantities/bom-needs-governed-parameters/) Cost per type can't carry a BOM | 2 | W7 | candidate |

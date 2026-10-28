@@ -1,0 +1,72 @@
+{
+  "id": "ARPL-PAR-0002",
+  "revision": 1,
+  "title": "One shared parameter file per company: find every candidate, choose one master, edit it byte-exact, keep project parameters in a project group",
+  "use_when": [
+    "Starting coordinator work on a project and the shared parameter file in use is not known",
+    "Two teams report the same parameter with different GUIDs, or schedules lose values after a family reload",
+    "A typo in a shared parameter name must be fixed without breaking existing values"
+  ],
+  "not_for": [
+    "Annotation families that carry the review stamp (QAQC note block): those are families loaded into the model, not entries in the shared parameter file",
+    "Deciding the company's parameter naming standard: that is the owner's decision"
+  ],
+  "api_terms": [
+    "Application.SharedParametersFilename",
+    "DefinitionFile",
+    "ExternalDefinition.GUID",
+    "InstanceBinding",
+    "BindingMap.Insert",
+    "BindingMap.ReInsert"
+  ],
+  "level": 2,
+  "work_class": "W7",
+  "workflows": [
+    "parameters-data",
+    "model-administration"
+  ],
+  "disciplines": [
+    "bim-vdc",
+    "generic"
+  ],
+  "roles": [
+    "coordinator",
+    "bim-manager"
+  ],
+  "project_types": [
+    "generic"
+  ],
+  "phases": [
+    "generic"
+  ],
+  "revit_versions_tested": [
+    "2024"
+  ],
+  "environment": {
+    "revit_version": "2024.3 (24.3.60.12)",
+    "tool": "RevitBridge MCP with run_csharp",
+    "compiler": "Roslyn 4.8 (C# 12)",
+    "agent": "Claude (Anthropic)",
+    "batch_tool": "ZEN 1.2 (ACC Gate Export Schedules, Type Marks by Family)",
+    "model": "Autodesk sample Snowdon Towers, 6 workshared ACC cloud discipline models"
+  },
+  "failure_patterns": [
+    "FP03",
+    "FP31"
+  ],
+  "status": "candidate",
+  "contributors": [
+    "Gottfried Schmidtke with Claude"
+  ],
+  "recorded": "2026-10-28",
+  "changelog": [
+    {
+      "revision": 1,
+      "date": "2026-10-28",
+      "change": "First recorded (IN-0020, curator session with the owner)",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "lesson": "The schedule shows only what the instance itself holds: mirror the values the data needs into project parameters, key every instance once, and count the export by unique id.",
+  "rule": "1. Write the assumed LOIN per discipline first (ISO 7817-1 structure), with the stage each field is required at; the client's table replaces it when it exists.\n2. Keep one INSTANCE PARAMETERS schedule per model with the fields of its discipline, Category, Family, Type, the key and the unique id first.\n3. Mirror into project-prefixed instance parameters every value the multi-category schedule cannot show: element id, unique id, phase created, category-specific built-ins; electrical values come from the circuit, not the family.\n4. Instance key: <discipline letter>-<element code>-<location>-<nnn>; location = room number of the first room found (own room, model room at point, architectural link room at transformed point), else the level name as written in the model, else the host level, else the level below.\n5. Number per discipline, code and location from the next free number; never overwrite a key that exists; nested components and sub-elements get none (they belong to their parent).\n6. Run fills in batches (about 2,000 elements, a 25 s budget per call) and check state after any timeout before running again; sync with a comment only after a clean commit, relinquish, close.\n7. When reading the export, count unique ids, not rows; report nested, subcategory and system rows separately.",
+  "validation": [
+    "Keys in the model are unique (count by element).",
+    "Every keyed row in the export has a unique id; duplicate rows share it.",
+    "Fill rate per field and discipline reported against the LOIN table, with the assumption stated."
+  ]
+}

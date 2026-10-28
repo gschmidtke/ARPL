@@ -20,6 +20,9 @@ Entry for engineers and designers. 'generic' packs apply to every discipline.
 | [ARPL-GEO-0001](../library/geometry/adaptive-rig-reference-lines-not-model-lines/) Forms absorb model lines and break hosting | 2 | W2 | candidate |
 | [ARPL-LNK-0002](../library/links-coordinates/batch-cloud-links-by-shared-coordinates/) Batch-link cloud models from a registry and link matrix, placed by shared coordinates; verify by link transform | 2 | W7 | candidate |
 | [ARPL-MCX-0001](../library/model-context/read-camera-before-interpreting-markups/) Markup read without checking the camera | 1 | W8 | candidate |
+| [ARPL-PAR-0002](../library/parameters-data/one-shared-parameter-file-per-company/) One shared parameter file per company: find every candidate, choose one master, edit it byte-exact, keep project parameters in a project group | 2 | W7 | candidate |
+| [ARPL-PAR-0003](../library/parameters-data/loin-instance-schedule-mirror-parameters-and-instance-key/) LOIN instance schedule per discipline: mirror category values into project parameters and give every instance a contractor key (discipline, element code, room or level, number) | 2 | W7 | candidate |
+| [ARPL-PAR-0004](../library/parameters-data/type-marks-zen-by-family-one-run-per-group/) Type Marks with ZEN Type Marks by Family: one run per family group, the search string becomes the prefix, Overwrite on for a clean re-run | 2 | W7 | candidate |
 | [ARPL-QA-0002](../library/validation-qaqc/loin-completeness-from-instance-parameter-schedule/) LOIN completeness snapshot from an exported instance-parameter schedule: fill rate per model, field and category, family elements only | 2 | W7 | candidate |
 | [ARPL-VIEW-0001](../library/views-graphics/crop-overridden-by-scope-box/) Crops silently ignored | 1 | W6 | candidate |
 | [ARPL-VIEW-0002](../library/views-graphics/section-view-direction/) Section looking the wrong way | 1 | W6 | candidate |
@@ -48,6 +51,7 @@ Entry for engineers and designers. 'generic' packs apply to every discipline.
 | [ARPL-GEO-0005](../library/geometry/masterplan-from-neutral-rebuild-package/) Masterplan from a neutral rebuild package: floors, DirectShape envelopes and domain-based grids | 2 | W4 | candidate |
 | [ARPL-LNK-0001](../library/links-coordinates/shared-coordinates-before-splitting-a-campus/) Set shared coordinates on an authority building, then split a campus model into per-building files | 2 | W5 | candidate |
 | [ARPL-PAR-0001](../library/parameters-data/material-description-keynote-governance/) Governed material Descriptions and Keynotes | 2 | W7 | candidate |
+| [ARPL-PAR-0003](../library/parameters-data/loin-instance-schedule-mirror-parameters-and-instance-key/) LOIN instance schedule per discipline: mirror category values into project parameters and give every instance a contractor key (discipline, element code, room or level, number) | 2 | W7 | candidate |
 | [ARPL-PLH-0001](../library/placement-hosting/hosted-insert-sill-height-explicit/) Windows placed at sill 0 | 1 | W4 | candidate |
 | [ARPL-PLH-0002](../library/placement-hosting/door-swing-verified-by-geometry/) Door swing reported correct without a test | 2 | W4 | candidate |
 | [ARPL-QA-0001](../library/validation-qaqc/layout-preview-as-review-step/) Layout preview as a review step | 2 | W8 | candidate |
@@ -75,6 +79,7 @@ Entry for engineers and designers. 'generic' packs apply to every discipline.
 | [ARPL-DOC-0001](../library/documentation/assembly-shop-drawings/) Shop drawings: invalid references and swapped elevations | 2 | W6 | candidate |
 | [ARPL-FAM-0005](../library/family-authoring/parametric-component-families-for-wall-panels/) Component families for a wall panel | 2 | W1 | candidate |
 | [ARPL-GEO-0003](../library/geometry/wall-and-footing-corner-joins/) Footing corner notches | 2 | W4 | candidate |
+| [ARPL-PAR-0003](../library/parameters-data/loin-instance-schedule-mirror-parameters-and-instance-key/) LOIN instance schedule per discipline: mirror category values into project parameters and give every instance a contractor key (discipline, element code, room or level, number) | 2 | W7 | candidate |
 
 ## mechanical
 
@@ -82,6 +87,8 @@ Entry for engineers and designers. 'generic' packs apply to every discipline.
 |---|---|---|---|
 | [ARPL-CON-0001](../library/connectors-systems/equipment-power-connector-with-load-data/) Power connector without load parameters | 3 | W1 | candidate |
 | [ARPL-CRD-0001](../library/coordination/clash-run-by-solid-intersection/) Weekly clash run inside Revit by solid intersection across open cloud models; penetrations separated, clashes grouped, owner by routing priority | 2 | W8 | candidate |
+| [ARPL-CRD-0002](../library/coordination/mep-spaces-enclose-through-room-bounding-links/) MEP spaces that exist but have no area: set the architectural (and facade) link types to Room Bounding in the MEP model | 2 | W7 | candidate |
+| [ARPL-PAR-0003](../library/parameters-data/loin-instance-schedule-mirror-parameters-and-instance-key/) LOIN instance schedule per discipline: mirror category values into project parameters and give every instance a contractor key (discipline, element code, room or level, number) | 2 | W7 | candidate |
 
 ## electrical
 
@@ -91,6 +98,8 @@ Entry for engineers and designers. 'generic' packs apply to every discipline.
 | [ARPL-CON-0001](../library/connectors-systems/equipment-power-connector-with-load-data/) Power connector without load parameters | 3 | W1 | candidate |
 | [ARPL-CON-0002](../library/connectors-systems/residential-branch-circuits-from-confirmed-layout/) Residential branch circuits from a confirmed layout | 3 | W3 | candidate |
 | [ARPL-CRD-0001](../library/coordination/clash-run-by-solid-intersection/) Weekly clash run inside Revit by solid intersection across open cloud models; penetrations separated, clashes grouped, owner by routing priority | 2 | W8 | candidate |
+| [ARPL-CRD-0002](../library/coordination/mep-spaces-enclose-through-room-bounding-links/) MEP spaces that exist but have no area: set the architectural (and facade) link types to Room Bounding in the MEP model | 2 | W7 | candidate |
+| [ARPL-PAR-0003](../library/parameters-data/loin-instance-schedule-mirror-parameters-and-instance-key/) LOIN instance schedule per discipline: mirror category values into project parameters and give every instance a contractor key (discipline, element code, room or level, number) | 2 | W7 | candidate |
 
 ## plumbing
 
@@ -98,6 +107,9 @@ Entry for engineers and designers. 'generic' packs apply to every discipline.
 |---|---|---|---|
 | [ARPL-ASM-0008](../library/assemblies-fabrication/slab-on-grade-from-the-framing-layout/) Slab on grade from the framing layout (anchors, recess, stub-ups) | 2 | W3 | candidate |
 | [ARPL-CRD-0001](../library/coordination/clash-run-by-solid-intersection/) Weekly clash run inside Revit by solid intersection across open cloud models; penetrations separated, clashes grouped, owner by routing priority | 2 | W8 | candidate |
+| [ARPL-CRD-0002](../library/coordination/mep-spaces-enclose-through-room-bounding-links/) MEP spaces that exist but have no area: set the architectural (and facade) link types to Room Bounding in the MEP model | 2 | W7 | candidate |
+| [ARPL-PAR-0003](../library/parameters-data/loin-instance-schedule-mirror-parameters-and-instance-key/) LOIN instance schedule per discipline: mirror category values into project parameters and give every instance a contractor key (discipline, element code, room or level, number) | 2 | W7 | candidate |
+| [ARPL-PAR-0004](../library/parameters-data/type-marks-zen-by-family-one-run-per-group/) Type Marks with ZEN Type Marks by Family: one run per family group, the search string becomes the prefix, Overwrite on for a clean re-run | 2 | W7 | candidate |
 
 ## audio-av
 
@@ -124,11 +136,15 @@ Entry for engineers and designers. 'generic' packs apply to every discipline.
 | [ARPL-ADM-0003](../library/model-administration/batch-cloud-onboarding-with-registry/) Batch-onboard local models to the cloud and register each one: verify by document state, handle posted-command dialogs | 2 | W7 | candidate |
 | [ARPL-ADM-0004](../library/model-administration/zen-acc-gate-weekly-collection/) ZEN ACC Gate as the weekly collection batch: health, links and worksets, schedule exports; what each output contains and how to drive it from a bridge | 2 | W8 | candidate |
 | [ARPL-CRD-0001](../library/coordination/clash-run-by-solid-intersection/) Weekly clash run inside Revit by solid intersection across open cloud models; penetrations separated, clashes grouped, owner by routing priority | 2 | W8 | candidate |
+| [ARPL-CRD-0002](../library/coordination/mep-spaces-enclose-through-room-bounding-links/) MEP spaces that exist but have no area: set the architectural (and facade) link types to Room Bounding in the MEP model | 2 | W7 | candidate |
 | [ARPL-DOC-0003](../library/documentation/weekly-print-sets-zen-print-intel/) Weekly print-set booklets with ZEN: one Revit print set per model, Print Intel workbook, ACC Gate Print PDFs | 2 | W6 | candidate |
 | [ARPL-FAM-0004](../library/family-authoring/annotation-family-version-and-reload/) Annotation family from a newer Revit version | 2 | W1 | candidate |
 | [ARPL-LNK-0001](../library/links-coordinates/shared-coordinates-before-splitting-a-campus/) Set shared coordinates on an authority building, then split a campus model into per-building files | 2 | W5 | candidate |
 | [ARPL-LNK-0002](../library/links-coordinates/batch-cloud-links-by-shared-coordinates/) Batch-link cloud models from a registry and link matrix, placed by shared coordinates; verify by link transform | 2 | W7 | candidate |
 | [ARPL-PAR-0001](../library/parameters-data/material-description-keynote-governance/) Governed material Descriptions and Keynotes | 2 | W7 | candidate |
+| [ARPL-PAR-0002](../library/parameters-data/one-shared-parameter-file-per-company/) One shared parameter file per company: find every candidate, choose one master, edit it byte-exact, keep project parameters in a project group | 2 | W7 | candidate |
+| [ARPL-PAR-0003](../library/parameters-data/loin-instance-schedule-mirror-parameters-and-instance-key/) LOIN instance schedule per discipline: mirror category values into project parameters and give every instance a contractor key (discipline, element code, room or level, number) | 2 | W7 | candidate |
+| [ARPL-PAR-0004](../library/parameters-data/type-marks-zen-by-family-one-run-per-group/) Type Marks with ZEN Type Marks by Family: one run per family group, the search string becomes the prefix, Overwrite on for a clean re-run | 2 | W7 | candidate |
 | [ARPL-QA-0002](../library/validation-qaqc/loin-completeness-from-instance-parameter-schedule/) LOIN completeness snapshot from an exported instance-parameter schedule: fill rate per model, field and category, family elements only | 2 | W7 | candidate |
 | [ARPL-SCH-0002](../library/schedules-quantities/bom-needs-governed-parameters/) Cost per type can't carry a BOM | 2 | W7 | candidate |
 

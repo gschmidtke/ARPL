@@ -1,0 +1,4 @@
+{
+  "version": "v01",
+  "instruction": "In the Snowdon HVAC model: count spaces with area > 0 and instances with a Space; read Room Bounding on each link type."
+}

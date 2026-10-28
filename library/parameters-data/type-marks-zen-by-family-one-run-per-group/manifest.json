@@ -1,0 +1,69 @@
+{
+  "id": "ARPL-PAR-0004",
+  "revision": 1,
+  "title": "Type Marks with ZEN Type Marks by Family: one run per family group, the search string becomes the prefix, Overwrite on for a clean re-run",
+  "use_when": [
+    "A model has no or inconsistent Type Marks and the types can be grouped by a word in the family name",
+    "Type Marks must be redone after the grouping changed"
+  ],
+  "not_for": [
+    "Pipe, duct and fitting system types (no family-name group); leave them or mark them by system",
+    "Firm-specific code lists that do not follow family names: enter the code as the search string only if family names contain it"
+  ],
+  "api_terms": [
+    "RevitCommandId.LookupCommandId",
+    "UIApplication.PostCommand",
+    "BuiltInParameter.ALL_MODEL_TYPE_MARK"
+  ],
+  "level": 2,
+  "work_class": "W7",
+  "workflows": [
+    "parameters-data",
+    "model-administration"
+  ],
+  "disciplines": [
+    "plumbing",
+    "generic",
+    "bim-vdc"
+  ],
+  "roles": [
+    "coordinator",
+    "bim-specialist"
+  ],
+  "project_types": [
+    "generic"
+  ],
+  "phases": [
+    "generic"
+  ],
+  "revit_versions_tested": [
+    "2024"
+  ],
+  "environment": {
+    "revit_version": "2024.3 (24.3.60.12)",
+    "tool": "RevitBridge MCP with run_csharp",
+    "compiler": "Roslyn 4.8 (C# 12)",
+    "agent": "Claude (Anthropic)",
+    "batch_tool": "ZEN 1.2 (ACC Gate Export Schedules, Type Marks by Family)",
+    "model": "Autodesk sample Snowdon Towers, 6 workshared ACC cloud discipline models"
+  },
+  "failure_patterns": [
+    "FP41",
+    "FP58"
+  ],
+  "status": "candidate",
+  "contributors": [
+    "Gottfried Schmidtke with Claude"
+  ],
+  "recorded": "2026-10-28",
+  "changelog": [
+    {
+      "revision": 1,
+      "date": "2026-10-28",
+      "change": "First recorded (IN-0020, curator session with the owner)",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ]
+    }
+  ]
+}

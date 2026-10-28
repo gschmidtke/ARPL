@@ -27,6 +27,7 @@ Learn from what went wrong: each pack is listed under the failure patterns it re
 |---|---|---|---|
 | [ARPL-ASM-0003](../library/assemblies-fabrication/wall-panels-families-not-parts/) Revit Parts for wall layers: a dead end | 2 | W3 | candidate |
 | [ARPL-PAR-0001](../library/parameters-data/material-description-keynote-governance/) Governed material Descriptions and Keynotes | 2 | W7 | candidate |
+| [ARPL-PAR-0002](../library/parameters-data/one-shared-parameter-file-per-company/) One shared parameter file per company: find every candidate, choose one master, edit it byte-exact, keep project parameters in a project group | 2 | W7 | candidate |
 
 ## FP04: Missing fabrication or material constraint
 
@@ -65,6 +66,7 @@ Learn from what went wrong: each pack is listed under the failure patterns it re
 |---|---|---|---|
 | [ARPL-ASM-0006](../library/assemblies-fabrication/sloped-roof-assembly-component-families/) Sloped roof assembly from component families | 2 | W3 | candidate |
 | [ARPL-PAR-0001](../library/parameters-data/material-description-keynote-governance/) Governed material Descriptions and Keynotes | 2 | W7 | candidate |
+| [ARPL-PAR-0003](../library/parameters-data/loin-instance-schedule-mirror-parameters-and-instance-key/) LOIN instance schedule per discipline: mirror category values into project parameters and give every instance a contractor key (discipline, element code, room or level, number) | 2 | W7 | candidate |
 | [ARPL-SCH-0002](../library/schedules-quantities/bom-needs-governed-parameters/) Cost per type can't carry a BOM | 2 | W7 | candidate |
 
 ## FP07: Correct element, wrong authority
@@ -107,6 +109,7 @@ Learn from what went wrong: each pack is listed under the failure patterns it re
 |---|---|---|---|
 | [ARPL-ADM-0001](../library/model-administration/exception-in-open-transaction-crashes-revit/) An exception inside an open Transaction crashed Revit | 1 | W5 | candidate |
 | [ARPL-ASM-0003](../library/assemblies-fabrication/wall-panels-families-not-parts/) Revit Parts for wall layers: a dead end | 2 | W3 | candidate |
+| [ARPL-CRD-0002](../library/coordination/mep-spaces-enclose-through-room-bounding-links/) MEP spaces that exist but have no area: set the architectural (and facade) link types to Room Bounding in the MEP model | 2 | W7 | candidate |
 | [ARPL-DOC-0001](../library/documentation/assembly-shop-drawings/) Shop drawings: invalid references and swapped elevations | 2 | W6 | candidate |
 | [ARPL-GEO-0004](../library/geometry/concept-model-from-neutral-spec-staged-build/) Concept model from a neutral spec: staged, idempotent build with visual gates | 2 | W4 | candidate |
 
@@ -171,6 +174,7 @@ Learn from what went wrong: each pack is listed under the failure patterns it re
 |---|---|---|---|
 | [ARPL-ADM-0003](../library/model-administration/batch-cloud-onboarding-with-registry/) Batch-onboard local models to the cloud and register each one: verify by document state, handle posted-command dialogs | 2 | W7 | candidate |
 | [ARPL-GEO-0004](../library/geometry/concept-model-from-neutral-spec-staged-build/) Concept model from a neutral spec: staged, idempotent build with visual gates | 2 | W4 | candidate |
+| [ARPL-PAR-0003](../library/parameters-data/loin-instance-schedule-mirror-parameters-and-instance-key/) LOIN instance schedule per discipline: mirror category values into project parameters and give every instance a contractor key (discipline, element code, room or level, number) | 2 | W7 | candidate |
 
 ## FP23: Viewport outline inflated by elements outside the crop
 
@@ -196,6 +200,7 @@ Learn from what went wrong: each pack is listed under the failure patterns it re
 | Pack | Level | Work class | Status |
 |---|---|---|---|
 | [ARPL-GEO-0005](../library/geometry/masterplan-from-neutral-rebuild-package/) Masterplan from a neutral rebuild package: floors, DirectShape envelopes and domain-based grids | 2 | W4 | candidate |
+| [ARPL-PAR-0002](../library/parameters-data/one-shared-parameter-file-per-company/) One shared parameter file per company: find every candidate, choose one master, edit it byte-exact, keep project parameters in a project group | 2 | W7 | candidate |
 
 ## FP32: Posted command assumed immediate
 
@@ -223,6 +228,7 @@ Learn from what went wrong: each pack is listed under the failure patterns it re
 |---|---|---|---|
 | [ARPL-ADM-0003](../library/model-administration/batch-cloud-onboarding-with-registry/) Batch-onboard local models to the cloud and register each one: verify by document state, handle posted-command dialogs | 2 | W7 | candidate |
 | [ARPL-GEO-0005](../library/geometry/masterplan-from-neutral-rebuild-package/) Masterplan from a neutral rebuild package: floors, DirectShape envelopes and domain-based grids | 2 | W4 | candidate |
+| [ARPL-PAR-0004](../library/parameters-data/type-marks-zen-by-family-one-run-per-group/) Type Marks with ZEN Type Marks by Family: one run per family group, the search string becomes the prefix, Overwrite on for a clean re-run | 2 | W7 | candidate |
 
 ## FP42: Null-conditional parameter write skips silently
 
@@ -305,4 +311,31 @@ Learn from what went wrong: each pack is listed under the failure patterns it re
 | Pack | Level | Work class | Status |
 |---|---|---|---|
 | [ARPL-DOC-0003](../library/documentation/weekly-print-sets-zen-print-intel/) Weekly print-set booklets with ZEN: one Revit print set per model, Print Intel workbook, ACC Gate Print PDFs | 2 | W6 | candidate |
+
+## FP55: Schedule export repeats one element
+
+| Pack | Level | Work class | Status |
+|---|---|---|---|
+| [ARPL-PAR-0003](../library/parameters-data/loin-instance-schedule-mirror-parameters-and-instance-key/) LOIN instance schedule per discipline: mirror category values into project parameters and give every instance a contractor key (discipline, element code, room or level, number) | 2 | W7 | candidate |
+| [ARPL-QA-0002](../library/validation-qaqc/loin-completeness-from-instance-parameter-schedule/) LOIN completeness snapshot from an exported instance-parameter schedule: fill rate per model, field and category, family elements only | 2 | W7 | candidate |
+
+## FP56: Placed spaces with no area because links are not room bounding
+
+| Pack | Level | Work class | Status |
+|---|---|---|---|
+| [ARPL-CRD-0002](../library/coordination/mep-spaces-enclose-through-room-bounding-links/) MEP spaces that exist but have no area: set the architectural (and facade) link types to Room Bounding in the MEP model | 2 | W7 | candidate |
+| [ARPL-QA-0002](../library/validation-qaqc/loin-completeness-from-instance-parameter-schedule/) LOIN completeness snapshot from an exported instance-parameter schedule: fill rate per model, field and category, family elements only | 2 | W7 | candidate |
+
+## FP57: Electrical value read from the family instead of the circuit
+
+| Pack | Level | Work class | Status |
+|---|---|---|---|
+| [ARPL-PAR-0003](../library/parameters-data/loin-instance-schedule-mirror-parameters-and-instance-key/) LOIN instance schedule per discipline: mirror category values into project parameters and give every instance a contractor key (discipline, element code, room or level, number) | 2 | W7 | candidate |
+| [ARPL-QA-0002](../library/validation-qaqc/loin-completeness-from-instance-parameter-schedule/) LOIN completeness snapshot from an exported instance-parameter schedule: fill rate per model, field and category, family elements only | 2 | W7 | candidate |
+
+## FP58: One field run as a list where the tool expects one value per run
+
+| Pack | Level | Work class | Status |
+|---|---|---|---|
+| [ARPL-PAR-0004](../library/parameters-data/type-marks-zen-by-family-one-run-per-group/) Type Marks with ZEN Type Marks by Family: one run per family group, the search string becomes the prefix, Overwrite on for a clean re-run | 2 | W7 | candidate |
 

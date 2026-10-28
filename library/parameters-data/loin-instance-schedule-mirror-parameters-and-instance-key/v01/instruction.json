@@ -1,0 +1,4 @@
+{
+  "version": "v01",
+  "instruction": "Derive per-discipline information requirements from ISO 7817-1 (purpose, milestone, actor, object; identification and information content) into a workbook (fields, schedule per discipline, requirement per stage, decisions); project prefix SNOW_; classification by both Uniformat (Assembly Code) and OmniClass."
+}

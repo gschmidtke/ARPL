@@ -1,0 +1,4 @@
+{
+  "version": "v02",
+  "instruction": "One run per search string, Overwrite on, start 1; read the ZEN summary after each run (prefix used, matched, assigned, skipped, sample updates); read Type Marks back; sync with the list of runs in the comment."
+}

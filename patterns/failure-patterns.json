@@ -836,6 +836,87 @@
       ],
       "revit_versions": "2024",
       "intake": "IN-0018"
+    },
+    {
+      "id": "FP55",
+      "name": "Schedule export repeats one element",
+      "meaning": "An exported multi-category schedule can list one element on several rows (seen: multi-level stairs exported twice with the same element id). Counting rows reports duplicate keys that are not duplicates in the model. Defence: count and deduplicate export rows by unique id; check duplicates against the model before reporting them.",
+      "found_by": "grouping the duplicate keys by element id",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ],
+      "status": "candidate",
+      "api_terms": [
+        "ViewSchedule.Export",
+        "Element.UniqueId"
+      ],
+      "revit_versions": "2024",
+      "intake": "IN-0020"
+    },
+    {
+      "id": "FP56",
+      "name": "Placed spaces with no area because links are not room bounding",
+      "meaning": "MEP spaces are placed but report area 0, so every instance's Space is empty and Space fields in schedules stay blank. The architectural link type in the MEP model has Room Bounding off. Defence: check space area before reading Space fields; set Room Bounding on the architecture and facade link types.",
+      "found_by": "counting enclosed spaces and reading the link types",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ],
+      "status": "candidate",
+      "api_terms": [
+        "RevitLinkType",
+        "BuiltInParameter.WALL_ATTR_ROOM_BOUNDING",
+        "SpatialElement.Area"
+      ],
+      "revit_versions": "2024",
+      "intake": "IN-0020"
+    },
+    {
+      "id": "FP57",
+      "name": "Electrical value read from the family instead of the circuit",
+      "meaning": "Voltage on lighting fixtures, devices and equipment is usually empty or only a type value on the family; the real value is the circuit's. Mirroring the family parameter gives 0% fill. Defence: read voltage from the element's power circuit (ElectricalSystem); read load from the family's own load parameters or the sum of panel phase loads.",
+      "found_by": "fill-rate check of the exported dataset",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ],
+      "status": "candidate",
+      "api_terms": [
+        "FamilyInstance.MEPModel",
+        "MEPModel.GetElectricalSystems",
+        "ElectricalSystem",
+        "BuiltInParameter.RBS_ELEC_VOLTAGE"
+      ],
+      "revit_versions": "2024",
+      "intake": "IN-0020"
+    },
+    {
+      "id": "FP58",
+      "name": "One field run as a list where the tool expects one value per run",
+      "meaning": "A tool field that accepts a separated list (ZEN Type Marks by Family search strings) was filled with every group at once, while the tool's intended use is one group string per run, which also becomes the prefix. Defence: read the tool's summary after a trial run; run once per group.",
+      "found_by": "owner review",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ],
+      "status": "candidate",
+      "api_terms": [
+        "UIApplication.PostCommand"
+      ],
+      "revit_versions": "2024",
+      "intake": "IN-0020"
+    },
+    {
+      "id": "FP59",
+      "name": "A finished batch's completion dialog blocks the next call",
+      "meaning": "The completion message of a batch run (ZEN ACC Gate 'Batch actions completed') stayed open after the run; the next bridge call waited 60 s and timed out. Defence: take a screenshot before the first bridge call after any batch run and close leftover dialogs.",
+      "found_by": "screenshot after the timeout",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ],
+      "status": "candidate",
+      "api_terms": [
+        "UIApplication.PostCommand"
+      ],
+      "revit_versions": "2024",
+      "intake": "IN-0020"
     }
   ]
 }

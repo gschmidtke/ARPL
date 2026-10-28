@@ -25,6 +25,7 @@ ARPL becomes trustworthy when packs are reproduced by other people, in other mod
 | [ARPL-CON-0001](../library/connectors-systems/equipment-power-connector-with-load-data/) Power connector without load parameters | Revit 2024 | candidate |
 | [ARPL-CON-0002](../library/connectors-systems/residential-branch-circuits-from-confirmed-layout/) Residential branch circuits from a confirmed layout | Revit 2024 | candidate |
 | [ARPL-CRD-0001](../library/coordination/clash-run-by-solid-intersection/) Weekly clash run inside Revit by solid intersection across open cloud models; penetrations separated, clashes grouped, owner by routing priority | Revit 2024 | candidate |
+| [ARPL-CRD-0002](../library/coordination/mep-spaces-enclose-through-room-bounding-links/) MEP spaces that exist but have no area: set the architectural (and facade) link types to Room Bounding in the MEP model | Revit 2024 | candidate |
 | [ARPL-DOC-0001](../library/documentation/assembly-shop-drawings/) Shop drawings: invalid references and swapped elevations | Revit 2024 | candidate |
 | [ARPL-DOC-0002](../library/documentation/dimension-style-in-trade-units/) Project units round framing dimensions | Revit 2024 | candidate |
 | [ARPL-DOC-0003](../library/documentation/weekly-print-sets-zen-print-intel/) Weekly print-set booklets with ZEN: one Revit print set per model, Print Intel workbook, ACC Gate Print PDFs | Revit 2024 | candidate |
@@ -42,6 +43,9 @@ ARPL becomes trustworthy when packs are reproduced by other people, in other mod
 | [ARPL-LNK-0002](../library/links-coordinates/batch-cloud-links-by-shared-coordinates/) Batch-link cloud models from a registry and link matrix, placed by shared coordinates; verify by link transform | Revit 2024 | candidate |
 | [ARPL-MCX-0001](../library/model-context/read-camera-before-interpreting-markups/) Markup read without checking the camera | Revit 2024 | candidate |
 | [ARPL-PAR-0001](../library/parameters-data/material-description-keynote-governance/) Governed material Descriptions and Keynotes | Revit 2024 | candidate |
+| [ARPL-PAR-0002](../library/parameters-data/one-shared-parameter-file-per-company/) One shared parameter file per company: find every candidate, choose one master, edit it byte-exact, keep project parameters in a project group | Revit 2024 | candidate |
+| [ARPL-PAR-0003](../library/parameters-data/loin-instance-schedule-mirror-parameters-and-instance-key/) LOIN instance schedule per discipline: mirror category values into project parameters and give every instance a contractor key (discipline, element code, room or level, number) | Revit 2024 | candidate |
+| [ARPL-PAR-0004](../library/parameters-data/type-marks-zen-by-family-one-run-per-group/) Type Marks with ZEN Type Marks by Family: one run per family group, the search string becomes the prefix, Overwrite on for a clean re-run | Revit 2024 | candidate |
 | [ARPL-PLH-0001](../library/placement-hosting/hosted-insert-sill-height-explicit/) Windows placed at sill 0 | Revit 2024 | candidate |
 | [ARPL-PLH-0002](../library/placement-hosting/door-swing-verified-by-geometry/) Door swing reported correct without a test | Revit 2024 | candidate |
 | [ARPL-QA-0001](../library/validation-qaqc/layout-preview-as-review-step/) Layout preview as a review step | Revit 2024 | candidate |
@@ -57,4 +61,4 @@ No pack serves these yet. Your first protocol here starts a new branch of the li
 
 - **Disciplines:** fire-protection, civil-site, lighting, ict-data, security, facilities
 - **Project types:** data-centers, airports, theme-parks, education, hospitality, commercial, industrial, infrastructure
-- **Phases:** construction, operations
+- **Phases:** operations

@@ -1092,6 +1092,71 @@
       "unverified_in_current_revit": true
     },
     {
+      "id": "ARPL-CRD-0002",
+      "revision": 1,
+      "title": "MEP spaces that exist but have no area: set the architectural (and facade) link types to Room Bounding in the MEP model",
+      "environment": {
+        "revit_version": "2024.3 (24.3.60.12)",
+        "tool": "RevitBridge MCP with run_csharp",
+        "compiler": "Roslyn 4.8 (C# 12)",
+        "agent": "Claude (Anthropic)",
+        "batch_tool": "ZEN 1.2 (ACC Gate Export Schedules, Type Marks by Family)",
+        "model": "Autodesk sample Snowdon Towers, 6 workshared ACC cloud discipline models"
+      },
+      "use_when": [
+        "Space: Number / Space: Name are empty in MEP schedules although spaces are placed",
+        "Spaces report area 0 or 'Not enclosed' in a model that links the architecture"
+      ],
+      "not_for": [
+        "Moving, deleting or renumbering spaces: that needs the discipline lead",
+        "Overlapping space volumes (upper limit / offset): report them to the lead"
+      ],
+      "api_terms": [
+        "RevitLinkType",
+        "BuiltInParameter.WALL_ATTR_ROOM_BOUNDING",
+        "SpatialElement.Area",
+        "FamilyInstance.Space"
+      ],
+      "level": 2,
+      "work_class": "W7",
+      "workflows": [
+        "coordination",
+        "spatial-planning",
+        "links-coordinates"
+      ],
+      "disciplines": [
+        "mechanical",
+        "electrical",
+        "plumbing",
+        "bim-vdc"
+      ],
+      "project_types": [
+        "generic"
+      ],
+      "phases": [
+        "generic"
+      ],
+      "revit_versions_tested": [
+        "2024"
+      ],
+      "failure_patterns": [
+        "FP56",
+        "FP11"
+      ],
+      "status": "candidate",
+      "rule": "1. Check spaces for area > 0 before reading Space fields; zero area everywhere points at the links.\n2. Set Room Bounding on the link types that carry walls, floors and curtain walls (architecture, facades), not on MEP or structural links unless the lead asks.\n3. Expect a 'Space volumes overlap' warning on commit; accept it and list the spaces for the lead instead of changing limits.\n4. Read back: spaces enclosed, instances with a space; sync with a comment.",
+      "validation": [
+        "Every space has area > 0 or is listed with a reason.",
+        "Instances with a Space counted before and after."
+      ],
+      "validation_checks": [],
+      "path": "library/coordination/mep-spaces-enclose-through-room-bounding-links",
+      "last_evidence": "2026-10-28",
+      "review_due": "2027-10-28",
+      "current_revit": "2027",
+      "unverified_in_current_revit": true
+    },
+    {
       "id": "ARPL-DOC-0001",
       "revision": 3,
       "title": "Shop drawings: invalid references and swapped elevations",
@@ -2524,6 +2589,87 @@
       "unverified_in_current_revit": true
     },
     {
+      "id": "ARPL-PAR-0003",
+      "revision": 1,
+      "title": "LOIN instance schedule per discipline: mirror category values into project parameters and give every instance a contractor key (discipline, element code, room or level, number)",
+      "environment": {
+        "revit_version": "2024.3 (24.3.60.12)",
+        "tool": "RevitBridge MCP with run_csharp",
+        "compiler": "Roslyn 4.8 (C# 12)",
+        "agent": "Claude (Anthropic)",
+        "batch_tool": "ZEN 1.2 (ACC Gate Export Schedules, Type Marks by Family)",
+        "model": "Autodesk sample Snowdon Towers, 6 workshared ACC cloud discipline models"
+      },
+      "use_when": [
+        "A client or project requires an information delivery per discipline (LOIN, ISO 19650 / ISO 7817-1) and a weekly dataset is read from one standard instance schedule per model",
+        "Contractors, bidders or site staff need to name one instance unambiguously (this door, not the door type)",
+        "The multi-category schedule cannot show a category-specific value (voltage, flow, fire rating, element id)"
+      ],
+      "not_for": [
+        "Type identification: Type Mark stays the type key (see ARPL-PAR-0004)",
+        "Asset tagging for operations, where the client gives its own asset code scheme"
+      ],
+      "api_terms": [
+        "ViewSchedule.CreateSchedule",
+        "ScheduleDefinition.GetSchedulableFields",
+        "InstanceBinding",
+        "GroupTypeId.IdentityData",
+        "Document.GetRoomAtPoint",
+        "RevitLinkInstance.GetTransform",
+        "FamilyInstance.Room",
+        "FamilyInstance.MEPModel",
+        "ElectricalSystem",
+        "BuiltInParameter.RBS_ELEC_VOLTAGE",
+        "SynchronizeWithCentralOptions"
+      ],
+      "level": 2,
+      "work_class": "W7",
+      "workflows": [
+        "parameters-data",
+        "schedules-quantities",
+        "validation-qaqc"
+      ],
+      "disciplines": [
+        "bim-vdc",
+        "architecture",
+        "structural",
+        "mechanical",
+        "electrical",
+        "plumbing",
+        "generic"
+      ],
+      "project_types": [
+        "generic"
+      ],
+      "phases": [
+        "design-development",
+        "construction-documents",
+        "construction"
+      ],
+      "revit_versions_tested": [
+        "2024"
+      ],
+      "failure_patterns": [
+        "FP06",
+        "FP22",
+        "FP55",
+        "FP57"
+      ],
+      "status": "candidate",
+      "rule": "1. Write the assumed LOIN per discipline first (ISO 7817-1 structure), with the stage each field is required at; the client's table replaces it when it exists.\n2. Keep one INSTANCE PARAMETERS schedule per model with the fields of its discipline, Category, Family, Type, the key and the unique id first.\n3. Mirror into project-prefixed instance parameters every value the multi-category schedule cannot show: element id, unique id, phase created, category-specific built-ins; electrical values come from the circuit, not the family.\n4. Instance key: <discipline letter>-<element code>-<location>-<nnn>; location = room number of the first room found (own room, model room at point, architectural link room at transformed point), else the level name as written in the model, else the host level, else the level below.\n5. Number per discipline, code and location from the next free number; never overwrite a key that exists; nested components and sub-elements get none (they belong to their parent).\n6. Run fills in batches (about 2,000 elements, a 25 s budget per call) and check state after any timeout before running again; sync with a comment only after a clean commit, relinquish, close.\n7. When reading the export, count unique ids, not rows; report nested, subcategory and system rows separately.",
+      "validation": [
+        "Keys in the model are unique (count by element).",
+        "Every keyed row in the export has a unique id; duplicate rows share it.",
+        "Fill rate per field and discipline reported against the LOIN table, with the assumption stated."
+      ],
+      "validation_checks": [],
+      "path": "library/parameters-data/loin-instance-schedule-mirror-parameters-and-instance-key",
+      "last_evidence": "2026-10-28",
+      "review_due": "2027-10-28",
+      "current_revit": "2027",
+      "unverified_in_current_revit": true
+    },
+    {
       "id": "ARPL-PAR-0001",
       "revision": 1,
       "title": "Governed material Descriptions and Keynotes",
@@ -2623,6 +2769,135 @@
       "path": "library/parameters-data/material-description-keynote-governance",
       "last_evidence": "2026-10-23",
       "review_due": "2027-10-23",
+      "current_revit": "2027",
+      "unverified_in_current_revit": true
+    },
+    {
+      "id": "ARPL-PAR-0002",
+      "revision": 1,
+      "title": "One shared parameter file per company: find every candidate, choose one master, edit it byte-exact, keep project parameters in a project group",
+      "environment": {
+        "revit_version": "2024.3 (24.3.60.12)",
+        "tool": "RevitBridge MCP with run_csharp",
+        "compiler": "Roslyn 4.8 (C# 12)",
+        "agent": "Claude (Anthropic)",
+        "batch_tool": "ZEN 1.2 (ACC Gate Export Schedules, Type Marks by Family)",
+        "model": "Autodesk sample Snowdon Towers, 6 workshared ACC cloud discipline models"
+      },
+      "use_when": [
+        "Starting coordinator work on a project and the shared parameter file in use is not known",
+        "Two teams report the same parameter with different GUIDs, or schedules lose values after a family reload",
+        "A typo in a shared parameter name must be fixed without breaking existing values"
+      ],
+      "not_for": [
+        "Annotation families that carry the review stamp (QAQC note block): those are families loaded into the model, not entries in the shared parameter file",
+        "Deciding the company's parameter naming standard: that is the owner's decision"
+      ],
+      "api_terms": [
+        "Application.SharedParametersFilename",
+        "DefinitionFile",
+        "ExternalDefinition.GUID",
+        "InstanceBinding",
+        "BindingMap.Insert",
+        "BindingMap.ReInsert"
+      ],
+      "level": 2,
+      "work_class": "W7",
+      "workflows": [
+        "parameters-data",
+        "model-administration"
+      ],
+      "disciplines": [
+        "bim-vdc",
+        "generic"
+      ],
+      "project_types": [
+        "generic"
+      ],
+      "phases": [
+        "generic"
+      ],
+      "revit_versions_tested": [
+        "2024"
+      ],
+      "failure_patterns": [
+        "FP03",
+        "FP31"
+      ],
+      "status": "candidate",
+      "rule": "1. Before any parameter work, list every shared parameter file the company and project can reach (cloud project files, local folders, the path set in Revit) and compare GUIDs with the parameters bound in the models.\n2. Choose one master file per company with the owner; record the others as superseded and stop binding from them.\n3. Back up the master file (dated copy) before every edit.\n4. Fix a misspelled name by renaming the entry and keeping its GUID; never delete and recreate, which makes a new parameter and orphans the values.\n5. Project-specific parameters go into their own group with a project prefix (for example SNOW_ for Snowdon); company parameters keep the company groups.\n6. Write the file in Revit's own format: UTF-16 LE with BOM, CRLF line endings, tab-separated columns; set USERMODIFIABLE to 0 for parameters filled by scripts.\n7. Review stamps (reviewer, date, comments) belong to an annotation family and its schedule; the parameters can live in the shared file, the family is loaded separately.",
+      "validation": [
+        "Every GUID bound in the models is found in the master file.",
+        "No name appears twice with different GUIDs across the files found.",
+        "The edited file has the same encoding, BOM and line endings as the backup."
+      ],
+      "validation_checks": [],
+      "path": "library/parameters-data/one-shared-parameter-file-per-company",
+      "last_evidence": "2026-10-28",
+      "review_due": "2027-10-28",
+      "current_revit": "2027",
+      "unverified_in_current_revit": true
+    },
+    {
+      "id": "ARPL-PAR-0004",
+      "revision": 1,
+      "title": "Type Marks with ZEN Type Marks by Family: one run per family group, the search string becomes the prefix, Overwrite on for a clean re-run",
+      "environment": {
+        "revit_version": "2024.3 (24.3.60.12)",
+        "tool": "RevitBridge MCP with run_csharp",
+        "compiler": "Roslyn 4.8 (C# 12)",
+        "agent": "Claude (Anthropic)",
+        "batch_tool": "ZEN 1.2 (ACC Gate Export Schedules, Type Marks by Family)",
+        "model": "Autodesk sample Snowdon Towers, 6 workshared ACC cloud discipline models"
+      },
+      "use_when": [
+        "A model has no or inconsistent Type Marks and the types can be grouped by a word in the family name",
+        "Type Marks must be redone after the grouping changed"
+      ],
+      "not_for": [
+        "Pipe, duct and fitting system types (no family-name group); leave them or mark them by system",
+        "Firm-specific code lists that do not follow family names: enter the code as the search string only if family names contain it"
+      ],
+      "api_terms": [
+        "RevitCommandId.LookupCommandId",
+        "UIApplication.PostCommand",
+        "BuiltInParameter.ALL_MODEL_TYPE_MARK"
+      ],
+      "level": 2,
+      "work_class": "W7",
+      "workflows": [
+        "parameters-data",
+        "model-administration"
+      ],
+      "disciplines": [
+        "plumbing",
+        "generic",
+        "bim-vdc"
+      ],
+      "project_types": [
+        "generic"
+      ],
+      "phases": [
+        "generic"
+      ],
+      "revit_versions_tested": [
+        "2024"
+      ],
+      "failure_patterns": [
+        "FP41",
+        "FP58"
+      ],
+      "status": "candidate",
+      "rule": "1. List the types in use and group them by a word every family name of the group contains; agree the group strings (they become the prefixes) with the owner or discipline lead.\n2. Run Type Marks by Family once per group: replace the default AUD with the group's string, start 1, Overwrite on for a re-run.\n3. Read the ZEN summary of each run (prefix, matched, assigned, skipped) before the next run.\n4. Watch names with spaces or other spellings ('Water Closet' vs 'WaterCloset'): the first group whose string matches takes the type.\n5. Read back all Type Marks in use and check for duplicates; then sync with the runs listed in the comment.",
+      "validation": [
+        "Every type in use in the target categories has a Type Mark.",
+        "No Type Mark is used by two types.",
+        "Each prefix corresponds to an agreed group string."
+      ],
+      "validation_checks": [],
+      "path": "library/parameters-data/type-marks-zen-by-family-one-run-per-group",
+      "last_evidence": "2026-10-28",
+      "review_due": "2027-10-28",
       "current_revit": "2027",
       "unverified_in_current_revit": true
     },
@@ -2901,7 +3176,7 @@
     },
     {
       "id": "ARPL-QA-0002",
-      "revision": 1,
+      "revision": 2,
       "title": "LOIN completeness snapshot from an exported instance-parameter schedule: fill rate per model, field and category, family elements only",
       "environment": {
         "revit_version": "2024.3 (24.3.60.12)",
@@ -2947,13 +3222,17 @@
         "2024"
       ],
       "failure_patterns": [
-        "FP49"
+        "FP49",
+        "FP55",
+        "FP56",
+        "FP57"
       ],
       "status": "candidate",
-      "rule": "1. Use one standard instance-parameter schedule in every model (same columns, Family and Category included); export it per model each week.\n2. Count per model, category and information column: instances, and filled values (non-empty after trimming).\n3. Count family elements only; rows without a family (circuits, systems, analytical elements) are reported separately, never in the score.\n4. Required fields: the client's LOIN table per category and stage; until it exists, every information column, and say so beside the score.\n5. Report: overall completeness (filled ÷ required values), a model × field grid, and the categories ranked by missing values (instances × unfilled fields).\n6. Target per project (95% used as a placeholder); a model below it fails the LOIN rule in the weekly checks.",
+      "rule": "1. Use one standard instance-parameter schedule per model (the discipline's LOIN fields, with Category, Family, instance key and unique id); export it per model each week.\n2. Count per model, category and information column by unique id, not by row: one element can appear on several rows (FP55).\n3. Count family elements only; nested components, sub-elements (sweeps, supports) and rows without a family (circuits, systems, analytical elements) are reported separately, never in the score.\n4. Required fields: the client's LOIN table per category and stage; until it exists, the assumed per-discipline LOIN (ARPL-PAR-0003), and say so beside the score.\n5. Before reporting a field at 0% as a team task, trace it to its source: a value on the circuit, unenclosed spaces or an unmodelled element is a coordination fix, not missing input.\n6. Report: overall completeness (filled ÷ required values), a model × field grid, and the categories ranked by missing values (instances × unfilled fields).\n7. Target per project (95% used as a placeholder); a model below it fails the LOIN rule in the weekly checks.",
       "validation": [
-        "Instance totals per model equal the schedule row count.",
-        "System and analytical rows excluded from the score and shown separately.",
+        "Unique ids per model equal the counted instances; duplicate rows are collapsed.",
+        "Nested, sub-element and system rows excluded from the score and shown separately.",
+        "Each 0% field has a recorded cause.",
         "The assumption about required fields is printed next to the score until a client LOIN table exists."
       ],
       "validation_checks": [],
@@ -3907,6 +4186,87 @@
       ],
       "revit_versions": "2024",
       "intake": "IN-0018"
+    },
+    {
+      "id": "FP55",
+      "name": "Schedule export repeats one element",
+      "meaning": "An exported multi-category schedule can list one element on several rows (seen: multi-level stairs exported twice with the same element id). Counting rows reports duplicate keys that are not duplicates in the model. Defence: count and deduplicate export rows by unique id; check duplicates against the model before reporting them.",
+      "found_by": "grouping the duplicate keys by element id",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ],
+      "status": "candidate",
+      "api_terms": [
+        "ViewSchedule.Export",
+        "Element.UniqueId"
+      ],
+      "revit_versions": "2024",
+      "intake": "IN-0020"
+    },
+    {
+      "id": "FP56",
+      "name": "Placed spaces with no area because links are not room bounding",
+      "meaning": "MEP spaces are placed but report area 0, so every instance's Space is empty and Space fields in schedules stay blank. The architectural link type in the MEP model has Room Bounding off. Defence: check space area before reading Space fields; set Room Bounding on the architecture and facade link types.",
+      "found_by": "counting enclosed spaces and reading the link types",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ],
+      "status": "candidate",
+      "api_terms": [
+        "RevitLinkType",
+        "BuiltInParameter.WALL_ATTR_ROOM_BOUNDING",
+        "SpatialElement.Area"
+      ],
+      "revit_versions": "2024",
+      "intake": "IN-0020"
+    },
+    {
+      "id": "FP57",
+      "name": "Electrical value read from the family instead of the circuit",
+      "meaning": "Voltage on lighting fixtures, devices and equipment is usually empty or only a type value on the family; the real value is the circuit's. Mirroring the family parameter gives 0% fill. Defence: read voltage from the element's power circuit (ElectricalSystem); read load from the family's own load parameters or the sum of panel phase loads.",
+      "found_by": "fill-rate check of the exported dataset",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ],
+      "status": "candidate",
+      "api_terms": [
+        "FamilyInstance.MEPModel",
+        "MEPModel.GetElectricalSystems",
+        "ElectricalSystem",
+        "BuiltInParameter.RBS_ELEC_VOLTAGE"
+      ],
+      "revit_versions": "2024",
+      "intake": "IN-0020"
+    },
+    {
+      "id": "FP58",
+      "name": "One field run as a list where the tool expects one value per run",
+      "meaning": "A tool field that accepts a separated list (ZEN Type Marks by Family search strings) was filled with every group at once, while the tool's intended use is one group string per run, which also becomes the prefix. Defence: read the tool's summary after a trial run; run once per group.",
+      "found_by": "owner review",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ],
+      "status": "candidate",
+      "api_terms": [
+        "UIApplication.PostCommand"
+      ],
+      "revit_versions": "2024",
+      "intake": "IN-0020"
+    },
+    {
+      "id": "FP59",
+      "name": "A finished batch's completion dialog blocks the next call",
+      "meaning": "The completion message of a batch run (ZEN ACC Gate 'Batch actions completed') stayed open after the run; the next bridge call waited 60 s and timed out. Defence: take a screenshot before the first bridge call after any batch run and close leftover dialogs.",
+      "found_by": "screenshot after the timeout",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ],
+      "status": "candidate",
+      "api_terms": [
+        "UIApplication.PostCommand"
+      ],
+      "revit_versions": "2024",
+      "intake": "IN-0020"
     }
   ]
 }

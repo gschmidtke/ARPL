@@ -1,0 +1,87 @@
+{
+  "id": "ARPL-PAR-0003",
+  "revision": 1,
+  "title": "LOIN instance schedule per discipline: mirror category values into project parameters and give every instance a contractor key (discipline, element code, room or level, number)",
+  "use_when": [
+    "A client or project requires an information delivery per discipline (LOIN, ISO 19650 / ISO 7817-1) and a weekly dataset is read from one standard instance schedule per model",
+    "Contractors, bidders or site staff need to name one instance unambiguously (this door, not the door type)",
+    "The multi-category schedule cannot show a category-specific value (voltage, flow, fire rating, element id)"
+  ],
+  "not_for": [
+    "Type identification: Type Mark stays the type key (see ARPL-PAR-0004)",
+    "Asset tagging for operations, where the client gives its own asset code scheme"
+  ],
+  "api_terms": [
+    "ViewSchedule.CreateSchedule",
+    "ScheduleDefinition.GetSchedulableFields",
+    "InstanceBinding",
+    "GroupTypeId.IdentityData",
+    "Document.GetRoomAtPoint",
+    "RevitLinkInstance.GetTransform",
+    "FamilyInstance.Room",
+    "FamilyInstance.MEPModel",
+    "ElectricalSystem",
+    "BuiltInParameter.RBS_ELEC_VOLTAGE",
+    "SynchronizeWithCentralOptions"
+  ],
+  "level": 2,
+  "work_class": "W7",
+  "workflows": [
+    "parameters-data",
+    "schedules-quantities",
+    "validation-qaqc"
+  ],
+  "disciplines": [
+    "bim-vdc",
+    "architecture",
+    "structural",
+    "mechanical",
+    "electrical",
+    "plumbing",
+    "generic"
+  ],
+  "roles": [
+    "coordinator",
+    "bim-manager"
+  ],
+  "project_types": [
+    "generic"
+  ],
+  "phases": [
+    "design-development",
+    "construction-documents",
+    "construction"
+  ],
+  "revit_versions_tested": [
+    "2024"
+  ],
+  "environment": {
+    "revit_version": "2024.3 (24.3.60.12)",
+    "tool": "RevitBridge MCP with run_csharp",
+    "compiler": "Roslyn 4.8 (C# 12)",
+    "agent": "Claude (Anthropic)",
+    "batch_tool": "ZEN 1.2 (ACC Gate Export Schedules, Type Marks by Family)",
+    "model": "Autodesk sample Snowdon Towers, 6 workshared ACC cloud discipline models"
+  },
+  "failure_patterns": [
+    "FP06",
+    "FP22",
+    "FP55",
+    "FP57"
+  ],
+  "status": "candidate",
+  "contributors": [
+    "Gottfried Schmidtke with Claude"
+  ],
+  "recorded": "2026-10-28",
+  "changelog": [
+    {
+      "revision": 1,
+      "date": "2026-10-28",
+      "change": "First recorded (IN-0020, curator session with the owner)",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ]
+    }
+  ]
+}

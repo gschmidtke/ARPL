@@ -1,6 +1,6 @@
 {
   "id": "ARPL-QA-0002",
-  "revision": 1,
+  "revision": 2,
   "title": "LOIN completeness snapshot from an exported instance-parameter schedule: fill rate per model, field and category, family elements only",
   "use_when": [
     "The client asks where the project stands on information requirements (LOIN) and every model carries the same instance-parameter schedule",
@@ -50,7 +50,10 @@
     "model": "Autodesk sample Snowdon Towers, 6 cloud discipline models, 20,327 instances"
   },
   "failure_patterns": [
-    "FP49"
+    "FP49",
+    "FP55",
+    "FP56",
+    "FP57"
   ],
   "status": "candidate",
   "contributors": [
@@ -62,6 +65,14 @@
       "revision": 1,
       "date": "2026-10-27",
       "change": "First recorded (IN-0017, curator session with the owner)",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ]
+    },
+    {
+      "revision": 2,
+      "date": "2026-10-28",
+      "change": "v02: count by unique id, report nested/sub-element/system rows separately, score against the per-discipline LOIN table, trace 0% fields to their source before asking teams (IN-0020)",
       "contributors": [
         "Gottfried Schmidtke with Claude"
       ]

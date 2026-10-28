@@ -1,0 +1,4 @@
+{
+  "version": "v04",
+  "instruction": "Fill voltage from the element's power circuit (ElectricalSystem voltage), load from the family's own Apparent Load / Load or the sum of the panel phase loads."
+}
