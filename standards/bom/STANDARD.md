@@ -1,6 +1,6 @@
 # ARPL-BOM-0001: Bill of Materials from federated Revit models
 
-**Version:** 1.2 · **Status:** candidate (category rules: *proposed*, to be confirmed by the BIM manager and the GC) · **Recorded:** 2026-10-28 (IN-0025)
+**Version:** 1.3 · **Status:** candidate (category rules: *proposed*, to be confirmed by the BIM manager and the GC) · **Recorded:** 2026-10-28 (IN-0025)
 **Machine-readable:** [bom-standard.json](bom-standard.json) · **Rules:** [category-rules.csv](category-rules.csv) · **Reference builder:** [build_bom.py](build_bom.py) · **Procedure pack:** ARPL-SCH-0003
 
 ## Purpose
@@ -29,7 +29,7 @@ ARPL defines the first two levels. The third needs GC decisions (waste factors, 
 ## Pipeline
 
 1. Read the INSTANCE PARAMETERS exports of all models (rows with a unique id).
-2. Rows with an instance key but no unique id are nested parts: exception "part of <parent key>". Deduplicate the rest by unique id: one element can appear on several rows (FP55).
+2. Every non-blank row is read. Rows with neither unique id nor instance key are system rows or system sub-elements (circuits, duct systems, wall sweeps, stair runs, landings and supports): exception "system row or sub-element". Rows with an instance key but no unique id are nested parts: exception "part of <parent key>". Deduplicate the rest by unique id: one element can appear on several rows (FP55).
 3. Drop elements outside the purchase phases.
 4. Find the rule: category + source discipline (first letter of the instance key) + material condition. No rule → exception.
 5. Quantity from the rule's field, in fixed units: lengths in feet (Revit's feet-inch text is parsed), areas in SF, volumes converted to CY. Unreadable → exception.
@@ -37,6 +37,18 @@ ARPL defines the first two levels. The third needs GC decisions (waste factors, 
 7. Aggregate per item: model quantity, instance count, elements missing a required field, breakdown by level.
 8. Trace: one row per element (item key, model, unique id, instance key, level, room or space, quantity).
 9. Reconcile: elements read = elements traced + exceptions; each line's quantity = the sum of its trace.
+
+## What the first run taught (Snowdon, 2026-10-28)
+
+1. **Count by element, not by row.** Schedules repeat elements: a multi-level stair appears once per level (FP55).
+2. **Every input row ends somewhere.** Each row is either in a BOM line or an exception with a reason. Readers that skip rows without an id let nested parts and system sub-elements disappear while the totals still match (FP60).
+3. **The unit belongs to category + material, never to category alone.** Structural framing holds steel joists (LF) and concrete beams (CY).
+4. **One category, one counting discipline.** Plumbing and lighting fixtures were modelled twice (Architecture and MEP); the rule table names the source.
+5. **Only bought phases count.** The Facades model is an existing-conditions model.
+6. **Parts follow the purchase unit.** Window mullions are part of the window. Curtain wall mullions are standalone and bought by length per profile. Chairs in a table family are separate items. Stair runs, landings and supports are parts of the stair. Railing balusters and posts belong to the railing type.
+7. **The export has to carry the quantity the trade buys by.** Mullion and railing length, stair risers and run width were missing and were added as mirrored parameters (ARPL-PAR-0003).
+8. **Wrong categories show up as BOM lines.** A railing type used for road striping became 625 LF of "railing". The BOM is also a model-semantics check (FP01).
+9. **Rule codes equal instance-key codes.** A mismatch (Flex Ducts DU vs FX) misfiles elements.
 
 ## Datasets (`datasets/`, header rows only)
 
@@ -71,5 +83,6 @@ The project prefix (`SNOW_` on Snowdon) is a parameter of the builder (`--prefix
 | Version | Date | Change |
 |---|---|---|
 | 1.0 | 2026-10-28 | First recorded (IN-0025) |
+| 1.3 | 2026-10-28 | Railings by length per type, stairs per stair with risers and run width; system rows listed as exceptions; lessons of the first run (IN-0028) |
 | 1.2 | 2026-10-28 | Owner: tables and chairs are separate entities. Rule column `nested_parts` (with_parent / own_item); Furniture own_item; nested chairs get their own ids (IN-0027) |
 | 1.1 | 2026-10-28 | Owner: window mullions are part of the window; curtain wall mullions are standalone. Curtain wall mullions bought by length (SNOW_Length bound and filled); nested parts listed as "part of <parent key>" instead of silently dropped; Flex Ducts code FX (IN-0026) |

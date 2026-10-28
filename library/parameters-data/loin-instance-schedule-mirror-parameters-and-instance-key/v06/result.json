@@ -1,0 +1,4 @@
+{
+  "result": "1,425 mullions, 131 railings and 26 stairs filled in the Architectural model; schedule fields added; synced. Creating the parameters through the API let Revit write the shared parameter file in its own format (UTF-16, CRLF), with no manual byte-level edit (compare ARPL-PAR-0002 v02).",
+  "found_by": "read-back and file check"
+}

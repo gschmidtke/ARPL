@@ -628,6 +628,28 @@
       ],
       "reviewed_by": "Claude (curator)",
       "closed": "2026-10-28"
+    },
+    {
+      "entry_id": "IN-0028",
+      "received": "2026-10-28",
+      "contributor": {
+        "name": "Gottfried Schmidtke",
+        "github": "gschmidtke",
+        "with": "Claude"
+      },
+      "source": "owner: go ahead with railings by length and stair risers/width; push the BOM lesson into ARPL",
+      "submitted": "Railing and stair BOM rules; lesson of the BOM effort",
+      "files": [],
+      "status": "filed",
+      "decision": "ARPL-BOM-0001 v1.3 (railings LF, stairs with risers/width, system rows listed, lessons section); ARPL-SCH-0003 rev 4 (v05, consolidated lesson); ARPL-PAR-0003 rev 4 (v06, BOM mirrors, parameters created through the API); FP60 second observation. Snowdon: SNOW_StairRisers / SNOW_StairWidth added to the master shared parameter file (backup in REPORTS), Architectural filled and synced, LOIN config updated.",
+      "resulting_ids": [
+        "ARPL-BOM-0001",
+        "ARPL-SCH-0003",
+        "ARPL-PAR-0003",
+        "FP60"
+      ],
+      "reviewed_by": "Claude (curator)",
+      "closed": "2026-10-28"
     }
   ]
 }

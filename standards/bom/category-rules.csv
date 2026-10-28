@@ -12,8 +12,8 @@ R10,Roofs,F,,area,SF,SNOW_Area,Family|Type,SNOW_Area,with_parent,RF,proposed,
 R11,Ceilings,A,,area,SF,SNOW_Area,Family|Type,SNOW_Area,with_parent,CG,proposed,
 R12,Curtain Panels,A,,area,SF,SNOW_Area,Family|Type,SNOW_Area,with_parent,CP,proposed,
 R13,Curtain Wall Mullions,A,,length,LF,SNOW_Length,Family|Type,SNOW_Length,with_parent,MU,proposed,curtain wall mullions are standalone elements bought by length per profile; mullions inside a window family are part of the window
-R14,Stairs,A,,count,EA,,Family|Type,,with_parent,ST,proposed,
-R15,Railings,A,,count,EA,,Family|Type,,with_parent,RL,proposed,length not exported: bind SNOW_Length to railings to buy by LF
+R14,Stairs,A,,count,EA,,Type Mark|Family|Type|SNOW_StairRisers|SNOW_StairWidth,SNOW_StairRisers|SNOW_StairWidth,with_parent,ST,proposed,"one stair is one item; runs, landings and supports are parts of it; risers and run width are what a stair fabricator prices by"
+R15,Railings,A,,length,LF,SNOW_Length,Family|Type,SNOW_Length,with_parent,RL,proposed,"bought by length per railing type; top rail, handrail, balusters and posts belong to the type; a railing type used for other things (road striping) is a modelling error for the lead"
 R16,Casework,A,,count,EA,,Type Mark|Family|Type,,with_parent,CW,proposed,
 R17,Furniture,A,,count,EA,,Type Mark|Family|Type,,own_item,FN,proposed,tables and chairs are separate entities: chairs nested in a table family are their own BOM items (owner 2026-10-28)
 R18,Specialty Equipment,A,,count,EA,,Type Mark|Family|Type,,with_parent,SE,proposed,

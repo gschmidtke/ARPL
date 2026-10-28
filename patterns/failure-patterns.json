@@ -966,7 +966,7 @@
     {
       "id": "FP60",
       "name": "A filter outside the reconciliation drops rows silently",
-      "meaning": "A reader that keeps only rows with a given field (here: a unique id) drops every row without it before counting starts. The totals still reconcile because the dropped rows were never counted, so nothing looks wrong. Seen with nested parts in a BOM: they carry their parent's key but no id of their own. Defence: count every input row, and turn each row that is not used into a named exception, so 'read = used + exceptions' covers the whole input.",
+      "meaning": "A reader that keeps only rows with a given field (here: a unique id) drops every row without it before counting starts. The totals still reconcile because the dropped rows were never counted, so nothing looks wrong. Seen with nested parts in a BOM: they carry their parent's key but no id of their own. Defence: count every input row, and turn each row that is not used into a named exception, so 'read = used + exceptions' covers the whole input. Seen a second time the same day with system rows and sub-elements (stair runs, landings, supports, circuits) that have neither id nor key; fixed by reading every non-blank row.",
       "found_by": "comparing keys shared by rows with keys shared by unique elements",
       "contributors": [
         "Gottfried Schmidtke with Claude"

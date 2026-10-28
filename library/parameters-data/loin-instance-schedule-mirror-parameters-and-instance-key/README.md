@@ -1,4 +1,4 @@
-# ARPL-PAR-0003 rev 3: LOIN instance schedule per discipline: mirror category values into project parameters and give every instance a contractor key (discipline, element code, room or level, number)
+# ARPL-PAR-0003 rev 4: LOIN instance schedule per discipline: mirror category values into project parameters and give every instance a contractor key (discipline, element code, room or level, number)
 
 _Generated from this pack's files by tools/build_catalogs.py. Edit manifest.json, intent.md, vNN/ or final/rule.json instead._
 
@@ -28,6 +28,7 @@ _Generated from this pack's files by tools/build_catalogs.py. Edit manifest.json
 | v03 | Export the schedules with ZEN ACC Gate and check the CSVs: headers, keyed rows, duplicate keys, fill rate per field. | Headers correct in all six. Architectural showed 3 duplicate keys: each a multi-level stair exported twice with the same element id (FP55), not a real duplicate. Electrical voltage 0% (the value lives on the circuit, FP57); HVAC space number 0% (spaces not enclosed, see ARPL-CRD-0002). Unkeyed rows: nested components, sub-elements and systems. | Counting rows instead of unique ids overstates duplicates. | grouping duplicate keys by element id |
 | v04 | Fill voltage from the element's power circuit (ElectricalSystem voltage), load from the family's own Apparent Load / Load or the sum of the panel phase loads. | Electrical voltage filled on 1,404 of 1,558 instances (circuit 1,389, family 15), load on 1,329; the rest are data devices and uncircuited elements. |  |  |
 | v05 | Owner decision: nested components inherit the key of their top-level parent. For every nested family instance with a blank key, walk up SuperComponent to the top-level instance and copy its key; never overwrite an existing key; sync each model. | Architecture 478, Structure 73, Facades 112, Electrical 16 nested instances keyed with the parent's key; HVAC and Plumbing have none; no parent without a key. 20 nested instances in Architecture belong to categories without the key parameter. |  | read-back per model before sync |
+| v06 | For the BOM (ARPL-BOM-0001): bind SNOW_Length to Curtain Wall Mullions and Railings (from CURVE_ELEM_LENGTH), new SNOW_StairRisers (STAIRS_ACTUAL_NUM_RISERS) and SNOW_StairWidth (widest StairsRun.ActualRunWidth) to Stairs, created in the shared parameter file through ExternalDefinitionCreationOptions; give nested chairs their own ids. | 1,425 mullions, 131 railings and 26 stairs filled in the Architectural model; schedule fields added; synced. Creating the parameters through the API let Revit write the shared parameter file in its own format (UTF-16, CRLF), with no manual byte-level edit (compare ARPL-PAR-0002 v02). |  | read-back and file check |
 
 ## Lesson
 The schedule shows only what the instance itself holds: mirror the values the data needs into project parameters, key every instance once, and count the export by unique id.
@@ -40,6 +41,7 @@ The schedule shows only what the instance itself holds: mirror the values the da
 5. Number per discipline, code and location from the next free number; never overwrite a key that exists; nested components take the key of their top-level parent (owner decision), so a contractor finds the part under the element it is built into; nested components that are bought as separate items (for example chairs in a table family; rule table of ARPL-BOM-0001, nested_parts = own_item) also get their own unique id and element id.
 6. Run fills in batches (about 2,000 elements, a 25 s budget per call) and check state after any timeout before running again; sync with a comment only after a clean commit, relinquish, close.
 7. When reading the export, count unique ids, not rows; report nested, subcategory and system rows separately.
+8. Mirror the quantity each trade buys by when the category's own value is not schedulable in the multi-category schedule (element length for mullions and railings; actual risers and widest run width for stairs). Create new shared parameters through the Revit API (ExternalDefinitionCreationOptions), so Revit writes the file.
 
 ## Validation
 - Keys in the model are unique (count by element).
