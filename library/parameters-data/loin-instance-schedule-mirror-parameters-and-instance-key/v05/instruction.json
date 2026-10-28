@@ -1,0 +1,4 @@
+{
+  "version": "v05",
+  "instruction": "Owner decision: nested components inherit the key of their top-level parent. For every nested family instance with a blank key, walk up SuperComponent to the top-level instance and copy its key; never overwrite an existing key; sync each model."
+}

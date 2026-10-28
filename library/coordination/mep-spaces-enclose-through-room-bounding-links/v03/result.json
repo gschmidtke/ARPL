@@ -1,0 +1,5 @@
+{
+  "result": "Electrical: 80 of 80 spaces enclosed, 1,314 of 1,558 electrical instances in a space. Plumbing: 39 of 43 enclosed (four default-named spaces 2, 5, 12, 414 stay unenclosed, listed for the lead), 95 of 179 fixtures in a space: the plumbing model has fewer spaces than the architecture has rooms.",
+  "problem": "Fewer spaces than rooms leaves instances without a space even when every space encloses.",
+  "found_by": "counting instances with a space per model"
+}

@@ -823,7 +823,7 @@
     {
       "id": "FP54",
       "name": "Closing the document the bridge holds",
-      "meaning": "A bridge script passes one document as doc. Closing that document (for example in a loop over Application.Documents after opening the next model) throws InvalidObjectException, and the call reports an error although other documents in the loop did close. Defence: after OpenAndActivateDocument work on uiapp.ActiveUIDocument.Document, close only the previous model by the reference taken before opening, and close the active model with PostableCommand.Close; check the open documents after any error.",
+      "meaning": "A bridge script passes one document as doc. Closing that document (for example in a loop over Application.Documents after opening the next model) throws InvalidObjectException, and the call reports an error although other documents in the loop did close. Defence: after OpenAndActivateDocument work on uiapp.ActiveUIDocument.Document, close only the previous model by the reference taken before opening, and close the active model with PostableCommand.Close; check the open documents after any error. Seen again 2026-10-28 with a background document: SynchronizeWithCentral followed by Close in the same call returned InvalidObjectException although sync and close had both happened; reopening confirmed the central model. Close in a separate call and check state after any error.",
       "found_by": "state check after the error",
       "contributors": [
         "Gottfried Schmidtke with Claude"

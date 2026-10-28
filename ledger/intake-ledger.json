@@ -484,6 +484,27 @@
       ],
       "reviewed_by": "Claude (curator)",
       "closed": "2026-10-28"
+    },
+    {
+      "entry_id": "IN-0021",
+      "received": "2026-10-28",
+      "contributor": {
+        "name": "Gottfried Schmidtke",
+        "github": "gschmidtke",
+        "with": "Claude"
+      },
+      "source": "owner answers to the questions in the 2026-10-28 report (no inbox file)",
+      "submitted": "Decisions: nested components inherit the parent's instance key (yes); ZEN prefix separate from the search string (no); room-bounding fix in Electrical and Plumbing (yes)",
+      "files": [],
+      "status": "filed",
+      "decision": "ARPL-PAR-0003 rev 2 (nested inherit, v05); ARPL-CRD-0002 rev 2 (Electrical and Plumbing, v03); ARPL-PAR-0004 unchanged (prefix = search string confirmed as intended); FP54 extended with a second observation.",
+      "resulting_ids": [
+        "ARPL-PAR-0003",
+        "ARPL-CRD-0002",
+        "FP54"
+      ],
+      "reviewed_by": "Claude (curator)",
+      "closed": "2026-10-28"
     }
   ]
 }
