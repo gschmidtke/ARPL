@@ -25,6 +25,13 @@ for path in sorted(glob.glob(os.path.join(root, "library/*/*/manifest.json"))):
     for v in sorted(glob.glob(os.path.join(os.path.dirname(path), "v*"))):
         for f in ("instruction.json", "result.json"):
             if not os.path.exists(os.path.join(v, f)): errors.append(f"{os.path.relpath(v, root)}: missing {f}")
+# Failure patterns: unique ids and an evidence_kind from the vocabulary
+fpdoc = json.load(open(os.path.join(root, "patterns/failure-patterns.json"), encoding="utf-8"))
+fpids = set()
+for fp in fpdoc["patterns"]:
+    if fp["id"] in fpids: errors.append(f"patterns/failure-patterns.json: duplicate {fp['id']}")
+    fpids.add(fp["id"])
+    if fp.get("evidence_kind") not in voc.get("evidence_kinds", {}): errors.append(f"patterns/failure-patterns.json: {fp['id']} evidence_kind '{fp.get('evidence_kind')}' is not in vocabularies.evidence_kinds")
 # Hidden characters can carry instructions humans can't see (context poisoning)
 HIDDEN = re.compile("[\U000E0000-\U000E007F\u200B-\u200F\u202A-\u202E\u2060-\u2064\uFEFF]")
 for folder in ["library", "domains", "patterns", "project-workflows", "vocabularies", "inbox", "templates"]:

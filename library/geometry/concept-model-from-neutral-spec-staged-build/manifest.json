@@ -1,12 +1,13 @@
 {
   "id": "ARPL-GEO-0004",
-  "revision": 1,
+  "revision": 2,
   "title": "Concept model from a neutral spec: staged, idempotent build with visual gates",
   "use_when": [
     "An agent builds a whole concept model from a structured spec (JSON) through a code-execution bridge",
     "A build script creates many elements of several categories in one call",
     "Element heights depend on a host (roof, slab) that may change later",
-    "The model must show which geometry is source fact and which is an AI estimate"
+    "The model must show which geometry is source fact and which is an AI estimate",
+    "Receiving a neutral spec from USG: rule 8 (evidence tags 'USG | exact / derived / approximate') is the USG-to-ARPL handoff"
   ],
   "not_for": [
     "Detailed design or construction documentation (LOD 300+)",
@@ -85,6 +86,14 @@
       "revision": 1,
       "date": "2026-10-27",
       "change": "First recorded (IN-0012, PR #1)",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ]
+    },
+    {
+      "revision": 2,
+      "date": "2026-10-28",
+      "change": "Rule 8 confirmed by the owner as the USG handoff; added to use_when (IN-0023)",
       "contributors": [
         "Gottfried Schmidtke with Claude"
       ]

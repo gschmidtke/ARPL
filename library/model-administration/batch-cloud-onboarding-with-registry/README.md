@@ -1,4 +1,4 @@
-# ARPL-ADM-0003 rev 1: Batch-onboard local models to the cloud and register each one: verify by document state, handle posted-command dialogs
+# ARPL-ADM-0003 rev 2: Batch-onboard local models to the cloud and register each one: verify by document state, handle posted-command dialogs
 
 _Generated from this pack's files by tools/build_catalogs.py. Edit manifest.json, intent.md, vNN/ or final/rule.json instead._
 
@@ -42,7 +42,7 @@ Per model:
 1. Open the local file and set identity fields (Building Name = model name, Project Name) in one short call; never leave template placeholder text (FP43); close other documents.
 2. Read hub, project and folder ids from an already uploaded sibling (GetHubId, GetProjectId, GetCloudFolderId). Cloud save + enable worksharing in one call; expect a timeout and do not resend (FP22). Wait 60-90 s, then read IsModelInCloud, IsWorkshared and GetCloudModelPath().GetModelGUID() in a short call. Never judge by PathName (FP45).
 3. If IsModelInCloud is false, the name already exists in the folder: open that cloud model (cloud-open UI after refresh, or by GUID) and check its coordinates and element counts before touching it.
-4. Post the registry command, move the mouse over the application so it runs (FP32), screenshot.
+4. Post the registry command (ZEN > Federation > Cloud GUIDs, command id CustomCtrl_%CustomCtrl_%CustomCtrl_%ZEN%Federation%ZenRegistry%CmdDumpCloudModelGuids), move the mouse over the application so it runs (FP32), screenshot.
 5. Click into the dialog's input field first, then type and confirm by keyboard (FP41); confirm an overwrite prompt only if the tool is known to append and a backup exists.
 6. Read the result dialog (key and GUID), close it, then sync with central.
 After the batch: one registry row per model, unique keys and GUIDs, no placeholder values. Cloud models cannot be detached to local files through the 2024 API.

@@ -19,7 +19,7 @@ If the evidence leaves the frame open (is this connector power, data or audio?),
 
 ## 1. Before you act: look it up
 
-1. Fetch the index (one file, about 35 KB):
+1. Fetch the index (one file, about 200 KB):
    `https://raw.githubusercontent.com/gschmidtke/ARPL/main/index.json`
 2. Describe the task in ARPL terms, using the frame you established in step 0:
    - **work class** W1–W8 (what drives the result; listed in the index);

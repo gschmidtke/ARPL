@@ -1,4 +1,4 @@
-# ARPL-GEO-0004 rev 1: Concept model from a neutral spec: staged, idempotent build with visual gates
+# ARPL-GEO-0004 rev 2: Concept model from a neutral spec: staged, idempotent build with visual gates
 
 _Generated from this pack's files by tools/build_catalogs.py. Edit manifest.json, intent.md, vNN/ or final/rule.json instead._
 
@@ -7,7 +7,7 @@ _Generated from this pack's files by tools/build_catalogs.py. Edit manifest.json
 | Level | 2 |
 | Work class | W4 |
 | Status | candidate |
-| Use when | An agent builds a whole concept model from a structured spec (JSON) through a code-execution bridge; A build script creates many elements of several categories in one call; Element heights depend on a host (roof, slab) that may change later; The model must show which geometry is source fact and which is an AI estimate |
+| Use when | An agent builds a whole concept model from a structured spec (JSON) through a code-execution bridge; A build script creates many elements of several categories in one call; Element heights depend on a host (roof, slab) that may change later; The model must show which geometry is source fact and which is an AI estimate; Receiving a neutral spec from USG: rule 8 (evidence tags 'USG | exact / derived / approximate') is the USG-to-ARPL handoff |
 | Not for | Detailed design or construction documentation (LOD 300+); Workshared central models (no sync handling covered here); Interpreting the sketch itself: that belongs to USG (see IN-0011 redirect) |
 | Workflows | geometry, placement-hosting, validation-qaqc |
 | Disciplines | architecture |
