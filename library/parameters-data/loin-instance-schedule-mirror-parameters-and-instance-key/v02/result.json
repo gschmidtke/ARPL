@@ -1,0 +1,5 @@
+{
+  "result": "17,928 instances keyed across six models, synced and closed. Facades first produced NOLEVEL keys on face-hosted generic models; fixed before sync by taking the host's level, then the level below the element.",
+  "problem": "Face-hosted families report no level of their own. The Architectural fill commit ran about 3 minutes and outlived the 60 s call (FP22).",
+  "found_by": "reading keys back before sync; screenshot of 'Committing Transaction'"
+}

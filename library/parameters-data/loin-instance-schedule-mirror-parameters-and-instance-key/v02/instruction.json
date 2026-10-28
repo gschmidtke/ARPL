@@ -1,0 +1,4 @@
+{
+  "version": "v02",
+  "instruction": "Bind the project parameters as instance parameters to the categories of each discipline; rebuild each model's INSTANCE PARAMETERS schedule from the field list; fill mirrors and the key SNOW_InstElemId = <discipline>-<element code>-<room number or level>-<nnn>; location: the element's own room (FamilyInstance room / to-room / from-room), then a room of the model at the element point, then a room of the architectural link at the transformed point, then its level; first room found wins; skip any element that already has a key."
+}

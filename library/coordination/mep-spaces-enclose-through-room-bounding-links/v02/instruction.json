@@ -1,0 +1,4 @@
+{
+  "version": "v02",
+  "instruction": "Set Room Bounding = 1 on the Architectural and Facades link types; accept the 'Space volumes overlap' warning; list the overlapping spaces; sync."
+}

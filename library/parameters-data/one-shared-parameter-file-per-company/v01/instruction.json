@@ -1,0 +1,4 @@
+{
+  "version": "v01",
+  "instruction": "Search the company's ACC project files and local folders for *.txt files with the shared parameter header (*META / *GROUP / *PARAM); compare GUIDs and names against the parameters bound in the six Snowdon models; record each file in an audit CSV."
+}

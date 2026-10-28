@@ -1,0 +1,5 @@
+{
+  "result": "First write lost the file's CRLF line endings; redone byte-exact (UTF-16 LE with BOM, CRLF, tab-separated). Revit reads the edited file; the renamed parameter keeps its GUID and therefore its values.",
+  "problem": "A plain text rewrite changed the encoding and line endings of a file Revit had written.",
+  "found_by": "comparing the file bytes before and after the edit"
+}

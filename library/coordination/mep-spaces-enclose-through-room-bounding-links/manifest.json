@@ -1,0 +1,71 @@
+{
+  "id": "ARPL-CRD-0002",
+  "revision": 1,
+  "title": "MEP spaces that exist but have no area: set the architectural (and facade) link types to Room Bounding in the MEP model",
+  "use_when": [
+    "Space: Number / Space: Name are empty in MEP schedules although spaces are placed",
+    "Spaces report area 0 or 'Not enclosed' in a model that links the architecture"
+  ],
+  "not_for": [
+    "Moving, deleting or renumbering spaces: that needs the discipline lead",
+    "Overlapping space volumes (upper limit / offset): report them to the lead"
+  ],
+  "api_terms": [
+    "RevitLinkType",
+    "BuiltInParameter.WALL_ATTR_ROOM_BOUNDING",
+    "SpatialElement.Area",
+    "FamilyInstance.Space"
+  ],
+  "level": 2,
+  "work_class": "W7",
+  "workflows": [
+    "coordination",
+    "spatial-planning",
+    "links-coordinates"
+  ],
+  "disciplines": [
+    "mechanical",
+    "electrical",
+    "plumbing",
+    "bim-vdc"
+  ],
+  "roles": [
+    "coordinator"
+  ],
+  "project_types": [
+    "generic"
+  ],
+  "phases": [
+    "generic"
+  ],
+  "revit_versions_tested": [
+    "2024"
+  ],
+  "environment": {
+    "revit_version": "2024.3 (24.3.60.12)",
+    "tool": "RevitBridge MCP with run_csharp",
+    "compiler": "Roslyn 4.8 (C# 12)",
+    "agent": "Claude (Anthropic)",
+    "batch_tool": "ZEN 1.2 (ACC Gate Export Schedules, Type Marks by Family)",
+    "model": "Autodesk sample Snowdon Towers, 6 workshared ACC cloud discipline models"
+  },
+  "failure_patterns": [
+    "FP56",
+    "FP11"
+  ],
+  "status": "candidate",
+  "contributors": [
+    "Gottfried Schmidtke with Claude"
+  ],
+  "recorded": "2026-10-28",
+  "changelog": [
+    {
+      "revision": 1,
+      "date": "2026-10-28",
+      "change": "First recorded (IN-0020, curator session with the owner)",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ]
+    }
+  ]
+}

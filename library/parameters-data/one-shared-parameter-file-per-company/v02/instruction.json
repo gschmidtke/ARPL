@@ -1,0 +1,4 @@
+{
+  "version": "v02",
+  "instruction": "Rename TICKNESS to THICKNESS in the master file, keeping its GUID; add a project group with 25 project-prefixed instance parameters (SNOW_) for the LOIN schedule; back up the file first."
+}

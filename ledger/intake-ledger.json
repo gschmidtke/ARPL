@@ -456,6 +456,34 @@
       ],
       "reviewed_by": "Claude (curator)",
       "closed": "2026-10-28"
+    },
+    {
+      "entry_id": "IN-0020",
+      "received": "2026-10-28",
+      "contributor": {
+        "name": "Gottfried Schmidtke",
+        "github": "gschmidtke",
+        "with": "Claude"
+      },
+      "source": "curator session with the owner, 2026-10-28 (owner instruction: summarize the lessons of the session and push them into ARPL; no inbox file)",
+      "submitted": "Coordinator session on the Snowdon Towers sample: shared parameter audit, per-discipline LOIN instance schedules with mirror parameters and instance key, schedule export check, electrical values from circuits, MEP spaces via room-bounding links, ZEN Type Marks by Family",
+      "files": [],
+      "status": "filed",
+      "decision": "New packs ARPL-PAR-0002, ARPL-PAR-0003, ARPL-PAR-0004, ARPL-CRD-0002; ARPL-QA-0002 raised to rev 2; failure patterns FP55-FP59. Safety: no cloud ids, local paths, GUIDs or personal data filed; the project prefix SNOW_ is kept as an example of the sample project. The BIM Coordinator scope definition is not filed: it waits for the owner's confirmation.",
+      "resulting_ids": [
+        "ARPL-PAR-0002",
+        "ARPL-PAR-0003",
+        "ARPL-PAR-0004",
+        "ARPL-CRD-0002",
+        "ARPL-QA-0002",
+        "FP55",
+        "FP56",
+        "FP57",
+        "FP58",
+        "FP59"
+      ],
+      "reviewed_by": "Claude (curator)",
+      "closed": "2026-10-28"
     }
   ]
 }

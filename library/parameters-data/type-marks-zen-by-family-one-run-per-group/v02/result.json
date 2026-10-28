@@ -1,0 +1,5 @@
+{
+  "result": "Prefix = search string in capitals with spaces removed (DRAIN-001, HOSEBIB-001). All 26 fixture, equipment and valve types in use marked, no duplicate marks; ZEN also marks unused types that match. 'Water Closet - Flush Valve' matched Valve, not WaterCloset (space in the name).",
+  "problem": "The dialog needs a click on OK and then Enter; clicks sent before the dialog appears are lost (FP41).",
+  "found_by": "ZEN summary per run and read-back"
+}

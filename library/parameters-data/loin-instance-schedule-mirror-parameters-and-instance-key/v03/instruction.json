@@ -1,0 +1,4 @@
+{
+  "version": "v03",
+  "instruction": "Export the schedules with ZEN ACC Gate and check the CSVs: headers, keyed rows, duplicate keys, fill rate per field."
+}

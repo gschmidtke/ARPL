@@ -1,0 +1,5 @@
+{
+  "result": "All six exports carry the new columns. Keyed rows: Architecture 5,162 of 6,253, Structure 1,279, Plumbing 6,052, Electrical 2,410, HVAC 2,627, Facades 256. Three apparent duplicate keys were one multi-level stair each, exported twice (FP55). Unkeyed rows are nested components, sub-elements (wall sweeps, stair supports) and systems. Zero-fill fields traced to a source problem, not to missing input: electrical voltage (on the circuit, FP57), HVAC space number (spaces not enclosed, FP56).",
+  "problem": "Rows were counted, not unique ids; nested and system rows mixed into the totals.",
+  "found_by": "grouping duplicates by element id; tracing each 0% field to its source"
+}

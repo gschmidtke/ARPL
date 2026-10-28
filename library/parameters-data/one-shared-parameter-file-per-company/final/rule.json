@@ -1,0 +1,9 @@
+{
+  "lesson": "A shared parameter is its GUID, not its name: keep one file, rename in place with the GUID unchanged, and write the file exactly as Revit wrote it.",
+  "rule": "1. Before any parameter work, list every shared parameter file the company and project can reach (cloud project files, local folders, the path set in Revit) and compare GUIDs with the parameters bound in the models.\n2. Choose one master file per company with the owner; record the others as superseded and stop binding from them.\n3. Back up the master file (dated copy) before every edit.\n4. Fix a misspelled name by renaming the entry and keeping its GUID; never delete and recreate, which makes a new parameter and orphans the values.\n5. Project-specific parameters go into their own group with a project prefix (for example SNOW_ for Snowdon); company parameters keep the company groups.\n6. Write the file in Revit's own format: UTF-16 LE with BOM, CRLF line endings, tab-separated columns; set USERMODIFIABLE to 0 for parameters filled by scripts.\n7. Review stamps (reviewer, date, comments) belong to an annotation family and its schedule; the parameters can live in the shared file, the family is loaded separately.",
+  "validation": [
+    "Every GUID bound in the models is found in the master file.",
+    "No name appears twice with different GUIDs across the files found.",
+    "The edited file has the same encoding, BOM and line endings as the backup."
+  ]
+}

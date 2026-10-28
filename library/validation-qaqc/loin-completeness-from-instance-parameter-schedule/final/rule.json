@@ -1,9 +1,10 @@
 {
   "lesson": "LOIN completeness is only meaningful against the client's requirement per category; until that table exists, state the assumption next to the number.",
-  "rule": "1. Use one standard instance-parameter schedule in every model (same columns, Family and Category included); export it per model each week.\n2. Count per model, category and information column: instances, and filled values (non-empty after trimming).\n3. Count family elements only; rows without a family (circuits, systems, analytical elements) are reported separately, never in the score.\n4. Required fields: the client's LOIN table per category and stage; until it exists, every information column, and say so beside the score.\n5. Report: overall completeness (filled ÷ required values), a model × field grid, and the categories ranked by missing values (instances × unfilled fields).\n6. Target per project (95% used as a placeholder); a model below it fails the LOIN rule in the weekly checks.",
+  "rule": "1. Use one standard instance-parameter schedule per model (the discipline's LOIN fields, with Category, Family, instance key and unique id); export it per model each week.\n2. Count per model, category and information column by unique id, not by row: one element can appear on several rows (FP55).\n3. Count family elements only; nested components, sub-elements (sweeps, supports) and rows without a family (circuits, systems, analytical elements) are reported separately, never in the score.\n4. Required fields: the client's LOIN table per category and stage; until it exists, the assumed per-discipline LOIN (ARPL-PAR-0003), and say so beside the score.\n5. Before reporting a field at 0% as a team task, trace it to its source: a value on the circuit, unenclosed spaces or an unmodelled element is a coordination fix, not missing input.\n6. Report: overall completeness (filled ÷ required values), a model × field grid, and the categories ranked by missing values (instances × unfilled fields).\n7. Target per project (95% used as a placeholder); a model below it fails the LOIN rule in the weekly checks.",
   "validation": [
-    "Instance totals per model equal the schedule row count.",
-    "System and analytical rows excluded from the score and shown separately.",
+    "Unique ids per model equal the counted instances; duplicate rows are collapsed.",
+    "Nested, sub-element and system rows excluded from the score and shown separately.",
+    "Each 0% field has a recorded cause.",
     "The assumption about required fields is printed next to the score until a client LOIN table exists."
   ]
 }

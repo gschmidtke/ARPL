@@ -1,0 +1,5 @@
+{
+  "result": "Headers correct in all six. Architectural showed 3 duplicate keys: each a multi-level stair exported twice with the same element id (FP55), not a real duplicate. Electrical voltage 0% (the value lives on the circuit, FP57); HVAC space number 0% (spaces not enclosed, see ARPL-CRD-0002). Unkeyed rows: nested components, sub-elements and systems.",
+  "problem": "Counting rows instead of unique ids overstates duplicates.",
+  "found_by": "grouping duplicate keys by element id"
+}

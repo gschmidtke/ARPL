@@ -1,0 +1,9 @@
+{
+  "lesson": "In ZEN Type Marks by Family the search string is the prefix: run once per group, Overwrite on, and check that family names really contain the string.",
+  "rule": "1. List the types in use and group them by a word every family name of the group contains; agree the group strings (they become the prefixes) with the owner or discipline lead.\n2. Run Type Marks by Family once per group: replace the default AUD with the group's string, start 1, Overwrite on for a re-run.\n3. Read the ZEN summary of each run (prefix, matched, assigned, skipped) before the next run.\n4. Watch names with spaces or other spellings ('Water Closet' vs 'WaterCloset'): the first group whose string matches takes the type.\n5. Read back all Type Marks in use and check for duplicates; then sync with the runs listed in the comment.",
+  "validation": [
+    "Every type in use in the target categories has a Type Mark.",
+    "No Type Mark is used by two types.",
+    "Each prefix corresponds to an agreed group string."
+  ]
+}
