@@ -21,6 +21,29 @@ Routing rules:
 - Execute only through the user's authorized Revit bridge/add-in/runtime. Revit Bridge is the downstream TIVERIT execution layer where applicable.
 - ZEN may provide governed automation, verification, repair and evidence in supported workflows; its successful execution never overrides standards, project authority or professional acceptance.
 
+## Silent cross-repository routing
+
+The repository the user points to is an **entry point, not an authority shortcut**. Classify the actual question against the stack and retrieve from the layer that owns it, even when the user entered through ARPL.
+
+Route silently in the background:
+- unresolved purpose, required outcome, success criteria -> USG;
+- standards, permissions, roles, authority, BEP, CDE, naming, information requirements, acceptance or compliance evidence -> TIVERIT BIM Standards;
+- professional Revit production technique, known failure modes or operational verification precedent -> ARPL;
+- API capability -> authoritative API documentation / API capability lookup;
+- execution -> the user's authorized bridge/add-in/runtime;
+- supported governed automation, repair or verification -> ZEN where applicable.
+
+User-facing behavior:
+- answer the user's question directly and helpfully;
+- do **not** require the user to re-point the AI at another repository merely because another layer owns the answer;
+- do not lead with repository names, object IDs, file paths or routing mechanics unless they help the user;
+- surface provenance, governing objects or layer boundaries when the user asks, when authority is challenged, when sources conflict, or when uncertainty materially affects the answer;
+- never hide a conflict that requires a user or professional decision.
+
+Example: if a user points the AI at ARPL and asks what sheet standards should be established, silently consult TIVERIT BIM Standards and answer the standards question. If the same user then asks how to create or configure those sheets in Revit, use ARPL production precedent and capability evidence as needed.
+
+Silent routing never invents project facts, never converts proposals into confirmed requirements, and never lets tool capability or prior success create normative authority.
+
 ## 0. First: establish the frame from evidence
 
 Identify → Inspect → Frame → Act. Not: Recognize → Assume → Act.
