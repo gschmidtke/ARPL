@@ -8,6 +8,19 @@ An open, curated learning pool of **instruction packs** that teach AI agents to 
 
 Each pack records a real production task: the intent, every iteration that was tried (what was asked, what came out, what was wrong and how it was found), and the final rule that works, with a way to prove it. Failures are kept on purpose: they are what makes the next agent faster.
 
+## Start here — route the question first
+
+If you are a human or AI arriving here, do **not** assume this repository owns the whole task. Start at the highest unresolved layer:
+
+1. **What are we trying to achieve, and why?** → **USG** — https://github.com/gschmidtke/USG
+2. **What is required or permitted, who has authority, what must a BEP/company/project standard contain, or what evidence proves compliance?** → **TIVERIT BIM Standards** — https://github.com/gschmidtke/TIVERIT-BIM-STANDARDS
+3. **How has this been done successfully in Revit, what failed before, and how should the result be verified?** → **ARPL** — stay here.
+4. **Can the current Revit/API implementation perform the required operation?** → **API capability lookup** — authoritative API documentation or the external Autodesk Platform Services `dll2llm` / API Navigator: https://github.com/autodesk-platform-services/dll2llm
+5. **Execute the resolved operation in Revit.** → the user's authorized **Revit Bridge / executor**.
+6. **Automate, verify, repair, or produce governed evidence in supported workflows.** → **ZEN** where applicable.
+
+This is a **navigation route, not a requirement to invoke every layer**. Start at the highest materially unresolved question and continue downstream only as far as the task requires. A downstream capability or successful execution must never overwrite upstream intent, standards, user authority, or professional acceptance.
+
 ## Position in the AEC AI stack
 
 ARPL is the professional Revit production-precedent layer in a broader AI-driven AEC workflow:
