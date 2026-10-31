@@ -1,0 +1,85 @@
+{
+  "schema_version": "0.1",
+  "id": "STAR-T-GATE-NODE-ARPL-001",
+  "type": "star_t_gate_repository_node",
+  "status": "integration_draft",
+  "system": "ARPL",
+  "repository": "https://github.com/gschmidtke/ARPL",
+  "authority_class": "operational_precedent",
+  "primary_question": "How has this been done successfully, what failed, and how was the result verified?",
+  "owns": [
+    "revit_production_precedent",
+    "known_failure_modes",
+    "corrective_methods",
+    "operational_verification_precedent",
+    "reproduction_and_usage_evidence"
+  ],
+  "does_not_own": [
+    "project_purpose",
+    "normative_bim_governance",
+    "permission_to_override_standards",
+    "api_capability_as_authority"
+  ],
+  "ecosystem": {
+    "routing_order": [
+      "USG",
+      "STANDARDS",
+      "ARPL",
+      "API_CAPABILITY",
+      "EXECUTION",
+      "VALIDATION"
+    ],
+    "nodes": {
+      "USG": "https://github.com/gschmidtke/USG",
+      "STANDARDS": "https://github.com/gschmidtke/TIVERIT-BIM-STANDARDS",
+      "ARPL": "https://github.com/gschmidtke/ARPL"
+    },
+    "rule": "The repository used as an entry point is not automatically authoritative for the user's question. Route to the owning node and load that node's agent contract before substantive use."
+  },
+  "public_intake": {
+    "name": "STAR-T-GATE Inbox",
+    "repository": "https://github.com/gschmidtke/STAR-T-GATE-INBOX",
+    "method": "POST",
+    "endpoint": "https://star-t-gate-inbox-worker.white-bar-0318.workers.dev/intake",
+    "allowed_targets": ["unknown", "USG", "STANDARDS", "ARPL"],
+    "direct_public_write_to_governed_repository": false,
+    "fallback_if_http_post_unavailable": "Return a complete STAR-T-GATE Inbox-compatible JSON payload to the user; do not invent an alternate direct-write route.",
+    "authority": "uncurated_evidence",
+    "rule": "Submission does not create governing knowledge."
+  },
+  "curation_handoff": {
+    "source_queue": "https://github.com/gschmidtke/STAR-T-GATE-INBOX/issues",
+    "active_curator_agents": [
+      {"name": "Zara", "platform": "ChatGPT"},
+      {"name": "Claude", "platform": "Anthropic Claude"}
+    ],
+    "curator_sequence": [
+      "READ_INBOX_ITEM",
+      "ESTABLISH_PROVENANCE",
+      "CLASSIFY",
+      "CHECK_DUPLICATE",
+      "SELECT_TARGET_REPOSITORY",
+      "LOAD_TARGET_CURATOR_CONTRACT",
+      "EVALUATE",
+      "NORMALIZE",
+      "CREATE_TARGET_REPOSITORY_CHANGE",
+      "VALIDATE",
+      "RECORD_CURATION",
+      "LINK_BACK_TO_INBOX_ITEM",
+      "CLOSE_OR_HOLD"
+    ],
+    "rules": [
+      "Inbox evidence is not authority.",
+      "Preserve provenance.",
+      "Do not silently resolve conflicts.",
+      "ARPL evidence/status rules govern promotion into ARPL.",
+      "Canonical change requires repository validation and required owner/professional decisions."
+    ]
+  },
+  "legacy_repo_inbox": {
+    "status": "deprecated_for_public_submission",
+    "public_entry": false,
+    "precedence": "STAR-T-GATE public_intake overrides legacy AGENTS.md direct-upload instructions for new public contributions.",
+    "note": "Repository-local inbox paths may remain for curator-side staging, historical material, or internal normalization."
+  }
+}
