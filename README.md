@@ -8,6 +8,55 @@ An open, curated learning pool of **instruction packs** that teach AI agents to 
 
 Each pack records a real production task: the intent, every iteration that was tried (what was asked, what came out, what was wrong and how it was found), and the final rule that works, with a way to prove it. Failures are kept on purpose: they are what makes the next agent faster.
 
+## Start here — route the question first
+
+If you are a human or AI arriving here, do **not** assume this repository owns the whole task. Start at the highest unresolved layer:
+
+1. **What are we trying to achieve, and why?** → **USG** — https://github.com/gschmidtke/USG
+2. **What is required or permitted, who has authority, what must a BEP/company/project standard contain, or what evidence proves compliance?** → **TIVERIT BIM Standards** — https://github.com/gschmidtke/TIVERIT-BIM-STANDARDS
+3. **How has this been done successfully in Revit, what failed before, and how should the result be verified?** → **ARPL** — stay here.
+4. **Can the current Revit/API implementation perform the required operation?** → **API capability lookup** — authoritative API documentation or the external Autodesk Platform Services `dll2llm` / API Navigator: https://github.com/autodesk-platform-services/dll2llm
+5. **Execute the resolved operation in Revit.** → the user's authorized **Revit Bridge / executor**.
+6. **Automate, verify, repair, or produce governed evidence in supported workflows.** → **ZEN** where applicable.
+
+This is a **navigation route, not a requirement to invoke every layer**. Start at the highest materially unresolved question and continue downstream only as far as the task requires. A downstream capability or successful execution must never overwrite upstream intent, standards, user authority, or professional acceptance.
+
+## Position in the AEC AI stack
+
+ARPL is the professional Revit production-precedent layer in a broader AI-driven AEC workflow:
+
+```text
+USG
+purpose / intent / required outcome
+    ↓
+TIVERIT BIM Standards
+normative requirements / authority / compliance evidence
+    ↓
+ARPL
+professional Revit production precedent / failure memory
+    ↓
+API capability lookup
+    ↓
+Revit Bridge
+bounded Revit execution
+    ↓
+ZEN
+productized governed automation / verification / repair / evidence
+```
+
+Public repositories owned by Gottfried Schmidtke:
+
+- USG — https://github.com/gschmidtke/USG
+- TIVERIT BIM Standards — https://github.com/gschmidtke/TIVERIT-BIM-STANDARDS
+
+For AI-driven Revit work, capability discovery should happen **after** intent, standards and ARPL production logic are resolved and **before** execution. A useful external reference is Autodesk Platform Services `dll2llm` / API Navigator:
+
+https://github.com/autodesk-platform-services/dll2llm
+
+That external project is not owned or governed by ARPL or TIVERIT. It is a capability reference: it may help answer **what can the API do?** It does not decide **what should be done**, what the project requires, or which production method is professionally acceptable.
+
+Revit Bridge and ZEN are downstream TIVERIT implementation/product layers and are referenced here by role rather than presented as public repositories.
+
 ## What a pack looks like
 
 An AI framed wall panels in Revit. Every stud was placed exactly where the layout said, and the check passed. Then a clash check found two end studs had moved 89 mm: Revit's automatic framing joins had changed them *after* placement. The API call "succeeded"; the model was wrong.
@@ -19,6 +68,8 @@ An AI framed wall panels in Revit. Every stud was placed exactly where the layou
 If your AI works in Revit through a bridge or MCP server, tell it:
 
 > Before this Revit task, check the ARPL knowledge pool for an established workflow: read https://raw.githubusercontent.com/gschmidtke/ARPL/main/AGENTS.md and follow it.
+
+For governed project or company standards, check TIVERIT BIM Standards before applying ARPL production precedent. ARPL does not override project standards or user authority.
 
 More options (system prompt, a lookup tool for bridges and MCP servers): [docs/agent-setup.md](docs/agent-setup.md).
 
