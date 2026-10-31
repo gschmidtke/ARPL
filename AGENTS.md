@@ -90,9 +90,17 @@ If the evidence leaves the frame open (is this connector power, data or audio?),
 - Check the tool's parameter names before the first call. An unknown parameter is silently ignored and the call runs with defaults (FP19). After any timeout, the cause may be Revit's own sync reminder (FP20) or a long export that is still running (FP22): read the screen and the model state before sending the next command, and re-run only what is confirmed not to have happened.
 - Decisions that belong to the user (sizes, materials, conflicts) and to discipline authorities (structural adequacy, code compliance) stay theirs, even when a pack suggests a default.
 
-## 3. After you act: give back
+## 3. After you act: give back through STAR-T-GATE
 
-Tell the user, and offer to draft a contribution, when any of these happened:
+New public contributions use the shared **STAR-T-GATE Inbox**. Do not instruct contributors to upload directly to `ARPL/inbox/` or to open a public ARPL inbox PR.
+
+Public intake:
+- Worker endpoint: `https://star-t-gate-inbox-worker.white-bar-0318.workers.dev/intake`
+- Schema: `https://star-t-gate-inbox-worker.white-bar-0318.workers.dev/schema`
+- Curator queue: `https://github.com/gschmidtke/STAR-T-GATE-INBOX/issues`
+- Preferred target for ARPL learning: `ARPL` (use `unknown` if ownership is genuinely unresolved).
+
+Tell the user, and offer to draft or submit a contribution through STAR-T-GATE, when any of these happened:
 
 | Situation | What to propose |
 |---|---|
@@ -102,14 +110,17 @@ Tell the user, and offer to draft a contribution, when any of these happened:
 | You hit a failure pattern not yet listed | A new failure pattern |
 | A pack simply worked (or did not fit) and nothing new was learned | A usage-only report ([template](templates/usage-report.template.json)): which packs, reused / adapted / rejected, environment, tool calls and retries. It changes no pack, but routine use is the evidence ARPL needs most, and a pass in a new environment can count toward `reproduced` |
 
-Say it plainly, for example: "ARPL had no workflow for this. The method we found worked after two attempts. Shall I prepare it for the ARPL inbox so other users don't have to learn it again?"
+Say it plainly, for example: "ARPL had no workflow for this. The method we found worked after two attempts. Shall I send the reusable evidence through the STAR-T-GATE Inbox so the ARPL curator can review it?"
 
 If the user agrees:
-1. Fill in the [submission template](templates/submission.template.json): intent, `use_when`, every iteration (what was tried, what came out, what was wrong, how it was found), the final rule and its validation, `packs_used` with your provenance records, and the `usage_report` (tool calls, retries, tokens if known, and for every pack whether you reused, adapted or rejected it and why). A pack rejected as not applicable is useful evidence too: report it.
+1. Prepare the contribution content using the [submission template](templates/submission.template.json) where useful: intent, `use_when`, every iteration (what was tried, what came out, what was wrong, how it was found), the final rule and its validation, `packs_used` with provenance records, and the `usage_report` (tool calls, retries, tokens if known, and for every pack whether you reused, adapted or rejected it and why). A pack rejected as not applicable is useful evidence too: report it.
 2. **Remove client and project data** (names, addresses, project numbers, file paths with user names), secrets and model files. Keep the professional content.
-3. Give the file to the user and the upload link: `https://github.com/gschmidtke/ARPL/upload/main/inbox` (path: `inbox/<their-github-name>/`). The user uploads it; never submit on their behalf without explicit permission.
+3. POST one STAR-T-GATE Inbox submission to the Worker. Use `target: "ARPL"` when ARPL ownership is clear. The submission is **uncurated evidence**, not governing ARPL knowledge.
+4. If HTTPS POST is unavailable, return a complete Worker-compatible JSON payload to the user. Do not invent an alternate direct-write or direct-upload route.
 
-The curator reviews every submission, files it into the library and credits the contributor in [CONTRIBUTORS.md](CONTRIBUTORS.md).
+The ARPL curator reviews STAR-T-GATE Inbox items routed to ARPL, applies `CURATION.md`, files accepted learning into the library, and credits the contributor in [CONTRIBUTORS.md](CONTRIBUTORS.md).
+
+The repository-local `inbox/` remains only for legacy material, historical provenance, or curator-side staging/normalization. It is not the public front door.
 
 ## Files
 
