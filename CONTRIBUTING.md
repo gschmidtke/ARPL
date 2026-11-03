@@ -35,7 +35,7 @@ Git users can fork and open a pull request the normal way, as long as it only to
 
 ## Rules
 
-- Only share what you have the right to share. No client names, addresses, project numbers, model files (`.rvt`, `.rfa`), passwords, API keys or licensed content (standards text, manufacturer data behind a login).
+- Only share what you have the right to share. No client names, addresses, project numbers, model files (`.rvt`, `.rfa`), passwords, API keys or licensed content (standards text, manufacturer data behind a login). Refer to a standard by number, part, edition and clause (for example "ISO 19650-2:2018, 5.1.4") instead of pasting its text, and do not link to private or internal locations.
 - By submitting, you agree to publish under CC BY 4.0 (content) and MIT (code).
 - Scripts are welcome as excerpts. They are never executed by the curator without review.
 
