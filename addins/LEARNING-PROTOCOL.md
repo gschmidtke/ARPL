@@ -29,6 +29,7 @@ This tells you three things the documentation may not:
 - which commands exist **in this installation** (split buttons hide most of them);
 - the **command id**, which a bridge can post with `UIApplication.PostCommand(RevitCommandId.LookupCommandId(id))` when clicking is unreliable;
 - the **tooltip**, which is often the most precise one-line statement of what a command does.
+- the **expanded tooltip** (the second part shown when the pointer rests on the button), which often holds the usage rules: preconditions, what to close first, which other command to use instead.
 
 Do not inspect the add-in's assemblies beyond their name and version. Reflection over types, decompiling or reading resources is out of scope for ARPL, whoever owns the add-in.
 

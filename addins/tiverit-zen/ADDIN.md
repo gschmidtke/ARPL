@@ -18,7 +18,7 @@ A Revit plug-in suite for BIM management at production scale: federated cloud li
 
 ## Commands
 
-Full inventory, 53 entries with command ids and tooltips: [commands.json](commands.json) (E2-inventory, 2026-11-03).
+Full inventory, 53 entries with command ids, tooltips and expanded tooltips: [commands.json](commands.json) (E2-inventory, 2026-11-03).
 
 Most commands sit inside split buttons: the ribbon shows one label per group, and the commands are in the dropdown under it. Use the inventory, not the visible ribbon, to know what exists.
 
@@ -62,6 +62,7 @@ The sheet-list standard as a CSV: export the model's sheet list, edit it in Exce
 #### Import Sheets (active model)
 
 - **Command id:** `CustomCtrl_%CustomCtrl_%CustomCtrl_%ZEN%Project Standards%ZenSheets%CmdImportSheetsFromExcel`
+- **Close the CSV in Excel first** (the command's own tooltip says so). If the file cannot be read, the command stops with "Failed to read CSV" and changes nothing (`V`).
 - **Reads:** one CSV, column A sheet number, column B sheet name; other columns ignored. A first row that looks like a header (A contains "sheet" and "no"/"number", or B contains "sheet" and "name") is skipped. Rows with both A and B empty are skipped; a row with a name but no number is skipped and reported.
 - **Changes:** in one transaction ("ZEN – Import Sheets from CSV", one Undo): renames sheets whose number matches and whose name differs; creates missing numbers as new sheets with the title block chosen in the first dialog. Does not save or sync.
 - **Dialogs, in this order:** "Select Title Block" (list of `Family : Type`, OK button; it appears even when no sheet will be created; closing it with × means new sheets get **no** title block); file dialog "Select Excel CSV (A: Sheet Number, B: Sheet Name)"; summary window with Created, Renamed, No Change/Skipped, duplicate numbers found in the CSV, and one line per row.
@@ -88,7 +89,7 @@ Start here when the user names a goal rather than a command.
 | I want to … | Use | Prepare first | Expect |
 |---|---|---|---|
 | Get the model's sheet list into Excel | Export Sheets | A sheet schedule named `SHEET LIST` with Sheet Number, Sheet Name as first columns | `<model> - SHEET_LIST.csv` |
-| Rename sheets from a list | Import Sheets (one model), Batch Import (local files), ACC Gate (cloud) | CSV: A unchanged numbers, B new names | Summary: Renamed n |
+| Rename sheets from a list | Import Sheets (one model), Batch Import (local files), ACC Gate (cloud) | CSV: A unchanged numbers, B new names; CSV closed in Excel | Summary: Renamed n |
 | Add sheets from a list | Import Sheets | CSV rows with new numbers; the title block type to use | Summary: Created n; one Undo for all |
 | Renumber sheets | Not ZEN: Revit or a bridge | Old → new mapping, checked for clashes | Then Export Sheets to refresh the CSV |
 | Print a set of sheets to PDF | Print PDF | A Revit print set (ZEN does not create one), a Print Intel workbook with a PrintJobs row | `<model>_<set>.pdf`, page count = set |
