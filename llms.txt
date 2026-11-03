@@ -6,6 +6,7 @@
 
 - [AGENTS.md](https://raw.githubusercontent.com/gschmidtke/ARPL/main/AGENTS.md): how to look up, apply, cite and give back
 - [index.json](https://raw.githubusercontent.com/gschmidtke/ARPL/main/index.json): machine-readable index of all packs, project workflows and failure patterns
+- [STAR-T-GATE](https://star-t-gate-inbox-worker.white-bar-0318.workers.dev/): official comment and intake channel for ARPL, TIVERIT BIM Standards and USG (manifest, schema, intake)
 - [Submission template](https://raw.githubusercontent.com/gschmidtke/ARPL/main/templates/submission.template.json): format for contributing a new or improved workflow
 
 ## Structure

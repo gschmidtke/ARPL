@@ -79,7 +79,11 @@ Say it plainly, for example: "ARPL had no workflow for this. The method we found
 If the user agrees:
 1. Fill in the [submission template](templates/submission.template.json): intent, `use_when`, every iteration (what was tried, what came out, what was wrong, how it was found), the final rule and its validation, `packs_used` with your provenance records, and the `usage_report` (tool calls, retries, tokens if known, and for every pack whether you reused, adapted or rejected it and why). A pack rejected as not applicable is useful evidence too: report it.
 2. **Remove client and project data** (names, addresses, project numbers, file paths with user names), secrets and model files. Keep the professional content.
-3. Give the file to the user and the upload link: `https://github.com/gschmidtke/ARPL/upload/main/inbox` (path: `inbox/<their-github-name>/`). The user uploads it; never submit on their behalf without explicit permission.
+3. Offer the user the two routes:
+   - **STAR-T-GATE**, for observations, failures, gaps and short findings: the user can use the form at `https://www.tiveritllc.com/star-t-gate.html`; or, with the user's explicit permission, you submit it to the machine entry point `https://star-t-gate-inbox-worker.white-bar-0318.workers.dev/` (read `/manifest` and `/schema` first, target `ARPL`, and do not invent fields). If the submission fails, say so and give the user the complete payload; do not claim it was recorded.
+   - **Upload** for files and complete protocols: `https://github.com/gschmidtke/ARPL/upload/main/inbox` (path: `inbox/<their-github-name>/`). The user uploads it.
+
+   Never submit on the user's behalf without explicit permission.
 
 The curator reviews every submission, files it into the library and credits the contributor in [CONTRIBUTORS.md](CONTRIBUTORS.md).
 
