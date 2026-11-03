@@ -7,7 +7,7 @@ The curator keeps the library consistent so it stays useful as it grows. The own
 
 ## One inbox
 
-Contributions enter only through pull requests that add files to `inbox/`, or through the STAR-T-GATE public intake described below. The "Inbox only" check rejects pull requests that touch anything else. If a contribution arrives any other way (a GitHub issue on this repository, an email), the curator replies with the upload link or the STAR-T-GATE intake instead of filing it from there. The library, catalogs, ledger, vocabularies and schemas are written only by the curator and the owner.
+Contributions enter only through pull requests that add files to `inbox/`, or through [STAR-T-GATE](https://www.tiveritllc.com/star-t-gate.html), the official comment channel for all TIVERIT open-source repositories, open to anyone (owner decision, 2026-11-02). The "Inbox only" check rejects pull requests that touch anything else. If a contribution arrives any other way (a GitHub issue on this repository, an email), the curator replies with the upload link or the STAR-T-GATE intake instead of filing it from there. The library, catalogs, ledger, vocabularies and schemas are written only by the curator and the owner.
 
 ## Curator reminder: where to find messages for ARPL
 
@@ -20,7 +20,7 @@ At the start of every curation session, check all of these before doing anything
    - File an accepted item through the normal review process below. In the ledger, set `source` to `STAR-T-GATE-INBOX#<issue number>`.
    - Close the loop on the issue: comment with the decision and links (pull request, ledger entry, resulting pack ids), then close it, or label it held with the reason.
 2. **Pull requests to `inbox/`** in this repository: list open pull requests and files under `inbox/`.
-3. **Owner's private coordination mailbox** (BPL, `inbox/arpl/`, when the session has access). Work routed there by the owner's project manager is ARPL work; return material results to the PM's return mailbox (`inbox/pm/`) as that repository's protocol requires, not to another role's mailbox. Do not copy private material into this public repository without sanitizing it.
+3. **Owner's private coordination channel** (when the session has access; the owner supplies its location). Work routed there is ARPL work; return results the way that channel's protocol requires. Do not copy private material into this public repository without sanitizing it.
 
 Record in the session report (`ledger/reports/YYYY-MM-DD.md`) which channels were checked and the issue or pull request numbers handled, including "no new ARPL messages" when a channel was empty.
 

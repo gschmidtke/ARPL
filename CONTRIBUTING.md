@@ -9,9 +9,19 @@ Thank you. Every protocol, even a failed attempt, makes the next agent better.
 - Professional rules from your discipline that an agent needs to know (a domain overlay).
 - Failure patterns you keep seeing.
 
-## How to submit: one inbox
+## How to submit: two ways in
 
-There is exactly one way in: **the `inbox/` folder**. Everything else in the repository is read-only for contributors and is maintained by the curator.
+Everything in the repository is read-only for contributors and is maintained by the curator. There are two ways in.
+
+### STAR-T-GATE: comments, observations and findings (anyone)
+
+[STAR-T-GATE](https://www.tiveritllc.com/star-t-gate.html) is the official place to comment on all TIVERIT open-source repositories (ARPL, [TIVERIT BIM Standards](https://github.com/gschmidtke/TIVERIT-BIM-STANDARDS) and [USG](https://github.com/gschmidtke/USG)). Anyone can use it; no GitHub account is needed. Pick the target (ARPL, or "Unknown" to let the curators route it), the type (observation, gap, failure, contradiction, evidence, proposal, question) and describe what you saw. Every submission lands in the curators' queue as uncurated evidence; the ARPL curator reviews the ARPL items.
+
+AI agents use the machine entry point at [https://star-t-gate-inbox-worker.white-bar-0318.workers.dev/](https://star-t-gate-inbox-worker.white-bar-0318.workers.dev/) (manifest, schema and intake), and only with their user's permission.
+
+### The `inbox/` folder: files and complete protocols
+
+Use this when you have files to hand over (a filled template, logs, a zip).
 
 1. Open [Upload to inbox](https://github.com/gschmidtke/ARPL/upload/main/inbox) (you need a free GitHub account).
 2. Name the path `inbox/<your-github-name>/` and drop your files: a JSON from [the template](templates/submission.template.json), Markdown, a plain-text log or a zip. Any format is fine.
@@ -21,7 +31,7 @@ There is exactly one way in: **the `inbox/` folder**. Everything else in the rep
 
 **Reproductions count.** Tried an existing pack and it worked (or didn't) in your Revit version? That is one of the most valuable contributions; see [help wanted](catalogs/help-wanted.md).
 
-Git users can fork and open a pull request the normal way, as long as it only touches `inbox/`. Pull requests that change anything outside `inbox/` fail the automatic "Inbox only" check and are closed. Issues are for questions only, not for submissions.
+Git users can fork and open a pull request the normal way, as long as it only touches `inbox/`. Pull requests that change anything outside `inbox/` fail the automatic "Inbox only" check and are closed. Issues on this repository are for questions only; send comments and findings through STAR-T-GATE.
 
 ## Rules
 

@@ -61,7 +61,7 @@ Want to help? See [help wanted](catalogs/help-wanted.md): packs waiting for repr
 
 ## Contribute
 
-Everyone can read, download and fork ARPL. Contributions go through **one inbox**: [upload your protocol to `inbox/`](https://github.com/gschmidtke/ARPL/upload/main/inbox) (see [CONTRIBUTING.md](CONTRIBUTING.md)). You don't need to fit our structure; the curator reads, verifies, restructures and files it. Nothing outside the inbox is edited by contributors. Every contribution is recorded in the [ledger](ledger/intake-ledger.json) and credited in [CONTRIBUTORS.md](CONTRIBUTORS.md).
+Everyone can read, download and fork ARPL. Comments, observations and findings go through [STAR-T-GATE](https://www.tiveritllc.com/star-t-gate.html), the official comment channel for all TIVERIT open-source repositories; anyone can use it. Files and complete protocols go to [`inbox/`](https://github.com/gschmidtke/ARPL/upload/main/inbox) (see [CONTRIBUTING.md](CONTRIBUTING.md)). You don't need to fit our structure; the curator reads, verifies, restructures and files it. Nothing outside the inbox is edited by contributors. Every contribution is recorded in the [ledger](ledger/intake-ledger.json) and credited in [CONTRIBUTORS.md](CONTRIBUTORS.md).
 
 ## Run it locally
 
