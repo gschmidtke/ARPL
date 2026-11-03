@@ -39,7 +39,8 @@ ARPL does not define naming conventions. It records how named results were produ
    1. `project_workflows`: a complete sequence for this deliverable? Follow its steps and the packs they name.
    2. `packs`: match the task against `use_when` (and exclude by `not_for`), then facets, then `api_terms` if you already know which API calls you will make.
    3. `failure_patterns`: the recurring ways agents fail (id, name, evidence kind); check the ones your work class is prone to and read their full text in `failure_patterns_file`.
-4. For each pack that applies, read in this order (paths are relative to `raw_base` + the pack's `path`):
+4. **The task uses a Revit add-in** (a ribbon tab or tool named by the user, not plain Revit): read `addins/<vendor>-<addin>/ADDIN.md` if it exists. If it does not, or the installed version differs, learn it with [addins/LEARNING-PROTOCOL.md](addins/LEARNING-PROTOCOL.md) (owner decision 2026-11-03): documentation and the read-only ribbon inventory first, one observed run with the user's consent, then offer to contribute the add-in card.
+5. For each pack that applies, read in this order (paths are relative to `raw_base` + the pack's `path`):
    1. `final/rule.json`: the rule and how to validate it;
    2. `v01/`, `v02/`…: the failed attempts, so you don't repeat them;
    3. the failure patterns listed in its manifest.
@@ -96,6 +97,7 @@ The curator reviews every submission, files it into the library and credits the 
 | `library/<workflow>/<pack>/` | Full packs |
 | `project-workflows/` | Level 4 sequences for whole deliverables |
 | `domains/` | Discipline overlays |
+| `addins/` | What agents learned about Revit add-ins (add-in cards, ribbon inventories) and the protocol for learning an unknown add-in |
 | `patterns/failure-patterns.json` | Failure patterns |
 | `vocabularies/vocabularies.json` | Allowed facet values |
 | `docs/model.md`, `docs/work-classes.md` | How ARPL is organized |
