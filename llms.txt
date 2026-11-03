@@ -13,6 +13,7 @@
 
 - [docs/model.md](https://raw.githubusercontent.com/gschmidtke/ARPL/main/docs/model.md): lookup chain, levels, facets
 - [docs/work-classes.md](https://raw.githubusercontent.com/gschmidtke/ARPL/main/docs/work-classes.md): work classes W1-W8, previews and proofs of done
+- [addins/README.md](https://raw.githubusercontent.com/gschmidtke/ARPL/main/addins/README.md): Revit add-ins learned by agents, and how to learn an unknown add-in
 - [vocabularies.json](https://raw.githubusercontent.com/gschmidtke/ARPL/main/vocabularies/vocabularies.json): allowed facet values
 
 ## Optional
