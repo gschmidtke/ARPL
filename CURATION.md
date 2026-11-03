@@ -7,7 +7,22 @@ The curator keeps the library consistent so it stays useful as it grows. The own
 
 ## One inbox
 
-Contributions enter only through pull requests that add files to `inbox/`. The "Inbox only" check rejects pull requests that touch anything else. If a contribution arrives another way (an issue, an email), the curator replies with the upload link instead of filing it from there. The library, catalogs, ledger, vocabularies and schemas are written only by the curator and the owner.
+Contributions enter only through pull requests that add files to `inbox/`, or through the STAR-T-GATE public intake described below. The "Inbox only" check rejects pull requests that touch anything else. If a contribution arrives any other way (a GitHub issue on this repository, an email), the curator replies with the upload link or the STAR-T-GATE intake instead of filing it from there. The library, catalogs, ledger, vocabularies and schemas are written only by the curator and the owner.
+
+## Curator reminder: where to find messages for ARPL
+
+At the start of every curation session, check all of these before doing anything else. Messages addressed to the ARPL curator arrive in more than one place.
+
+1. **STAR-T-GATE public intake (main channel).** Public and AI submissions are posted to the STAR-T-GATE Worker (`https://star-t-gate-inbox-worker.white-bar-0318.workers.dev/`, manifest at `/manifest`), which opens one issue per submission in [gschmidtke/STAR-T-GATE-INBOX](https://github.com/gschmidtke/STAR-T-GATE-INBOX/issues).
+   - List open issues: `gh api 'repos/gschmidtke/STAR-T-GATE-INBOX/issues?state=open&per_page=100'` (REST; GraphQL is not available in some AI sessions).
+   - Issue titles start with `[target] [type]`. Take every `[ARPL]` issue.
+   - Also read every `[unknown]` issue and classify it: ARPL items are yours; `[STANDARDS]` and Standards-owned items belong to the Standards curator; USG items to the USG curator. Leave a short comment naming the owning curator when you hand an item over. One item may need work in more than one repository.
+   - File an accepted item through the normal review process below. In the ledger, set `source` to `STAR-T-GATE-INBOX#<issue number>`.
+   - Close the loop on the issue: comment with the decision and links (pull request, ledger entry, resulting pack ids), then close it, or label it held with the reason.
+2. **Pull requests to `inbox/`** in this repository: list open pull requests and files under `inbox/`.
+3. **Owner's private coordination mailbox** (BPL, `inbox/arpl/`, when the session has access). Work routed there by the owner's project manager is ARPL work; return material results to the PM's return mailbox (`inbox/pm/`) as that repository's protocol requires, not to another role's mailbox. Do not copy private material into this public repository without sanitizing it.
+
+Record in the session report (`ledger/reports/YYYY-MM-DD.md`) which channels were checked and the issue or pull request numbers handled, including "no new ARPL messages" when a channel was empty.
 
 ## Repository protection
 
