@@ -6,7 +6,7 @@
   "observed": "2026-11-03",
   "evidence": "E2-inventory",
   "tool": "addins/_tools/ribbon_inventory.cs",
-  "note": "Tooltips are the add-in's own public UI text. Split-button parents carry an internal id and no command of their own.",
+  "note": "Tooltips (short and expanded) are the add-in's own public UI text. Split-button parents carry an internal id and no command of their own. Expanded tooltips added 2026-11-03 (second inventory run).",
   "commands": [
     {
       "panel": "Federation",
@@ -14,7 +14,8 @@
       "in_dropdown": false,
       "command_id": "CustomCtrl_%CustomCtrl_%ZEN%Federation%CmdAccGate",
       "control": "RibbonButton",
-      "tooltip": "Runs project-wide actions on live ACC cloud models: opens each selected model, applies the actions, synchronizes changes and closes it — model after model, in one run. Works without an open model."
+      "tooltip": "Runs project-wide actions on live ACC cloud models: opens each selected model, applies the actions, synchronizes changes and closes it — model after model, in one run. Works without an open model.",
+      "tooltip_expanded": "Select the models from the project's Model Registry and choose the actions — among them creating and repairing cloud links from the Link Matrix, worksets, standard schedules, sheets, materials, families, shared coordinates, PDFs and health checks. One combined run log documents every model. Needs your APS credentials (APS Settings)."
     },
     {
       "panel": "Federation",
@@ -22,7 +23,8 @@
       "in_dropdown": false,
       "command_id": "CustomCtrl_%CustomCtrl_%ZEN%Federation%ZenLinks",
       "control": "RibbonSplitButton",
-      "tooltip": "Adds selected cloud models as links to the active model, with the settings the project's Link Matrix prescribes — the single-model counterpart of ACC Gate's cloud linking."
+      "tooltip": "Adds selected cloud models as links to the active model, with the settings the project's Link Matrix prescribes — the single-model counterpart of ACC Gate's cloud linking.",
+      "tooltip_expanded": "1. Pick a Model Registry CSV and check the model(s) to link. 2. Pick the Link Matrix that documents their settings. The registry choice is remembered — hold Ctrl while clicking to pick a different one. The Link Matrix is always asked for."
     },
     {
       "panel": "Federation",
@@ -30,7 +32,8 @@
       "in_dropdown": true,
       "command_id": "CustomCtrl_%CustomCtrl_%CustomCtrl_%ZEN%Federation%ZenLinks%CmdLinkModelsFromRegistry",
       "control": "RibbonButton",
-      "tooltip": "Adds selected cloud models as links to the active model, with the settings the project's Link Matrix prescribes — the single-model counterpart of ACC Gate's cloud linking."
+      "tooltip": "Adds selected cloud models as links to the active model, with the settings the project's Link Matrix prescribes — the single-model counterpart of ACC Gate's cloud linking.",
+      "tooltip_expanded": "1. Pick a Model Registry CSV and check the model(s) to link. 2. Pick the Link Matrix that documents their settings. The registry choice is remembered — hold Ctrl while clicking to pick a different one. The Link Matrix is always asked for."
     },
     {
       "panel": "Federation",
@@ -38,7 +41,8 @@
       "in_dropdown": true,
       "command_id": "CustomCtrl_%CustomCtrl_%CustomCtrl_%ZEN%Federation%ZenLinks%CmdRepairLinksFromRegistry",
       "control": "RibbonButton",
-      "tooltip": null
+      "tooltip": null,
+      "tooltip_expanded": null
     },
     {
       "panel": "Federation",
@@ -46,7 +50,8 @@
       "in_dropdown": false,
       "command_id": "CustomCtrl_%CustomCtrl_%ZEN%Federation%ZenLinkMatrix",
       "control": "RibbonSplitButton",
-      "tooltip": null
+      "tooltip": null,
+      "tooltip_expanded": null
     },
     {
       "panel": "Federation",
@@ -54,7 +59,8 @@
       "in_dropdown": true,
       "command_id": "CustomCtrl_%CustomCtrl_%CustomCtrl_%ZEN%Federation%ZenLinkMatrix%CmdGenerateCloudLinkMatrixFromRegistry",
       "control": "RibbonButton",
-      "tooltip": "Creates the project's Cloud Link Matrix from the Model Registry — one governed record of which models link into which hosts, with which settings. ACC Gate builds and repairs the cloud links from it."
+      "tooltip": "Creates the project's Cloud Link Matrix from the Model Registry — one governed record of which models link into which hosts, with which settings. ACC Gate builds and repairs the cloud links from it.",
+      "tooltip_expanded": "One row per host and link model, with default worksets and link settings to adjust before use."
     },
     {
       "panel": "Federation",
@@ -62,7 +68,8 @@
       "in_dropdown": true,
       "command_id": "CustomCtrl_%CustomCtrl_%CustomCtrl_%ZEN%Federation%ZenLinkMatrix%CmdShowCloudLinkMatrixEditor",
       "control": "RibbonButton",
-      "tooltip": null
+      "tooltip": null,
+      "tooltip_expanded": null
     },
     {
       "panel": "Federation",
@@ -70,7 +77,8 @@
       "in_dropdown": false,
       "command_id": "CustomCtrl_%CustomCtrl_%ZEN%Federation%ZenRegistry",
       "control": "RibbonSplitButton",
-      "tooltip": "Reads the active cloud model's project and model IDs and adds a ready-made row to the project's Model Registry — the model list ACC Gate and the link tools work from."
+      "tooltip": "Reads the active cloud model's project and model IDs and adds a ready-made row to the project's Model Registry — the model list ACC Gate and the link tools work from.",
+      "tooltip_expanded": "The active model must be an ACC / BIM 360 cloud model."
     },
     {
       "panel": "Federation",
@@ -78,7 +86,8 @@
       "in_dropdown": true,
       "command_id": "CustomCtrl_%CustomCtrl_%CustomCtrl_%ZEN%Federation%ZenRegistry%CmdDumpCloudModelGuids",
       "control": "RibbonButton",
-      "tooltip": "Reads the active cloud model's project and model IDs and adds a ready-made row to the project's Model Registry — the model list ACC Gate and the link tools work from."
+      "tooltip": "Reads the active cloud model's project and model IDs and adds a ready-made row to the project's Model Registry — the model list ACC Gate and the link tools work from.",
+      "tooltip_expanded": "The active model must be an ACC / BIM 360 cloud model."
     },
     {
       "panel": "Federation",
@@ -86,7 +95,8 @@
       "in_dropdown": true,
       "command_id": "CustomCtrl_%CustomCtrl_%CustomCtrl_%ZEN%Federation%ZenRegistry%CmdFindDesktopConnectorPaths",
       "control": "RibbonButton",
-      "tooltip": null
+      "tooltip": null,
+      "tooltip_expanded": null
     },
     {
       "panel": "Federation",
@@ -94,7 +104,8 @@
       "in_dropdown": false,
       "command_id": "CustomCtrl_%CustomCtrl_%ZEN%Federation%ZenAps",
       "control": "RibbonSplitButton",
-      "tooltip": null
+      "tooltip": null,
+      "tooltip_expanded": null
     },
     {
       "panel": "Federation",
@@ -102,7 +113,8 @@
       "in_dropdown": true,
       "command_id": "CustomCtrl_%CustomCtrl_%CustomCtrl_%ZEN%Federation%ZenAps%CmdSetApsCredentials",
       "control": "RibbonButton",
-      "tooltip": null
+      "tooltip": null,
+      "tooltip_expanded": null
     },
     {
       "panel": "Federation",
@@ -110,7 +122,8 @@
       "in_dropdown": true,
       "command_id": "CustomCtrl_%CustomCtrl_%CustomCtrl_%ZEN%Federation%ZenAps%CmdTestApsToken",
       "control": "RibbonButton",
-      "tooltip": null
+      "tooltip": null,
+      "tooltip_expanded": null
     },
     {
       "panel": "Data & Health",
@@ -118,7 +131,8 @@
       "in_dropdown": false,
       "command_id": "CustomCtrl_%CustomCtrl_%ZEN%Data & Health%ZenModelHealth",
       "control": "RibbonSplitButton",
-      "tooltip": null
+      "tooltip": null,
+      "tooltip_expanded": null
     },
     {
       "panel": "Data & Health",
@@ -126,7 +140,8 @@
       "in_dropdown": true,
       "command_id": "CustomCtrl_%CustomCtrl_%CustomCtrl_%ZEN%Data & Health%ZenModelHealth%CmdModelHealthCheck",
       "control": "RibbonButton",
-      "tooltip": null
+      "tooltip": null,
+      "tooltip_expanded": null
     },
     {
       "panel": "Data & Health",
@@ -134,7 +149,8 @@
       "in_dropdown": true,
       "command_id": "CustomCtrl_%CustomCtrl_%CustomCtrl_%ZEN%Data & Health%ZenModelHealth%CmdBatchModelHealthCheck",
       "control": "RibbonButton",
-      "tooltip": null
+      "tooltip": null,
+      "tooltip_expanded": null
     },
     {
       "panel": "Data & Health",
@@ -142,7 +158,8 @@
       "in_dropdown": false,
       "command_id": "CustomCtrl_%CustomCtrl_%ZEN%Data & Health%ZenPbpAudit",
       "control": "RibbonSplitButton",
-      "tooltip": null
+      "tooltip": null,
+      "tooltip_expanded": null
     },
     {
       "panel": "Data & Health",
@@ -150,7 +167,8 @@
       "in_dropdown": true,
       "command_id": "CustomCtrl_%CustomCtrl_%CustomCtrl_%ZEN%Data & Health%ZenPbpAudit%CmdPbpAllLinksAndWorksets",
       "control": "RibbonButton",
-      "tooltip": null
+      "tooltip": null,
+      "tooltip_expanded": null
     },
     {
       "panel": "Data & Health",
@@ -158,7 +176,8 @@
       "in_dropdown": true,
       "command_id": "CustomCtrl_%CustomCtrl_%CustomCtrl_%ZEN%Data & Health%ZenPbpAudit%CmdBatchPbpAllLinksAndWorksets",
       "control": "RibbonButton",
-      "tooltip": null
+      "tooltip": null,
+      "tooltip_expanded": null
     },
     {
       "panel": "Data & Health",
@@ -166,7 +185,8 @@
       "in_dropdown": false,
       "command_id": "CustomCtrl_%CustomCtrl_%ZEN%Data & Health%ZenSizes",
       "control": "RibbonSplitButton",
-      "tooltip": null
+      "tooltip": null,
+      "tooltip_expanded": null
     },
     {
       "panel": "Data & Health",
@@ -174,7 +194,8 @@
       "in_dropdown": true,
       "command_id": "CustomCtrl_%CustomCtrl_%CustomCtrl_%ZEN%Data & Health%ZenSizes%CmdAccRefreshRegistrySizes",
       "control": "RibbonButton",
-      "tooltip": null
+      "tooltip": null,
+      "tooltip_expanded": null
     },
     {
       "panel": "Data & Health",
@@ -182,7 +203,8 @@
       "in_dropdown": true,
       "command_id": "CustomCtrl_%CustomCtrl_%CustomCtrl_%ZEN%Data & Health%ZenSizes%CmdAccExportFileSizesFromDc",
       "control": "RibbonButton",
-      "tooltip": null
+      "tooltip": null,
+      "tooltip_expanded": null
     },
     {
       "panel": "Data & Health",
@@ -190,7 +212,8 @@
       "in_dropdown": true,
       "command_id": "CustomCtrl_%CustomCtrl_%CustomCtrl_%ZEN%Data & Health%ZenSizes%CmdExportFamilySizesToCsv",
       "control": "RibbonButton",
-      "tooltip": null
+      "tooltip": null,
+      "tooltip_expanded": null
     },
     {
       "panel": "Data & Health",
@@ -198,7 +221,8 @@
       "in_dropdown": false,
       "command_id": "CustomCtrl_%CustomCtrl_%ZEN%Data & Health%ZenScheduleData",
       "control": "RibbonSplitButton",
-      "tooltip": null
+      "tooltip": null,
+      "tooltip_expanded": null
     },
     {
       "panel": "Data & Health",
@@ -206,7 +230,8 @@
       "in_dropdown": true,
       "command_id": "CustomCtrl_%CustomCtrl_%CustomCtrl_%ZEN%Data & Health%ZenScheduleData%CmdExportSchedules",
       "control": "RibbonButton",
-      "tooltip": null
+      "tooltip": null,
+      "tooltip_expanded": null
     },
     {
       "panel": "Data & Health",
@@ -214,7 +239,8 @@
       "in_dropdown": true,
       "command_id": "CustomCtrl_%CustomCtrl_%CustomCtrl_%ZEN%Data & Health%ZenScheduleData%CmdBatchExportSchedules",
       "control": "RibbonButton",
-      "tooltip": null
+      "tooltip": null,
+      "tooltip_expanded": null
     },
     {
       "panel": "Data & Health",
@@ -222,7 +248,8 @@
       "in_dropdown": false,
       "command_id": "CustomCtrl_%CustomCtrl_%ZEN%Data & Health%ZenPrintPdf",
       "control": "RibbonSplitButton",
-      "tooltip": "Exports PDFs from the active model as defined in the PrintJobs sheet of its Print Intel workbook — no print dialogs, no PDF printer needed."
+      "tooltip": "Exports PDFs from the active model as defined in the PrintJobs sheet of its Print Intel workbook — no print dialogs, no PDF printer needed.",
+      "tooltip_expanded": "• Select the workbook Export Print Intel produced • Pick one output folder — it applies to every job • Every filled-in row becomes one combined PDF • Leave PdfSetupName blank to use the ZEN default"
     },
     {
       "panel": "Data & Health",
@@ -230,7 +257,8 @@
       "in_dropdown": true,
       "command_id": "CustomCtrl_%CustomCtrl_%CustomCtrl_%ZEN%Data & Health%ZenPrintPdf%CmdPrintPdfFromRegistry",
       "control": "RibbonButton",
-      "tooltip": "Exports PDFs from the active model as defined in the PrintJobs sheet of its Print Intel workbook — no print dialogs, no PDF printer needed."
+      "tooltip": "Exports PDFs from the active model as defined in the PrintJobs sheet of its Print Intel workbook — no print dialogs, no PDF printer needed.",
+      "tooltip_expanded": "• Select the workbook Export Print Intel produced • Pick one output folder — it applies to every job • Every filled-in row becomes one combined PDF • Leave PdfSetupName blank to use the ZEN default"
     },
     {
       "panel": "Data & Health",
@@ -238,7 +266,8 @@
       "in_dropdown": true,
       "command_id": "CustomCtrl_%CustomCtrl_%CustomCtrl_%ZEN%Data & Health%ZenPrintPdf%CmdExportPrintIntelWorkbook",
       "control": "RibbonButton",
-      "tooltip": "Exports an Excel workbook describing the active model's print setup. Its PrintJobs sheet is where you define the PDFs for Print PDF."
+      "tooltip": "Exports an Excel workbook describing the active model's print setup. Its PrintJobs sheet is where you define the PDFs for Print PDF.",
+      "tooltip_expanded": "One workbook, five sheets: • Worksets, Links, PrintSets — reference data from the model • PrintJobs — fill in PrintSetName per row, then run Print PDF • ModelInfo — identifies the model for ACC Gate batch printing"
     },
     {
       "panel": "Project Standards",
@@ -246,7 +275,8 @@
       "in_dropdown": false,
       "command_id": "CustomCtrl_%CustomCtrl_%ZEN%Project Standards%ZenWorksets",
       "control": "RibbonSplitButton",
-      "tooltip": null
+      "tooltip": null,
+      "tooltip_expanded": null
     },
     {
       "panel": "Project Standards",
@@ -254,7 +284,8 @@
       "in_dropdown": true,
       "command_id": "CustomCtrl_%CustomCtrl_%CustomCtrl_%ZEN%Project Standards%ZenWorksets%CmdExportWorksetsToExcel",
       "control": "RibbonButton",
-      "tooltip": null
+      "tooltip": null,
+      "tooltip_expanded": null
     },
     {
       "panel": "Project Standards",
@@ -262,7 +293,8 @@
       "in_dropdown": true,
       "command_id": "CustomCtrl_%CustomCtrl_%CustomCtrl_%ZEN%Project Standards%ZenWorksets%CmdImportWorksetsFromCsv",
       "control": "RibbonButton",
-      "tooltip": "Applies a workset standard from a CSV to the active model: missing worksets are created, existing ones kept. The model must be workshared; the CSV isn't tied to a Revit version."
+      "tooltip": "Applies a workset standard from a CSV to the active model: missing worksets are created, existing ones kept. The model must be workshared; the CSV isn't tied to a Revit version.",
+      "tooltip_expanded": "ACC Gate applies the same standard to many cloud models in one run (Create Worksets From Registry)."
     },
     {
       "panel": "Project Standards",
@@ -270,7 +302,8 @@
       "in_dropdown": false,
       "command_id": "CustomCtrl_%CustomCtrl_%ZEN%Project Standards%ZenSheets",
       "control": "RibbonSplitButton",
-      "tooltip": "The sheet-list standard: export the SHEET LIST schedule, or create and rename sheets from a CSV — in this model or many local files."
+      "tooltip": "The sheet-list standard: export the SHEET LIST schedule, or create and rename sheets from a CSV — in this model or many local files.",
+      "tooltip_expanded": null
     },
     {
       "panel": "Project Standards",
@@ -278,7 +311,8 @@
       "in_dropdown": true,
       "command_id": "CustomCtrl_%CustomCtrl_%CustomCtrl_%ZEN%Project Standards%ZenSheets%CmdExportSheetsToExcel",
       "control": "RibbonButton",
-      "tooltip": null
+      "tooltip": null,
+      "tooltip_expanded": null
     },
     {
       "panel": "Project Standards",
@@ -286,7 +320,8 @@
       "in_dropdown": true,
       "command_id": "CustomCtrl_%CustomCtrl_%CustomCtrl_%ZEN%Project Standards%ZenSheets%CmdImportSheetsFromExcel",
       "control": "RibbonButton",
-      "tooltip": "Creates or renames sheets in the active model from a CSV — column A sheet number, column B sheet name. The CSV isn't tied to a Revit version."
+      "tooltip": "Creates or renames sheets in the active model from a CSV — column A sheet number, column B sheet name. The CSV isn't tied to a Revit version.",
+      "tooltip_expanded": "Close the CSV in Excel before running."
     },
     {
       "panel": "Project Standards",
@@ -294,7 +329,8 @@
       "in_dropdown": true,
       "command_id": "CustomCtrl_%CustomCtrl_%CustomCtrl_%ZEN%Project Standards%ZenSheets%CmdBatchImportSheetsFromExcel",
       "control": "RibbonButton",
-      "tooltip": "Creates or renames sheets from one CSV in many local Revit files in one run, without opening each file yourself. For cloud models, use ACC Gate."
+      "tooltip": "Creates or renames sheets from one CSV in many local Revit files in one run, without opening each file yourself. For cloud models, use ACC Gate.",
+      "tooltip_expanded": "Same CSV format as Import Sheets; the CSV isn't tied to a Revit version."
     },
     {
       "panel": "Project Standards",
@@ -302,7 +338,8 @@
       "in_dropdown": false,
       "command_id": "CustomCtrl_%CustomCtrl_%ZEN%Project Standards%ZenCoordinates",
       "control": "RibbonSplitButton",
-      "tooltip": null
+      "tooltip": null,
+      "tooltip_expanded": null
     },
     {
       "panel": "Project Standards",
@@ -310,7 +347,8 @@
       "in_dropdown": true,
       "command_id": "CustomCtrl_%CustomCtrl_%CustomCtrl_%ZEN%Project Standards%ZenCoordinates%CmdExportCoordinateAuthorityCsv",
       "control": "RibbonButton",
-      "tooltip": "Captures the project's shared-coordinate position from the active model as a Coordinate Authority CSV — the reference every model of the project is aligned to."
+      "tooltip": "Captures the project's shared-coordinate position from the active model as a Coordinate Authority CSV — the reference every model of the project is aligned to.",
+      "tooltip_expanded": "Apply it with Apply Authority CSV, or to many cloud models at once with ACC Gate's Acquire Shared Coordinates action."
     },
     {
       "panel": "Project Standards",
@@ -318,7 +356,8 @@
       "in_dropdown": true,
       "command_id": "CustomCtrl_%CustomCtrl_%CustomCtrl_%ZEN%Project Standards%ZenCoordinates%CmdApplyCoordinateAuthorityCsv",
       "control": "RibbonButton",
-      "tooltip": "Sets the active model's shared-coordinate position from a Coordinate Authority CSV and writes a before/after log. Doesn't save or sync — review the result first."
+      "tooltip": "Sets the active model's shared-coordinate position from a Coordinate Authority CSV and writes a before/after log. Doesn't save or sync — review the result first.",
+      "tooltip_expanded": "The CSV isn't tied to a Revit version: an authority exported in one Revit year applies in another. ACC Gate's Acquire Shared Coordinates action applies it to many cloud models."
     },
     {
       "panel": "Project Standards",
@@ -326,7 +365,8 @@
       "in_dropdown": false,
       "command_id": "CustomCtrl_%CustomCtrl_%ZEN%Project Standards%ZenSchedules",
       "control": "RibbonSplitButton",
-      "tooltip": null
+      "tooltip": null,
+      "tooltip_expanded": null
     },
     {
       "panel": "Project Standards",
@@ -334,7 +374,8 @@
       "in_dropdown": true,
       "command_id": "CustomCtrl_%CustomCtrl_%CustomCtrl_%ZEN%Project Standards%ZenSchedules%CmdExtractStandardScheduleDefinitions",
       "control": "RibbonButton",
-      "tooltip": "Captures how the standard schedules are built — fields, filters, sorting and grouping — in a workbook that isn't tied to a Revit version, so schedule standards can be governed without keeping a source Revit file. Step 1 of 2."
+      "tooltip": "Captures how the standard schedules are built — fields, filters, sorting and grouping — in a workbook that isn't tied to a Revit version, so schedule standards can be governed without keeping a source Revit file. Step 1 of 2.",
+      "tooltip_expanded": "Then use Import Schedule Definitions (WB) to rebuild the schedules in any model — no source Revit file needed. Appearance (fonts, colors, grid lines) isn't included in this version; for a full copy use Import Schedules (RVT)."
     },
     {
       "panel": "Project Standards",
@@ -342,7 +383,8 @@
       "in_dropdown": true,
       "command_id": "CustomCtrl_%CustomCtrl_%CustomCtrl_%ZEN%Project Standards%ZenSchedules%CmdImportStandardScheduleDefinitions",
       "control": "RibbonButton",
-      "tooltip": "Rebuilds the standard schedules in the active model from a workbook made with Export Schedule Definitions (WB) — no source Revit file needed, and the workbook isn't tied to a Revit version. Step 2 of 2."
+      "tooltip": "Rebuilds the standard schedules in the active model from a workbook made with Export Schedule Definitions (WB) — no source Revit file needed, and the workbook isn't tied to a Revit version. Step 2 of 2.",
+      "tooltip_expanded": "For a full copy including appearance, use Import Schedules (RVT) with a source Revit file instead."
     },
     {
       "panel": "Project Standards",
@@ -350,7 +392,8 @@
       "in_dropdown": true,
       "command_id": "CustomCtrl_%CustomCtrl_%CustomCtrl_%ZEN%Project Standards%ZenSchedules%CmdImportStandardSchedules",
       "control": "RibbonButton",
-      "tooltip": "Copies the standard schedules, with their view templates, from a source Revit file into the active model — a full copy, including appearance."
+      "tooltip": "Copies the standard schedules, with their view templates, from a source Revit file into the active model — a full copy, including appearance.",
+      "tooltip_expanded": "The source file must be from the same or an older Revit version. For a version-free route, use the Schedule Definitions (WB) pair."
     },
     {
       "panel": "Project Standards",
@@ -358,7 +401,8 @@
       "in_dropdown": true,
       "command_id": "CustomCtrl_%CustomCtrl_%CustomCtrl_%ZEN%Project Standards%ZenSchedules%CmdBatchImportStandardSchedules",
       "control": "RibbonButton",
-      "tooltip": "Copies the standard schedules from one source Revit file into many local Revit files in one run."
+      "tooltip": "Copies the standard schedules from one source Revit file into many local Revit files in one run.",
+      "tooltip_expanded": "The source file must be from the same or an older Revit version than the target files."
     },
     {
       "panel": "Project Standards",
@@ -366,7 +410,8 @@
       "in_dropdown": false,
       "command_id": "CustomCtrl_%CustomCtrl_%ZEN%Project Standards%CmdExportTemplateStandards",
       "control": "RibbonButton",
-      "tooltip": null
+      "tooltip": null,
+      "tooltip_expanded": null
     },
     {
       "panel": "Families",
@@ -374,7 +419,8 @@
       "in_dropdown": false,
       "command_id": "CustomCtrl_%CustomCtrl_%ZEN%Families%ZenLoad",
       "control": "RibbonSplitButton",
-      "tooltip": null
+      "tooltip": null,
+      "tooltip_expanded": null
     },
     {
       "panel": "Families",
@@ -382,7 +428,8 @@
       "in_dropdown": true,
       "command_id": "CustomCtrl_%CustomCtrl_%CustomCtrl_%ZEN%Families%ZenLoad%CmdLoadSingleFamily",
       "control": "RibbonButton",
-      "tooltip": null
+      "tooltip": null,
+      "tooltip_expanded": null
     },
     {
       "panel": "Families",
@@ -390,7 +437,8 @@
       "in_dropdown": true,
       "command_id": "CustomCtrl_%CustomCtrl_%CustomCtrl_%ZEN%Families%ZenLoad%CmdLoadFamiliesFromFolder",
       "control": "RibbonButton",
-      "tooltip": null
+      "tooltip": null,
+      "tooltip_expanded": null
     },
     {
       "panel": "Families",
@@ -398,7 +446,8 @@
       "in_dropdown": false,
       "command_id": "CustomCtrl_%CustomCtrl_%ZEN%Families%CmdMonitorAndSwap",
       "control": "RibbonButton",
-      "tooltip": "Switches a project to a renamed family library in one pass: every placed instance of an OLD_… family moves to the matching NEW_… family and type, after you review each pair."
+      "tooltip": "Switches a project to a renamed family library in one pass: every placed instance of an OLD_… family moves to the matching NEW_… family and type, after you review each pair.",
+      "tooltip_expanded": "Saves re-placing or re-typing instances by hand when a family naming standard changes. Families are paired by name after the prefix, types by equal type name. Afterwards the old families can be purged."
     },
     {
       "panel": "Families",
@@ -406,7 +455,8 @@
       "in_dropdown": false,
       "command_id": "CustomCtrl_%CustomCtrl_%ZEN%Families%ZenMaterials",
       "control": "RibbonSplitButton",
-      "tooltip": null
+      "tooltip": null,
+      "tooltip_expanded": null
     },
     {
       "panel": "Families",
@@ -414,7 +464,8 @@
       "in_dropdown": true,
       "command_id": "CustomCtrl_%CustomCtrl_%CustomCtrl_%ZEN%Families%ZenMaterials%CmdExportMaterialsToCsv",
       "control": "RibbonButton",
-      "tooltip": null
+      "tooltip": null,
+      "tooltip_expanded": null
     },
     {
       "panel": "Families",
@@ -422,7 +473,8 @@
       "in_dropdown": true,
       "command_id": "CustomCtrl_%CustomCtrl_%CustomCtrl_%ZEN%Families%ZenMaterials%CmdImportMaterialsFromCsv",
       "control": "RibbonButton",
-      "tooltip": null
+      "tooltip": null,
+      "tooltip_expanded": null
     },
     {
       "panel": "Families",
@@ -430,7 +482,8 @@
       "in_dropdown": false,
       "command_id": "CustomCtrl_%CustomCtrl_%ZEN%Families%CmdAssignTypeMarksByFamilyName",
       "control": "RibbonButton",
-      "tooltip": "Assigns numbered Type Marks (for example DOOR-050, DOOR-051) to all types of the families whose names contain a search term, starting from a number you choose."
+      "tooltip": "Assigns numbered Type Marks (for example DOOR-050, DOOR-051) to all types of the families whose names contain a search term, starting from a number you choose.",
+      "tooltip_expanded": "Run it once per category with its own number range — for example doors from 0, windows from 50, walls from 100. The search term becomes the mark's prefix."
     }
   ]
 }

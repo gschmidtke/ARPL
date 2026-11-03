@@ -30,8 +30,11 @@ Every statement about an add-in carries how it is known. A lesson is only as str
 | `E2-inventory` | Ribbon inventory from the running Revit | That a command exists, its id, panel and label |
 | `E3-observed` | A run on a test or copied model: dialogs, files written, model state read before and after | What the command actually did in that version |
 | `E4-reproduced` | E3 repeated by another user, version or project | That the behaviour holds beyond one session |
+| `V-vendor-verified` | The add-in's developer checked the statement against the add-in's source | Exact behaviour, including edge cases a single run would not show (what Cancel does, matching rules, limits) |
 
 Statements a vendor or owner makes in conversation count as `E1-docs` once they are written down by them; until then they are hearsay and are not filed.
+
+`V-vendor-verified` is only available where the developer takes part, as for ZEN (Tiverit LLC). The card states the verified behaviour and never the code behind it. A `V` statement names the add-in version or source release it was checked against, and is still compared with one observed run (`E3`) before a command is marked complete.
 
 ## What never goes in here
 
