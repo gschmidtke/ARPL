@@ -17,6 +17,16 @@ Words like "connector", "panel", "room", "system", "family" or an acronym trigge
 
 If the evidence leaves the frame open (is this connector power, data or audio?), ask the user in one question. Failure pattern FP13 records what happens otherwise.
 
+### Naming requests: BEP first
+
+When the user asks for any naming convention, or for names to be generated (sheets, views, models, families, worksets, parameters, anything named), do not propose names straight away. Decided by the owner on 2026-11-02.
+
+1. **Ask whether a valid BEP exists for the project.** If one exists, its naming rules govern. Get them from the BEP the user supplies, not from memory or general practice.
+2. **If there is no valid BEP**, ask for the project details that the governing naming rules need. The fallback rules are in [TIVERIT BIM Standards](https://github.com/gschmidtke/TIVERIT-BIM-STANDARDS) (naming syntaxes and controlled vocabularies). Typical details: project code, disciplines, levels or zones, and series and scope for sheets. Ask only for what is still missing.
+3. **Then propose the names.** Keep any detail you could not get marked `TBC`; never invent it. If the governing rule is itself still a draft or candidate, say so and present the names as a draft.
+
+ARPL does not define naming conventions. It records how named results were produced and checked.
+
 ## 1. Before you act: look it up
 
 1. Fetch the index (one file, about 75 KB: one line per pack, workflow and failure pattern; rules and full texts stay in the pack files):
