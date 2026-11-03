@@ -50,6 +50,22 @@ for dp, dn, fn in os.walk(os.path.join(root, "library")):
             src = open(os.path.join(dp, f), encoding="utf-8").read()
             hit = FORBIDDEN.search(src)
             if hit: errors.append(f"{os.path.relpath(os.path.join(dp, f), root)}: check scripts must be read-only (found '{hit.group(0)}')")
+# Source wall: links to the owner's repositories must point to the public set only.
+# Licensed source material and non-public locations are never referenced from ARPL.
+PUBLIC_REPOS = {"arpl", "tiverit-bim-standards", "usg", "star-t-gate-inbox", "star-t-gate-inbox-worker"}
+OWNER_LINK = re.compile(r"(?:github\.com|raw\.githubusercontent\.com)/gschmidtke/([A-Za-z0-9._-]+)", re.I)
+for dp, dn, fn in os.walk(root):
+    if "/.git" in dp.replace(os.sep, "/") + "/" or os.path.basename(dp) == ".git":
+        dn[:] = []; continue
+    dn[:] = [d for d in dn if d != ".git"]
+    for f in fn:
+        if not f.endswith((".json", ".md", ".txt", ".cs", ".py", ".csv", ".yml", ".yaml", ".html")): continue
+        path = os.path.join(dp, f)
+        text = open(path, encoding="utf-8", errors="replace").read()
+        for mt in OWNER_LINK.finditer(text):
+            repo = mt.group(1).lower().removesuffix(".git")
+            if repo not in PUBLIC_REPOS:
+                errors.append(f"{os.path.relpath(path, root)}: link to a non-public location of the owner ('{mt.group(0)}'); remove it")
 
 print(f"{len(ids)} packs checked, {len(errors)} problems")
 for e in errors: print(" -", e)
