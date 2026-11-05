@@ -1,0 +1,4 @@
+{
+  "version": "v05",
+  "instruction": "Branch-and-bound order per column, pruning on crossings"
+}

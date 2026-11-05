@@ -1,0 +1,5 @@
+{
+  "result": "Notes metres outside the view",
+  "problem": "Revit internal units are feet (FP26)",
+  "found_by": "image export of the sheet"
+}

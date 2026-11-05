@@ -1,0 +1,4 @@
+{
+  "version": "v08",
+  "instruction": "Test against dimension lines (Segments Origin/Value) and estimated text boxes; remove redundant dimensions; move remaining ones along their normal and move their witness ticks with them"
+}

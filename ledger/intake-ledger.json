@@ -705,11 +705,42 @@
         "inbox/claude/2026-11-05-drafting-view-detail-from-model.json",
         "inbox/claude/2026-11-05-annotation-leader-check.cs"
       ],
-      "status": "received",
-      "decision": "Held for independent review: the curator is the same occupant as the author. Will be filed as status 'candidate' only after a reviewer other than Claude has checked it.",
-      "resulting_ids": [],
+      "status": "filed",
+      "decision": "Filed on the owner's request of 2026-11-05 ('update the ARPL knowledge base with what you learned in this session') into ARPL-DOC-0004 (protocol and read-only check) and ARPL-DOC-0005, status 'candidate'. The curator is the same occupant as the author: the independent review asked for on receipt is still open and is the condition for any status above 'candidate'.",
+      "resulting_ids": [
+        "ARPL-DOC-0004",
+        "ARPL-DOC-0005"
+      ],
       "reviewed_by": "",
-      "closed": ""
+      "closed": "2026-11-05"
+    },
+    {
+      "entry_id": "IN-0032",
+      "received": "2026-11-05",
+      "contributor": {
+        "name": "Gottfried Schmidtke",
+        "github": "gschmidtke",
+        "with": "Claude (BAUMEISTER seat)"
+      },
+      "source": "owner session 2026-11-05 (owner request in chat)",
+      "submitted": "Lessons from a detailing session in the owner's R&D model: detail annotation layout at the element, drafting-view details derived from the model, metric-to-imperial switch of units, dimension types, notes and scales, and an insulation material swap by type parameters; six failure patterns",
+      "files": [],
+      "status": "filed",
+      "decision": "Filed as status 'candidate'. Client and project data, file paths and private repository references removed. Standards references point to the public TIVERIT BIM Standards (detail annotation profile PR #49, owner-approved, merge pending). Curator is the same occupant as the author (disclosed); independent reproduction is open.",
+      "resulting_ids": [
+        "ARPL-DOC-0004",
+        "ARPL-DOC-0005",
+        "ARPL-CHG-0003",
+        "ARPL-CHG-0004",
+        "FP62",
+        "FP63",
+        "FP64",
+        "FP65",
+        "FP66",
+        "FP67"
+      ],
+      "reviewed_by": "",
+      "closed": "2026-11-05"
     }
   ]
 }

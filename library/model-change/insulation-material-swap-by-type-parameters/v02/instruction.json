@@ -1,0 +1,4 @@
+{
+  "version": "v02",
+  "instruction": "Material.Duplicate assigned through doc.GetElement(...)"
+}

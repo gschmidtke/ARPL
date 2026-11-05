@@ -1,0 +1,78 @@
+{
+  "revision": 1,
+  "level": 2,
+  "roles": [
+    "bim-specialist",
+    "technical-architect"
+  ],
+  "project_types": [
+    "residential"
+  ],
+  "revit_versions_tested": [
+    "2024"
+  ],
+  "environment": {
+    "revit_version": "2024.3",
+    "tool": "RevitBridge 0.4.0 (local Revit API bridge, MCP) with run_csharp",
+    "compiler": "Roslyn 4.8 (C# 12)",
+    "agent": "Claude (Anthropic)",
+    "model": "owner R&D model: small accessory dwelling, workshared cloud model"
+  },
+  "status": "candidate",
+  "contributors": [
+    "Gottfried Schmidtke with Claude"
+  ],
+  "recorded": "2026-11-05",
+  "changelog": [
+    {
+      "revision": 1,
+      "date": "2026-11-05",
+      "change": "First recorded (IN-0032, owner session; curator is the same occupant as the author, disclosed)",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ]
+    }
+  ],
+  "id": "ARPL-DOC-0005",
+  "title": "Construction detail as a drafting view derived from the model",
+  "use_when": [
+    "drawing an LOD 400 construction detail as a drafting view from model facts",
+    "rebuilding a detail in place while keeping its sheet placement",
+    "adding enlargements, airflow or air-control lines to a detail"
+  ],
+  "not_for": [
+    "callouts of model sections where the owner wants the model to carry the information",
+    "structural, wind, energy or product verification"
+  ],
+  "api_terms": [
+    "ViewDrafting.Create",
+    "DetailCurve",
+    "FilledRegion.Create",
+    "Arc.Create",
+    "Plane.CreateByNormalAndOrigin",
+    "ViewSheet.Create",
+    "Viewport.Create",
+    "ImageExportOptions",
+    "PDFExportOptions"
+  ],
+  "work_class": "W6",
+  "workflows": [
+    "documentation",
+    "views-graphics"
+  ],
+  "disciplines": [
+    "architecture"
+  ],
+  "phases": [
+    "design-development",
+    "construction-documents"
+  ],
+  "failure_patterns": [
+    "FP40",
+    "FP18",
+    "FP26",
+    "FP63",
+    "FP64",
+    "FP08"
+  ]
+}

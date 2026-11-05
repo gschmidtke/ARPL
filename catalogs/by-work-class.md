@@ -54,6 +54,8 @@ Work class = what drives the result; it decides the preview and the proof of 'do
 | [ARPL-ADM-0002](../library/model-administration/reset-workshared-cloud-model-links-worksets/) Reset a workshared cloud model: remove all Revit links and delete user worksets with all worksets closed | 2 | W5 | candidate |
 | [ARPL-CHG-0001](../library/model-change/lower-a-level-and-propagate-dependents/) Lowering a level: what doesn't follow | 2 | W5 | candidate |
 | [ARPL-CHG-0002](../library/model-change/replace-footprint-roof-revit-2024/) Changing a footprint roof's outline by API in Revit 2024 | 2 | W5 | candidate |
+| [ARPL-CHG-0003](../library/model-change/metric-to-imperial-units-and-scales/) Switch a project from metric to imperial: units, dimension types, notes and view scales | 2 | W5 | candidate |
+| [ARPL-CHG-0004](../library/model-change/insulation-material-swap-by-type-parameters/) Swap an insulation material model-wide by type parameters; keep the old variant as a family copy | 2 | W5 | candidate |
 | [ARPL-LNK-0001](../library/links-coordinates/shared-coordinates-before-splitting-a-campus/) Set shared coordinates on an authority building, then split a campus model into per-building files | 2 | W5 | candidate |
 
 ## W6: Documentation production (driven by views and sheets)
@@ -63,6 +65,8 @@ Work class = what drives the result; it decides the preview and the proof of 'do
 | [ARPL-DOC-0001](../library/documentation/assembly-shop-drawings/) Shop drawings: invalid references and swapped elevations | 2 | W6 | candidate |
 | [ARPL-DOC-0002](../library/documentation/dimension-style-in-trade-units/) Project units round framing dimensions | 1 | W6 | candidate |
 | [ARPL-DOC-0003](../library/documentation/weekly-print-sets-zen-print-intel/) Weekly print-set booklets with ZEN: one Revit print set per model, Print Intel workbook, ACC Gate Print PDFs | 2 | W6 | candidate |
+| [ARPL-DOC-0004](../library/documentation/detail-annotation-at-the-element/) Detail annotation at the element: grouped notes, shoulder leaders, no crossings | 2 | W6 | candidate |
+| [ARPL-DOC-0005](../library/documentation/drafting-view-detail-from-the-model/) Construction detail as a drafting view derived from the model | 2 | W6 | candidate |
 | [ARPL-VIEW-0001](../library/views-graphics/crop-overridden-by-scope-box/) Crops silently ignored | 1 | W6 | candidate |
 | [ARPL-VIEW-0002](../library/views-graphics/section-view-direction/) Section looking the wrong way | 1 | W6 | candidate |
 

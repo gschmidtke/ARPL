@@ -1,0 +1,107 @@
+{
+  "revision": 1,
+  "level": 2,
+  "roles": [
+    "bim-specialist",
+    "technical-architect"
+  ],
+  "project_types": [
+    "residential"
+  ],
+  "revit_versions_tested": [
+    "2024"
+  ],
+  "environment": {
+    "revit_version": "2024.3",
+    "tool": "RevitBridge 0.4.0 (local Revit API bridge, MCP) with run_csharp",
+    "compiler": "Roslyn 4.8 (C# 12)",
+    "agent": "Claude (Anthropic)",
+    "model": "owner R&D model: small accessory dwelling, workshared cloud model"
+  },
+  "status": "candidate",
+  "contributors": [
+    "Gottfried Schmidtke with Claude"
+  ],
+  "recorded": "2026-11-05",
+  "changelog": [
+    {
+      "revision": 1,
+      "date": "2026-11-05",
+      "change": "First recorded (IN-0032, owner session; curator is the same occupant as the author, disclosed)",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ]
+    }
+  ],
+  "id": "ARPL-DOC-0004",
+  "title": "Detail annotation at the element: grouped notes, shoulder leaders, no crossings",
+  "use_when": [
+    "annotating a drafting or detail view with text notes and leaders",
+    "a reviewer asks for notes at the element instead of a numbered legend",
+    "checking a detail for crossing leaders, leaders through dimensions or text, duplicate lines"
+  ],
+  "not_for": [
+    "tag families driven by parameters (use governed tags)",
+    "deciding what a note says: content, product and engineering values stay with their owners"
+  ],
+  "api_terms": [
+    "TextNote.Create",
+    "TextNote.AddLeader",
+    "TextNoteLeaderTypes",
+    "Leader.Anchor",
+    "Leader.Elbow",
+    "Leader.End",
+    "TextNote.RemoveLeaders",
+    "TextNote.LeaderLeftAttachment",
+    "Dimension.Segments",
+    "ElementTransformUtils.MoveElement"
+  ],
+  "work_class": "W6",
+  "workflows": [
+    "documentation",
+    "views-graphics"
+  ],
+  "disciplines": [
+    "architecture",
+    "generic"
+  ],
+  "phases": [
+    "design-development",
+    "construction-documents"
+  ],
+  "failure_patterns": [
+    "FP26",
+    "FP62",
+    "FP64",
+    "FP65",
+    "FP22"
+  ],
+  "validation_checks": [
+    {
+      "file": "final/checks/annotation_leader_check.cs",
+      "runs_in": "RevitBridge run_csharp, transaction none",
+      "mode": "read-only",
+      "returns": "{pass, crossings, noShoulder, dup, noLeader_review}",
+      "inputs": {
+        "viewId": "the drafting/detail view to check"
+      },
+      "test_runs": [
+        {
+          "date": "2026-11-05",
+          "model": "owner R&D model, 5 detail views (81 leaders)",
+          "revit_version": "2024.3",
+          "result": "pass",
+          "note": "after layout; it found 2 leaders without shoulder and 2 dimension-tick duplicates that were then fixed or excluded"
+        }
+      ],
+      "model_assumptions": [
+        "Leaders are straight with one elbow",
+        "Dimension witness ticks are thin detail lines referenced by a dimension"
+      ],
+      "not_for": [
+        "Leaders through dimension lines: see the rule's DA-04 obstacle test",
+        "Whether a note names the right component (human review)"
+      ]
+    }
+  ]
+}

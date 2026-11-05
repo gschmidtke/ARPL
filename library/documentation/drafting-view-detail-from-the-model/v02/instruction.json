@@ -1,0 +1,4 @@
+{
+  "version": "v02",
+  "instruction": "Rebuild in place: delete every element owned by the view"
+}

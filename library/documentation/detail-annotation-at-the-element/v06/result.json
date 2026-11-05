@@ -1,0 +1,5 @@
+{
+  "result": "No horizontal shoulder possible; Revit collapses the elbow",
+  "problem": "the column must sit on the side of its targets",
+  "found_by": "read-only check (noShoulder)"
+}

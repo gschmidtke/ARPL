@@ -1,0 +1,5 @@
+{
+  "result": "Bridge timed out at 60 s; the call still completed",
+  "problem": "10! orders; FP22 behaviour",
+  "found_by": "bridge timeout, read-only state check"
+}

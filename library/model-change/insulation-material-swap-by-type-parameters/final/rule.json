@@ -1,0 +1,10 @@
+{
+  "lesson": "A material swap is a parameter change, not a rebuild: family types carry the material, the material carries the hatch. Only DirectShapes carry the material in their geometry, so they need SetShape with a copy of their own faces.",
+  "rule": "1. Inventory every place the old material is used: materials by name, compound layers of host types (with instance counts), family type material parameters, model elements by Element.GetMaterialIds, DirectShapes, filled region types in drafting views, and text.\n2. Create the new material by duplicating the old (Material.Duplicate returns the Material); set its cut pattern (hatch) and graphics colour; give the old material its proper hatch too.\n3. Before changing the in-use family, keep the old variant: EditFamily > SaveAs '<family> - <old material>' > LoadFamily; set its types' material to the old one. It stays unplaced for later use.\n4. Change the in-use family's type material parameters and rename the types; update instance comments that name the material. Change thickness only by type parameters, after a dry run shows which way the geometry grows.\n5. DirectShapes: rebuild with TessellatedShapeBuilder from the triangulated faces of their own solid, each face with the new material id, Target Solid, Fallback Abort; compare volumes before SetShape.\n6. Drafting details: change the filled region type of the old fill; update notes; re-run annotation layout (ARPL-DOC-0004).\n7. Recount: no model element still uses the old material; sync with a comment.",
+  "validation": [
+    "Model elements using the old material: 0",
+    "DirectShape volume difference below tolerance",
+    "Family copy present with old material, unplaced",
+    "Section/plan views show the new hatch"
+  ]
+}

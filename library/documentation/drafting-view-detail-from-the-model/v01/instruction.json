@@ -1,0 +1,4 @@
+{
+  "version": "v01",
+  "instruction": "Seal symbol with new Plane(normal, origin)"
+}

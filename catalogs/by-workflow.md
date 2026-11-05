@@ -44,6 +44,7 @@ Primary entry for Revit users and developers: what area of Revit the work touche
 
 | Pack | Level | Work class | Status |
 |---|---|---|---|
+| [ARPL-CHG-0004](../library/model-change/insulation-material-swap-by-type-parameters/) Swap an insulation material model-wide by type parameters; keep the old variant as a family copy | 2 | W5 | candidate |
 | [ARPL-CON-0001](../library/connectors-systems/equipment-power-connector-with-load-data/) Power connector without load parameters | 3 | W1 | candidate |
 | [ARPL-CON-0002](../library/connectors-systems/residential-branch-circuits-from-confirmed-layout/) Residential branch circuits from a confirmed layout | 3 | W3 | candidate |
 | [ARPL-PAR-0001](../library/parameters-data/material-description-keynote-governance/) Governed material Descriptions and Keynotes | 2 | W7 | candidate |
@@ -99,6 +100,8 @@ Primary entry for Revit users and developers: what area of Revit the work touche
 |---|---|---|---|
 | [ARPL-DOC-0001](../library/documentation/assembly-shop-drawings/) Shop drawings: invalid references and swapped elevations | 2 | W6 | candidate |
 | [ARPL-DOC-0002](../library/documentation/dimension-style-in-trade-units/) Project units round framing dimensions | 1 | W6 | candidate |
+| [ARPL-DOC-0004](../library/documentation/detail-annotation-at-the-element/) Detail annotation at the element: grouped notes, shoulder leaders, no crossings | 2 | W6 | candidate |
+| [ARPL-DOC-0005](../library/documentation/drafting-view-detail-from-the-model/) Construction detail as a drafting view derived from the model | 2 | W6 | candidate |
 | [ARPL-VIEW-0001](../library/views-graphics/crop-overridden-by-scope-box/) Crops silently ignored | 1 | W6 | candidate |
 | [ARPL-VIEW-0002](../library/views-graphics/section-view-direction/) Section looking the wrong way | 1 | W6 | candidate |
 
@@ -109,9 +112,12 @@ Primary entry for Revit users and developers: what area of Revit the work touche
 | [ARPL-ASM-0001](../library/assemblies-fabrication/sheathing-layout-minimum-remnant-at-openings/) Plywood slivers at openings | 2 | W3 | candidate |
 | [ARPL-ASM-0005](../library/assemblies-fabrication/assembly-naming-and-identical-panels/) Assembly naming and identical panels | 1 | W3 | candidate |
 | [ARPL-CHG-0001](../library/model-change/lower-a-level-and-propagate-dependents/) Lowering a level: what doesn't follow | 2 | W5 | candidate |
+| [ARPL-CHG-0003](../library/model-change/metric-to-imperial-units-and-scales/) Switch a project from metric to imperial: units, dimension types, notes and view scales | 2 | W5 | candidate |
 | [ARPL-DOC-0001](../library/documentation/assembly-shop-drawings/) Shop drawings: invalid references and swapped elevations | 2 | W6 | candidate |
 | [ARPL-DOC-0002](../library/documentation/dimension-style-in-trade-units/) Project units round framing dimensions | 1 | W6 | candidate |
 | [ARPL-DOC-0003](../library/documentation/weekly-print-sets-zen-print-intel/) Weekly print-set booklets with ZEN: one Revit print set per model, Print Intel workbook, ACC Gate Print PDFs | 2 | W6 | candidate |
+| [ARPL-DOC-0004](../library/documentation/detail-annotation-at-the-element/) Detail annotation at the element: grouped notes, shoulder leaders, no crossings | 2 | W6 | candidate |
+| [ARPL-DOC-0005](../library/documentation/drafting-view-detail-from-the-model/) Construction detail as a drafting view derived from the model | 2 | W6 | candidate |
 | [ARPL-PAR-0001](../library/parameters-data/material-description-keynote-governance/) Governed material Descriptions and Keynotes | 2 | W7 | candidate |
 | [ARPL-VIEW-0001](../library/views-graphics/crop-overridden-by-scope-box/) Crops silently ignored | 1 | W6 | candidate |
 | [ARPL-VIEW-0002](../library/views-graphics/section-view-direction/) Section looking the wrong way | 1 | W6 | candidate |
@@ -187,5 +193,7 @@ Primary entry for Revit users and developers: what area of Revit the work touche
 | [ARPL-ASM-0002](../library/assemblies-fabrication/opening-framing-header-fit-under-plates/) Door too tall for a header | 2 | W3 | candidate |
 | [ARPL-CHG-0001](../library/model-change/lower-a-level-and-propagate-dependents/) Lowering a level: what doesn't follow | 2 | W5 | candidate |
 | [ARPL-CHG-0002](../library/model-change/replace-footprint-roof-revit-2024/) Changing a footprint roof's outline by API in Revit 2024 | 2 | W5 | candidate |
+| [ARPL-CHG-0003](../library/model-change/metric-to-imperial-units-and-scales/) Switch a project from metric to imperial: units, dimension types, notes and view scales | 2 | W5 | candidate |
+| [ARPL-CHG-0004](../library/model-change/insulation-material-swap-by-type-parameters/) Swap an insulation material model-wide by type parameters; keep the old variant as a family copy | 2 | W5 | candidate |
 | [ARPL-GEO-0002](../library/geometry/gable-walls-as-profile-walls/) Gable walls without wall attachment | 2 | W4 | candidate |
 
