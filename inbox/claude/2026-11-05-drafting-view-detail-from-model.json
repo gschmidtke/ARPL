@@ -1,0 +1,90 @@
+{
+  "title": "LOD 400 construction detail as a drafting view from a live model: model change, detail geometry, annotation at the element with non-crossing shoulder leaders, line-purpose review",
+  "contributor": {
+    "name": "Claude (Anthropic), BAUMEISTER seat, session with the repository owner",
+    "github": "",
+    "credit_as": "Claude (AI agent), with Gottfried Schmidtke (owner rules R1-R5)"
+  },
+  "license_confirmation": "I wrote this or have the right to share it, and I agree to publish it under CC BY 4.0 (text/JSON) and MIT (code).",
+  "context": {
+    "revit_version": "2024",
+    "tool_or_bridge": "RevitBridge run_csharp (Roslyn C# 12), cloud workshared model",
+    "discipline": "architecture",
+    "project_type": "residential, small accessory dwelling (owner R&D model)",
+    "phase": "design development / detailing"
+  },
+  "intent": "Develop roof-to-wall eave junctions (low and high eave of a vented shed roof) as LOD 400 drafting-view details derived from the model, with enlarged sub-details, annotation placed at the elements it describes, and a documented review of every drawn line, so that a reviewer can follow connections and evidence on the sheet itself.",
+  "use_when": [
+    "An agent draws a construction detail as a drafting view from model facts (section survey -> 2D detail)",
+    "An agent annotates any drafting or detail view and must keep notes at the element, grouped outside the geometry, with non-crossing leaders",
+    "An agent must produce dimensions in a unit other than the project units (e.g. mm with ft-in alternates in a cm project)",
+    "A reviewer asks for traceable connections: enlargements, airflow/air-control lines, tolerance stacks"
+  ],
+  "not_for": [
+    "Model-based details (callouts of 3D sections) where the owner wants the model to carry the information; this protocol is for drafting views only",
+    "Structural, energy or code verification: the detail records assumptions; it does not verify them"
+  ],
+  "api_terms": [
+    "ViewDrafting.Create", "DetailCurve / doc.Create.NewDetailCurve", "FilledRegion.Create", "CurveLoop",
+    "Arc.Create(Plane, ...)", "Plane.CreateByNormalAndOrigin",
+    "TextNote.Create", "TextNote.AddLeader(TextNoteLeaderTypes.TNLT_STRAIGHT_L/R)", "Leader.End", "Leader.Elbow", "Leader.Anchor",
+    "TextNote.LeaderLeftAttachment / LeaderRightAttachment (LeaderAtachement.TopLine)", "TextNote.RemoveLeaders",
+    "doc.Create.NewDimension", "DimensionType.Duplicate", "DimensionType.SetUnitsFormatOptions", "DimensionType.SetAlternateUnitsFormatOptions",
+    "ViewSheet.Create", "Viewport.Create", "Viewport.SetBoxCenter", "Viewport.GetBoxOutline",
+    "ImageExportOptions / doc.ExportImage", "PDFExportOptions / doc.Export",
+    "SynchronizeWithCentralOptions (SaveLocalBefore/After = true)", "RelinquishOptions"
+  ],
+  "improves": "",
+  "standards_refs": {
+    "note": "TIVERIT BIM Standards evaluated against main@e2cb86712d090b7e558c74c4792b40661f70a04d. R1-R5 are owner rules of 2026-11-05, proposed to the Standards curator as REQ-S7-SHEET-020..024 and INS-REVIT-ANNOTATION-001 ANN-04..06 (not yet promoted).",
+    "applied_existing": [
+      "TIVERIT-BIM-STD-S7-SHEET-TITLEBLOCK-DOCUMENTATION-001: REQ-S7-SHEET-001/003/006 (sheet A5-0x identity), -013/-015 (legibility, consistent composition), -016 (reusable annotation content), -017 (no floating annotation), -018 (pre-issue QA)",
+      "TIVERIT-BIM-INS-REVIT-ANNOTATION-001: ANN-01 (approved types), ANN-02 (units and precision), ANN-03 (no manual lines in place of governed annotation)",
+      "TIVERIT-S4-REVIT-ANNOTATION-TYPE-FIELDS-001: UNITS_PRECISION, DISPLAY_PROPERTIES, CHANGE_CONTROL"
+    ],
+    "proposed_new": ["REQ-S7-SHEET-020 (R1)", "REQ-S7-SHEET-021 (R2)", "REQ-S7-SHEET-022 (R3)", "REQ-S7-SHEET-023 (R4)", "REQ-S7-SHEET-024 (R5)"],
+    "deviations_recorded": [
+      "ANN-01 / S4 CHANGE_CONTROL: project-local styles were created (dimension type 'DET Linear - mm (ft-in)', line styles 'DET Air Control' and 'DET Airflow', filled regions 'DET ...') because no governed catalogue exists yet. They are flagged for governance, not presented as standard.",
+      "REQ-S7-SHEET-008/009: title-block fields remain template placeholders (open item)."
+    ]
+  },
+  "packs_used": [
+    { "arpl_pack": "ARPL-DOC-0002", "pack_revision": 1, "revit_version": "2024", "result": "improved" },
+    { "arpl_pack": "ARPL-QA-0001", "pack_revision": 1, "revit_version": "2024", "result": "passed" },
+    { "arpl_pack": "ARPL-GEO-0004", "pack_revision": 2, "revit_version": "2024", "result": "passed" }
+  ],
+  "usage_report": {
+    "tokens_in": "",
+    "tokens_out": "",
+    "tool_calls": "about 60 bridge calls for the detail work (model change, two details, three enlargements, annotation rework, checks, exports, syncs)",
+    "retries": "11 failed or corrected attempts, listed in iterations",
+    "packs": [
+      { "arpl_pack": "ARPL-DOC-0002", "verdict": "adapted", "why": "Same lesson (project units do not fit the drawing): here the project was in cm and the detail needed mm with ft-in alternates. Added: alternate units with a bracket prefix/suffix; the 'Alternate Units' parameter is found by name in Revit 2024 (no BuiltInParameter)." },
+      { "arpl_pack": "ARPL-QA-0001", "verdict": "reused", "why": "Image export of the view after every drawing step as the visual gate; found 6 of the defects below." },
+      { "arpl_pack": "ARPL-GEO-0004", "verdict": "adapted", "why": "Staged build with gates applied to 2D: geometry, then annotation, then checks; each stage committed separately so a failed stage rolls back alone." }
+    ],
+    "without_arpl_estimate": ""
+  },
+  "iterations": [
+    { "instruction": "Change rafters 2x8 -> 2x12 (owner decision) and raise roof build-up", "result": "63 members retyped, 176 elements raised 102 mm, synced", "problem": "none; a new framing type had no cost (set 0, marked COST TBD)", "found_by": "type parameter check" },
+    { "instruction": "Seal symbol: Arc.Create(new Plane(normal, origin), r, 0, 2pi)", "result": "compile error: Plane has no 2-argument constructor", "problem": "API member assumed (FP40)", "found_by": "compiler" },
+    { "instruction": "Rebuild a drafting view in place: delete all elements owned by the view, then redraw", "result": "InvalidObjectException", "problem": "the view owns one internal element without a category; deleting it invalidates the view. Filter OwnerViewId == view && Category != null", "found_by": "exception, then a read-only survey grouped by type and category" },
+    { "instruction": "Name views 'DET-01 EA - Roof Edge - 1:2'", "result": "ArgumentException: prohibited characters", "problem": "':' is not allowed in view names; put the scale in the view scale, not the name", "found_by": "exception" },
+    { "instruction": "Read text of notes from a list collected before deleting some of them", "result": "InvalidObjectException", "problem": "stale element references after delete (FP18/FP27 family): capture what you need before deleting", "found_by": "exception" },
+    { "instruction": "Dimensions in the project's default type", "result": "drawing showed 45, 34, 7 (centimetres)", "problem": "project units are cm (FP26 / ARPL-DOC-0002). Fix: own dimension type, mm primary, ft-in alternate with ' [' and ']'", "found_by": "external reviewer reading the PDF" },
+    { "instruction": "Keynote legend with number tags (rev B/C)", "result": "owner rejected: annotation must live at the element (R1)", "problem": "legend + numbers forces the reader to cross-reference; numbers also lost meaning after a renumbering (DET-02 notes referred to 'DET-01 note 3')", "found_by": "owner review" },
+    { "instruction": "Stack notes in a column using TextNote bounding-box height", "result": "notes spread over several metres", "problem": "a TextNote's bounding box includes its leaders. Measure height with leaders removed, then add leaders", "found_by": "image export" },
+    { "instruction": "Pass column positions to TextNote.Coord", "result": "notes placed metres outside the view", "problem": "values given in mm where Revit expects feet (FP26)", "found_by": "image export of the sheet" },
+    { "instruction": "Find a non-crossing order with a full 10! permutation search inside one bridge call", "result": "bridge timed out at 60 s; the call still completed in Revit", "problem": "long call (FP22-like). Read model state before re-running. Replaced by branch-and-bound with pruning on crossings (8.5k nodes for 10 notes)", "found_by": "bridge timeout, then a read-only state check" },
+    { "instruction": "Leader to a target lying behind the text column", "result": "no horizontal shoulder possible; Revit collapses the elbow", "problem": "the column must lie on the side of the targets it serves (R2/R4). Move the group, do not bend the shoulder", "found_by": "read-only check (noShoulder = 2)" },
+    { "instruction": "Remove duplicate lines when two collinear lines overlap >= 90 % of the SHORTER line", "result": "deleted long WRB and trellis lines that a short edge overlapped", "problem": "coverage must be measured against the candidate's own length. Lines restored", "found_by": "reading the deletion report before syncing" },
+    { "instruction": "Dimensions referencing short witness stubs", "result": "after the panel end moved 2 mm, the clip dimension silently read 70 for a 72 distance", "problem": "witness stubs are not tied to geometry. Dimension the real edges where they exist; move stubs with the geometry", "found_by": "line-purpose review (R5)" }
+  ],
+  "final_rule": {
+    "lesson": "A detail is read through its annotation. Notes in a legend, crossing leaders and unexplained lines make a correct drawing unreadable; Revit's leader and bounding-box behaviour makes a naive layout fail.",
+    "rule": "1) Annotate each element with its own text note and leader (R1). 2) Group notes in columns outside the geometry, on the side of the elements they serve (R2). 3) Measure each note's height with its leader removed; stack the column; choose the note order by branch-and-bound so that no two leaders cross, including leaders of groups already placed (R3). 4) Attach leaders at the top line; set Elbow at the anchor height, offset towards the target, so every leader starts with a horizontal shoulder (R4). 5) List every detail line; remove same-style duplicates and hidden lines buried under visible lines only when the candidate itself is >= 90 % covered; dimension real edges; record the purpose of what remains (R5). 6) Use a dimension type in the drawing's units, not the project's. 7) Export an image after each stage and look at it.",
+    "validation": "Read-only check 2026-11-05-annotation-leader-check.cs per view: crossings = 0, noShoulder = 0, duplicate/buried lines = 0; notes without leader listed for human review (titles and general notes only). Result in the source session: 5 views, 81 leaders, all pass. Plus PDF review by the owner."
+  },
+  "validation_checks": ["inbox/claude/2026-11-05-annotation-leader-check.cs"],
+  "notes": "Source: owner R&D model; no client data. Model facts, geometry values and product assumptions stay in the owner's private records; this protocol records only the method. Detail content (vented roof, R-38 mineral wool, 2x10 vented blocking) is an example, not a recommendation; structural, wind, energy and product approvals were explicitly not verified."
+}
