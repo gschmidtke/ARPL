@@ -2,6 +2,8 @@
 
 20 October 2026 · Gottfried Schmidtke
 
+> **Snapshot note (curator, 2026-11-05):** this paper describes ARPL as of 20 October 2026. Current counts from `index.json`: 47 instruction packs (all `candidate`), 3 project workflows, 61 failure patterns, 2 executable checks, 1 discipline overlay; Revit versions tested: 2024 only. For the live state, read `index.json` and `catalogs/`.
+
 ARPL (AI Revit Production Logic) is a public, curated knowledge pool for AI agents working in Revit, live on GitHub since 20 October 2026. It holds 28 instruction packs, all recorded by one contributor in Revit 2024 and refined in production (the shed roof pack went through nine iterations and five owner corrections). None has yet been reproduced by anyone else. It's ready for its first outside users, but not yet proven by them.
 
 ## Where ARPL stands today

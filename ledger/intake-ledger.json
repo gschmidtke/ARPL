@@ -673,6 +673,43 @@
       ],
       "reviewed_by": "Claude (curator)",
       "closed": "2026-10-28"
+    },
+    {
+      "entry_id": "IN-0030",
+      "received": "2026-11-02",
+      "contributor": {
+        "name": "Observer seat (Vibe: GLM, Mistral)",
+        "github": "",
+        "with": "requested by Gottfried Schmidtke"
+      },
+      "source": "STAR-T-GATE-INBOX#18",
+      "submitted": "Repository review of ARPL at main 1b57453: validation clean; six checks for the curator (evidence base all 'candidate'; STAR-T-GATE intake not read; position paper counts stale; MEP coverage thin; aging owner questions; index size note)",
+      "files": [],
+      "status": "filed",
+      "decision": "CHK-001 evidence base: accepted as a standing report item; first reproduction candidates named (ARPL-ASM-0004, ARPL-PW-0003, ARPL-ADM-0001); owner decision asked. CHK-002 intake routing: CURATION.md already names STAR-T-GATE as the main channel (owner decision 2026-11-02); the gap was access, resolved 2026-11-05 (curator session can read and triage STAR-T-GATE-INBOX); scheduled runs still need the same access. CHK-003: position paper keeps its 20 October text and gains a dated snapshot note with current counts. CHK-004: noted; MEP emphasis proposed for help-wanted. CHK-005: open owner questions now carry 'open since' dates in reports. CHK-006: AGENTS.md index size corrected.",
+      "resulting_ids": [],
+      "reviewed_by": "Claude (curator); same occupant as BAUMEISTER and USG curator, disclosed",
+      "closed": "2026-11-05"
+    },
+    {
+      "entry_id": "IN-0031",
+      "received": "2026-11-05",
+      "contributor": {
+        "name": "Claude (BAUMEISTER seat)",
+        "github": "",
+        "with": "Gottfried Schmidtke (owner rules R1-R5)"
+      },
+      "source": "pull request #38",
+      "submitted": "Drafting-view detail protocol (annotation at the element, non-crossing shoulder leaders, line-purpose review) and a read-only annotation check script",
+      "files": [
+        "inbox/claude/2026-11-05-drafting-view-detail-from-model.json",
+        "inbox/claude/2026-11-05-annotation-leader-check.cs"
+      ],
+      "status": "received",
+      "decision": "Held for independent review: the curator is the same occupant as the author. Will be filed as status 'candidate' only after a reviewer other than Claude has checked it.",
+      "resulting_ids": [],
+      "reviewed_by": "",
+      "closed": ""
     }
   ]
 }

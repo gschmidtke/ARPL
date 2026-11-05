@@ -29,7 +29,7 @@ ARPL does not define naming conventions. It records how named results were produ
 
 ## 1. Before you act: look it up
 
-1. Fetch the index (one file, about 75 KB: one line per pack, workflow and failure pattern; rules and full texts stay in the pack files):
+1. Fetch the index (one file, about 80 KB: one line per pack, workflow and failure pattern; rules and full texts stay in the pack files):
    `https://raw.githubusercontent.com/gschmidtke/ARPL/main/index.json`
 2. Describe the task in ARPL terms, using the frame you established in step 0:
    - **work class** W1–W8 (what drives the result; listed in the index);
