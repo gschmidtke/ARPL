@@ -1,0 +1,4 @@
+{
+  "version": "v05",
+  "instruction": "Delete collinear duplicates when they overlap >= 90 % of the shorter line"
+}

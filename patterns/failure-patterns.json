@@ -995,6 +995,110 @@
       "revit_versions": "2024",
       "intake": "IN-0029",
       "evidence_kind": "observed"
+    },
+    {
+      "id": "FP62",
+      "name": "Text note bounding box includes its leaders",
+      "meaning": "TextNote.get_BoundingBox(view) covers the leader lines, not only the text. Stacking notes by that height spreads them over metres. Defence: remove the leaders, measure, stack, then add the leaders back.",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ],
+      "status": "candidate",
+      "revit_versions": "2024",
+      "intake": "IN-0032",
+      "evidence_kind": "observed",
+      "found_by": "owner session 2026-11-05",
+      "api_terms": [
+        "TextNote",
+        "BoundingBoxXYZ",
+        "TextNote.RemoveLeaders"
+      ]
+    },
+    {
+      "id": "FP63",
+      "name": "Deleting everything a view owns invalidates the view",
+      "meaning": "A drafting view owns an internal element without a category. Deleting all elements whose OwnerViewId is the view deletes it too, and the next use of the view throws InvalidObjectException. Defence: delete only owned elements with a category.",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ],
+      "status": "candidate",
+      "revit_versions": "2024",
+      "intake": "IN-0032",
+      "evidence_kind": "observed",
+      "found_by": "owner session 2026-11-05",
+      "api_terms": [
+        "Element.OwnerViewId",
+        "Document.Delete"
+      ]
+    },
+    {
+      "id": "FP64",
+      "name": "Duplicate-line cleanup measures overlap against the shorter line",
+      "meaning": "Collinear lines were treated as duplicates when they overlapped by 90 % of the shorter one. A short edge lying on a long line then deleted the long line (WRB, trellis edge). Defence: a line is a duplicate only if it is itself at least 90 % covered by another line of the same style, or a hidden line under a visible one.",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ],
+      "status": "candidate",
+      "revit_versions": "2024",
+      "intake": "IN-0032",
+      "evidence_kind": "observed",
+      "found_by": "owner session 2026-11-05",
+      "api_terms": [
+        "DetailCurve",
+        "Line"
+      ]
+    },
+    {
+      "id": "FP65",
+      "name": "Dimension on witness stubs drifts from the geometry",
+      "meaning": "Dimensions referencing short helper lines keep their value when the geometry moves. After the panel end moved 2 mm the clip dimension read 70 for a 72 distance. Defence: dimension real edges; when helper ticks are needed, move them with the geometry and re-read the values.",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ],
+      "status": "candidate",
+      "revit_versions": "2024",
+      "intake": "IN-0032",
+      "evidence_kind": "observed",
+      "found_by": "owner session 2026-11-05",
+      "api_terms": [
+        "Dimension",
+        "ReferenceArray"
+      ]
+    },
+    {
+      "id": "FP66",
+      "name": "DirectShape material is built into its geometry",
+      "meaning": "A DirectShape has no material parameter: the material is set per face when the shape is built. Changing a material parameter or the material in families does not change it. Defence: rebuild the shape from its own faces with the new material id (TessellatedShapeBuilder) and compare volumes before SetShape.",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ],
+      "status": "candidate",
+      "revit_versions": "2024",
+      "intake": "IN-0032",
+      "evidence_kind": "observed",
+      "found_by": "owner session 2026-11-05",
+      "api_terms": [
+        "DirectShape.SetShape",
+        "TessellatedShapeBuilder",
+        "TessellatedFace"
+      ]
+    },
+    {
+      "id": "FP67",
+      "name": "Scale change leaves paper-sized annotation behind",
+      "meaning": "Changing a view scale resizes the geometry on the sheet but not text, leaders and dimension text. Note stacks no longer fit their targets, viewports grow into neighbours or the title strip. Defence: after any scale change, re-run the annotation layout and check viewport overlaps and fit on every sheet.",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ],
+      "status": "candidate",
+      "revit_versions": "2024",
+      "intake": "IN-0032",
+      "evidence_kind": "observed",
+      "found_by": "owner session 2026-11-05",
+      "api_terms": [
+        "View.Scale",
+        "Viewport.GetBoxOutline"
+      ]
     }
   ]
 }

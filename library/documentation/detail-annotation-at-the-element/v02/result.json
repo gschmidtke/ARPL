@@ -1,0 +1,5 @@
+{
+  "result": "Notes spread over several metres",
+  "problem": "a TextNote bounding box includes its leaders (FP62)",
+  "found_by": "image export"
+}

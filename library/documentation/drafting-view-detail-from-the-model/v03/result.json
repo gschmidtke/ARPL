@@ -1,0 +1,5 @@
+{
+  "result": "ArgumentException",
+  "problem": "prohibited characters; the scale belongs to the view scale",
+  "found_by": "exception"
+}

@@ -1,0 +1,5 @@
+{
+  "result": "Clip dimension read 70 for 72",
+  "problem": "stubs are not tied to geometry (FP65)",
+  "found_by": "line-purpose review"
+}

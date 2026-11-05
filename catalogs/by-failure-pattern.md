@@ -27,6 +27,7 @@ Learn from what went wrong: each pack is listed under the failure patterns it re
 | Pack | Level | Work class | Status |
 |---|---|---|---|
 | [ARPL-ASM-0003](../library/assemblies-fabrication/wall-panels-families-not-parts/) Revit Parts for wall layers: a dead end | 2 | W3 | candidate |
+| [ARPL-CHG-0004](../library/model-change/insulation-material-swap-by-type-parameters/) Swap an insulation material model-wide by type parameters; keep the old variant as a family copy | 2 | W5 | candidate |
 | [ARPL-PAR-0001](../library/parameters-data/material-description-keynote-governance/) Governed material Descriptions and Keynotes | 2 | W7 | candidate |
 | [ARPL-PAR-0002](../library/parameters-data/one-shared-parameter-file-per-company/) One shared parameter file per company: find every candidate, choose one master, edit it byte-exact, keep project parameters in a project group | 2 | W7 | candidate |
 
@@ -86,6 +87,7 @@ Learn from what went wrong: each pack is listed under the failure patterns it re
 |---|---|---|---|
 | [ARPL-DOC-0001](../library/documentation/assembly-shop-drawings/) Shop drawings: invalid references and swapped elevations | 2 | W6 | candidate |
 | [ARPL-DOC-0002](../library/documentation/dimension-style-in-trade-units/) Project units round framing dimensions | 1 | W6 | candidate |
+| [ARPL-DOC-0005](../library/documentation/drafting-view-detail-from-the-model/) Construction detail as a drafting view derived from the model | 2 | W6 | candidate |
 | [ARPL-VIEW-0001](../library/views-graphics/crop-overridden-by-scope-box/) Crops silently ignored | 1 | W6 | candidate |
 
 ## FP09: Source misread
@@ -162,6 +164,7 @@ Learn from what went wrong: each pack is listed under the failure patterns it re
 | Pack | Level | Work class | Status |
 |---|---|---|---|
 | [ARPL-CON-0002](../library/connectors-systems/residential-branch-circuits-from-confirmed-layout/) Residential branch circuits from a confirmed layout | 3 | W3 | candidate |
+| [ARPL-DOC-0005](../library/documentation/drafting-view-detail-from-the-model/) Construction detail as a drafting view derived from the model | 2 | W6 | candidate |
 
 ## FP19: Unknown tool parameter silently ignored
 
@@ -175,6 +178,7 @@ Learn from what went wrong: each pack is listed under the failure patterns it re
 | Pack | Level | Work class | Status |
 |---|---|---|---|
 | [ARPL-ADM-0003](../library/model-administration/batch-cloud-onboarding-with-registry/) Batch-onboard local models to the cloud and register each one: verify by document state, handle posted-command dialogs | 2 | W7 | candidate |
+| [ARPL-DOC-0004](../library/documentation/detail-annotation-at-the-element/) Detail annotation at the element: grouped notes, shoulder leaders, no crossings | 2 | W6 | candidate |
 | [ARPL-GEO-0004](../library/geometry/concept-model-from-neutral-spec-staged-build/) Concept model from a neutral spec: staged, idempotent build with visual gates | 2 | W4 | candidate |
 | [ARPL-PAR-0003](../library/parameters-data/loin-instance-schedule-mirror-parameters-and-instance-key/) LOIN instance schedule per discipline: mirror category values into project parameters and give every instance a contractor key (discipline, element code, room or level, number) | 2 | W7 | candidate |
 
@@ -182,6 +186,7 @@ Learn from what went wrong: each pack is listed under the failure patterns it re
 
 | Pack | Level | Work class | Status |
 |---|---|---|---|
+| [ARPL-CHG-0003](../library/model-change/metric-to-imperial-units-and-scales/) Switch a project from metric to imperial: units, dimension types, notes and view scales | 2 | W5 | candidate |
 | [ARPL-DOC-0001](../library/documentation/assembly-shop-drawings/) Shop drawings: invalid references and swapped elevations | 2 | W6 | candidate |
 
 ## FP24: Local cloud cache exhausts the disk during a batch run
@@ -196,6 +201,14 @@ Learn from what went wrong: each pack is listed under the failure patterns it re
 | Pack | Level | Work class | Status |
 |---|---|---|---|
 | [ARPL-ADM-0002](../library/model-administration/reset-workshared-cloud-model-links-worksets/) Reset a workshared cloud model: remove all Revit links and delete user worksets with all worksets closed | 2 | W5 | candidate |
+
+## FP26: Internal database units assumed
+
+| Pack | Level | Work class | Status |
+|---|---|---|---|
+| [ARPL-CHG-0003](../library/model-change/metric-to-imperial-units-and-scales/) Switch a project from metric to imperial: units, dimension types, notes and view scales | 2 | W5 | candidate |
+| [ARPL-DOC-0004](../library/documentation/detail-annotation-at-the-element/) Detail annotation at the element: grouped notes, shoulder leaders, no crossings | 2 | W6 | candidate |
+| [ARPL-DOC-0005](../library/documentation/drafting-view-detail-from-the-model/) Construction detail as a drafting view derived from the model | 2 | W6 | candidate |
 
 ## FP31: Name-based parameter lookup ambiguity
 
@@ -221,6 +234,8 @@ Learn from what went wrong: each pack is listed under the failure patterns it re
 
 | Pack | Level | Work class | Status |
 |---|---|---|---|
+| [ARPL-CHG-0004](../library/model-change/insulation-material-swap-by-type-parameters/) Swap an insulation material model-wide by type parameters; keep the old variant as a family copy | 2 | W5 | candidate |
+| [ARPL-DOC-0005](../library/documentation/drafting-view-detail-from-the-model/) Construction detail as a drafting view derived from the model | 2 | W6 | candidate |
 | [ARPL-GEO-0004](../library/geometry/concept-model-from-neutral-spec-staged-build/) Concept model from a neutral spec: staged, idempotent build with visual gates | 2 | W4 | candidate |
 | [ARPL-GEO-0005](../library/geometry/masterplan-from-neutral-rebuild-package/) Masterplan from a neutral rebuild package: floors, DirectShape envelopes and domain-based grids | 2 | W4 | candidate |
 
@@ -354,4 +369,41 @@ Learn from what went wrong: each pack is listed under the failure patterns it re
 | Pack | Level | Work class | Status |
 |---|---|---|---|
 | [ARPL-SCH-0003](../library/schedules-quantities/bom-from-governed-instance-data/) BOM from governed instance data: deduplicated QTO grouped by a category rule table, every line traced to its model elements (implements ARPL-BOM-0001) | 2 | W7 | candidate |
+
+## FP62: Text note bounding box includes its leaders
+
+| Pack | Level | Work class | Status |
+|---|---|---|---|
+| [ARPL-DOC-0004](../library/documentation/detail-annotation-at-the-element/) Detail annotation at the element: grouped notes, shoulder leaders, no crossings | 2 | W6 | candidate |
+
+## FP63: Deleting everything a view owns invalidates the view
+
+| Pack | Level | Work class | Status |
+|---|---|---|---|
+| [ARPL-DOC-0005](../library/documentation/drafting-view-detail-from-the-model/) Construction detail as a drafting view derived from the model | 2 | W6 | candidate |
+
+## FP64: Duplicate-line cleanup measures overlap against the shorter line
+
+| Pack | Level | Work class | Status |
+|---|---|---|---|
+| [ARPL-DOC-0004](../library/documentation/detail-annotation-at-the-element/) Detail annotation at the element: grouped notes, shoulder leaders, no crossings | 2 | W6 | candidate |
+| [ARPL-DOC-0005](../library/documentation/drafting-view-detail-from-the-model/) Construction detail as a drafting view derived from the model | 2 | W6 | candidate |
+
+## FP65: Dimension on witness stubs drifts from the geometry
+
+| Pack | Level | Work class | Status |
+|---|---|---|---|
+| [ARPL-DOC-0004](../library/documentation/detail-annotation-at-the-element/) Detail annotation at the element: grouped notes, shoulder leaders, no crossings | 2 | W6 | candidate |
+
+## FP66: DirectShape material is built into its geometry
+
+| Pack | Level | Work class | Status |
+|---|---|---|---|
+| [ARPL-CHG-0004](../library/model-change/insulation-material-swap-by-type-parameters/) Swap an insulation material model-wide by type parameters; keep the old variant as a family copy | 2 | W5 | candidate |
+
+## FP67: Scale change leaves paper-sized annotation behind
+
+| Pack | Level | Work class | Status |
+|---|---|---|---|
+| [ARPL-CHG-0003](../library/model-change/metric-to-imperial-units-and-scales/) Switch a project from metric to imperial: units, dimension types, notes and view scales | 2 | W5 | candidate |
 

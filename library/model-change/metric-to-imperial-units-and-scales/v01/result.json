@@ -1,0 +1,5 @@
+{
+  "result": "Detail dimensions still showed mm with ft-in alternates",
+  "problem": "dimension types with their own units do not follow the project",
+  "found_by": "dimension inventory"
+}

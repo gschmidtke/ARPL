@@ -1,0 +1,4 @@
+{
+  "version": "v04",
+  "instruction": "DirectShapes rebuilt from their own faces with TessellatedShapeBuilder and the new material id"
+}

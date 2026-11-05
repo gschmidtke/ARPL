@@ -1,0 +1,5 @@
+{
+  "result": "InvalidObjectException",
+  "problem": "the view owns an internal element without a category (FP63); filter Category != null",
+  "found_by": "exception, then a survey grouped by type"
+}

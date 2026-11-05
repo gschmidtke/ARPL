@@ -1,0 +1,5 @@
+{
+  "result": "One viewport overlap (A4-04) and one viewport into the title strip; detail notes no longer stacked",
+  "problem": "geometry grows, annotation does not (FP67)",
+  "found_by": "viewport overlap check, image export"
+}

@@ -1,0 +1,4 @@
+{
+  "version": "v03",
+  "instruction": "Column positions passed to TextNote.Coord in mm"
+}

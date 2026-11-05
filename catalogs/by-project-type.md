@@ -55,8 +55,12 @@ Entry by building type. Project-level workflows are listed in project-workflows/
 | [ARPL-ASM-0007](../library/assemblies-fabrication/device-placement-follows-the-framing/) Device placement follows the framing (manufacturer's standpoint) | 2 | W3 | candidate |
 | [ARPL-ASM-0008](../library/assemblies-fabrication/slab-on-grade-from-the-framing-layout/) Slab on grade from the framing layout (anchors, recess, stub-ups) | 2 | W3 | candidate |
 | [ARPL-CHG-0002](../library/model-change/replace-footprint-roof-revit-2024/) Changing a footprint roof's outline by API in Revit 2024 | 2 | W5 | candidate |
+| [ARPL-CHG-0003](../library/model-change/metric-to-imperial-units-and-scales/) Switch a project from metric to imperial: units, dimension types, notes and view scales | 2 | W5 | candidate |
+| [ARPL-CHG-0004](../library/model-change/insulation-material-swap-by-type-parameters/) Swap an insulation material model-wide by type parameters; keep the old variant as a family copy | 2 | W5 | candidate |
 | [ARPL-CON-0002](../library/connectors-systems/residential-branch-circuits-from-confirmed-layout/) Residential branch circuits from a confirmed layout | 3 | W3 | candidate |
 | [ARPL-DOC-0001](../library/documentation/assembly-shop-drawings/) Shop drawings: invalid references and swapped elevations | 2 | W6 | candidate |
+| [ARPL-DOC-0004](../library/documentation/detail-annotation-at-the-element/) Detail annotation at the element: grouped notes, shoulder leaders, no crossings | 2 | W6 | candidate |
+| [ARPL-DOC-0005](../library/documentation/drafting-view-detail-from-the-model/) Construction detail as a drafting view derived from the model | 2 | W6 | candidate |
 | [ARPL-FAM-0005](../library/family-authoring/parametric-component-families-for-wall-panels/) Component families for a wall panel | 2 | W1 | candidate |
 | [ARPL-GEO-0002](../library/geometry/gable-walls-as-profile-walls/) Gable walls without wall attachment | 2 | W4 | candidate |
 | [ARPL-GEO-0004](../library/geometry/concept-model-from-neutral-spec-staged-build/) Concept model from a neutral spec: staged, idempotent build with visual gates | 2 | W4 | candidate |

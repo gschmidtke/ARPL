@@ -1,0 +1,5 @@
+{
+  "result": "Compile error",
+  "problem": "Material.Duplicate returns a Material, not an ElementId (FP40)",
+  "found_by": "compiler"
+}

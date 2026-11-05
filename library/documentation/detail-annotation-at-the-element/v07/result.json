@@ -1,0 +1,5 @@
+{
+  "result": "Too coarse: many false hits",
+  "problem": "a dimension's box covers its witness lines and whole extent",
+  "found_by": "comparison with the drawing"
+}

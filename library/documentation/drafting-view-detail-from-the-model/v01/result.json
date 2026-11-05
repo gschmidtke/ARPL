@@ -1,0 +1,5 @@
+{
+  "result": "Compile error",
+  "problem": "constructor not in the API (FP40); use Plane.CreateByNormalAndOrigin",
+  "found_by": "compiler"
+}

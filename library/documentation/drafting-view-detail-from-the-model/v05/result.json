@@ -1,0 +1,5 @@
+{
+  "result": "Long WRB and trellis lines deleted",
+  "problem": "coverage must be measured against the candidate's own length (FP64)",
+  "found_by": "deletion report read before sync"
+}
