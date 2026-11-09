@@ -13,7 +13,8 @@ Contributions enter only through pull requests that add files to `inbox/`, or th
 
 At the start of every curation session, check all of these before doing anything else. Messages addressed to the ARPL curator arrive in more than one place.
 
-1. **STAR-T-GATE public intake (main channel).** Public and AI submissions are posted to the STAR-T-GATE Worker (`https://star-t-gate-inbox-worker.white-bar-0318.workers.dev/`, manifest at `/manifest`), which opens one issue per submission in [gschmidtke/STAR-T-GATE-INBOX](https://github.com/gschmidtke/STAR-T-GATE-INBOX/issues).
+1. **STAR-T-GATE public intake (main channel).** **Who checks it (owner decision, 2026-11-08):** the owner's project manager checks STAR-T-GATE-INBOX in owner-opened sessions and routes `[ARPL]` items to this curator through the owner's private coordination channel (item 3). A scheduled curator session without access to STAR-T-GATE-INBOX records "STAR-T-GATE: checked by the project manager in owner sessions" in its report and does not raise the access question again. A curator session that does have access may still check it, as below.
+   Public and AI submissions are posted to the STAR-T-GATE Worker (`https://star-t-gate-inbox-worker.white-bar-0318.workers.dev/`, manifest at `/manifest`), which opens one issue per submission in [gschmidtke/STAR-T-GATE-INBOX](https://github.com/gschmidtke/STAR-T-GATE-INBOX/issues).
    - List open issues: `gh api 'repos/gschmidtke/STAR-T-GATE-INBOX/issues?state=open&per_page=100'` (REST; GraphQL is not available in some AI sessions).
    - Issue titles start with `[target] [type]`. Take every `[ARPL]` issue.
    - Also read every `[unknown]` issue and classify it: ARPL items are yours; `[STANDARDS]` and Standards-owned items belong to the Standards curator; USG items to the USG curator. Leave a short comment naming the owning curator when you hand an item over. One item may need work in more than one repository.
