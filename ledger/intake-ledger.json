@@ -706,12 +706,12 @@
         "inbox/claude/2026-11-05-annotation-leader-check.cs"
       ],
       "status": "filed",
-      "decision": "Filed on the owner's request of 2026-11-05 ('update the ARPL knowledge base with what you learned in this session') into ARPL-DOC-0004 (protocol and read-only check) and ARPL-DOC-0005, status 'candidate'. The curator is the same occupant as the author: the independent review asked for on receipt is still open and is the condition for any status above 'candidate'.",
+      "decision": "Filed on the owner's request of 2026-11-05 ('update the ARPL knowledge base with what you learned in this session') into ARPL-DOC-0004 (protocol and read-only check) and ARPL-DOC-0005, status 'candidate'. The curator is the same occupant as the author: an independent review was asked for on receipt. Independent review 2026-11-08: falsification attempted on every claim in PR #38; no falsification found. Three items remain attested rather than evidenced (the five-view run, the number of bridge calls, the owner's PDF review), which matches 'candidate'. Status unchanged at 'candidate'; a run log or per-view output excerpt for the check would move the five-view run from attested to evidenced. No re-review needed unless pack content changes on promotion.",
       "resulting_ids": [
         "ARPL-DOC-0004",
         "ARPL-DOC-0005"
       ],
-      "reviewed_by": "",
+      "reviewed_by": "Independent AI reviewer (different provider and model family from the author, Mistral-based), 2026-11-08",
       "closed": "2026-11-05"
     },
     {
