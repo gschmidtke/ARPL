@@ -1127,7 +1127,7 @@
     {
       "id": "FP68",
       "name": "A link placed by shared coordinates cannot be unpinned",
-      "meaning": "Revit pins a link instance that is associated with a shared site. Setting Element.Pinned = false through the API is silently ignored (it still reads true), and MoveElement/RotateElement then throw 'Unable to move element(s) due to at least one of them being pinned'. The UI behaves the same; the user has to set the shared site to not shared first, and the API has no call for that (the 'Shared Site' parameter is a button, storage type None). Defence: do not plan to move associated links; re-create them (ARPL-LNK-0003). To simulate a user's moved link in a test, create an unshared instance of the same type and move that.",
+      "meaning": "Revit pins a link instance that is associated with a shared site. Setting Element.Pinned = false through the API is silently ignored (it still reads true), and MoveElement/RotateElement then throw 'Unable to move element(s) due to at least one of them being pinned'. The UI behaves the same; the user has to set the shared site to not shared first, and the API has no call for that (the 'Shared Site' parameter is a button, storage type None). Qualification (IN-0035): an unloaded link reports its stored pin flag (seen false on a bound link whose loaded reading was true), and a bound file-link instance created unpinned through the API could be moved - which rewrites the linked model's site (FP72). Defence: never move a bound link; re-create them (ARPL-LNK-0003). To simulate a user's moved link in a test, create an unshared instance of the same type and move that.",
       "found_by": "bridge test: Pinned read back true after setting false; owner: 'you need to disable shared coordinates ...unpinning does not work'",
       "api_terms": [
         "Element.Pinned",
@@ -1140,17 +1140,34 @@
       "status": "candidate",
       "revit_versions": "2024",
       "intake": "IN-0033",
-      "evidence_kind": "observed"
+      "evidence_kind": "observed",
+      "history": [
+        {
+          "until": "2026-11-10",
+          "superseded_by_intake": "IN-0035",
+          "previous_meaning": "Revit pins a link instance that is associated with a shared site. Setting Element.Pinned = false through the API is silently ignored (it still reads true), and MoveElement/RotateElement then throw 'Unable to move element(s) due to at least one of them being pinned'. The UI behaves the same; the user has to set the shared site to not shared first, and the API has no call for that (the 'Shared Site' parameter is a button, storage type None). Defence: do not plan to move associated links; re-create them (ARPL-LNK-0003). To simulate a user's moved link in a test, create an unshared instance of the same type and move that.",
+          "why_superseded": "Qualified: the enforced pin applies to bound instances as Revit reports them while loaded; an instance created unpinned through the API and bound can be moved, and the move rewrites the linked model's site (FP72)."
+        }
+      ],
+      "evidence": [
+        {
+          "note": "2026-11-10 (IN-0035): ACC host, bound pinned link, Pinned=false then MoveElement -> 'Unable to move element(s) due to at least one of them being pinned' (rolled back). Same host reopened with worksets closed: that instance read pinned=False; loaded again: pinned=True.",
+          "intake": "IN-0035"
+        }
+      ]
     },
     {
       "id": "FP69",
-      "name": "Moving a link to the right place does not make it shared",
-      "meaning": "A link moved (or rotated) back to its shared-coordinate position is correct by value but its instance name reads 'location <Not Shared>', while a link placed by ImportPlacement.Shared reads the site name (for example 'location SNOWDON'). The association cannot be set on an existing instance through the API. A repair that only moves leaves a state linking would never produce. Defence: re-create by shared coordinates, check position AND association. Note: an unloaded link also shows '<Not Shared>' until it is loaded, so read association only on loaded links.",
+      "name": "A link is shared by a stored site binding, not by its position",
+      "meaning": "A link instance is either bound to a named ProjectLocation (site) of the linked model or it is not; the binding is shown as 'location <site>' in the instance name and is not exposed as a parameter. Two instances of the same link type at the identical transform can differ: the one created with ImportPlacement.Shared reads 'location SNOWDON', one created at origin and moved (or rotated) into the same place reads 'location <Not Shared>'. Moving never creates the binding, and moving a bound instance does not remove it (see FP72). Setting the binding on an existing instance: file-based link exactly at its shared position -> Document.PublishCoordinates(new LinkElementId(instanceId, linkProjectLocationId)) binds it without deleting anything; cloud link -> no API (FP73). The site name shown is the linked model's location name (can differ in case from the host's). An unloaded link always reads '<Not Shared>', so read the binding only on loaded links.",
       "found_by": "owner comparing Link Intel exports before and after the repair",
       "api_terms": [
-        "RevitLinkInstance.Create",
+        "Document.PublishCoordinates",
+        "ElementTransformUtils.MoveElement",
         "ImportPlacement.Shared",
-        "ElementTransformUtils.MoveElement"
+        "LinkElementId",
+        "ProjectLocation",
+        "RevitLinkInstance.Create"
       ],
       "contributors": [
         "Gottfried Schmidtke with Claude"
@@ -1158,7 +1175,22 @@
       "status": "candidate",
       "revit_versions": "2024",
       "intake": "IN-0033",
-      "evidence_kind": "observed"
+      "evidence_kind": "observed",
+      "history": [
+        {
+          "until": "2026-11-10",
+          "superseded_by_intake": "IN-0035",
+          "previous_name": "Moving a link to the right place does not make it shared",
+          "previous_meaning": "A link moved (or rotated) back to its shared-coordinate position is correct by value but its instance name reads 'location <Not Shared>', while a link placed by ImportPlacement.Shared reads the site name (for example 'location SNOWDON'). The association cannot be set on an existing instance through the API. A repair that only moves leaves a state linking would never produce. Defence: re-create by shared coordinates, check position AND association. Note: an unloaded link also shows '<Not Shared>' until it is loaded, so read association only on loaded links.",
+          "why_superseded": "Controlled tests (IN-0035) showed the association is a stored binding to a ProjectLocation of the linked model, not a result of position. The earlier reading that a moved link loses its association was wrong: the observed links were already '<Not Shared>' before the repair moved them (a person must un-share a link to move it in the UI). The statement 'the API cannot set the association on an existing instance' holds for cloud links only; for file-based links Document.PublishCoordinates with a link location id sets it."
+        }
+      ],
+      "evidence": [
+        {
+          "note": "2026-11-10 (IN-0035), Revit 2024.3, local copies of the Snowdon host and two link models: identical transforms, Create Shared -> 'location SNOWDON', Create Origin + move -> '<Not Shared>'; parameter difference only Name/Mark/IfcGUID. PublishCoordinates(LinkElementId(instance, location 12144)) on the in-place '<Not Shared>' instance -> 'location SNOWDON', same ElementId, still pinned, element count unchanged, link site values unchanged. Reopened ACC host with worksets closed: all five associated links read '<Not Shared>' until loaded.",
+          "intake": "IN-0035"
+        }
+      ]
     },
     {
       "id": "FP70",
@@ -1197,6 +1229,68 @@
       "status": "candidate",
       "revit_versions": "2024",
       "intake": "IN-0033",
+      "evidence_kind": "observed"
+    },
+    {
+      "id": "FP72",
+      "name": "Moving a shared link rewrites the linked model's shared site",
+      "meaning": "Moving or rotating a link instance that is bound to a site does not unbind it. Revit moves the site record of the linked model with it (its ProjectLocation position changes) and RevitLinkType.HasSaveablePositions() turns true: the linked model now carries changed shared coordinates that Revit later offers to save, and for a cloud link cannot save. An automated repair that moves a bound link to 'fix' its position corrupts the link's coordinates instead. Defence: never move a bound instance; report a bound link that is off position as a coordinate mismatch between host and link. Moving an unbound ('<Not Shared>') instance leaves the link's site untouched.",
+      "found_by": "bridge test on local copies: site EW/NS read before and after a 10 m move inside a rolled-back transaction",
+      "api_terms": [
+        "ElementTransformUtils.MoveElement",
+        "RevitLinkType.HasSaveablePositions",
+        "RevitLinkType.SavePositions",
+        "ProjectLocation.GetProjectPosition"
+      ],
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ],
+      "status": "candidate",
+      "revit_versions": "2024",
+      "intake": "IN-0035",
+      "evidence_kind": "observed"
+    },
+    {
+      "id": "FP73",
+      "name": "No API binds an existing cloud link to a shared site",
+      "meaning": "Document.PublishCoordinates is the only API call that binds an existing link instance to a site of the linked model, and Revit refuses it for cloud (ACC) links with InvalidOperationException 'Attempting to publish shared coordinates to a cloud based link which is treated as read-only' - also when the instance is already exactly in place and nothing would change. AcquireCoordinates changes the HOST's shared coordinates (and is refused when the systems already match); MoveOriginToHostOrigin / MoveBasePointToHostBasePoint set no binding; the UI command 'Move instance to' a named position has no API counterpart. For a cloud link the only automated way to the bound state is a new instance created with ImportPlacement.Shared, which loses everything attached to the old instance (tags, dimensions, per-instance view settings). A repair must choose: re-create (bound, dependents lost) or keep (dependents kept, binding unresolved and reported).",
+      "found_by": "bridge test on an ACC test host (rolled back, closed without sync, state verified by reopening)",
+      "api_terms": [
+        "Document.PublishCoordinates",
+        "Document.AcquireCoordinates",
+        "RevitLinkInstance.MoveOriginToHostOrigin",
+        "RevitLinkInstance.MoveBasePointToHostBasePoint",
+        "RevitLinkInstance.Create(Document, ElementId, ImportPlacement)"
+      ],
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ],
+      "status": "candidate",
+      "revit_versions": "2024",
+      "intake": "IN-0035",
+      "evidence_kind": "observed",
+      "sources": [
+        "https://help.autodesk.com/cloudhelp/2026/ENU/Revit-API-MainReference/files/html/04419593-f258-dc77-b18a-24a29733b75f.htm",
+        "https://help.autodesk.com/cloudhelp/2026/ENU/Revit-API-MainReference/files/html/ecc5f396-6aa4-ffbb-32df-b9a20e82b7d5.htm"
+      ]
+    },
+    {
+      "id": "FP74",
+      "name": "Placement by shared coordinates follows the host's active site and allows one bound instance",
+      "meaning": "RevitLinkInstance.Create(doc, typeId, ImportPlacement.Shared) positions the link relative to the host's ACTIVE ProjectLocation (with a second host site 20 m away made active, the link landed 20 m off, still bound to the linked model's site). It is refused while the type already has a bound instance: 'Selected file is already linked with the host model by shared coordinates.' Defences: check the host's active site before placing; a create-new-then-delete-old repair only works when the old instance is unbound; copying a bound instance gives an unbound copy.",
+      "found_by": "bridge test on local copies (rolled back)",
+      "api_terms": [
+        "RevitLinkInstance.Create(Document, ElementId, ImportPlacement)",
+        "Document.ActiveProjectLocation",
+        "ProjectLocation.Duplicate",
+        "ElementTransformUtils.CopyElement"
+      ],
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ],
+      "status": "candidate",
+      "revit_versions": "2024",
+      "intake": "IN-0035",
       "evidence_kind": "observed"
     }
   ]

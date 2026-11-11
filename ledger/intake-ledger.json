@@ -788,6 +788,30 @@
       ],
       "reviewed_by": "",
       "closed": "2026-11-10"
+    },
+    {
+      "entry_id": "IN-0035",
+      "received": "2026-11-10",
+      "contributor": {
+        "name": "Gottfried Schmidtke",
+        "github": "gschmidtke",
+        "with": "Claude (BAUMEISTER seat)"
+      },
+      "source": "owner session 2026-11-10 (project manager research dispatch; bridge-run lessons rule)",
+      "submitted": "Root cause of shared-site binding on Create versus Move: rolled-back experiments on local copies and on one ACC test host",
+      "files": [],
+      "status": "filed",
+      "decision": "Filed as candidate: ARPL-LNK-0003 rev 3 (v07); FP69 corrected with its earlier reading kept in 'history'; FP68 qualified; new FP72, FP73, FP74. Curator is the same occupant as the author (disclosed).",
+      "resulting_ids": [
+        "ARPL-LNK-0003 (rev 3)",
+        "FP69 (corrected)",
+        "FP68 (qualified)",
+        "FP72",
+        "FP73",
+        "FP74"
+      ],
+      "reviewed_by": "",
+      "closed": "2026-11-10"
     }
   ]
 }
