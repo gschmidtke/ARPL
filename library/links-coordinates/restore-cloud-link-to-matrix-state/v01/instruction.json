@@ -1,0 +1,4 @@
+{
+  "version": "v01",
+  "instruction": "Find the existing link by RevitLinkType.GetExternalFileReference().GetPath() GUIDs, else by link name = model key"
+}

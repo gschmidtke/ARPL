@@ -1,0 +1,4 @@
+{
+  "version": "v03",
+  "instruction": "Re-place instead of move: delete the instance, RevitLinkInstance.Create(doc, typeId, ImportPlacement.Shared), apply workset, pin"
+}

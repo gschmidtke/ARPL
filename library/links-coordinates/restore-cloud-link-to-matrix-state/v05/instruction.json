@@ -1,0 +1,4 @@
+{
+  "version": "v05",
+  "instruction": "Identity fallback for unloaded ACC links from ExternalResourceReference.GetReferenceInformation(): LinkedModelProjectId, LinkedModelModelId, LinkedModelRegion; then RevitLinkType.Load() before the placement check. Batch: open all worksets"
+}

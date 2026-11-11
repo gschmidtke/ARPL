@@ -1,0 +1,5 @@
+{
+  "result": "Position and shared-site association restored",
+  "problem": "Revit showed a modal warning 'All instances of link ... have been deleted, but the model itself is still loaded' with a Remove Link button: an unattended batch would stop there (FP11)",
+  "found_by": "owner screenshot"
+}

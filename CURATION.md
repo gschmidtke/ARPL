@@ -65,6 +65,10 @@ Independent reviews of ARPL output by another AI (for example a second model rev
 
 Decided by the owner on 2026-10-27. Every accepted submission goes straight into the library as `candidate`, including designs and workflows that have not yet run end to end; the curator does not hold them back for a pilot. The manifest and README say plainly what was run and what was not. Correction comes from use: user or AI reports in the inbox that confirm, contradict or falsify a pack are filed as iterations, reproductions or deprecations by the normal process. Desktop-control failure patterns (the layer around Revit, such as window focus) stay in the same failure-pattern list as API patterns.
 
+## Lessons from every Revit bridge run
+
+**Owner rule, 2026-11-10:** every session in which an agent runs Revit through the bridge (or desktop control) files its lessons learned in ARPL, in the same session: new or revised packs, iterations, and failure patterns (API and desktop/bridge layer alike), through the normal process above. No add-in source code, client data or private paths go into the public files; record what was run and what was not.
+
 ## Status rules
 
 The status definitions in `vocabularies/vocabularies.json` are authoritative; this table repeats them.

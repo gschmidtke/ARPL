@@ -1,0 +1,4 @@
+{
+  "version": "v02",
+  "instruction": "Identity from the loaded link document: RevitLinkInstance.GetLinkDocument().GetCloudModelPath() project and model GUID; name only when no identity"
+}
