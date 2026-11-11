@@ -767,6 +767,27 @@
       ],
       "reviewed_by": "",
       "closed": "2026-11-10"
+    },
+    {
+      "entry_id": "IN-0034",
+      "received": "2026-11-10",
+      "contributor": {
+        "name": "Gottfried Schmidtke",
+        "github": "gschmidtke",
+        "with": "Claude (BAUMEISTER seat)"
+      },
+      "source": "owner session 2026-11-10 (bridge-run lessons rule)",
+      "submitted": "Batch retest of the link repair (all worksets open) on three Snowdon cloud hosts through the Revit bridge; long batch outlives the call timeout; helper process does not outlive Revit",
+      "files": [],
+      "status": "filed",
+      "decision": "Filed as candidate: ARPL-LNK-0003 rev 2 (v06), evidence on FP22 and FP41. Curator is the same occupant as the author (disclosed).",
+      "resulting_ids": [
+        "ARPL-LNK-0003 (rev 2)",
+        "FP22 (evidence)",
+        "FP41 (evidence)"
+      ],
+      "reviewed_by": "",
+      "closed": "2026-11-10"
     }
   ]
 }

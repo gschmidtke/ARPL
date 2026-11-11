@@ -227,6 +227,10 @@
         {
           "note": "Cloud operations too: SaveAsCloudModel plus EnableCloudWorksharing took 60-90 s and outlived the bridge reply every time; during 'Enable Worksharing' further calls also timed out. The model was uploaded each time. Defence: one long call per model, then wait and read IsModelInCloud / IsWorkshared / the cloud model GUID in a short call; never resend (ARPL-ADM-0003).",
           "intake": "IN-0015"
+        },
+        {
+          "note": "2026-11-10: an ACC batch repair over one or two cloud hosts (all worksets open, 60-115 s per host) outlived the remote call timeout (80 s); the run continued in Revit. Pattern that worked: the script writes its summary to a file; the agent waits and reads the file in a later read-only call instead of re-running.",
+          "intake": "IN-0034"
         }
       ],
       "evidence_kind": "observed"
@@ -668,6 +672,10 @@
         {
           "note": "Seen again 2026-11-10: the computer-use open-application call on a running Revit 2024 started a second instance; the bridge kept routing run_csharp to the older, busy instance (bridge status listed both as alive), so every call timed out. Defence confirmed: never open-application on a running Revit; exit Revit through the API or ask the owner.",
           "intake": "IN-0033"
+        },
+        {
+          "note": "2026-11-10: a helper process started from inside Revit (to deploy a rebuilt add-in and restart Revit after exit) did not survive Revit's exit; Revit had to be started by hand. Child processes of Revit should not be relied on to outlive it.",
+          "intake": "IN-0034"
         }
       ]
     },

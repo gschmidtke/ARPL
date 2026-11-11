@@ -1,5 +1,5 @@
 {
   "result": "Local cases all pass with a clean second run. Batch with only the link worksets open failed to load links: 'The element ... is in a closed workset' (the link TYPE's workset) and 'loaded into multiple documents and cannot be reloaded' (another open document had the link loaded) (FP71)",
-  "problem": "Batch fix (open all worksets) built, retest pending",
+  "problem": "Batch fix (open all worksets) built; retested in v06",
   "found_by": "bridge-run test, report file"
 }
