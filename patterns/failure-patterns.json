@@ -90,6 +90,10 @@
         {
           "note": "2026-11-10: deleting the last instance of a link type raised the modal warning 'All instances of link ... have been deleted, but the model itself is still loaded' (with a Remove Link button). Fixed by creating the replacement instance before deleting the old one and by an IFailuresPreprocessor on the transaction (ARPL-LNK-0003).",
           "intake": "IN-0033"
+        },
+        {
+          "note": "2026-11-11: the bridge reported 'Revit did not pick up run_csharp within 60s' while a warning dialog (FP17) was open; a screenshot found it and one click on OK released it. After an 80 s timeout, check the screen before assuming Revit is still busy.",
+          "intake": "IN-0035"
         }
       ],
       "contributors": [
@@ -163,7 +167,13 @@
       "contributors": [
         "Gottfried Schmidtke with Claude"
       ],
-      "evidence_kind": "observed"
+      "evidence_kind": "observed",
+      "evidence": [
+        {
+          "note": "2026-11-11, Revit 2024.3: two modal 'Multiple Spaces are in the same enclosed region' warning dialogs (46 warnings each) blocked the bridge for minutes. The first came from RevitLinkType.Unload of room-bounding links in a host with MEP spaces (Unload runs outside any transaction, so no failures preprocessor can be attached). The second came from a test transaction that deleted a room-bounding link without a preprocessor. A transaction that registered the repair's failures preprocessor (delete warnings, list them) raised no dialog in the same models. Defence: give every transaction that deletes, moves or re-creates room-bounding links a preprocessor, and do not unload links in a host with spaces during an unattended run.",
+          "intake": "IN-0035"
+        }
+      ]
     },
     {
       "id": "FP18",
@@ -598,7 +608,13 @@
         "https://github.com/mcp-servers-for-revit/mcp-servers-for-revit/issues/57",
         "https://github.com/mcp-servers-for-revit/revit-mcp/issues/32"
       ],
-      "intake": "IN-0008"
+      "intake": "IN-0008",
+      "evidence": [
+        {
+          "note": "2026-11-11: a new add-in build was tested without restarting Revit by loading its DLL from bytes (Assembly.Load(byte[])) beside the installed one and calling it by reflection. The two copies have separate static state, so dialog silencers and caches from the installed copy do not apply to the byte-loaded one. Record which copy produced a result.",
+          "intake": "IN-0035"
+        }
+      ]
     },
     {
       "id": "FP39",
@@ -1188,6 +1204,10 @@
       "evidence": [
         {
           "note": "2026-11-10 (IN-0035), Revit 2024.3, local copies of the Snowdon host and two link models: identical transforms, Create Shared -> 'location SNOWDON', Create Origin + move -> '<Not Shared>'; parameter difference only Name/Mark/IfcGUID. PublishCoordinates(LinkElementId(instance, location 12144)) on the in-place '<Not Shared>' instance -> 'location SNOWDON', same ElementId, still pinned, element count unchanged, link site values unchanged. Reopened ACC host with worksets closed: all five associated links read '<Not Shared>' until loaded.",
+          "intake": "IN-0035"
+        },
+        {
+          "note": "2026-11-11: in a local host, five cloud links that read '<Not Shared>' while unloaded were loaded by the repair and then all read 'location SNOWDON': they had been bound all along. The same links had refused to load the evening before (ExternalServerMissing), so loading cloud links into a local file is not reliable either way.",
           "intake": "IN-0035"
         }
       ]
