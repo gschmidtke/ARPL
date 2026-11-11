@@ -45,7 +45,7 @@ Shared-site binding is a stored relationship between a link instance and a site 
 5. Register an IFailuresPreprocessor on every repair transaction (delete warnings, list them in the report); a run with anything unfixable says so in its status, never plain OK.
 6. Run the repair twice: the second run must change nothing.
 Alternative where policy allows (not this owner's): re-create un-shared links that have nothing attached; for file links, PublishCoordinates with the link location id binds an in-place instance without deletion (FP69).
-7. Owner rule 2026-11-11: only what the matrix defines. Any link the matrix does not define for the host (another model, any local file link) is removed, with a report line naming it, the reason and what went with it (instances, annotations counted first). Cloud links whose identity cannot be read are listed, not removed. Links of disabled rows and nested links are kept. Nothing is removed when the host has no enabled rows. A link that only carries the matrix name never selects, blocks or is repointed for the row: the matrix link is created and the other one removed. LoadOnOpen = FALSE: unload at the end (handler on Application.FailuresProcessing around Unload).
+7. Owner rule 2026-11-11: only what the matrix defines. Any link the matrix does not define for the host (another model, any local file link) is removed, with a report line naming it, the reason and what went with it (instances, annotations counted first). A cloud link whose identity cannot be read is loaded once to read it; if it still cannot be identified it is not a matrix link and is removed too (owner correction: no 'needs attention' end state). Links of disabled rows and nested links are kept. Nothing is removed when the host has no enabled rows. A link that only carries the matrix name never selects, blocks or is repointed for the row: the matrix link is created and the other one removed. LoadOnOpen = FALSE: unload at the end (handler on Application.FailuresProcessing around Unload).
 
 ## Validation
 - Every link is at the Matrix position and pinned; every '<Not Shared>' link is named in the report as 'Shared Site to set manually'
@@ -53,4 +53,4 @@ Alternative where policy allows (not this owner's): re-create un-shared links th
 - No shared link was moved: HasSaveablePositions() is false on every link type after the run
 - No modal dialog during the run; warnings listed in the report
 - Second run: nothing created, moved or removed; the same manual items reported
-- No link outside the matrix remains (except unidentifiable cloud links, which are listed); every removal is named in the report with what was removed with it
+- No link outside the matrix remains; every removal is named in the report with what was removed with it
