@@ -14,7 +14,7 @@ _Generated from this pack's files by tools/build_catalogs.py. Edit manifest.json
 | Project types | generic |
 | Revit tested | 2024 |
 | API | RevitLinkInstance.GetLinkDocument, Document.GetCloudModelPath, ModelPath.GetModelGUID, ModelPath.GetProjectGUID, RevitLinkType.GetExternalResourceReferences, ExternalResourceReference.GetReferenceInformation, RevitLinkType.GetExternalFileReference, RevitLinkType.IsLoaded, RevitLinkType.Load, RevitLinkType.LoadFrom, RevitLinkInstance.Create(Document, ElementId, ImportPlacement), ImportPlacement.Shared, Element.Pinned, ProjectLocation.GetProjectPosition, RevitLinkInstance.GetTotalTransform, IFailuresPreprocessor, FailuresAccessor.DeleteWarning, SubTransaction, WorksetConfigurationOption.OpenAllWorksets, Document.PublishCoordinates, RevitLinkType.HasSaveablePositions, Element.GetDependentElements |
-| Failure patterns | FP68, FP69, FP70, FP71, FP72, FP73, FP74, FP11, FP50, FP41, FP75 |
+| Failure patterns | FP68, FP69, FP70, FP71, FP72, FP73, FP74, FP11, FP50, FP41, FP75, FP76 |
 | Contributors | Gottfried Schmidtke with Claude |
 
 **Intent:** a repair run brings every link of a host back to its link matrix row, the way linking created it: the right cloud model, exactly once, at the shared position, associated with the shared site, pinned, on its workset. Nothing is left for a person to clean up, and no dialog stops an unattended batch (owner rule, 2026-11-10).
@@ -39,7 +39,7 @@ Shared-site binding is a stored relationship between a link instance and a site 
 
 ## Rule
 1. Identity: loaded link -> GetLinkDocument().GetCloudModelPath() GUIDs; unloaded ACC link -> ExternalResourceReference.GetReferenceInformation() LinkedModelProjectId / LinkedModelModelId (observed 2024.3); file reference only for file-based links; name only when no identity can be read, and never over a link whose identity is known to be another model.
-2. Load governed links before checking placement or binding (RevitLinkType.Load): an unloaded link always reads '<Not Shared>'. In a batch open all worksets; run with no other open document that has the same links loaded.
+2. Load governed links before checking placement or binding (RevitLinkType.Load): an unloaded link always reads '<Not Shared>'. In a batch open all worksets; run with no other open document that has the same links loaded. Load through an Application.FailuresProcessing handler that deletes warnings, and verify RevitLinkType.IsLoaded afterwards: Load can return LinkLoaded while a rolled-back warning left the link unloaded (FP76).
 3. Check the host's active site first (FP74). Per instance (loaded): shared and in place -> nothing; shared and off position -> do NOT move (FP72), row error 'host and linked model coordinates disagree'; un-shared and in place -> pin, report 'Shared Site to set manually'; un-shared and off position -> move back (safe while un-shared), pin, report the same. Never delete and re-create an existing link to restore its Shared Site. Only a missing link is created, with ImportPlacement.Shared. After the placement pass, roll it back if any link type now has HasSaveablePositions() true.
 4. The run status names the manual items ('OK — N link(s) need Shared Site set manually'); they are not row errors, and a second run reports them again without changing anything.
 5. Register an IFailuresPreprocessor on every repair transaction (delete warnings, list them in the report); a run with anything unfixable says so in its status, never plain OK.

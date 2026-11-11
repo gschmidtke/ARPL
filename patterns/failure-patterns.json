@@ -1351,6 +1351,26 @@
       "revit_versions": "2024",
       "intake": "IN-0035",
       "evidence_kind": "observed"
+    },
+    {
+      "id": "FP76",
+      "name": "RevitLinkType.Load reports LinkLoaded although a warning rolled the load back",
+      "meaning": "In an unattended run (dialogs suppressed), loading a cloud link whose content raises a Revit warning in the host (seen: 'Space volumes overlap. Adjust the Upper Limit and Limit Offset properties of the Spaces.' when the Architecture link bounds the HVAC model's spaces) leaves the link unloaded, yet RevitLinkType.Load returns LinkLoadResultType.LinkLoaded and throws nothing. Code that trusts the return value counts the link as loaded and then cannot check it; if the host is synced, the link stays unloaded and every later run repeats the failure. With an Application.FailuresProcessing handler that deletes the warnings for that document during the Load call, the same link loads (IsLoaded true). Defence: load through a FailuresProcessing handler and verify RevitLinkType.IsLoaded afterwards; report the reason when it is still false.",
+      "found_by": "ACC Gate batch report (HVAC host: 'loaded for check 1' but 'placement not checked') reproduced over the bridge with and without a FailuresProcessing handler; host closed without sync",
+      "api_terms": [
+        "RevitLinkType.Load",
+        "LinkLoadResult.LoadResult",
+        "RevitLinkType.IsLoaded",
+        "Application.FailuresProcessing",
+        "FailuresAccessor.DeleteWarning"
+      ],
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ],
+      "status": "candidate",
+      "revit_versions": "2024",
+      "intake": "IN-0035",
+      "evidence_kind": "observed"
     }
   ]
 }
