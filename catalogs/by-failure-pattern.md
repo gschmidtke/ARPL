@@ -452,3 +452,9 @@ Learn from what went wrong: each pack is listed under the failure patterns it re
 |---|---|---|---|
 | [ARPL-LNK-0003](../library/links-coordinates/restore-cloud-link-to-matrix-state/) Restore a cloud link to the state its link matrix defines: identity by cloud GUID, move back un-shared links and report their Shared Site, never move a shared link, no dialogs | 2 | W7 | candidate |
 
+## FP75: A rolled-back transaction group did not undo link changes in an open working model
+
+| Pack | Level | Work class | Status |
+|---|---|---|---|
+| [ARPL-LNK-0003](../library/links-coordinates/restore-cloud-link-to-matrix-state/) Restore a cloud link to the state its link matrix defines: identity by cloud GUID, move back un-shared links and report their Shared Site, never move a shared link, no dialogs | 2 | W7 | candidate |
+

@@ -14,7 +14,7 @@ _Generated from this pack's files by tools/build_catalogs.py. Edit manifest.json
 | Project types | generic |
 | Revit tested | 2024 |
 | API | RevitLinkInstance.GetLinkDocument, Document.GetCloudModelPath, ModelPath.GetModelGUID, ModelPath.GetProjectGUID, RevitLinkType.GetExternalResourceReferences, ExternalResourceReference.GetReferenceInformation, RevitLinkType.GetExternalFileReference, RevitLinkType.IsLoaded, RevitLinkType.Load, RevitLinkType.LoadFrom, RevitLinkInstance.Create(Document, ElementId, ImportPlacement), ImportPlacement.Shared, Element.Pinned, ProjectLocation.GetProjectPosition, RevitLinkInstance.GetTotalTransform, IFailuresPreprocessor, FailuresAccessor.DeleteWarning, SubTransaction, WorksetConfigurationOption.OpenAllWorksets, Document.PublishCoordinates, RevitLinkType.HasSaveablePositions, Element.GetDependentElements |
-| Failure patterns | FP68, FP69, FP70, FP71, FP72, FP73, FP74, FP11, FP50, FP41 |
+| Failure patterns | FP68, FP69, FP70, FP71, FP72, FP73, FP74, FP11, FP50, FP41, FP75 |
 | Contributors | Gottfried Schmidtke with Claude |
 
 **Intent:** a repair run brings every link of a host back to its link matrix row, the way linking created it: the right cloud model, exactly once, at the shared position, associated with the shared site, pinned, on its workset. Nothing is left for a person to clean up, and no dialog stops an unattended batch (owner rule, 2026-11-10).

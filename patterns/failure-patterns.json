@@ -848,7 +848,13 @@
       ],
       "revit_versions": "any",
       "intake": "IN-0017",
-      "evidence_kind": "observed"
+      "evidence_kind": "observed",
+      "evidence": [
+        {
+          "note": "2026-11-11: WorksharingUtils.GetUserWorksetInfo on a cloud model path threw InternalException ('A managed exception was thrown by Revit…') right after the user closed that model without synchronizing, so opening with only selected worksets was not possible; opening with all worksets closed works, but then cloud links cannot be loaded ('The element \"this RevitLinkType\" is in a closed workset').",
+          "intake": "IN-0035"
+        }
+      ]
     },
     {
       "id": "FP51",
@@ -1310,6 +1316,25 @@
         "Document.ActiveProjectLocation",
         "ProjectLocation.Duplicate",
         "ElementTransformUtils.CopyElement"
+      ],
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ],
+      "status": "candidate",
+      "revit_versions": "2024",
+      "intake": "IN-0035",
+      "evidence_kind": "observed"
+    },
+    {
+      "id": "FP75",
+      "name": "A rolled-back transaction group did not undo link changes in an open working model",
+      "meaning": "A test was wrapped in a TransactionGroup on the user's open, workshared cloud model, to be rolled back afterwards: one transaction deleted a cloud link type and created a local file link with ImportPlacement.Shared, and a repair engine then ran two passes. TransactionGroup.RollBack() returned without error, but the deleted link type stayed deleted and the new file link stayed in the model (observed in Revit 2024.3; cause not isolated). Inside an open group, RevitLinkType.Unload is refused ('Operation is not permitted when there is any open transaction phase started by API client'). Defence: never test in a model the user has open. Open the model yourself, run the test, close it without save or sync, and confirm by reopening; if a user's model was changed by mistake, ask them to close it without synchronizing.",
+      "found_by": "bridge test; link list read before and after the rollback",
+      "api_terms": [
+        "TransactionGroup.RollBack",
+        "RevitLinkType.Create",
+        "RevitLinkType.Unload",
+        "Document.Delete"
       ],
       "contributors": [
         "Gottfried Schmidtke with Claude"
