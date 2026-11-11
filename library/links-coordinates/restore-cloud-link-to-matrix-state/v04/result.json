@@ -1,0 +1,5 @@
+{
+  "result": "No dialog; four links re-placed in one run",
+  "problem": "An unloaded link was not found again ('already contains a linked model'): GetExternalFileReference throws for unloaded ACC links too (FP70)",
+  "found_by": "owner test"
+}

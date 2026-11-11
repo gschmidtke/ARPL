@@ -45,6 +45,7 @@ ARPL becomes trustworthy when packs are reproduced by other people, in other mod
 | [ARPL-GEO-0005](../library/geometry/masterplan-from-neutral-rebuild-package/) Masterplan from a neutral rebuild package: floors, DirectShape envelopes and domain-based grids | Revit 2024 | candidate |
 | [ARPL-LNK-0001](../library/links-coordinates/shared-coordinates-before-splitting-a-campus/) Set shared coordinates on an authority building, then split a campus model into per-building files | Revit 2024 | candidate |
 | [ARPL-LNK-0002](../library/links-coordinates/batch-cloud-links-by-shared-coordinates/) Batch-link cloud models from a registry and link matrix, placed by shared coordinates; verify by link transform | Revit 2024 | candidate |
+| [ARPL-LNK-0003](../library/links-coordinates/restore-cloud-link-to-matrix-state/) Restore a cloud link to the state its link matrix defines: identity by cloud GUID, re-place by shared coordinates, no dialogs | Revit 2024 | candidate |
 | [ARPL-MCX-0001](../library/model-context/read-camera-before-interpreting-markups/) Markup read without checking the camera | Revit 2024 | candidate |
 | [ARPL-PAR-0001](../library/parameters-data/material-description-keynote-governance/) Governed material Descriptions and Keynotes | Revit 2024 | candidate |
 | [ARPL-PAR-0002](../library/parameters-data/one-shared-parameter-file-per-company/) One shared parameter file per company: find every candidate, choose one master, edit it byte-exact, keep project parameters in a project group | Revit 2024 | candidate |

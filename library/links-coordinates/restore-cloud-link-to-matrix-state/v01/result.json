@@ -1,0 +1,5 @@
+{
+  "result": "Loaded ACC links not found when the file name differs from the model key; the repair tried to create them again: 'document already contains a linked model'",
+  "problem": "GetExternalFileReference throws for ACC cloud links (loaded and, as found later, unloaded) (FP70)",
+  "found_by": "owner test"
+}

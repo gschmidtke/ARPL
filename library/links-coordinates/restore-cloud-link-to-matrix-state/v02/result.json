@@ -1,0 +1,5 @@
+{
+  "result": "Loaded links matched by GUID; a moved link was moved back by RotateElement/MoveElement and verified",
+  "problem": "The moved link sat exactly at the shared position but its instance name read 'location <Not Shared>'; links re-created by shared coordinates read 'location SNOWDON' (FP69)",
+  "found_by": "owner, from the link instance names"
+}

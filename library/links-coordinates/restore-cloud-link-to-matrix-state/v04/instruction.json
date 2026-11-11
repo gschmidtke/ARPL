@@ -1,0 +1,4 @@
+{
+  "version": "v04",
+  "instruction": "Create the new instance first, then delete the old one; register an IFailuresPreprocessor on every repair transaction that deletes warnings and lists them in the report"
+}

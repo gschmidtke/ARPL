@@ -741,6 +741,32 @@
       ],
       "reviewed_by": "",
       "closed": "2026-11-05"
+    },
+    {
+      "entry_id": "IN-0033",
+      "received": "2026-11-10",
+      "contributor": {
+        "name": "Gottfried Schmidtke",
+        "github": "gschmidtke",
+        "with": "Claude (BAUMEISTER seat)"
+      },
+      "source": "owner session 2026-11-10 (owner rule: lessons from every Revit bridge run go to ARPL)",
+      "submitted": "Lessons from testing a link repair (ZEN 1.2.1 test builds) in Revit 2024.3 on the Snowdon Towers sample federation, partly driven by the agent through the Revit bridge: cloud link identity, shared-site association, re-placing links without dialogs, loading links in batch-opened hosts; desktop/bridge incidents",
+      "files": [],
+      "status": "filed",
+      "decision": "Filed as status 'candidate'. No add-in source code, client data or private repository content; private paths removed. Curator is the same occupant as the author (disclosed); independent reproduction is open.",
+      "resulting_ids": [
+        "ARPL-LNK-0003",
+        "FP68",
+        "FP69",
+        "FP70",
+        "FP71",
+        "FP11 (evidence)",
+        "FP20 (evidence)",
+        "FP41 (evidence)"
+      ],
+      "reviewed_by": "",
+      "closed": "2026-11-10"
     }
   ]
 }

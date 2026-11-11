@@ -86,6 +86,10 @@
         {
           "note": "Two documented suppression routes: the DialogBoxShowing event (dismiss a dialog programmatically) and the Revit 2011 failure processing API, which does more than dialog suppression. An unattended run without one of these blocks silently.",
           "intake": "IN-0006"
+        },
+        {
+          "note": "2026-11-10: deleting the last instance of a link type raised the modal warning 'All instances of link ... have been deleted, but the model itself is still loaded' (with a Remove Link button). Fixed by creating the replacement instance before deleting the old one and by an IFailuresPreprocessor on the transaction (ARPL-LNK-0003).",
+          "intake": "IN-0033"
         }
       ],
       "contributors": [
@@ -189,7 +193,13 @@
       "contributors": [
         "Gottfried Schmidtke with Claude"
       ],
-      "evidence_kind": "observed"
+      "evidence_kind": "observed",
+      "evidence": [
+        {
+          "note": "2026-11-10: after an add-in DLL was rebuilt, Revit 2024 showed 'Security - Unsigned Add-In' at start; the bridge cannot run until a person answers it (Load Once / Always Load). Plan restarts with a person present, or sign test builds.",
+          "intake": "IN-0033"
+        }
+      ]
     },
     {
       "id": "FP21",
@@ -653,7 +663,13 @@
       "revit_versions": "observed in 2024; desktop layer, not the Revit API",
       "intake": "IN-0013, IN-0015",
       "related": "FP11 (dialogs), FP32 (posted commands)",
-      "evidence_kind": "observed"
+      "evidence_kind": "observed",
+      "evidence": [
+        {
+          "note": "Seen again 2026-11-10: the computer-use open-application call on a running Revit 2024 started a second instance; the bridge kept routing run_csharp to the older, busy instance (bridge status listed both as alive), so every call timed out. Defence confirmed: never open-application on a running Revit; exit Revit through the API or ask the owner.",
+          "intake": "IN-0033"
+        }
+      ]
     },
     {
       "id": "FP42",
@@ -1099,6 +1115,81 @@
         "View.Scale",
         "Viewport.GetBoxOutline"
       ]
+    },
+    {
+      "id": "FP68",
+      "name": "A link placed by shared coordinates cannot be unpinned",
+      "meaning": "Revit pins a link instance that is associated with a shared site. Setting Element.Pinned = false through the API is silently ignored (it still reads true), and MoveElement/RotateElement then throw 'Unable to move element(s) due to at least one of them being pinned'. The UI behaves the same; the user has to set the shared site to not shared first, and the API has no call for that (the 'Shared Site' parameter is a button, storage type None). Defence: do not plan to move associated links; re-create them (ARPL-LNK-0003). To simulate a user's moved link in a test, create an unshared instance of the same type and move that.",
+      "found_by": "bridge test: Pinned read back true after setting false; owner: 'you need to disable shared coordinates ...unpinning does not work'",
+      "api_terms": [
+        "Element.Pinned",
+        "ElementTransformUtils.MoveElement",
+        "BuiltInParameter.GEO_LOCATION"
+      ],
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ],
+      "status": "candidate",
+      "revit_versions": "2024",
+      "intake": "IN-0033",
+      "evidence_kind": "observed"
+    },
+    {
+      "id": "FP69",
+      "name": "Moving a link to the right place does not make it shared",
+      "meaning": "A link moved (or rotated) back to its shared-coordinate position is correct by value but its instance name reads 'location <Not Shared>', while a link placed by ImportPlacement.Shared reads the site name (for example 'location SNOWDON'). The association cannot be set on an existing instance through the API. A repair that only moves leaves a state linking would never produce. Defence: re-create by shared coordinates, check position AND association. Note: an unloaded link also shows '<Not Shared>' until it is loaded, so read association only on loaded links.",
+      "found_by": "owner comparing Link Intel exports before and after the repair",
+      "api_terms": [
+        "RevitLinkInstance.Create",
+        "ImportPlacement.Shared",
+        "ElementTransformUtils.MoveElement"
+      ],
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ],
+      "status": "candidate",
+      "revit_versions": "2024",
+      "intake": "IN-0033",
+      "evidence_kind": "observed"
+    },
+    {
+      "id": "FP70",
+      "name": "Cloud link identity not readable from the file reference",
+      "meaning": "RevitLinkType.GetExternalFileReference() throws InvalidOperationException for ACC cloud links, loaded and unloaded. Code that identifies links by that path silently falls back to names and then duplicates or misses links ('document already contains a linked model'). Identity sources that work (Revit 2024.3): loaded -> RevitLinkInstance.GetLinkDocument().GetCloudModelPath() GUIDs; unloaded -> RevitLinkType.GetExternalResourceReferences() values, GetReferenceInformation() keys LinkedModelProjectId, LinkedModelModelId, LinkedModelRegion (key names are not documented; observed). Revit also refuses LoadFrom to a model that is already linked in the host: the call returns and nothing changes.",
+      "found_by": "bridge read of all link types (ext reference throws; reference information carries the GUIDs)",
+      "api_terms": [
+        "RevitLinkType.GetExternalFileReference",
+        "RevitLinkType.GetExternalResourceReferences",
+        "ExternalResourceReference.GetReferenceInformation",
+        "Document.GetCloudModelPath",
+        "RevitLinkType.LoadFrom"
+      ],
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ],
+      "status": "candidate",
+      "revit_versions": "2024",
+      "intake": "IN-0033",
+      "evidence_kind": "observed"
+    },
+    {
+      "id": "FP71",
+      "name": "Link cannot be loaded in a batch-opened host",
+      "meaning": "RevitLinkType.Load() fails when the link TYPE sits on a closed workset ('The element \"this RevitLinkType\" is in a closed workset'), so opening only the worksets of the link instances is not enough; and it fails with 'The link ... is loaded into multiple documents and cannot be reloaded' when another open document already has that model loaded. Defence: a batch that must check or fix link placement opens all worksets, and runs with no other document of the same federation open; anything still not loadable is a row error, not 'not checked'.",
+      "found_by": "ACC Gate repair report, bridge-run test B1",
+      "api_terms": [
+        "RevitLinkType.Load",
+        "WorksetConfiguration",
+        "WorksetConfigurationOption.OpenAllWorksets"
+      ],
+      "related": "FP50 (batch report describes links as the batch opened them)",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ],
+      "status": "candidate",
+      "revit_versions": "2024",
+      "intake": "IN-0033",
+      "evidence_kind": "observed"
     }
   ]
 }
