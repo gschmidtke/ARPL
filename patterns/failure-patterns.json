@@ -172,6 +172,10 @@
         {
           "note": "2026-11-11, Revit 2024.3: two modal 'Multiple Spaces are in the same enclosed region' warning dialogs (46 warnings each) blocked the bridge for minutes. The first came from RevitLinkType.Unload of room-bounding links in a host with MEP spaces (Unload runs outside any transaction, so no failures preprocessor can be attached). The second came from a test transaction that deleted a room-bounding link without a preprocessor. A transaction that registered the repair's failures preprocessor (delete warnings, list them) raised no dialog in the same models. Defence: give every transaction that deletes, moves or re-creates room-bounding links a preprocessor, and do not unload links in a host with spaces during an unattended run.",
           "intake": "IN-0035"
+        },
+        {
+          "note": "2026-11-11 (defence tested): RevitLinkType.Unload runs outside any transaction, so no transaction preprocessor can be attached. A handler on Application.FailuresProcessing, filtered to the document and active only around the Unload call, deleted its warnings and listed them in the report: a cloud link was unloaded in a host with MEP spaces with 0 dialogs (twice, plus a two-host batch). Removing link types inside a transaction with the preprocessor also raised no dialog.",
+          "intake": "IN-0035"
         }
       ]
     },
