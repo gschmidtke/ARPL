@@ -143,7 +143,7 @@ Primary entry for Revit users and developers: what area of Revit the work touche
 | [ARPL-CRD-0002](../library/coordination/mep-spaces-enclose-through-room-bounding-links/) MEP spaces that exist but have no area: set the architectural (and facade) link types to Room Bounding in the MEP model | 2 | W7 | candidate |
 | [ARPL-LNK-0001](../library/links-coordinates/shared-coordinates-before-splitting-a-campus/) Set shared coordinates on an authority building, then split a campus model into per-building files | 2 | W5 | candidate |
 | [ARPL-LNK-0002](../library/links-coordinates/batch-cloud-links-by-shared-coordinates/) Batch-link cloud models from a registry and link matrix, placed by shared coordinates; verify by link transform | 2 | W7 | candidate |
-| [ARPL-LNK-0003](../library/links-coordinates/restore-cloud-link-to-matrix-state/) Restore a cloud link to the state its link matrix defines: identity by cloud GUID, never move a shared link, re-create or keep-and-report, no dialogs | 2 | W7 | candidate |
+| [ARPL-LNK-0003](../library/links-coordinates/restore-cloud-link-to-matrix-state/) Restore a cloud link to the state its link matrix defines: identity by cloud GUID, move back un-shared links and report their Shared Site, never move a shared link, no dialogs | 2 | W7 | candidate |
 
 ## coordination: Interference, openings, clearances between disciplines
 
@@ -153,7 +153,7 @@ Primary entry for Revit users and developers: what area of Revit the work touche
 | [ARPL-CRD-0002](../library/coordination/mep-spaces-enclose-through-room-bounding-links/) MEP spaces that exist but have no area: set the architectural (and facade) link types to Room Bounding in the MEP model | 2 | W7 | candidate |
 | [ARPL-LNK-0001](../library/links-coordinates/shared-coordinates-before-splitting-a-campus/) Set shared coordinates on an authority building, then split a campus model into per-building files | 2 | W5 | candidate |
 | [ARPL-LNK-0002](../library/links-coordinates/batch-cloud-links-by-shared-coordinates/) Batch-link cloud models from a registry and link matrix, placed by shared coordinates; verify by link transform | 2 | W7 | candidate |
-| [ARPL-LNK-0003](../library/links-coordinates/restore-cloud-link-to-matrix-state/) Restore a cloud link to the state its link matrix defines: identity by cloud GUID, never move a shared link, re-create or keep-and-report, no dialogs | 2 | W7 | candidate |
+| [ARPL-LNK-0003](../library/links-coordinates/restore-cloud-link-to-matrix-state/) Restore a cloud link to the state its link matrix defines: identity by cloud GUID, move back un-shared links and report their Shared Site, never move a shared link, no dialogs | 2 | W7 | candidate |
 
 ## validation-qaqc: Checks of geometry, semantics, parameters, systems, deliverables
 
@@ -183,7 +183,7 @@ Primary entry for Revit users and developers: what area of Revit the work touche
 | [ARPL-FAM-0004](../library/family-authoring/annotation-family-version-and-reload/) Annotation family from a newer Revit version | 2 | W1 | candidate |
 | [ARPL-LNK-0001](../library/links-coordinates/shared-coordinates-before-splitting-a-campus/) Set shared coordinates on an authority building, then split a campus model into per-building files | 2 | W5 | candidate |
 | [ARPL-LNK-0002](../library/links-coordinates/batch-cloud-links-by-shared-coordinates/) Batch-link cloud models from a registry and link matrix, placed by shared coordinates; verify by link transform | 2 | W7 | candidate |
-| [ARPL-LNK-0003](../library/links-coordinates/restore-cloud-link-to-matrix-state/) Restore a cloud link to the state its link matrix defines: identity by cloud GUID, never move a shared link, re-create or keep-and-report, no dialogs | 2 | W7 | candidate |
+| [ARPL-LNK-0003](../library/links-coordinates/restore-cloud-link-to-matrix-state/) Restore a cloud link to the state its link matrix defines: identity by cloud GUID, move back un-shared links and report their Shared Site, never move a shared link, no dialogs | 2 | W7 | candidate |
 | [ARPL-PAR-0001](../library/parameters-data/material-description-keynote-governance/) Governed material Descriptions and Keynotes | 2 | W7 | candidate |
 | [ARPL-PAR-0002](../library/parameters-data/one-shared-parameter-file-per-company/) One shared parameter file per company: find every candidate, choose one master, edit it byte-exact, keep project parameters in a project group | 2 | W7 | candidate |
 | [ARPL-PAR-0004](../library/parameters-data/type-marks-zen-by-family-one-run-per-group/) Type Marks with ZEN Type Marks by Family: one run per family group, the search string becomes the prefix, Overwrite on for a clean re-run | 2 | W7 | candidate |

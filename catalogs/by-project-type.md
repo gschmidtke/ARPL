@@ -31,7 +31,7 @@ Entry by building type. Project-level workflows are listed in project-workflows/
 | [ARPL-GEO-0003](../library/geometry/wall-and-footing-corner-joins/) Footing corner notches | 2 | W4 | candidate |
 | [ARPL-LNK-0001](../library/links-coordinates/shared-coordinates-before-splitting-a-campus/) Set shared coordinates on an authority building, then split a campus model into per-building files | 2 | W5 | candidate |
 | [ARPL-LNK-0002](../library/links-coordinates/batch-cloud-links-by-shared-coordinates/) Batch-link cloud models from a registry and link matrix, placed by shared coordinates; verify by link transform | 2 | W7 | candidate |
-| [ARPL-LNK-0003](../library/links-coordinates/restore-cloud-link-to-matrix-state/) Restore a cloud link to the state its link matrix defines: identity by cloud GUID, never move a shared link, re-create or keep-and-report, no dialogs | 2 | W7 | candidate |
+| [ARPL-LNK-0003](../library/links-coordinates/restore-cloud-link-to-matrix-state/) Restore a cloud link to the state its link matrix defines: identity by cloud GUID, move back un-shared links and report their Shared Site, never move a shared link, no dialogs | 2 | W7 | candidate |
 | [ARPL-MCX-0001](../library/model-context/read-camera-before-interpreting-markups/) Markup read without checking the camera | 1 | W8 | candidate |
 | [ARPL-PAR-0001](../library/parameters-data/material-description-keynote-governance/) Governed material Descriptions and Keynotes | 2 | W7 | candidate |
 | [ARPL-PAR-0002](../library/parameters-data/one-shared-parameter-file-per-company/) One shared parameter file per company: find every candidate, choose one master, edit it byte-exact, keep project parameters in a project group | 2 | W7 | candidate |

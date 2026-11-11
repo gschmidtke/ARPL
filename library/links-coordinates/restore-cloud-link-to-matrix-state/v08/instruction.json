@@ -1,0 +1,4 @@
+{
+  "version": "v08",
+  "instruction": "Owner rule: an existing link is never deleted and re-created to restore its Shared Site. A '<Not Shared>' link was un-shared on purpose by a person (Revit requires it before a link can be unpinned and moved): move it back if needed (safe while un-shared), pin it, and report it by name as 'Shared Site to set manually' so the BIM manager can ask the discipline lead. Never move a shared link. Roll back the placement pass if any link type gains saveable positions"
+}
