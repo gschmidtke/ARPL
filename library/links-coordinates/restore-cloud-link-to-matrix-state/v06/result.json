@@ -1,0 +1,5 @@
+{
+  "result": "Electrical host (link moved 15 m and rotated 20 degrees, three links '<Not Shared>'): 4 re-placed by shared coordinates, 1 matched, 0 errors, synchronized; open 114 s. Rerun (host reopened from the cloud): 5 matched, nothing changed. Two further hosts in one batch: both 5 matched, open 62-69 s each.",
+  "problem": "",
+  "found_by": "bridge-run test, report files"
+}

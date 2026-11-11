@@ -1,0 +1,4 @@
+{
+  "version": "v06",
+  "instruction": "Batch repair opens the host with all worksets (WorksetConfigurationOption.OpenAllWorksets), then the same identity, load, re-place and warning handling as v05; no other document of the federation open in the session"
+}

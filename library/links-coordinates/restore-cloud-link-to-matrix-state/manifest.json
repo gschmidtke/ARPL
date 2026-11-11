@@ -1,6 +1,6 @@
 {
   "id": "ARPL-LNK-0003",
-  "revision": 1,
+  "revision": 2,
   "title": "Restore a cloud link to the state its link matrix defines: identity by cloud GUID, re-place by shared coordinates, no dialogs",
   "use_when": [
     "A repair run must bring every link of a host back to the link matrix: found by cloud identity, at the shared position, associated with the shared site, pinned, on its workset",
@@ -86,6 +86,14 @@
       "revision": 1,
       "date": "2026-11-10",
       "change": "First recorded from the ZEN 1.2.1 Repair Links tests (IN-0033)",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ]
+    },
+    {
+      "revision": 2,
+      "date": "2026-11-10",
+      "change": "v06: batch retest with all worksets open passes (3 hosts, rerun clean)",
       "contributors": [
         "Gottfried Schmidtke with Claude"
       ]
