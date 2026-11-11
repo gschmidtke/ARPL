@@ -617,6 +617,10 @@
         {
           "note": "2026-11-11: a new add-in build was tested without restarting Revit by loading its DLL from bytes (Assembly.Load(byte[])) beside the installed one and calling it by reflection. The two copies have separate static state, so dialog silencers and caches from the installed copy do not apply to the byte-loaded one. Record which copy produced a result.",
           "intake": "IN-0035"
+        },
+        {
+          "note": "2026-11-11: installing a rebuilt add-in from the bridge. Revit locks the add-in DLL, and a process started from Revit is stopped when Revit exits. A one-time scheduled task (schtasks /create … /sc once, then /run) ran a script that waited for the Revit process to exit, copied the build into the Addins folder, and restarted Revit with the needed environment variable. Revit was closed via PostCommand(ExitRevit) with no documents open; the new build was verified in the restarted session, and the task was deleted.",
+          "intake": "IN-0035"
         }
       ]
     },
