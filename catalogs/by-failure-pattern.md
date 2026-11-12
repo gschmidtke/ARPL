@@ -116,7 +116,7 @@ Learn from what went wrong: each pack is listed under the failure patterns it re
 | [ARPL-CRD-0002](../library/coordination/mep-spaces-enclose-through-room-bounding-links/) MEP spaces that exist but have no area: set the architectural (and facade) link types to Room Bounding in the MEP model | 2 | W7 | candidate |
 | [ARPL-DOC-0001](../library/documentation/assembly-shop-drawings/) Shop drawings: invalid references and swapped elevations | 2 | W6 | candidate |
 | [ARPL-GEO-0004](../library/geometry/concept-model-from-neutral-spec-staged-build/) Concept model from a neutral spec: staged, idempotent build with visual gates | 2 | W4 | candidate |
-| [ARPL-LNK-0003](../library/links-coordinates/restore-cloud-link-to-matrix-state/) Restore a cloud link to the state its link matrix defines: identity by cloud GUID, re-place by shared coordinates, no dialogs | 2 | W7 | candidate |
+| [ARPL-LNK-0003](../library/links-coordinates/restore-cloud-link-to-matrix-state/) Restore a cloud link to the state its link matrix defines: identity by cloud GUID, move back un-shared links and report their Shared Site, never move a shared link, no dialogs | 2 | W7 | candidate |
 
 ## FP12: Fix incomplete
 
@@ -246,7 +246,7 @@ Learn from what went wrong: each pack is listed under the failure patterns it re
 |---|---|---|---|
 | [ARPL-ADM-0003](../library/model-administration/batch-cloud-onboarding-with-registry/) Batch-onboard local models to the cloud and register each one: verify by document state, handle posted-command dialogs | 2 | W7 | candidate |
 | [ARPL-GEO-0005](../library/geometry/masterplan-from-neutral-rebuild-package/) Masterplan from a neutral rebuild package: floors, DirectShape envelopes and domain-based grids | 2 | W4 | candidate |
-| [ARPL-LNK-0003](../library/links-coordinates/restore-cloud-link-to-matrix-state/) Restore a cloud link to the state its link matrix defines: identity by cloud GUID, re-place by shared coordinates, no dialogs | 2 | W7 | candidate |
+| [ARPL-LNK-0003](../library/links-coordinates/restore-cloud-link-to-matrix-state/) Restore a cloud link to the state its link matrix defines: identity by cloud GUID, move back un-shared links and report their Shared Site, never move a shared link, no dialogs | 2 | W7 | candidate |
 | [ARPL-PAR-0004](../library/parameters-data/type-marks-zen-by-family-one-run-per-group/) Type Marks with ZEN Type Marks by Family: one run per family group, the search string becomes the prefix, Overwrite on for a clean re-run | 2 | W7 | candidate |
 
 ## FP42: Null-conditional parameter write skips silently
@@ -305,7 +305,7 @@ Learn from what went wrong: each pack is listed under the failure patterns it re
 | Pack | Level | Work class | Status |
 |---|---|---|---|
 | [ARPL-ADM-0004](../library/model-administration/zen-acc-gate-weekly-collection/) ZEN ACC Gate as the weekly collection batch: health, links and worksets, schedule exports; what each output contains and how to drive it from a bridge | 2 | W8 | candidate |
-| [ARPL-LNK-0003](../library/links-coordinates/restore-cloud-link-to-matrix-state/) Restore a cloud link to the state its link matrix defines: identity by cloud GUID, re-place by shared coordinates, no dialogs | 2 | W7 | candidate |
+| [ARPL-LNK-0003](../library/links-coordinates/restore-cloud-link-to-matrix-state/) Restore a cloud link to the state its link matrix defines: identity by cloud GUID, move back un-shared links and report their Shared Site, never move a shared link, no dialogs | 2 | W7 | candidate |
 
 ## FP51: Dialog remembers another project's folder
 
@@ -414,23 +414,53 @@ Learn from what went wrong: each pack is listed under the failure patterns it re
 
 | Pack | Level | Work class | Status |
 |---|---|---|---|
-| [ARPL-LNK-0003](../library/links-coordinates/restore-cloud-link-to-matrix-state/) Restore a cloud link to the state its link matrix defines: identity by cloud GUID, re-place by shared coordinates, no dialogs | 2 | W7 | candidate |
+| [ARPL-LNK-0003](../library/links-coordinates/restore-cloud-link-to-matrix-state/) Restore a cloud link to the state its link matrix defines: identity by cloud GUID, move back un-shared links and report their Shared Site, never move a shared link, no dialogs | 2 | W7 | candidate |
 
-## FP69: Moving a link to the right place does not make it shared
+## FP69: A link is shared by a stored site binding, not by its position
 
 | Pack | Level | Work class | Status |
 |---|---|---|---|
-| [ARPL-LNK-0003](../library/links-coordinates/restore-cloud-link-to-matrix-state/) Restore a cloud link to the state its link matrix defines: identity by cloud GUID, re-place by shared coordinates, no dialogs | 2 | W7 | candidate |
+| [ARPL-LNK-0003](../library/links-coordinates/restore-cloud-link-to-matrix-state/) Restore a cloud link to the state its link matrix defines: identity by cloud GUID, move back un-shared links and report their Shared Site, never move a shared link, no dialogs | 2 | W7 | candidate |
 
 ## FP70: Cloud link identity not readable from the file reference
 
 | Pack | Level | Work class | Status |
 |---|---|---|---|
-| [ARPL-LNK-0003](../library/links-coordinates/restore-cloud-link-to-matrix-state/) Restore a cloud link to the state its link matrix defines: identity by cloud GUID, re-place by shared coordinates, no dialogs | 2 | W7 | candidate |
+| [ARPL-LNK-0003](../library/links-coordinates/restore-cloud-link-to-matrix-state/) Restore a cloud link to the state its link matrix defines: identity by cloud GUID, move back un-shared links and report their Shared Site, never move a shared link, no dialogs | 2 | W7 | candidate |
 
 ## FP71: Link cannot be loaded in a batch-opened host
 
 | Pack | Level | Work class | Status |
 |---|---|---|---|
-| [ARPL-LNK-0003](../library/links-coordinates/restore-cloud-link-to-matrix-state/) Restore a cloud link to the state its link matrix defines: identity by cloud GUID, re-place by shared coordinates, no dialogs | 2 | W7 | candidate |
+| [ARPL-LNK-0003](../library/links-coordinates/restore-cloud-link-to-matrix-state/) Restore a cloud link to the state its link matrix defines: identity by cloud GUID, move back un-shared links and report their Shared Site, never move a shared link, no dialogs | 2 | W7 | candidate |
+
+## FP72: Moving a shared link rewrites the linked model's shared site
+
+| Pack | Level | Work class | Status |
+|---|---|---|---|
+| [ARPL-LNK-0003](../library/links-coordinates/restore-cloud-link-to-matrix-state/) Restore a cloud link to the state its link matrix defines: identity by cloud GUID, move back un-shared links and report their Shared Site, never move a shared link, no dialogs | 2 | W7 | candidate |
+
+## FP73: No API binds an existing cloud link to a shared site
+
+| Pack | Level | Work class | Status |
+|---|---|---|---|
+| [ARPL-LNK-0003](../library/links-coordinates/restore-cloud-link-to-matrix-state/) Restore a cloud link to the state its link matrix defines: identity by cloud GUID, move back un-shared links and report their Shared Site, never move a shared link, no dialogs | 2 | W7 | candidate |
+
+## FP74: Placement by shared coordinates follows the host's active site and allows one bound instance
+
+| Pack | Level | Work class | Status |
+|---|---|---|---|
+| [ARPL-LNK-0003](../library/links-coordinates/restore-cloud-link-to-matrix-state/) Restore a cloud link to the state its link matrix defines: identity by cloud GUID, move back un-shared links and report their Shared Site, never move a shared link, no dialogs | 2 | W7 | candidate |
+
+## FP75: A rolled-back transaction group did not undo link changes in an open working model
+
+| Pack | Level | Work class | Status |
+|---|---|---|---|
+| [ARPL-LNK-0003](../library/links-coordinates/restore-cloud-link-to-matrix-state/) Restore a cloud link to the state its link matrix defines: identity by cloud GUID, move back un-shared links and report their Shared Site, never move a shared link, no dialogs | 2 | W7 | candidate |
+
+## FP76: RevitLinkType.Load reports LinkLoaded although a warning rolled the load back
+
+| Pack | Level | Work class | Status |
+|---|---|---|---|
+| [ARPL-LNK-0003](../library/links-coordinates/restore-cloud-link-to-matrix-state/) Restore a cloud link to the state its link matrix defines: identity by cloud GUID, move back un-shared links and report their Shared Site, never move a shared link, no dialogs | 2 | W7 | candidate |
 

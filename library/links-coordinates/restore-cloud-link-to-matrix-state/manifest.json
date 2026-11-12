@@ -1,7 +1,7 @@
 {
   "id": "ARPL-LNK-0003",
-  "revision": 2,
-  "title": "Restore a cloud link to the state its link matrix defines: identity by cloud GUID, re-place by shared coordinates, no dialogs",
+  "revision": 4,
+  "title": "Restore a cloud link to the state its link matrix defines: identity by cloud GUID, move back un-shared links and report their Shared Site, never move a shared link, no dialogs",
   "use_when": [
     "A repair run must bring every link of a host back to the link matrix: found by cloud identity, at the shared position, associated with the shared site, pinned, on its workset",
     "A link was moved, rotated, unloaded, removed, duplicated or put on another workset",
@@ -31,7 +31,10 @@
     "IFailuresPreprocessor",
     "FailuresAccessor.DeleteWarning",
     "SubTransaction",
-    "WorksetConfigurationOption.OpenAllWorksets"
+    "WorksetConfigurationOption.OpenAllWorksets",
+    "Document.PublishCoordinates",
+    "RevitLinkType.HasSaveablePositions",
+    "Element.GetDependentElements"
   ],
   "level": 2,
   "work_class": "W7",
@@ -72,9 +75,14 @@
     "FP69",
     "FP70",
     "FP71",
+    "FP72",
+    "FP73",
+    "FP74",
     "FP11",
     "FP50",
-    "FP41"
+    "FP41",
+    "FP75",
+    "FP76"
   ],
   "status": "candidate",
   "contributors": [
@@ -94,6 +102,22 @@
       "revision": 2,
       "date": "2026-11-10",
       "change": "v06: batch retest with all worksets open passes (3 hosts, rerun clean)",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ]
+    },
+    {
+      "revision": 3,
+      "date": "2026-11-10",
+      "change": "v07: root cause of the shared-site binding (IN-0035). FP69 corrected (history kept); rule 3 changed: never move a bound link; re-create only an unbound instance with nothing attached, otherwise keep it, put it in place and report the unresolved binding; file links can be bound in place by PublishCoordinates. New FP72-FP74.",
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ]
+    },
+    {
+      "revision": 4,
+      "date": "2026-11-10",
+      "change": "v08: owner rule - existing links are never re-created for their Shared Site; un-shared links are moved back, pinned and reported for a manual Shared Site; shared links are never moved; saveable-positions guard. Tested on an ACC host (not synced) and a local copy.",
       "contributors": [
         "Gottfried Schmidtke with Claude"
       ]

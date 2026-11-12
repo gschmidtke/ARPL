@@ -1,0 +1,4 @@
+{
+  "version": "v07",
+  "instruction": "Before re-creating, find out what the shared-site binding is and whether an existing instance can be bound without deletion: compare Create Shared, Create Origin + move, copy, PublishCoordinates (instance only / with link location id), AcquireCoordinates, MoveBasePointToHostBasePoint, a second host site, and the same on an ACC host; every change rolled back"
+}

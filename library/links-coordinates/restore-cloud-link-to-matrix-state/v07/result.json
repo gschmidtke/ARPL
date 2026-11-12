@@ -1,0 +1,5 @@
+{
+  "result": "The binding is stored, not positional (FP69 corrected). File links: PublishCoordinates with the link location id binds an in-place instance without deleting anything. Cloud links: refused (FP73). Moving a bound instance rewrites the linked model's site (FP72). Create Shared follows the host's active site and is refused while a bound instance exists (FP74). ACC test host reopened afterwards: version and all five links unchanged.",
+  "problem": "Re-creating (v03-v06) binds every link but deletes tags, dimensions and view settings attached to the old instance; for cloud links there is no non-destructive alternative, so keeping such instances and reporting the unresolved binding is the conservative choice",
+  "found_by": "bridge-run research, rolled-back transactions, reopen check"
+}
