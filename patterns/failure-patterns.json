@@ -1401,6 +1401,30 @@
           "intake": "IN-0035"
         }
       ]
+    },
+    {
+      "id": "FP78",
+      "name": "A batch that opens models with all worksets closed cannot report on links: links on closed worksets stay unloaded",
+      "meaning": "Opening a workshared model with WorksetConfigurationOption.CloseAllWorksets is the fast way to open many models for reports. Revit link instances placed on a user workset (for example XX_<model>) are then not loaded, so any report about the links (position, shared site, origin match) can only say 'unloaded'. The instance name even reads 'location <Not Shared>' because the link is not loaded. A model-level report (warnings, views, sheets, family counts, schedules) is not affected. Defence: open the link worksets (or all worksets) for any action that reports on links, or state in the report that links were not loaded because their workset was closed.",
+      "found_by": "ZEN weekly-report video readiness run (read-only ACC Gate actions, Snowdon ACC project), 2026-11-12",
+      "api_terms": [
+        "WorksetConfigurationOption.CloseAllWorksets",
+        "OpenOptions.SetOpenWorksetsConfiguration",
+        "RevitLinkInstance"
+      ],
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ],
+      "status": "candidate",
+      "revit_versions": "2024",
+      "intake": "IN-0036",
+      "evidence_kind": "observed",
+      "evidence": [
+        {
+          "note": "2026-11-12 11:00, Revit 2024 bridge: Structural and Electrical opened with all worksets closed (7-13 s each). Link report: every link row 'Unloaded / Not checked (unloaded)', instance names 'location <Not Shared>'. Model health in the same run: 'Revit Link Status - InClosedWorkset: 5' for both. The same links read as shared when the host is opened with all worksets (2026-11-11 Plumbing run, about 2 min to open).",
+          "intake": "IN-0036"
+        }
+      ]
     }
   ]
 }
