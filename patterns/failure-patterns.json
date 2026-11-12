@@ -1377,6 +1377,30 @@
           "intake": "IN-0035"
         }
       ]
+    },
+    {
+      "id": "FP77",
+      "name": "An add-in cannot read its Excel configuration workbook while the user has it open in Excel",
+      "meaning": "Excel opens a workbook for write and shares it for read only. An add-in that opens the same file with a library's default file open (ClosedXML new XLWorkbook(path) asks for read with FileShare.Read) is refused with an IOException, because it does not allow the existing writer. In an unattended batch this fails per model, after each model has been opened, so one locked file turns into a whole run of identical errors. Defence: open the workbook with FileAccess.Read and FileShare.ReadWrite | FileShare.Delete, copy it into memory and parse from there; read it once before the first model is opened, and stop the run with one message if it cannot be read.",
+      "found_by": "Owner observation during ZEN 1.2.1 Repair Links runs (the Link Matrix was edited in Excel between runs); reproduced over the bridge by holding the workbook the way Excel does",
+      "api_terms": [
+        "System.IO.FileStream",
+        "FileShare.ReadWrite",
+        "ClosedXML.Excel.XLWorkbook"
+      ],
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ],
+      "status": "candidate",
+      "revit_versions": "2024",
+      "intake": "IN-0035",
+      "evidence_kind": "observed",
+      "evidence": [
+        {
+          "note": "2026-11-11 19:50, Revit 2024 bridge: workbook held open with FileAccess.ReadWrite / FileShare.Read (as Excel does). A plain FileShare.Read open failed with IOException (control); the shared-read loader read all rows (6 registry, 30 matrix). The read-once guard stopped a batch with a missing workbook in 66 ms with one message and no model opened.",
+          "intake": "IN-0035"
+        }
+      ]
     }
   ]
 }
