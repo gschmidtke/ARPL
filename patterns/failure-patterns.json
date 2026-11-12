@@ -1421,7 +1421,7 @@
       "evidence_kind": "observed",
       "evidence": [
         {
-          "note": "2026-11-12 11:00, Revit 2024 bridge: Structural and Electrical opened with all worksets closed (7-13 s each). Link report: every link row 'Unloaded / Not checked (unloaded)', instance names 'location <Not Shared>'. Model health in the same run: 'Revit Link Status - InClosedWorkset: 5' for both. The same links read as shared when the host is opened with all worksets (2026-11-11 Plumbing run, about 2 min to open).",
+          "note": "2026-11-12 11:00, Revit 2024 bridge: Structural and Electrical opened with all worksets closed (7-13 s each). Link report: every link row 'Unloaded / Not checked (unloaded)', instance names 'location <Not Shared>'. Model health in the same run: 'Revit Link Status - InClosedWorkset: 5' for both. With all worksets open (2026-11-11 Plumbing run, about 2 min to open), the links of that host were loaded and their placement was checked.",
           "intake": "IN-0036"
         }
       ]
