@@ -1382,7 +1382,7 @@
       "id": "FP77",
       "name": "An add-in cannot read its Excel configuration workbook while the user has it open in Excel",
       "meaning": "Excel opens a workbook for write and shares it for read only. An add-in that opens the same file with a library's default file open (ClosedXML new XLWorkbook(path) asks for read with FileShare.Read) is refused with an IOException, because it does not allow the existing writer. In an unattended batch this fails per model, after each model has been opened, so one locked file turns into a whole run of identical errors. Defence: open the workbook with FileAccess.Read and FileShare.ReadWrite | FileShare.Delete, copy it into memory and parse from there; read it once before the first model is opened, and stop the run with one message if it cannot be read.",
-      "found_by": "Owner observation during ZEN 1.2.1 Repair Links runs (the Link Matrix was edited in Excel between runs); reproduced over the bridge by holding the workbook the way Excel does",
+      "found_by": "ZEN 1.2.1 release review: the Link Matrix loader used ClosedXML's default open; the shared-read change was accepted by the Owner on 2026-11-11 19:44 and reproduced over the bridge by holding the workbook the way Excel does",
       "api_terms": [
         "System.IO.FileStream",
         "FileShare.ReadWrite",

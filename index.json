@@ -145,6 +145,7 @@
   {"id":"FP73","name":"No API binds an existing cloud link to a shared site","evidence_kind":"observed","status":"candidate"},
   {"id":"FP74","name":"Placement by shared coordinates follows the host's active site and allows one bound instance","evidence_kind":"observed","status":"candidate"},
   {"id":"FP75","name":"A rolled-back transaction group did not undo link changes in an open working model","evidence_kind":"observed","status":"candidate"},
-  {"id":"FP76","name":"RevitLinkType.Load reports LinkLoaded although a warning rolled the load back","evidence_kind":"observed","status":"candidate"}
+  {"id":"FP76","name":"RevitLinkType.Load reports LinkLoaded although a warning rolled the load back","evidence_kind":"observed","status":"candidate"},
+  {"id":"FP77","name":"An add-in cannot read its Excel configuration workbook while the user has it open in Excel","evidence_kind":"observed","status":"candidate"}
  ]
 }
