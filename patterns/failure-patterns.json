@@ -1312,6 +1312,16 @@
       "sources": [
         "https://help.autodesk.com/cloudhelp/2026/ENU/Revit-API-MainReference/files/html/04419593-f258-dc77-b18a-24a29733b75f.htm",
         "https://help.autodesk.com/cloudhelp/2026/ENU/Revit-API-MainReference/files/html/ecc5f396-6aa4-ffbb-32df-b9a20e82b7d5.htm"
+      ],
+      "evidence": [
+        {
+          "intake": "IN-0035",
+          "note": "2026-11-10 21:58, Revit 2024.3, ACC host Snowdon Electrical opened with all worksets, every test in its own transaction and rolled back, closed without sync, reopened to verify (bridge script 'G-1 cloud host experiment', result log Documents\\ZEN_ACC_Batch\\BAUMEISTER-sharedsite\\G1.log). G1-A: new instance of the HVAC cloud link type created with ImportPlacement.Origin (in place, '<Not Shared>'), then PublishCoordinates(new LinkElementId(newId, linkActiveLocationId)) -> InvalidOperationException 'Attempting to publish shared coordinates to a cloud based link which is treated as read-only.' G1-B: the same call on the existing bound instance -> same exception. G1-C: Pinned=false then MoveElement on the bound instance -> 'Unable to move element(s) due to at least one of them being pinned.' (FP68). Link site values and HasSaveablePositions unchanged; NumberOfSaves 54 before and after."
+        },
+        {
+          "intake": "IN-0035",
+          "note": "2026-11-12 20:04, Revit 2024.3, second reproduction: host Snowdon HVAC opened from ACC detached (worksets preserved, all open); Facades cloud link (LinkedModelModelId 1e3a63ae-…, '<Not Shared>', loaded); PublishCoordinates(new LinkElementId(instance, linkDoc.ActiveProjectLocation.Id)) in a rolled-back transaction -> same InvalidOperationException 'Attempting to publish shared coordinates to a cloud based link which is treated as read-only.' The refusal follows the link being a cloud link, independent of host and of the host being detached."
+        }
       ]
     },
     {
