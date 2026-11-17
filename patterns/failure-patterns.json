@@ -1326,11 +1326,11 @@
       "evidence": [
         {
           "intake": "IN-0035",
-          "note": "2026-11-10 21:58, Revit 2024.3, ACC host Snowdon Electrical opened with all worksets, every test in its own transaction and rolled back, closed without sync, reopened to verify (bridge script 'G-1 cloud host experiment', result log Documents\\ZEN_ACC_Batch\\BAUMEISTER-sharedsite\\G1.log). G1-A: new instance of the HVAC cloud link type created with ImportPlacement.Origin (in place, '<Not Shared>'), then PublishCoordinates(new LinkElementId(newId, linkActiveLocationId)) -> InvalidOperationException 'Attempting to publish shared coordinates to a cloud based link which is treated as read-only.' G1-B: the same call on the existing bound instance -> same exception. G1-C: Pinned=false then MoveElement on the bound instance -> 'Unable to move element(s) due to at least one of them being pinned.' (FP68). Link site values and HasSaveablePositions unchanged; NumberOfSaves 54 before and after."
+          "note": "2026-11-10 21:58, Revit 2024.3, an ACC test host (Electrical model) opened with all worksets, every test in its own transaction and rolled back, closed without sync, reopened to verify (bridge script 'G-1 cloud host experiment'; result log kept on the test machine). G1-A: new instance of the HVAC cloud link type created with ImportPlacement.Origin (in place, '<Not Shared>'), then PublishCoordinates(new LinkElementId(newId, linkActiveLocationId)) -> InvalidOperationException 'Attempting to publish shared coordinates to a cloud based link which is treated as read-only.' G1-B: the same call on the existing bound instance -> same exception. G1-C: Pinned=false then MoveElement on the bound instance -> 'Unable to move element(s) due to at least one of them being pinned.' (FP68). Link site values and HasSaveablePositions unchanged; NumberOfSaves 54 before and after."
         },
         {
           "intake": "IN-0035",
-          "note": "2026-11-12 20:04, Revit 2024.3, second reproduction: host Snowdon HVAC opened from ACC detached (worksets preserved, all open); Facades cloud link (LinkedModelModelId 1e3a63ae-…, '<Not Shared>', loaded); PublishCoordinates(new LinkElementId(instance, linkDoc.ActiveProjectLocation.Id)) in a rolled-back transaction -> same InvalidOperationException 'Attempting to publish shared coordinates to a cloud based link which is treated as read-only.' The refusal follows the link being a cloud link, independent of host and of the host being detached."
+          "note": "2026-11-12 20:04, Revit 2024.3, second reproduction: a second ACC test host (HVAC model) opened from ACC detached (worksets preserved, all open); Facades cloud link ('<Not Shared>', loaded); PublishCoordinates(new LinkElementId(instance, linkDoc.ActiveProjectLocation.Id)) in a rolled-back transaction -> same InvalidOperationException 'Attempting to publish shared coordinates to a cloud based link which is treated as read-only.' The refusal follows the link being a cloud link, independent of host and of the host being detached."
         }
       ]
     },
@@ -1426,7 +1426,7 @@
       "id": "FP78",
       "name": "A batch that opens models with all worksets closed cannot report on links: links on closed worksets stay unloaded",
       "meaning": "Opening a workshared model with WorksetConfigurationOption.CloseAllWorksets is the fast way to open many models for reports. Revit link instances placed on a user workset (for example XX_<model>) are then not loaded, so any report about the links (position, shared site, origin match) can only say 'unloaded'. The instance name even reads 'location <Not Shared>' because the link is not loaded. A model-level report (warnings, views, sheets, family counts, schedules) is not affected. Defence: open the link worksets (or all worksets) for any action that reports on links, or state in the report that links were not loaded because their workset was closed.",
-      "found_by": "ZEN weekly-report video readiness run (read-only ACC Gate actions, Snowdon ACC project), 2026-11-12",
+      "found_by": "read-only ZEN ACC Gate batch run on an internal ACC test project, 2026-11-12",
       "api_terms": [
         "WorksetConfigurationOption.CloseAllWorksets",
         "OpenOptions.SetOpenWorksetsConfiguration",
