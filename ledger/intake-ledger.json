@@ -814,6 +814,20 @@
       ],
       "reviewed_by": "",
       "closed": "2026-11-10"
+    },
+    {
+      "entry_id": "IN-0036",
+      "received": "2026-11-12",
+      "contributor": {
+        "name": "Gottfried Schmidtke",
+        "github": "gschmidtke",
+        "with": "Claude (BAUMEISTER seat)"
+      },
+      "source": "owner session 2026-11-12 (PM P0 video dispatch; bridge-run lessons rule)",
+      "submitted": "Read-only batch run of five report actions on two ACC models plus one invalid registry row: timings, outputs, and what a closed-worksets open cannot report",
+      "files": [],
+      "status": "filed",
+      "decision": "Filed FP78 as candidate. Other observations recorded in the 2026-11-12 report: a registry row whose model GUID does not exist fails before any open ('Could not build CloudModelPath from GUIDs') and the run continues; per-model open time 7-19 s with worksets closed; measuring family file sizes by saving each family to a temporary file took about 1.7 s per family (105 + 153 families: 529 s). Curator is the same occupant as the author (disclosed)."
     }
   ]
 }
