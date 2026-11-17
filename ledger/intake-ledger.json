@@ -814,6 +814,28 @@
       ],
       "reviewed_by": "",
       "closed": "2026-11-10"
+    },
+    {
+      "entry_id": "IN-0037",
+      "received": "2026-11-17",
+      "contributor": {
+        "name": "Gottfried Schmidtke",
+        "github": "gschmidtke",
+        "with": "Claude (BAUMEISTER seat), owner present"
+      },
+      "source": "owner session 2026-11-17: first live test of a bridge reference build on Revit 2024 (bridge-run lessons rule); routed by the owner's project manager",
+      "submitted": "Six operational lessons from the live test (session pinning, write switch read at start, open-application starts a new Revit, a Level without 'Comments', write-test sandbox, configuration write not on the device) plus two deployment and verification lessons (build installs over the running version, broad binary string search)",
+      "files": [],
+      "status": "filed",
+      "decision": "Filed as candidate. New FP79 (bridge call reaches a session or document the agent did not choose; sandbox rule in its defence), FP80 (bridge write switch not in the reported state: read at start; write reported but not on the device, cause not established), FP81 (new add-in build installs over the running version), FP82 (binary string search matches compiler-generated names). Evidence added to FP41 (open-application starts a second Revit, seen again) and FP31 (one Level had no 'Comments'; no category claim). Observations and proposed general rules kept apart; no bridge source, project names, element ids, tokens or private paths. No pack created: the lessons concern the bridge and agent layer, not a Revit production workflow. Curator is the same occupant as the author (disclosed); independent review requested through the owner's project manager.",
+      "resulting_ids": [
+        "FP79",
+        "FP80",
+        "FP81",
+        "FP82"
+      ],
+      "reviewed_by": "Claude (curator); same occupant as BAUMEISTER, the author of the lessons (disclosed)",
+      "closed": "2026-11-17"
     }
   ]
 }
