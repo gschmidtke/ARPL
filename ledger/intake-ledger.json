@@ -10,7 +10,7 @@
         "with": "Claude (Anthropic)"
       },
       "source": "founding contribution",
-      "submitted": "Learning chains from Revit production sessions 2026-10 (coffee brewer families, power connector, adaptive components, ADU-01 wall panels, documentation, schedules), failure patterns FP01-FP12, ARPL v0.43 layout preview rule",
+      "submitted": "Learning chains from Revit production sessions 2026-10 (coffee brewer families, power connector, adaptive components, ADU-A wall panels, documentation, schedules), failure patterns FP01-FP12, ARPL v0.43 layout preview rule",
       "status": "filed",
       "decision": "Founding library: 25 canonical packs, 1 project workflow, 1 domain overlay, 12 failure patterns",
       "resulting_ids": [
@@ -53,7 +53,7 @@
         "github": "gschmidtke",
         "with": "Claude (Anthropic)"
       },
-      "source": "ADU-01 production session 2026-10-20 (shed roof, walls fitted to the roof, shop drawings, issue)",
+      "source": "ADU-A production session 2026-10-20 (shed roof, walls fitted to the roof, shop drawings, issue)",
       "submitted": "Roof assembly learning chain v01-v09, owner corrections (insulation inside walls only, deck-bearing members follow the slope, a wall is a wall), Revit crash journal, failure patterns FP13-FP16, operating rules (watch Revit for dialogs, sync after success)",
       "status": "filed",
       "decision": "New packs ARPL-ASM-0006, ARPL-CHG-0002, ARPL-ADM-0001 and workflow ARPL-PW-0002; revisions to ARPL-ASM-0005, ARPL-DOC-0001, ARPL-GEO-0002, ARPL-PW-0001; AGENTS.md operating rules",
@@ -80,7 +80,7 @@
         "github": "gschmidtke",
         "with": "Claude (Anthropic)"
       },
-      "source": "ADU-01 production session 2026-10-21 (three standard sliders, slab on grade, all views at 1:25)",
+      "source": "ADU-A production session 2026-10-21 (three standard sliders, slab on grade, all views at 1:25)",
       "submitted": "Door replacement with header sizing and NEC wall-space consequences, slab on grade derived from the framing, view rescale and sheet packing, failure patterns FP19-FP23",
       "status": "filed",
       "decision": "New pack ARPL-ASM-0008; revisions to ARPL-ASM-0002, ARPL-CON-0002, ARPL-DOC-0001",

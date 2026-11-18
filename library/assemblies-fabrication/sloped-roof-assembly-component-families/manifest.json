@@ -56,7 +56,7 @@
     "tool": "RevitBridge 0.4.0 (local Revit API bridge, MCP) with run_csharp",
     "compiler": "Roslyn 4.8 (C# 12)",
     "agent": "Claude (Anthropic)",
-    "model": "ADU-01 (workshared cloud model)"
+    "model": "ADU-A (workshared cloud model)"
   },
   "failure_patterns": [
     "FP02",
@@ -74,7 +74,7 @@
     {
       "revision": 1,
       "date": "2026-10-20",
-      "change": "First recorded (ADU-01 shed roof, 241 pieces)"
+      "change": "First recorded (ADU-A shed roof, 241 pieces)"
     },
     {
       "revision": 2,
@@ -127,7 +127,7 @@
     {
       "revision": 8,
       "date": "2026-10-20",
-      "change": "First executable validation check (final/checks/clash_check.cs, read-only); passed on ADU-01",
+      "change": "First executable validation check (final/checks/clash_check.cs, read-only); passed on ADU-A",
       "contributors": [
         "Gottfried Schmidtke with Claude"
       ]
@@ -150,7 +150,7 @@
       "test_runs": [
         {
           "date": "2026-10-20",
-          "model": "ADU-01 (5 assemblies, 799 pieces)",
+          "model": "ADU-A (5 assemblies, 799 pieces)",
           "revit_version": "2024.3",
           "result": "pass",
           "allowed_contacts": {
@@ -161,7 +161,7 @@
         },
         {
           "date": "2026-10-21",
-          "model": "ADU-01, ASSEMBLY_PREFIXES empty (all assemblies)",
+          "model": "ADU-A, ASSEMBLY_PREFIXES empty (all assemblies)",
           "revit_version": "2024.3",
           "result": "pass",
           "seconds": 0.8,

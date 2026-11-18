@@ -1,6 +1,6 @@
 # ARPL-PW-0002: ADU shed roof assembly
 
-Level 4 project workflow, recorded on ADU-01 (Revit 2024) on 2026-10-20. Builds on [ARPL-PW-0001](../architecture-residential-adu-fabrication-package/) (exterior wall panels).
+Level 4 project workflow, recorded on ADU-A (Revit 2024) on 2026-10-20. Builds on [ARPL-PW-0001](../architecture-residential-adu-fabrication-package/) (exterior wall panels).
 
 Replace a placeholder shed roof with a real build-up and turn it into one roof assembly: 2x8 rafters @ 24in, walls rebuilt to fit the roof (taller high wall, raked end walls), frieze blocks, outlookers and fly rafters, 3/4in plywood deck, standing seam roofing, 1x10 fascia and barge boards covering every exposed rafter cut, batts and drywall inside the wall lines, shop drawing and BOM with cost.
 

@@ -1,6 +1,6 @@
 # Incident: Revit fatal error during scripted roof replacement
 
-**Date:** 2026-10-20, 18:52 (local). **Revit:** 2024.3. **Bridge:** RevitBridge 0.4.0, `run_csharp`, mode `group`. **Model:** ADU-01 (workshared cloud model). **Packs:** [ARPL-ADM-0001](../../library/model-administration/exception-in-open-transaction-crashes-revit/), [ARPL-CHG-0002](../../library/model-change/replace-footprint-roof-revit-2024/). **Failure pattern:** FP14.
+**Date:** 2026-10-20, 18:52 (local). **Revit:** 2024.3. **Bridge:** RevitBridge 0.4.0, `run_csharp`, mode `group`. **Model:** ADU-A (workshared cloud model). **Packs:** [ARPL-ADM-0001](../../library/model-administration/exception-in-open-transaction-crashes-revit/), [ARPL-CHG-0002](../../library/model-change/replace-footprint-roof-revit-2024/). **Failure pattern:** FP14.
 
 ## What happened
 
@@ -12,8 +12,8 @@
 | 18:52:35.079 | Journal: `A Transaction object or the document itself got destroyed while executing a call ... The transaction identity is: APITransactionIdentity_1` |
 | 18:52:35.080 | Journal: `Pure Virtual Function Call!!! Go to crash protection.` |
 | 18:52:38 | Dialog: "Revit has experienced a fatal error and cannot continue." |
-| 19:08–19:10 | Recovery files saved by the user's decision: `Documents\ADU-01\ADU-01.rvt` (detached from the cloud), `TONGS Column(Recovery).rfa` |
-| 19:30 | Revit restarted; recovery file opened as `ADU-01_detached`; roof recreated with the guarded pattern without error |
+| 19:08–19:10 | Recovery files saved by the user's decision: a detached local `.rvt` copy of the model, a column family recovery file (`.rfa`) |
+| 19:30 | Revit restarted; recovery file opened as `ADU-A_detached`; roof recreated with the guarded pattern without error |
 
 ## Root cause
 
@@ -29,7 +29,7 @@ My first explanation to the user (deleting a roof that walls were attached to) w
 
 ## Data impact
 
-- Cloud model ADU-01 unchanged since the last sync. Lost from the cloud session: the three annotation-only roof preview views, which are present in the recovery file.
+- Cloud model ADU-A unchanged since the last sync. Lost from the cloud session: the three annotation-only roof preview views, which are present in the recovery file.
 - The recovery file is a detached local copy. Work done in it does not sync back to the cloud model.
 
 ## Corrective actions
