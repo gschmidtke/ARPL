@@ -438,7 +438,13 @@
       "sources": [
         "https://jeremytammik.github.io/tbc/a/1659_param_filter.html"
       ],
-      "intake": "IN-0006"
+      "intake": "IN-0006",
+      "evidence": [
+        {
+          "note": "2026-11-17, Revit 2024: a name-based write of 'Comments' to the one Level element that was tried failed with 'no parameter named Comments'; the bridge left no transaction behind. Observed on that element only; no claim about every Level or category. For a neutral write probe the run used the built-in Project Name parameter (PROJECT_NAME) of Project Information instead, which every project has.",
+          "intake": "IN-0037"
+        }
+      ]
     },
     {
       "id": "FP32",
@@ -700,6 +706,10 @@
         {
           "note": "2026-11-10: a helper process started from inside Revit (to deploy a rebuilt add-in and restart Revit after exit) did not survive Revit's exit; Revit had to be started by hand. Child processes of Revit should not be relied on to outlive it.",
           "intake": "IN-0034"
+        },
+        {
+          "note": "Seen again 2026-11-17 (Revit 2024, another bridge build): the computer-use open-application call for Revit, used to bring the running Revit forward, started a new Revit instance instead, twice. Bringing the running window forward through its taskbar button worked. Same occupant as the earlier observations, so this is a repeat, not an independent reproduction.",
+          "intake": "IN-0037"
         }
       ]
     },
@@ -1312,6 +1322,16 @@
       "sources": [
         "https://help.autodesk.com/cloudhelp/2026/ENU/Revit-API-MainReference/files/html/04419593-f258-dc77-b18a-24a29733b75f.htm",
         "https://help.autodesk.com/cloudhelp/2026/ENU/Revit-API-MainReference/files/html/ecc5f396-6aa4-ffbb-32df-b9a20e82b7d5.htm"
+      ],
+      "evidence": [
+        {
+          "intake": "IN-0035",
+          "note": "2026-11-10 21:58, Revit 2024.3, an ACC test host (Electrical model) opened with all worksets, every test in its own transaction and rolled back, closed without sync, reopened to verify (bridge script 'G-1 cloud host experiment'; result log kept on the test machine). G1-A: new instance of the HVAC cloud link type created with ImportPlacement.Origin (in place, '<Not Shared>'), then PublishCoordinates(new LinkElementId(newId, linkActiveLocationId)) -> InvalidOperationException 'Attempting to publish shared coordinates to a cloud based link which is treated as read-only.' G1-B: the same call on the existing bound instance -> same exception. G1-C: Pinned=false then MoveElement on the bound instance -> 'Unable to move element(s) due to at least one of them being pinned.' (FP68). Link site values and HasSaveablePositions unchanged; NumberOfSaves 54 before and after."
+        },
+        {
+          "intake": "IN-0035",
+          "note": "2026-11-12 20:04, Revit 2024.3, second reproduction: a second ACC test host (HVAC model) opened from ACC detached (worksets preserved, all open); Facades cloud link ('<Not Shared>', loaded); PublishCoordinates(new LinkElementId(instance, linkDoc.ActiveProjectLocation.Id)) in a rolled-back transaction -> same InvalidOperationException 'Attempting to publish shared coordinates to a cloud based link which is treated as read-only.' The refusal follows the link being a cloud link, independent of host and of the host being detached."
+        }
       ]
     },
     {
@@ -1399,6 +1419,131 @@
         {
           "note": "2026-11-11 19:50, Revit 2024 bridge: workbook held open with FileAccess.ReadWrite / FileShare.Read (as Excel does). A plain FileShare.Read open failed with IOException (control); the shared-read loader read all rows (6 registry, 30 matrix). The read-once guard stopped a batch with a missing workbook in 66 ms with one message and no model opened.",
           "intake": "IN-0035"
+        }
+      ]
+    },
+    {
+      "id": "FP78",
+      "name": "A batch that opens models with all worksets closed cannot report on links: links on closed worksets stay unloaded",
+      "meaning": "Opening a workshared model with WorksetConfigurationOption.CloseAllWorksets is the fast way to open many models for reports. Revit link instances placed on a user workset (for example XX_<model>) are then not loaded, so any report about the links (position, shared site, origin match) can only say 'unloaded'. The instance name even reads 'location <Not Shared>' because the link is not loaded. A model-level report (warnings, views, sheets, family counts, schedules) is not affected. Defence: open the link worksets (or all worksets) for any action that reports on links, or state in the report that links were not loaded because their workset was closed.",
+      "found_by": "read-only ZEN ACC Gate batch run on an internal ACC test project, 2026-11-12",
+      "api_terms": [
+        "WorksetConfigurationOption.CloseAllWorksets",
+        "OpenOptions.SetOpenWorksetsConfiguration",
+        "RevitLinkInstance"
+      ],
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ],
+      "status": "candidate",
+      "revit_versions": "2024",
+      "intake": "IN-0036",
+      "evidence_kind": "observed",
+      "evidence": [
+        {
+          "note": "2026-11-12 11:00, Revit 2024 bridge: Structural and Electrical opened with all worksets closed (7-13 s each). Link report: every link row 'Unloaded / Not checked (unloaded)', instance names 'location <Not Shared>'. Model health in the same run: 'Revit Link Status - InClosedWorkset: 5' for both. With all worksets open (2026-11-11 Plumbing run, about 2 min to open), the links of that host were loaded and their placement was checked.",
+          "intake": "IN-0036"
+        }
+      ]
+    },
+    {
+      "id": "FP79",
+      "name": "Bridge call reaches a Revit session or document the agent did not choose",
+      "meaning": "With several Revit instances open, the bridge client decides which one receives the calls. Two observed faces: (a) the MCP server picked the newest live session at first use and kept it until that connection failed; there was no tool to switch, and every later call went to that Revit even after the agent meant another; (b) the model the user called a 'sandbox' was a workshared cloud model. In both, the agent would have written to a document it did not intend. Defence: before any write, call the bridge's document-information tool and confirm the target: for a write test it must be a new, unsaved, non-workshared local project (not workshared, not a cloud model, empty path). Choose the session explicitly where the bridge allows it (for example an environment variable naming the Revit process). Read-only tests may run in a production or cloud model; writes may not, unless the user names that document for the write.",
+      "found_by": "bridge status and document information showed the calls reaching a workshared cloud model while a second Revit was open; the user's named sandbox read back as workshared and cloud",
+      "api_terms": [
+        "Document.IsWorkshared",
+        "Document.IsModelInCloud",
+        "Document.PathName",
+        "MCP session selection"
+      ],
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ],
+      "status": "candidate",
+      "revit_versions": "observed in 2024; bridge client layer, not the Revit API",
+      "intake": "IN-0037",
+      "related": "FP41 (desktop layer: wrong window or instance; its 2026-11-10 evidence already shows a bridge routing to an older instance), FP45 (document state read from the path string)",
+      "evidence_kind": "observed",
+      "evidence": [
+        {
+          "note": "2026-11-17, Revit 2024 (24.3), bridge reference build: read-only tests ran on a workshared cloud model; the write test moved to a new unsaved local project confirmed by the document-information tool (not workshared, not cloud, empty path). One named, undoable transaction resulted; Ctrl+Z restored the value.",
+          "intake": "IN-0037"
+        }
+      ]
+    },
+    {
+      "id": "FP80",
+      "name": "Bridge write switch is not in the state the agent reports",
+      "meaning": "A bridge write switch (a configuration flag that allows or refuses writes) can differ from what the agent believes, in two observed faces. (a) The flag is read when Revit starts: editing the configuration file changes nothing in Revit instances already running, and every Revit started after the edit inherits the new value, so a write-enabled test leaves write-enabled Revits behind. (b) A write of the configuration file to the user's machine through the agent's file tool reported success, but the file still held the previous value; a Revit started later came up with writes on. The cause of (b) is not established; the likely cause is that the same staged path was written twice and the earlier content was delivered. Defence: after any change to a safety switch, read the file back from the device and compare its content before reporting it as done; when writing the same file twice in a session, use a fresh staged path; after a write test, reset the switch and close every Revit started while it was on, then confirm the setting through the bridge's status tool in a newly started Revit.",
+      "found_by": "a Revit started after the reported reset came up with writes on; read-back of the device file showed the old value",
+      "api_terms": [
+        "bridge configuration file",
+        "bridge status tool",
+        "device file write and read-back"
+      ],
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ],
+      "status": "candidate",
+      "revit_versions": "observed in 2024; bridge and agent-tool layer, not the Revit API",
+      "intake": "IN-0037",
+      "related": "FP05 (call succeeded, result wrong), FP76 (success code although the operation was rolled back)",
+      "evidence_kind": "observed",
+      "evidence": [
+        {
+          "note": "2026-11-17: reset reported at 10:23 was not on the device; found 10:41, rewritten from a new staged path, read back (writes off), Revit restarted, bridge status confirmed writes off. Exposure 10:23-10:42: two Revit instances ran with writes on; no document open, no tool calls logged from them.",
+          "intake": "IN-0037"
+        }
+      ]
+    },
+    {
+      "id": "FP81",
+      "name": "A new add-in build installs over the running version instead of beside it",
+      "meaning": "The build's deploy step writes the new version into the same add-in folder and the same .addin manifest name as the installed version. The new build replaces the old one, and the old version's extra DLLs stay in the folder, so 'both versions can load side by side' is false and leftovers can mask what the new build contains. Defence: before building or installing a new version, read the deploy target and manifest name; park (move out) the installed version first and record where; after the test, restore it the same way, knowing that restoring overwrites the new build and restores the old configuration too.",
+      "found_by": "release review of the deploy target before the first live install; the claim 'both can load' in an earlier handoff was corrected",
+      "api_terms": [
+        ".addin manifest",
+        "Addins folder",
+        "MSBuild deploy target"
+      ],
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ],
+      "status": "candidate",
+      "revit_versions": "observed in 2024; deployment layer",
+      "intake": "IN-0037",
+      "related": "FP38 (deploying a rebuilt add-in from the bridge)",
+      "evidence_kind": "observed",
+      "evidence": [
+        {
+          "note": "2026-11-17: installed version parked by the owner before the build; the new build installed into the same folder; restore path recorded for after the test.",
+          "intake": "IN-0037"
+        }
+      ]
+    },
+    {
+      "id": "FP82",
+      "name": "A string search on a compiled binary matches compiler-generated names",
+      "meaning": "Checking that a capability was removed by searching the compiled DLL for a broad name gives a false positive: the compiler embeds attributes such as Microsoft.CodeAnalysis.EmbeddedAttribute in ordinary builds, so a search for 'CodeAnalysis' matches a build that has no compiler dependency at all. Strings in .NET metadata and user strings can also be ASCII or UTF-16, so a search in one encoding can miss the other. Defence: search for the specific namespace or member that proves the capability (for example Microsoft.CodeAnalysis.CSharp, and the tool name in UTF-16), and run the same search on a build known to contain it as a positive control. A zero count without a positive control proves nothing; better still, inspect the assembly references.",
+      "found_by": "the broad search matched the new build; the positive control on the previous build separated the generated attribute from a real dependency",
+      "api_terms": [
+        "Microsoft.CodeAnalysis.EmbeddedAttribute",
+        "AssemblyRef",
+        ".NET metadata strings (ASCII / UTF-16)"
+      ],
+      "contributors": [
+        "Gottfried Schmidtke with Claude"
+      ],
+      "status": "candidate",
+      "revit_versions": "build verification, version-independent; observed on a Revit 2024 (.NET Framework 4.8) build",
+      "intake": "IN-0037",
+      "related": "FP38 (compiler environment inside the host)",
+      "evidence_kind": "observed",
+      "evidence": [
+        {
+          "note": "2026-11-17: specific search on the new build: 0 matches for Microsoft.CodeAnalysis.CSharp (ASCII) and for the removed tool name (UTF-16); previous build as positive control: 1 and 2 matches. Assembly references of the new build list no compiler assembly.",
+          "intake": "IN-0037"
         }
       ]
     }
