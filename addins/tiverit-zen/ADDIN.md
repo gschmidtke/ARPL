@@ -38,7 +38,7 @@ Most commands sit inside split buttons: the ribbon shows one label per group, an
 - **Writes:** one combined PDF per PrintJobs row, `<ModelTitle>_<PrintSetName>.pdf`, into one output folder for the whole run. With PdfSetupName blank: ZEN default profile (each sheet at its own paper size, vector, colour, sheet-number order).
 - **Dialogs:** "Select Print Intel workbook" (file dialog; the File name box accepts a full path); "Browse For Folder" for the output ("Select an output folder for N print job(s)"); progress in Revit's status bar; completion window "Print by Registry" listing PDFs written and sheets per job.
 - **Does not:** print elements on worksets closed in the session (E1-docs). Does not create print sets.
-- **Evidence:** E3-observed twice on 2026-11-03: Concept Set, 16 pages; ADU-01-current, 29 pages; page counts equal to the sets.
+- **Evidence:** E3-observed twice on 2026-11-03: Concept Set, 16 pages; ADU-A-current, 29 pages; page counts equal to the sets.
 
 ### Sheets (Project Standards): Export Sheets, Import Sheets, Batch Import
 

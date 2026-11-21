@@ -59,7 +59,7 @@
     {
       "revision": 2,
       "date": "2026-10-20",
-      "change": "API method for editing an existing wall profile (2024, verified on ADU-01); walls under a sloped roof follow the rafter line",
+      "change": "API method for editing an existing wall profile (2024, verified on ADU-A); walls under a sloped roof follow the rafter line",
       "contributors": [
         "Gottfried Schmidtke with Claude"
       ]

@@ -44,7 +44,7 @@
     "tool": "RevitBridge 0.4.0 (local Revit API bridge, MCP) with run_csharp",
     "compiler": "Roslyn 4.8 (C# 12)",
     "agent": "Claude (Anthropic)",
-    "model": "ADU-01 (workshared cloud model; recovery copy)"
+    "model": "ADU-A (workshared cloud model; recovery copy)"
   },
   "failure_patterns": [
     "FP14",
@@ -59,7 +59,7 @@
     {
       "revision": 1,
       "date": "2026-10-20",
-      "change": "First recorded from the ADU-01 roof replacement crash"
+      "change": "First recorded from the ADU-A roof replacement crash"
     }
   ]
 }
