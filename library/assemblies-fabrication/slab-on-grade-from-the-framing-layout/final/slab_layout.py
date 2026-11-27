@@ -1,5 +1,5 @@
 import json, math
-# ---- inputs from ADU-01 (mm) ----
+# ---- inputs from ADU-A (mm) ----
 X0, X1, Y0, Y1 = -3983, 8040.8, -1172.7, 2494.8          # framing outer faces = slab edge
 EDGE_W, EDGE_D, SLAB_T = 305, 406, 102                    # thickened edge 12in wide x 16in below top, slab 4in
 MAX_S, END_MAX, END_MIN, BOLT_CLR = 1219, 305, 60, 35    # anchor spacing <= 4 ft (assumed, engineer to confirm), ends <= 12 in

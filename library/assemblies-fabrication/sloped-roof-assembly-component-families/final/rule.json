@@ -8,7 +8,7 @@
     "Assembly member count equals pieces built",
     "No piece longer than its stock length",
     "Every type in the assembly has its own Cost and unit in Type Comments",
-    "Insulation bounding box inside the outer face of the wall framing (ADU-01: batts y -1134.1..2456.2 within -1172.7..2494.8; x -3944.9..8002.7 within -3983..8040.8)",
+    "Insulation bounding box inside the outer face of the wall framing (ADU-A: batts y -1134.1..2456.2 within -1172.7..2494.8; x -3944.9..8002.7 within -3983..8040.8)",
     "Top-face normal of every deck-bearing member equals the roof normal",
     "Every exterior face below the roof is closed: framing, insulation, sheathing, siding and gypsum reach the rafter line on all walls"
   ]

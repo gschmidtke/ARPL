@@ -25,7 +25,7 @@ _Generated from this pack's files by tools/build_catalogs.py. Edit manifest.json
 
 | Version | Instruction | Result | Problem | Found by |
 |---|---|---|---|---|
-| v01 | ADU-01 electrical: receptacles, switches, lights and smoke alarms placed from the NEC rules and the room layout; framing considered only at rough-in | Code-compliant layout confirmed by the owner and modelled | 9 of 14 ceiling devices on or next to a rafter, 4 wall boxes on a stud; every one had to be moved after modelling, and the layout preview had to be re-checked | distance check against stud and rafter axes before adding rough-in (see ARPL-CON-0002 v07) |
+| v01 | ADU-A electrical: receptacles, switches, lights and smoke alarms placed from the NEC rules and the room layout; framing considered only at rough-in | Code-compliant layout confirmed by the owner and modelled | 9 of 14 ceiling devices on or next to a rafter, 4 wall boxes on a stud; every one had to be moved after modelling, and the layout preview had to be re-checked | distance check against stud and rafter axes before adding rough-in (see ARPL-CON-0002 v07) |
 
 ## Lesson
 A layout that satisfies the code but ignores the framing is not buildable as drawn; the fabricator moves the device, and the drawings become wrong.
